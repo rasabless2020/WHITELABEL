@@ -1,0 +1,33 @@
+﻿@using NonFactors.Mvc.Grid;
+@model WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS  
+@{
+    ViewBag.Title = "Declined Requisition";
+    //Layout = "~/Areas/Super/Views/Shared/_SuperLayout.cshtml";
+    Layout = "~/Areas/Super/Views/Shared/_SuperNewLayout.cshtml";
+}
+
+@Html.AntiForgeryToken()
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-heading">
+                    <div class="card-title" align="right">@*<a href="@Url.Action("RequisitionDetails", "SuperRequisition",new { area="Super"})" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span>Add New Requisition</a>*@</div>
+                </div><!--.panel-heading-->
+                <div class="card-body">
+                    <div class="row example-row">
+
+                        @Html.AjaxGrid(Url.Action("DeclinedIndexGrid", "SuperRequisition", new { area = "Super" }))
+                    </div><!--.row-->
+                </div><!--.panel-body-->
+                @*<div class="card-footer text-right">
+        <a href="@(Url.Action("GridExportIndex","SuperRequisition",new { area="Super"}) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>
+            </div>*@
+
+            </div><!--.panel-->
+        </div><!--.col-md-12-->
+    </div><!--.row-->
+
+</div>
+
+@Scripts.Render("~/bundles/SuperRequisition")

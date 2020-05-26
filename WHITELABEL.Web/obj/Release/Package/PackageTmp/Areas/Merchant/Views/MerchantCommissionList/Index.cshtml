@@ -1,0 +1,43 @@
+﻿@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-md-12">
+        @*<div class="col-md-12 row headcolor">
+            <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-list fa-3x"></i></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4" style="text-align:right; padding-top:10px;">
+                <h3>
+                    Merchant Commission List
+                </h3>
+            </div>
+        </div>*@
+    </div>
+    <div class="col-md-12 padding-top-20">
+        <div class="card" style="margin-bottom:20px;">
+            <div class="card-body" style="text-align:center;">
+                <h3 style="margin-bottom:30px;">Mobile / Utility Slab</h3>
+                <div class="row example-row" id="ExportDiv" style="width:100%">
+                    @Html.AjaxGrid(Url.Action("IndexGrid", "MerchantCommissionList", new { area = "Merchant" }))
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body" style="text-align:center;">
+                <h3 style="margin-bottom:30px;">DMR Slab</h3>
+                <div class="row example-row" id="ExportDiv" style="width:100%">
+                    @Html.AjaxGrid(Url.Action("DMTCommissionIndexGrid", "MerchantCommissionList", new { area = "Merchant" }))
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+}
+

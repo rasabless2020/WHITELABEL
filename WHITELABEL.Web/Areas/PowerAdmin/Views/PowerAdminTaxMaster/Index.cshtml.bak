@@ -1,0 +1,160 @@
+﻿@using NonFactors.Mvc.Grid;
+@model WHITELABEL.Data.Models.TBL_TAX_MASTER
+@{
+    ViewBag.Title = "Tax Master";
+    //Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminLayout.cshtml";
+    Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminNewLayout.cshtml";
+}
+
+@Scripts.Render("~/bundles/PowerAdminTaxMaster")
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal padding-top-20">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-heading">
+                            <div class="card-title">
+                                <div class="text-right col-md-12">
+                                    <div class="panel-title" align="right"><a href="#" data-toggle="modal" data-target=".transd" id="transactionvalueid" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New Tax Master</a></div>
+                                </div>
+                            </div>
+                        </div><!--.panel-heading-->
+
+                        <div class="row example-row">
+                            @Html.AjaxGrid(Url.Action("IndexGrid", "PowerAdminTaxMaster", new { area = "PowerAdmin" }))
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div><!--.row-->
+    </div>
+
+}
+
+<div id="transactionvalueid" class="modal scale fade transd" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Tax Master</h4>
+
+            </div>
+            <div class="modal-body">
+
+                <div class="col-md-12">
+                    <div class="col-md-4" style="padding-top:10px;">TDS : </div>
+                    <div class="col-md-4">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                
+                                    <input type="text" id="TDS_Amount" value="" class="form-control" pattern="\d{1,2}(\.\d{0,4})?"  onkeypress="return isNumberKey(event)" />
+                                    @*<select id="TDS_Status_Val">
+            <option value="1">Active</option>
+            <option value="0">Deactive</option>
+        </select>
+        <input type="hidden" id="IDTDSAmt" />
+        <span style="color:red" id="informationMessage"><lable id="lblmsg"></lable></span>*@
+                                
+                                <span><small></small></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                
+                                    @*<input type="text" id="TDS_Amount" value="" class="form-control" pattern="\d{1,2}(\.\d{0,4})?" />*@
+                                    <select id="TDS_Status_Val" class="form-control">
+                                        <option value="1">Active</option>
+                                        <option value="0">Deactive</option>
+                                    </select>
+                                    <input type="hidden" id="IDTDSAmt" />
+                                    <span style="color:red" id="informationMessage"><lable id="lblmsg"></lable></span>
+                                
+                                <span><small></small></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-4" style="padding-top:10px;">GST : </div>
+
+                    <div class="col-md-4">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+
+                                <input type="text" id="GST_Amount" value="" class="form-control" pattern="\d{1,2}(\.\d{0,4})?"  onkeypress="return isNumberKey(event)" />
+                                @*<select id="GST_Status_Val">
+            <option value="1">Active</option>
+            <option value="0">Deactive</option>
+        </select>
+        <input type="hidden" id="IDGSTAmt" />*@
+                            </div>
+                                <span><small></small></span>
+                            
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                
+                                    @*<input type="text" id="GST_Amount" value="" class="form-control" pattern="\d{1,2}(\.\d{0,4})?" />*@
+                                    <select id="GST_Status_Val" class="form-control">
+                                        <option value="1">Active</option>
+                                        <option value="0">Deactive</option>
+                                    </select>
+                                    <input type="hidden" id="IDGSTAmt" />
+                               
+                                <span><small></small></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">               
+                <button type="button" id="valuesubmit" class="btn btn-success" onclick="SaveTaxMasterDetails($('#TDS_Amount').val(),$('#GST_Amount').val(),$('#TDS_Status_Val').val(),$('#GST_Status_Val').val());">Save</button>
+            </div>
+        </div><!--.modal-content-->
+    </div><!--.modal-dialog-->
+
+</div>
+<script type="text/javascript">
+    
+    
+   $(document).ready(function () {
+       $('#valuesubmit').attr('disabled', true);
+        });
+
+    function isNumberKey(evt) {
+        debugger;
+        var tds = $('#TDS_Amount').val();
+        var Gst = $('#GST_Amount').val();
+        
+            document.getElementById("valuesubmit").disabled = false;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        else {
+            
+            return true;
+            $('#valuesubmit').attr('disabled', false);
+        }
+            
+        }
+   
+</script>
+

@@ -1,0 +1,107 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>
+@{
+    ViewBag.Title = "Super Requisition Report";
+    //Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_newadminLayoutPage.cshtml";
+}
+
+
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        <div class="col-md-12">
+            <div class=" card">
+                <div class="card-body">
+
+                    <div class="panel-heading" style="padding-bottom:10px;">
+                        <div class="card-title row" align="right">
+                            <div class="col-md-6 text-left">
+                                <button id="btnExport" class="btn btn-info btn-xs"><span class="ion-forward"></span> EXPORT</button>
+                                @*<a href="@(Url.Action("GridExportIndex", "MemberRequisition", new { area = "Admin" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="panel-body">
+                        <div class="row example-row">
+
+                            <div class="col-md-12 row mb-2">
+                            <div class="col-md-4">
+                                <div class="inputer">
+                                    <div class="input-wrapper">
+                                        @Html.DropDownList("MemberService", new SelectList((ViewBag.MemberService) as SelectList, "Value", "Text"), "Select Super", new { id = "SuperList", @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="inputer">
+                                    <div class="input-wrapper">
+                                        @Html.DropDownList("MemberTransactionStatus", new List<SelectListItem>
+                                                                            { new SelectListItem{Text="Approve", Value="Approve"},
+                                                                                new SelectListItem{Text="Pending", Value="Pending"},
+                                                                                new SelectListItem{Text="Decline", Value="Decline"} },
+                                                                               "Select Status", new { id = "TransactionStatus", @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                                </div>
+                            
+                            <div class="col-md-12">@Html.AjaxGrid(Url.Action("SuperRequisitonGrid", "MemberRequisitionReport", new { area = "Admin" }))</div>
+                        </div>
+
+                    </div>
+                    @*<div class="panel-footer text-right">
+                <button id="btnExport" class="btn btn-info btn-xs">EXPORT</button>
+                @*<a href="#" id="btnExportSuperrecoard" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                    @*<a href="@(Url.Action("ExportIndex","SuperRequisition",new {area="Super" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*
+                </div>*@
+
+                </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+
+<script>
+    $(document).on('change', '#TransactionStatus', function () {
+        debugger;
+        var status = $('#SuperList').val();
+           $('.mvc-grid').mvcgrid({
+               //query: 'search=' + this.value ,
+               query: 'search=' + status +'&Status='+this.value,
+               reload: true
+           });
+       });
+</script>
+
+<script>
+       //$(document).on('change', '.mvc-grid-search', function () {
+    $("#SuperList").change(function () {
+        debugger;
+        var status = $('#TransactionStatus').val();
+        //var dropdownMerchantval = $('#MerchantId').val();
+           $('.mvc-grid').mvcgrid({
+               //query: 'search=' + this.value,
+               query: 'search=' + this.value + '&Status=' + status,
+               reload: true
+           });
+       });
+</script>
+
+<script type="text/javascript">
+    $("#btnExportSuperrecoard").click(function () {
+        var url = '@(Url.Action("ExportSuperIndex", "MemberRequisitionReport", new {area="Admin" }) + ViewContext.HttpContext.Request.QueryString)?Disid=' + $("#SuperList").val() + '&statusval=' + $("#TransactionStatus").val();
+        window.location.href = url;
+    })
+</script>
+<script type="text/javascript">
+    $("[id$=btnExport]").click(function (e) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=my-ajax-grid]').html()));
+        e.preventDefault();
+    });
+</script>

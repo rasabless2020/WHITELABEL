@@ -1,0 +1,74 @@
+﻿@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "White Level Introducer";
+    //Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminLayout.cshtml";
+    Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminNewLayout.cshtml";
+}
+
+@*<div class="full-content margin-top-40 margin-bottom-40 bg-white">*@
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+    <div class="full-content margin-top-20">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="panel-heading text-right">
+                            @if (Session["msg"] != null)
+                            {
+                                <div id="informationMessage" class="text-center alert alert-success">
+                                    <span style="width:100%;text-align:center;">@Session["msg"].ToString() </span>
+                                    @if (Session["msg"].ToString() == "Data Saved Successfully" || Session["msg"].ToString() == "Data Updated Successfully")
+                                    {
+                                        Session.Remove("msg");
+                                    }
+                                </div>
+                            }
+
+                            <div class="card-title ">
+                                <div class="row">
+                                <div class="text-left col-md-6 col-lg-6">
+                                    @*<a href="@(Url.Action("ExportIndex") + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span> Export</a>*@
+                                    <a href="@(Url.Action("ExportIndex", "PowerAdminMember", new { area = "PowerAdmin" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span> Export</a>
+                                </div>
+                                <div class="text-right col-md-6 col-lg-6">
+                                    <a href="@Url.Action("CreateMember", "PowerAdminMember", new { area = "PowerAdmin" })" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New White Level Introducer</a>
+                                    @*<a href="@Url.Action("CreateMember", "APILabel")" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span>Add New Member</a>*@
+
+                                </div>
+</div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div><!--.panel-heading-->
+                        <div class="panel-body">
+                            <div class="row example-row">
+
+                                @*@Html.AjaxGrid(Url.Action("IndexGrid", "APILabel"))*@
+                                @Html.AjaxGrid(Url.Action("IndexGrid", "PowerAdminMember", new { area = "PowerAdmin" }))
+                            </div><!--.row-->
+                        </div><!--.panel-body-->
+
+                    </div><!--.panel-->
+                    </div>
+                </div><!--.col-md-12-->
+            </div><!--.row-->
+    </div>
+
+@Scripts.Render("~/bundles/PowerAdminMember")
+}
+@if (Session["msg"] != null)
+{
+
+}
+<script>
+     $(document).ready(function () {
+         window.setTimeout(function () {
+             $("#informationMessage").fadeOut('slow');
+         }, 2000);
+     });
+
+</script>
+
+

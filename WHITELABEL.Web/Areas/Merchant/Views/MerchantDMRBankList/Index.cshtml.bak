@@ -1,0 +1,29 @@
+﻿@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+}
+
+@using (Html.BeginForm(new { id = "BankList" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal padding-top-20">
+        @*<div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="row example-row">*@
+        <div>
+            <div>
+                <div>
+                    <div>
+                        <div>
+                            @Html.AjaxGrid(Url.Action("DMRBankList", "MerchantDMRBankList", new { area = "Merchant" }))
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*@Scripts.Render("~/bundles/DeleteBeneficiary");*@
+}

@@ -1,0 +1,96 @@
+﻿@model  WHITELABEL.Web.Areas.Merchant.Models.MoneyTransferModelView
+@{
+    ViewBag.Title = "Fund Transfer Message";
+    Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+}
+
+<div class="content">
+    <div class="display-animation">
+        <div class="full-content margin-bottom-40 bg-white" id="Bill_page">
+            <div class="row example-row" style="min-height:350px; background-color: #ebe9e9; padding:20px;">
+                <div class="col-md-4"></div>
+
+                <div class="col-md-4">
+
+
+                    <div class="col-md-12 margin-bottom-10">
+                        <div class="col-md-6">
+                            Beneficiary Name
+                        </div>
+                        <div class="col-md-6">
+                            @ViewBag.BeneficiaryName
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            Transaction ID
+                        </div>
+                        <div class="col-md-6">
+                            @ViewBag.TransactionID
+                        </div>
+                    </div>
+                    <div class="col-md-12  margin-bottom-10">
+                        <div class="col-md-6">
+                            Transaction Date
+                        </div>
+                        <div class="col-md-6">
+                            @ViewBag.TransactionDate
+                        </div>
+                    </div>
+                    <div class="col-md-12  margin-bottom-10">
+                        <div class="col-md-6">
+                            Order ID
+                        </div>
+                        <div class="col-md-6">
+                            @ViewBag.QrderId
+                        </div>
+                    </div>
+
+                    <div class="col-md-12  margin-bottom-10">
+                        <div class="col-md-6">
+                            Transfer Amount
+                        </div>
+                        <div class="col-md-6">
+                            @ViewBag.Amount
+                        </div>
+                    </div>
+
+                    <div class="col-md-12  margin-bottom-10">
+                        <div class="col-md-6">
+                            Charged Amount
+                        </div>
+                        <div class="col-md-6">
+                            @ViewBag.ChargeAmt
+                        </div>
+                    </div>
+                    <div class="col-md-12  margin-bottom-10">
+                        <div class="col-md-6">
+                            Transaction Status
+                        </div>
+                        <div class="col-md-6">
+                            @ViewBag.status
+                        </div>
+                    </div>
+                    <div class="col-md-12 margin-top-10">
+                        
+                            <div class="form-group">
+
+                                <a href="@Url.Action("DMRInformation", "MerchantDMRDashboard", new { area = "Merchant"})" class="btn btn-primary" style="font-size:14px; color: #ffffff; margin-left:30px;">Back to Transaction List</a>
+                            </div>
+                        
+                    </div>
+                </div>
+
+                <div class="col-md-4"></div>
+
+                </div>
+            <!--.row-->
+            <!--.row-->
+        </div>
+        <!--.full-content-->
+    </div>
+    <!--.display-animation-->
+    <!-- content -->
+</div>
+

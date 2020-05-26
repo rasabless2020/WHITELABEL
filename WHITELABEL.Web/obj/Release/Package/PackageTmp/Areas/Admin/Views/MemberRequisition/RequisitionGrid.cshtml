@@ -1,0 +1,10 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@*@model IEnumerable<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>*@
+@model IGrid<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>
+@{
+    ViewBag.Title = "RequisitionGrid";
+    //Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@(new HtmlGrid<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>(Html, Model))
+

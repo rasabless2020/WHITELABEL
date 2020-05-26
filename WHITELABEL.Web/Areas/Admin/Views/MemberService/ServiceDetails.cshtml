@@ -1,0 +1,89 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_WHITELABLE_SERVICE>
+@{
+    ViewBag.Title = "Service Details";
+    //Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal padding-top-20">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            @*<div class="col-md-12">
+                <div class="col-md-12 row headcolor">
+                    <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-cogs fa-3x"></i> </div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4" style="text-align:right; padding-top:10px;">
+                        <h3>
+                            Distributor Services Mapping
+                        </h3>
+                    </div>
+                </div>
+            </div>*@
+            <div class="col-md-12">
+                <div class=" card">
+                    <div class="card-body">
+                        <div class="panel-heading">
+                            <div class="card-title row">
+                                <div class="col-lg-3">
+                                    @*@Html.DropDownList("MemberService", (IEnumerable <SelectListItem>)ViewBag.MemberService)*@
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @Html.DropDownList("MemberService", new SelectList((ViewBag.MemberService) as SelectList, "Value", "Text"), "Select Distributor", new { id = "MemberList", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row example-row">
+                                <div class="col-md-12">
+                                    @(Html
+                                                            .Grid(Model)
+                                                            .Build(columns =>
+                                                            {
+                                                                                //columns.Add(model => model.MEMBER_ID).Titled("UserName");
+                                                                                columns.Add(model => model.ServiceName).Titled("Service Name");
+                                                                                //columns.Add(model => model.ACTIVE_SERVICE).Titled("Active Service");
+                                                                                columns.Add(model => model.SL_NO).Titled("Active Service").Filterable(false).Sortable(false).RenderedAs(m => Html.CheckBoxFor(a => m.ACTIVE_SERVICE, new { @id = "chkservice" + m.SL_NO + "", onchange = "ActiveServiceUpdate('" + Encrypt.EncryptMe(m.MEMBER_ID.ToString()) + "','" + Encrypt.EncryptMe(m.SL_NO.ToString()) + "','chkservice" + m.SL_NO + "')" }));
+                                                            })
+
+                                                            .Empty("No data found")
+                                                            .Id("my-ajax-grid")
+                                                            .Filterable()
+                                                            .Sortable()
+                                    )
+                                </div>
+                            </div><!--.row-->
+                        </div><!--.panel-body-->
+                    </div><!--.panel-->
+                </div>
+            </div><!--.col-md-12-->
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/MemberService");
+
+    if (!string.IsNullOrEmpty(ViewBag.decrptSlId))
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                debugger;
+                var url_string = window.location.href; //window.location.href
+                var url = new URL(url_string);
+                var c = getParameterByName("memid");
+                $("#MemberList").val(c);
+            });
+        </script>
+    }
+
+}
+
+
+

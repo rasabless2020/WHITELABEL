@@ -1,0 +1,65 @@
+﻿@model WHITELABEL.Data.Models.TBL_MASTER_MEMBER
+@{
+    ViewBag.Title = "Upload Logo";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Scripts.Render("~/bundles/MemberApilevel")
+@using (Html.BeginForm("UploadLogo", "MemberAPILabel", FormMethod.Post, new { area = "Admin", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal padding-top-20">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    @if (Session["msg"] != null)
+                    {
+                        if (Session["msg"].ToString() == "Logo Update Successfully")
+                        {
+                            <div id="informationMessage" class="text-center alert alert-success">
+                                <span style="width:100%;text-align:center;">
+                                    @Session["msg"].ToString()
+                                </span>
+                            </div>
+                            Session.Remove("msg");
+                        }
+                        //else if (Session["msg"].ToString() == "Please Upload Logo")
+                        else
+                        {
+                            <div id="informationMessage" class="text-center alert alert-danger">
+                                <span style="width:100%;text-align:center;">@Session["msg"].ToString() </span>
+                            </div>
+                            Session.Remove("msg");
+                        }
+                    }
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label class="control-label col-md-3">Upload Logo</label>
+                                <div class="col-md-9">
+                                    <input type="file" name="LogoUpload" id="exampleInputLogo" onchange="ValidateUploadlogoInput(this);">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="text-center padding-top-10 padding-bottom-10">
+                            <input type="submit" value="Upload Logo" class="btn btn-primary" id="btnsubmit" />
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+
+            window.setTimeout(function () {
+                $("#informationMessage").fadeOut('slow');
+            }, 2000);
+        });
+    </script>
+}
+

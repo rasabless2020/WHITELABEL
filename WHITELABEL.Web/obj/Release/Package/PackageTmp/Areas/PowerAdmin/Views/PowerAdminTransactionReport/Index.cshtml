@@ -1,0 +1,118 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_ACCOUNTS>
+@{
+    ViewBag.Title = "White Level Commission Report";
+    //Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminLayout.cshtml";
+   Layout = "~/Areas/PowerAdmin/Views/Shared/_LayoutPowerAdmin.cshtml";
+}
+
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="panel-heading">
+                        <div class="card-title">
+                            <div class="text-left">
+                                <button id="btnExport" class="btn btn-info btn-xs"><span class="ion-forward"></span> EXPORT</button>
+                                @*<a href="@(Url.Action("ExportIndex","SuperRequisition",new {area="Super" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row example-row" style="margin-bottom:10px;">
+                            <div class="col-md-4">
+                                <div class="inputer">
+                                    <div class="input-wrapper">
+                                        @Html.DropDownList("MemberService", new SelectList((ViewBag.MemberService) as SelectList, "Value", "Text"), "Select Whitelevel", new { id = "WhiteLevelList", @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="inputer">
+                                    <div class="input-wrapper">
+                                        @Html.DropDownList("MemberTransactionStatus", new List<SelectListItem>
+                                                                            { new SelectListItem{Text="Mobile Recharge", Value="Mobile Recharge"},
+                                                                                new SelectListItem{Text="DMR", Value="DMR"},
+                                                                                new SelectListItem{Text="Requisition", Value="Requisition"} },
+                                                                               "Select Status", new { id = "TransactionStatus", @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                            <div class="col-md-12">@Html.AjaxGrid(Url.Action("IndexGrid", "PowerAdminTransactionReport", new { area = "PowerAdmin" }))</div>
+
+
+
+                       
+                    </div>
+                    <div class="panel-footer text-right">
+                        @*<a href="#" id="btnExportWhiteLevelrecoard" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                        @*<button id="btnExport" class="btn btn-info btn-xs">EXPORT</button>*@
+                        @*<a href="@(Url.Action("ExportIndex","MemberTransactionReport",new {area="Admin" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                    </div>
+
+                </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<script>
+    $(document).on('change', '#TransactionStatus', function () {
+        var dropdownval = $('#WhiteLevelList').val();
+        $('.mvc-grid').mvcgrid({
+            query: 'search=' + dropdownval + '&Status=' + this.value,
+            //query: 'search=' + this.value+'&Satus'+this.value,
+            reload: true,
+            reloadStarted: function () {
+                $(".divFooterTotalComm").remove();
+            },
+        });
+    });
+</script>
+
+<script>
+    //$(document).on('change', '.mvc-grid-search', function () {
+    $("#WhiteLevelList").change(function () {
+        var status = $('#TransactionStatus').val();
+        $('.mvc-grid').mvcgrid({
+            //query: 'search=' + this.value,
+            query: 'search=' + this.value + '&Status=' + status,
+            reload: true,
+            reloadStarted: function () {
+                $(".divFooterTotalComm").remove();
+            },
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('.mvc-grid').mvcgrid({       
+            reload: true,
+                reloadStarted: function () {
+                    $(".divFooterTotalComm").remove();
+                },
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $("#btnExportWhiteLevelrecoard").click(function () {
+        var url = '@(Url.Action("ExportIndexWhiteLevelAdminReport", "PowerAdminTransactionReport", new {area="PowerAdmin" }) + ViewContext.HttpContext.Request.QueryString)?Disid=' + $("#WhiteLevelList").val() + '&statusval=' + $("#TransactionStatus").val();
+        window.location.href = url;
+    })
+</script>
+
+<script type="text/javascript">    
+    $("[id$=btnExport]").click(function (e) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=my-ajax-grid]').html()));
+        e.preventDefault();
+    });
+</script>
+
+

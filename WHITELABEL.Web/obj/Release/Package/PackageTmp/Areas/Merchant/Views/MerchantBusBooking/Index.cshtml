@@ -1,0 +1,385 @@
+﻿
+@{
+    ViewBag.Title = "Bus Service";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+
+
+<div style="padding:200px; text-align:center;">
+    <h1>coming soon.....</h1>
+</div>
+
+
+
+@*<div class="content">
+    @*<div class="page-header full-content">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>Search</h1>
+            </div>
+            <!--.col-->
+            <div class="col-sm-6">
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="ion-home"></i></a></li>
+                    <li><a href="#" class="active">Search </a></li>
+                </ol>
+            </div>
+            <!--.col-->
+        </div>
+        <!--.row-->
+    </div>*
+    <!--.page-header-->
+    <!-- content -->
+    <div class="display-animation">
+        <div class="full-content bg-white padding-0 padding-top-10">
+            <div class="row">
+                <ul class="inline-list" id="filter">
+                    <!--<li>
+                      <div class="dropdown">
+                      <a class="dropdown-toggle btn btn-blue btn-xs btn-xs" href="#" data-toggle="dropdown">Time</a>
+                        <div class="dropdown-menu" style="padding:5px;  width:300px;">
+                          <form class="form-horizontal"  >
+                            <div class="input-group"> <span class="input-group-addon"><i class="ion-android-calendar"></i></span>
+                              <div class="inputer">
+                                <div class="input-wrapper">
+                                  <input type="text" style="width:80%" name="birthday" class="form-control bootstrap-daterangepicker-basic" value="03/18/2013" />
+                                </div>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </li>-->
+                    <li>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle btn btn-blue btn-xs btn-xs" href="#" data-toggle="dropdown">Price range </a>
+                            <div class="dropdown-menu" style="padding:5px; width:300px;">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <input type="text" name="" class="ionrange-money1">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle btn btn-blue btn-xs btn-xs" href="#" data-toggle="dropdown">Time range </a>
+                            <div class="dropdown-menu" style="padding:5px; width:300px;">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <input type="text" name="" class="ionrange-money1">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle btn btn-blue btn-xs btn-xs" href="#" data-toggle="dropdown">Stops </a>
+                            <div class="dropdown-menu" style="padding:5px; width:300px;">
+                                <form class="form-horizontal">
+                                    <div class="btn-group btn-group-xs" data-toggle="buttons">
+                                        <label class="btn btn-blue active">
+                                            <input type="radio" name="options" id="option0" autocomplete="off" checked>
+                                            0
+                                        </label>
+                                        <label class="btn btn-blue-grey">
+                                            <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                                            1
+                                        </label>
+                                        <label class="btn btn-blue-grey">
+                                            <input type="radio" name="options" id="option2" autocomplete="off">
+                                            2
+                                        </label>
+                                        <label class="btn btn-blue-grey">
+                                            <input type="radio" name="options" id="option3" autocomplete="off">
+                                            3
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle btn btn-blue btn-xs btn-xs" href="#" data-toggle="dropdown">Bus type </a>
+                            <div class="dropdown-menu" style="padding:5px; width:370px;">
+                                <form class="form-horizontal">
+                                    <div class="btn-group btn-group-xs" data-toggle="buttons">
+                                        <label class="btn btn-blue active">
+                                            <input type="radio" name="optionsa" id="option1" autocomplete="off" checked>
+                                            AC
+                                        </label>
+                                        <label class="btn btn-blue-grey">
+                                            <input type="radio" name="optionsa" id="option2" autocomplete="off">
+                                            Non AC
+                                        </label>
+                                        <label class="btn btn-blue-grey">
+                                            <input type="radio" name="optionsa" id="option222" autocomplete="off">
+                                            AC sleeper
+                                        </label>
+                                        <label class="btn btn-blue-grey">
+                                            <input type="radio" name="optionsa" id="option22j" autocomplete="off">
+                                            Non AC sleeper
+                                        </label>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle btn btn-blue btn-xs btn-xs" href="#" data-toggle="dropdown"> OPERATOR </a>
+                            <div class="dropdown-menu" style="padding:5px; ">
+                                <form class="form-horizontal">
+                                    <div class="form-group" style="margin-bottom:0; ">
+                                        <select multiple class="selecter">
+                                            <option>All</option>
+                                            <option>OPERATOR</option>
+                                            <option>OPERATOR 2</option>
+                                            <option>OPERATOR 3</option>
+                                        </select>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle btn btn-blue btn-xs btn-xs" href="#" data-toggle="dropdown">Trip duration </a>
+                            <div class="dropdown-menu" style="padding:5px; width:300px;">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <input type="text" name="" class="ionrange-money1">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="dropdown">
+                            <a class="dropdown-toggle btn btn-blue btn-xs btn-xs" href="#" data-toggle="dropdown">Layover duration </a>
+                            <div class="dropdown-menu" style="padding:5px; width:300px;">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <input type="text" name="" class="ionrange-money1">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="display-animation" id="bus_search">
+        <div class="full-content margin-bottom-40 bg-white">
+            <div class="row">
+                <div class="col-md-12 material-animate">
+                    <div class="panel-group" id="search_list">
+                        <ul class="list-group">
+                            <!--<li class="list-group-item ">
+                              <div class="col-lg-4">Airlines</div>
+                              <div class="col-lg-8 text-center">
+                                <div class="col-lg-4">Departure </div>
+                                <div class="col-lg-4">Arrival Time</div>
+                                <div class="col-lg-2">Refundable</div>
+                                <div class="col-lg-2">Price</div>
+                              </div>
+                              <div class="clearfix"></div>
+                            </li>-->
+                            <li class="list-group-item">
+                                <div class="col-lg-4">
+                                    <h4>EX-Service Man Dependent Tourist Service  </h4>
+                                    <p>A/C Seater push back (2+2)</p>
+                                </div>
+                                <div class="col-lg-8 text-center">
+                                    <div class="col-lg-3">
+                                        <h4>23:30 <span class="fa fa-angle-double-right text-blue"></span> 05:00</h4>
+                                        <p><span class="pull-left">05h :  30m </span> <span class="pull-right">1 Rest Stop</span></p>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h4><span class="label label-info">4.1/5</span></h4>
+                                        <p>(21 Ratings)</p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <h4>24 Seats</h4>
+                                        <p>11 Window</p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p><del>INR 300</del></p>
+                                        <h4>
+                                            INR 285
+                                            <button class="btn btn-blue btn-xs pull-right">Book </button>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+
+                            <li class="list-group-item">
+                                <div class="col-lg-4">
+                                    <h4>Friends Travels </h4>
+                                    <p>A/C Seater push back (2+2)</p>
+                                </div>
+                                <div class="col-lg-8 text-center">
+                                    <div class="col-lg-3">
+                                        <h4>23:30 <span class="fa fa-angle-double-right text-blue"></span> 05:00</h4>
+                                        <p><span class="pull-left">05h :  30m </span> <span class="pull-right">1 Rest Stop</span></p>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h4><span class="label label-info">4.1/5</span></h4>
+                                        <p>(21 Ratings)</p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <h4>24 Seats</h4>
+                                        <p>11 Window</p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p><del>INR 300</del></p>
+                                        <h4>
+                                            INR 285
+                                            <button class="btn btn-blue btn-xs pull-right">Book </button>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+
+                            <li class="list-group-item">
+                                <div class="col-lg-4">
+                                    <h4>City Express  </h4>
+                                    <p>A/C Seater push back (2+2)</p>
+                                </div>
+                                <div class="col-lg-8 text-center">
+                                    <div class="col-lg-3">
+                                        <h4>23:30 <span class="fa fa-angle-double-right text-blue"></span> 05:00</h4>
+                                        <p><span class="pull-left">05h :  30m </span> <span class="pull-right">1 Rest Stop</span></p>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h4><span class="label label-info">4.1/5</span></h4>
+                                        <p>(21 Ratings)</p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <h4>24 Seats</h4>
+                                        <p>11 Window</p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p><del>INR 300</del></p>
+                                        <h4>
+                                            INR 285
+                                            <button class="btn btn-blue btn-xs pull-right">Book </button>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+
+                            <li class="list-group-item">
+                                <div class="col-lg-4">
+                                    <h4>Snemita Paribahan</h4>
+                                    <p>A/C Seater push back (2+2)</p>
+                                </div>
+                                <div class="col-lg-8 text-center">
+                                    <div class="col-lg-3">
+                                        <h4>23:30 <span class="fa fa-angle-double-right text-blue"></span> 05:00</h4>
+                                        <p><span class="pull-left">05h :  30m </span> <span class="pull-right">1 Rest Stop</span></p>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h4><span class="label label-info">4.1/5</span></h4>
+                                        <p>(21 Ratings)</p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <h4>24 Seats</h4>
+                                        <p>11 Window</p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p><del>INR 300</del></p>
+                                        <h4>
+                                            INR 285
+                                            <button class="btn btn-blue btn-xs pull-right">Book </button>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+
+                            <li class="list-group-item">
+                                <div class="col-lg-4">
+                                    <h4> Bengal Surface Transport  </h4>
+                                    <p>A/C Seater push back (2+2)</p>
+                                </div>
+                                <div class="col-lg-8 text-center">
+                                    <div class="col-lg-3">
+                                        <h4>23:30 <span class="fa fa-angle-double-right text-blue"></span> 05:00</h4>
+                                        <p><span class="pull-left">05h :  30m </span> <span class="pull-right">1 Rest Stop</span></p>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h4><span class="label label-info">4.1/5</span></h4>
+                                        <p>(21 Ratings)</p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <h4>24 Seats</h4>
+                                        <p>11 Window</p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p><del>INR 300</del></p>
+                                        <h4>
+                                            INR 285
+                                            <button class="btn btn-blue btn-xs pull-right">Book </button>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+
+                            <li class="list-group-item">
+                                <div class="col-lg-4">
+                                    <h4> Ankita Paribahan  </h4>
+                                    <p>A/C Seater push back (2+2)</p>
+                                </div>
+                                <div class="col-lg-8 text-center">
+                                    <div class="col-lg-3">
+                                        <h4>23:30 <span class="fa fa-angle-double-right text-blue"></span> 05:00</h4>
+                                        <p><span class="pull-left">05h :  30m </span> <span class="pull-right">1 Rest Stop</span></p>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <h4><span class="label label-info">4.1/5</span></h4>
+                                        <p>(21 Ratings)</p>
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <h4>24 Seats</h4>
+                                        <p>11 Window</p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <p><del>INR 300</del></p>
+                                        <h4>
+                                            INR 285
+                                            <button class="btn btn-blue btn-xs pull-right">Book </button>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!--.col-->
+
+            </div>
+            <!--.row-->
+        </div>
+        <!--.full-content-->
+    </div>
+    <!--.display-animation-->
+    <!-- content -->
+</div>*@
+<!--.content-->
+

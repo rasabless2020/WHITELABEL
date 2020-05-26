@@ -1,0 +1,14 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IGrid<WHITELABEL.Data.Models.TBL_SETTINGS_BANK_DETAILS>
+@{
+    ViewBag.Title = "RequisitionDetailGrid";
+    //Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@(new HtmlGrid<WHITELABEL.Data.Models.TBL_SETTINGS_BANK_DETAILS>(Html, Model))
+<style>
+    .RowColorchange {
+        background-color: sandybrown;
+    }
+</style>
+

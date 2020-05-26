@@ -1,0 +1,43 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_REMITTER_BENEFICIARY_INFO>
+@{
+    ViewBag.Title = "DisplayBeneficiaryList";
+    Layout = null;
+    //Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+}
+
+@*@(new HtmlGrid<WHITELABEL.Data.Models.TBL_REMITTER_BENEFICIARY_INFO>(Html, Model))*@
+@(Html
+                            .Grid(Model)
+                            .Build(columns =>
+                            {
+                                columns.Add(model => model.BeneficiaryID).Titled("Ben. Id");
+                                //columns.Add(model => model.ToUser).Titled("To User");
+                                columns.Add(model => model.BeneficiaryName).Titled("Beneficiary Name");
+                                columns.Add(model => model.Bank).Titled("Bank");
+                                columns.Add(model => model.IFSC).Titled("IFSC");
+                                columns.Add(model => model.BeneficiaryName).Titled("Beneficiary Name");
+                                columns.Add(model => model.Account).Titled("Account");
+                                columns.Add(model => model.Mobile).Titled("Mobile");
+                                columns.Add(model => model.ID).Titled("").Encoded(false).Filterable(false).Sortable(false)
+                                    .RenderedAs(model => "<a href='" + @Url.Action("FundTransfer", "MerchantDMRDashboard", new { area = "Merchant", TransID = Encrypt.EncryptMe(model.ID.ToString()) }) + "' class='btn btn-success'>Fund Transfer</a>"); 
+                            })                            
+                            .Empty("No data found")
+                            .Id("my-ajax-grid")
+                            .MultiFilterable()
+                            //.Pageable(pager =>
+                            //{
+                            //    pager.PagesToDisplay = 10;
+                            //    pager.RowsPerPage = 10;
+                            //})
+                            .Filterable()
+                            .Sortable()
+)
+<script type="text/javascript">
+    $('#my-ajax-grid').mvcgrid({
+        reloadStarted: function () {
+            reload: true;
+        }
+    });
+</script>

@@ -1,0 +1,147 @@
+﻿@model WHITELABEL.Web.Areas.Distributor.Models.DistributorCreditLimitSetting
+@{
+    ViewBag.Title = "DeductMerchantCreditAmt";
+    Layout = "~/Areas/Distributor/Views/Shared/_LayoutDistributor.cshtml";
+}
+<script src="~/Areas/Distributor/DistributorHelperJS/RetailerAPILevel/IndexDistributorCredit.js"></script>
+@using (Ajax.BeginForm("PostDeductCREDITLimitBALANCESetting", "DistributorCreditManagment", new AjaxOptions { Confirm = "Do you want to deduct credit limit to merchant", OnSuccess = "OnSuccessDeductCreditLimitDistributor", OnFailure = "OnFailureDeductCreditLimitDistributor", LoadingElementId = "progressDeductCreditLimitDistributor" }, new { area = "Distributor", @id = "DeductCreditLimitDISTRIBUTOR" }))
+{
+    <div class="form-horizontal">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="clearfix">
+            @*<div class="col-md-12">
+                <div class="col-md-12 row headcolor">
+                    <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-list fa-3x"></i></div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4" style="text-align:right; padding-top:10px;">
+                        <h3>
+                            Deduct Credit Balance
+                        </h3>
+                    </div>
+                </div>
+            </div>*@
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row ">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6 row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="text-align:left;">Merchant Name</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="md-form">
+                                                    
+                                                    @Html.EditorFor(m => m.From_Member_Name, new { htmlAttributes = new { @id = "txtRetailerMemberaName", style = " width:100%; padding:5px;", placeholder = "Merchant User Name", @class = "form-control" } })
+                                                    @Html.HiddenFor(model => model.FROM_MEM_ID, new { id = "hfRetailerID" })
+                                                </div>
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.From_Member_Name, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" style="display:none">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="text-align:left;">Reserved Credit Balance(PCL) </label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="md-form">
+                                                    @Html.EditorFor(model => model.reservedCreditLimit, new { htmlAttributes = new { @class = "form-control", @placeholder = "", @readonly = "readonly", @id = "txtDistReservedCreditLimit" } })
+                                                </div>
+                                                <span>@Html.ValidationMessageFor(model => model.reservedCreditLimit, "", new { @class = "text-danger" })</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="text-align:left;">Deduct Credit Balance Amount</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="md-form">
+                                                    @Html.EditorFor(model => model.CREDIT_LIMIT_AMOUNT, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
+                                                </div>
+                                                <span>@Html.ValidationMessageFor(model => model.CREDIT_LIMIT_AMOUNT, "", new { @class = "text-danger" })</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="text-align:left;">Credit Balance Note</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="md-form">
+                                                    @Html.TextAreaFor(model => model.CREDIT_LIMIT_DIstription, 5, 54, new { htmlAttributes = new { @class = "form-control", @style = "border-radius:5px", @placeholder = "Description" } })
+                                                </div>
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CREDIT_LIMIT_DIstription, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" style="display:none">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="text-align:left;">Services Tagging</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="md-form">
+                                                    <div class="">
+                                                        @Html.CheckBoxFor(x => x.MOBILE_RECHARGE, new { @class = "", @id = "chkMobile" }) Mobile | @Html.CheckBoxFor(x => x.UTILITY_SERVICES, new { @class = "", @id = "chkUtility" }) Utility | @Html.CheckBoxFor(x => x.DMR, new { @class = "", @id = "chkDMT" }) DMT | @Html.CheckBoxFor(x => x.AIR_TICKET, new { @class = "", @id = "chkFlight" }) Air Booking | @Html.CheckBoxFor(x => x.RAIL_UTILITY, new { @class = "", @id = "chkRail" }) Rail<br />
+                                                        @Html.CheckBoxFor(x => x.BUS_TICKET, new { @class = "", @id = "chkBusBooking" }) Bus Booking | @Html.CheckBoxFor(x => x.HOTEL_BOOKING, new { @class = "", @id = "chkHotelBooking" }) Hotel Booking |  @Html.CheckBoxFor(x => x.AllServices, new { @class = "", @id = "chkAllService" }) <b>Check All Services</b>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3"></label>
+                                        <div class="col-md-9">
+                                            <div class="inputer" style="text-align:center">
+                                                <input type="submit" value="Proceed" class="btn btn-primary" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3"></div>
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div>
+    </div>
+}
+<div class="preloader hidden" id="progressDeductCreditLimitDistributor" style="display:none;">
+    <div id="loading"></div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {      
+        $('#progressDeductCreditLimitDistributor').removeClass("hidden");
+        $('#progressDeductCreditLimitDistributor').hide();
+    })
+    function OnSuccessDeductCreditLimitDistributor(response) {
+        var message = response;
+        $("#DeductCreditLimitDISTRIBUTOR").trigger("reset");
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+                var url = "/Distributor/DistributorCreditManagment/CreditLimitList";
+                window.location.href = url;
+            }
+        });
+    }
+    function OnFailureDeductCreditLimitDistributor(response) {
+        alert("Error occured.");
+    }
+</script>
+

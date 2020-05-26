@@ -1,0 +1,308 @@
+﻿@model WHITELABEL.Data.Models.TBL_SETTINGS_BANK_DETAILS
+@using WHITELABEL.Web.Helper;
+@{
+    ViewBag.Title = "Distributor Bank Details";
+    //Layout = "~/Areas/Distributor/Views/Shared/_DistributorLayout.cshtml";
+    //    Layout = "~/Areas/Distributor/Views/Shared/_LayoutDistributor.cshtml";
+    Layout = "~/Areas/Distributor/Views/Shared/_LayoutDistributor.cshtml";
+}
+
+@using (Html.BeginForm("BankDetails", "DistributorBankDetails", FormMethod.Post, new { area = "Distributor" }))
+{
+
+    <div class="form-horizontal padding-top-20">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.SL_NO)
+        @Html.HiddenFor(model => model.MEM_ID)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            @*<div class="col-md-12">
+                <div class="col-md-12 row headcolor">
+                    <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-university  fa-3x"></i></div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4" style="text-align:right; padding-top:10px;">
+                        <h3>
+                            Add Bank Information
+                        </h3>
+                    </div>
+                </div>
+            </div>*@
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-heading">
+                    </div><!--.panel-heading-->
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-2">Acount Holder Name</label>
+                                    <div class="col-md-10">
+                                        <div class="inputer">
+                                            <div class="md-form">
+                                                @Html.HiddenFor(model => model.SL_NO)
+                                                @Html.EditorFor(model => model.ACCOUNT_HOLDERNAME, new { htmlAttributes = new { @class = "form-control", @placeholder = "Acount Holder Name" } })
+                                            </div>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.BANK, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!--.row-->
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3">Bank Name</label>
+                                    <div class="col-md-9">
+                                        <div class="inputer">
+                                            <div class="md-form">
+                                                @Html.HiddenFor(model => model.SL_NO)
+                                                @Html.EditorFor(model => model.BANK, new { htmlAttributes = new { @class = "form-control", @placeholder = "Bank Name" } })
+                                            </div>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.BANK, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3">Ifsc Code</label>
+                                    <div class="col-md-9">
+                                        <div class="inputer">
+                                            <div class="md-form">
+                                                @Html.EditorFor(model => model.IFSC, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ifsc Code" } })
+                                            </div>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.IFSC, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div><!--.row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3">Mirc Code</label>
+                                    <div class="col-md-9">
+                                        <div class="inputer">
+                                            <div class="md-form">
+                                                @Html.EditorFor(model => model.MICR_CODE, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mirc Code" } })
+                                            </div>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.MICR_CODE, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3">Account No.</label>
+                                    <div class="col-md-9">
+                                        <div class="inputer">
+                                            <div class="md-form">
+                                                @Html.EditorFor(model => model.ACCOUNT_NO, new { htmlAttributes = new { @class = "form-control", @placeholder = "Account No." } })
+                                            </div>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.ACCOUNT_NO, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div><!--.row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3">Branch</label>
+                                    <div class="col-md-9">
+                                        <div class="inputer">
+                                            <div class="md-form">
+                                                @Html.EditorFor(model => model.BRANCH, new { htmlAttributes = new { @class = "form-control", @placeholder = "Branch" } })
+                                            </div>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.BRANCH, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3">Contact</label>
+                                    <div class="col-md-9">
+                                        <div class="inputer">
+                                            <div class="md-form">
+                                                @Html.EditorFor(model => model.CONTACT, new { htmlAttributes = new { @class = "form-control", @placeholder = "Contact" } })
+                                            </div>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CONTACT, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div><!--.row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3">Address</label>
+                                    <div class="col-md-9">
+                                        <div class="inputer">
+                                            <div class="md-form">
+                                                @Html.EditorFor(model => model.ADDRESS, "0", new { htmlAttributes = new { @class = "form-control", @placeholder = "Address" } })
+                                            </div>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.ADDRESS, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3">City</label>
+                                    <div class="col-md-9">
+                                        <div class="inputer">
+                                            <div class="md-form">
+                                                @Html.EditorFor(model => model.CITY, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
+                                            </div>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CITY, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div><!--.row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3">District</label>
+                                    <div class="col-md-9">
+                                        <div class="inputer">
+                                            <div class="md-form">
+                                                @Html.EditorFor(model => model.DISTRICT, new { htmlAttributes = new { @class = "form-control", @placeholder = "District Name" } })
+                                            </div>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.DISTRICT, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3"> State</label>
+                                    <div class="col-md-9">
+                                        <div class="inputer">
+                                            <div class="md-form">
+                                                @*@Html.EditorFor(model => model.STATE, new { htmlAttributes = new { @class = "form-control", @placeholder = "State" } })*@
+                                                @*@Html.AutocompleteFor(model => model.STATE, model => model.STATENAME, "GetStateName", "MemberBankDetails", false, new { area = "Admin", htmlAttributes = new { @class = "form-control", autocomplete = "off" } })*@
+                                                @Html.AutocompleteFor(model => model.STATE, model => model.STATENAME, "GetStateName", "DistributorBankDetails", false, new { area = "Distributor", htmlAttributes = new { @class = "form-control", autocomplete = "off", @placeholder = "State" } })
+                                            </div>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.STATE, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div><!--.row-->
+
+                    </div><!--.panel-body-->
+
+                    <div class="card-footer">
+                        <div class="col-lg-6">
+
+                        </div>
+
+                        <div class="col-lg-6 text-right">
+                            @if (ViewBag.checkbank == "0")
+                            {
+                                <input type="submit" value="Create" class="btn btn-primary" />
+
+                            }
+                            else
+                            {
+                                <input type="submit" value="Update" class="btn btn-primary" />
+
+                            }
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div>
+
+    </div>
+    @*<style>
+        #selectedCompany {
+            border: 1px dashed silver;
+            margin: 10px 0;
+            padding: 5px;
+        }
+        .typeahead, .tt-query, .tt-hint {
+            width: 300px;
+            padding: 8px;
+            font-size: 18px;
+            /*border: 2px solid #ccc;*/
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            border-radius: 0px;
+            outline: none;
+            
+        }
+        .typeahead {
+            background-color: #fff;
+            
+        }
+            .typeahead:focus {
+                border: 2px solid #0097cf;
+            }
+        .tt-query {
+            -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+        }
+        .tt-hint {
+            color: #999
+        }
+        .tt-dropdown-menu {
+            width: 300px;
+            max-height: 150px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+            margin-top: 12px;
+            padding: 8px 0;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            -webkit-border-radius: 8px;
+            -moz-border-radius: 8px;
+            border-radius: 8px;
+            -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+            -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+            /*box-shadow: 0 5px 10px rgba(0, 0, 0, .2);*/
+        }
+        .tt-suggestion {
+            padding: 3px 20px;
+            font-size: 18px;
+            line-height: 24px;
+        }
+            .tt-suggestion.tt-cursor {
+                color: #fff;
+                background-color: #579;
+            }
+            .tt-suggestion p {
+                margin: 0;
+            }
+    </style>*@
+
+    <style>
+        .form-horizontal .control-label {
+            text-align: left
+        }
+    </style>
+
+}
+
+

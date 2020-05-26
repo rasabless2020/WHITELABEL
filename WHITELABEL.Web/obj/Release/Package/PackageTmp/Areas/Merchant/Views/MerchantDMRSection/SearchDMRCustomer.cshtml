@@ -1,0 +1,334 @@
+﻿@model WHITELABEL.Web.Areas.Merchant.Models.GetDMRCustomerInfo
+@{
+    ViewBag.Title = "Search Customer";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+@using (Ajax.BeginForm("GetDMRCustomerInformation", "MerchantDMRSection", new AjaxOptions { OnSuccess = "OnSuccessGetDMRCustomerDetails", OnFailure = "OnFailureGetDMRCustomerInfo", LoadingElementId = "progressGetDMRCustomerInfo" }, new { area = "Merchant", @id = "SearchDMRCustomer" }))
+{
+    <div class="form-horizontal padding-top-20">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-12">              
+            </div>
+            <div class="col-md-12">
+                <div class="card" style="padding:50px 0;">
+                    <div class="card-body">
+                        <div class="col-md-12" style="text-align:center; margin-bottom:30px;">
+                            <h1>Search Customer Mobile Number</h1>
+                        </div>
+
+                        <div class="col-md-12 clearfix row">
+
+
+                            <div class="col-md-1"></div>
+
+                            <div class="col-md-9">
+                                <div class="inputer">
+                                    <div class="md-form">                                      
+                                        @Html.EditorFor(m => m.CustomerMobileNo, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Customer Id", id = "TransxtID" } })
+                                    </div>
+                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CustomerMobileNo, "", new { @class = "text-danger" })</small></span>
+                                </div>
+                            </div>
+                            <div class="col-md-1">                                
+                                <button class="btn btn-danger" type="submit">Search</button>
+                                
+                            </div>
+                            <div class="col-md-1"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div class="preloader hidden" id="progressGetDMRCustomerInfo" style="display:none">
+    <div id="loading"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        GetOutletMerchantInformation();
+        $('#progressGetDMRCustomerInfo').removeClass("hidden");
+        $('#progressGetDMRCustomerInfo').hide();
+    })
+    function OnSuccessGetDMRCustomerDetails(response) {
+        debugger;
+        $('#progressGetDMRCustomerInfo').show();
+        var message = response;
+
+        var message = response;
+        debugger;
+        var Remitterid = message.RemitterIDVALUE;
+        var APIMSG = message.msgDetail;
+
+
+        var CustId = $('#TransxtID').val();
+        $("#SearchDMRCustomer").trigger("reset");
+        debugger;
+        if (APIMSG == "Transaction Successfully") {
+            var url = "/Merchant/MerchantDMRSection/CustomerDetails";
+            window.location.href = url;
+        }
+        else if (APIMSG == "OTP sent successfully")
+        {
+            $('#txtDMTCustomerMobile').val(CustId);
+            $('#hdnRemitterId').val(Remitterid);
+            $('.transdDMRCustRegForm').modal('show');
+        }
+        else {
+            bootbox.alert({
+                size: "small",
+                message: response,
+                backdrop: true,
+                callback: function () {
+                    console.log(message);
+                    if (response == "Remitter Not Found") {
+                        var url = "/Merchant/MerchantDMRSection/CreateCustomer";
+                        window.location.href = url;
+                    }
+                }
+            });
+
+        }
+        //if (response != "Invalid Credential or Access Denied") {
+        //    if (response != 'Data not found in database') {
+        //        if (response == 'Please check mobile number length' || response == 'Mobile number should only be in digits' || response == 'Access has been restricted') {
+        //            bootbox.alert({
+        //                size: "small",
+        //                message: response,
+        //                backdrop: true
+        //            });
+        //        }
+        //        else {
+        //            var url = "/Merchant/MerchantDMRSection/CustomerDetails";
+        //            window.location.href = url;
+        //        }
+        //        $('#progressGetDMRCustomerInfo').hide();
+        //    }
+        //    else {
+        //        var url = "/Merchant/MerchantDMRSection/CreateCustomer";
+        //        window.location.href = url;
+        //    }
+        //}
+        //else {
+        //    bootbox.alert({
+        //        size: "small",
+        //        message: response,
+        //        backdrop: true
+        //    });
+        //}
+    }
+    function OnFailureGetDMRCustomerInfo(response) {
+        debugger;
+        alert("Error occured.");
+    }
+</script>
+
+
+
+<script src="~/Areas/Merchant/MerchantHelperJS/TransXTAPI/InstantPayAPIJs.js"></script>
+<div id="transactionvalueDMRCustomerRegistrationid" class="modal scale fade transdDMRCustRegForm" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" style="max-width: 700px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Validate Mobile No</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12" style="padding: 0 20px;">
+                    <div style="box-shadow: 5px 10px #3e50b4; border: 1px solid #3e50b4; padding:20px 0; margin:40px;" class="clearfix">
+                        <div class=" col-md-12 row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-4" style="padding-top:10px;">Mobile No</label>
+                                    <div class="col-md-8">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">
+                                                <input type="text" class="form-control text-box single-line" id="txtDMTCustomerMobile" placeholder="Customer Mobile No" readonly="readonly" />
+                                                <input type="hidden" id="hdnRemitterId" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-4" style="padding-top:10px;"> OTP</label>
+                                    <div class="col-md-8">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">
+                                                <input type="text" class="form-control text-box single-line" id="txtDMTCUSTOTP_Value" placeholder="Enter OTP" />
+                                            </div>
+                                            <span class="help-block"><small>@*@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })*@</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center col-md-12">
+                            <input type="submit" value="Verify Yourself" class="btn btn-primary" id="btnOutletsubmit" onclick="VerifyDMTCustomerMobileNo($('#txtDMTCustomerMobile').val(),$('#hdnRemitterId').val(),$('#txtDMTCUSTOTP_Value').val());" />
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div><!--.modal-content-->
+    </div><!--.modal-dialog-->
+</div>
+
+
+
+
+@*<script src="~/Areas/Merchant/MerchantHelperJS/MobileRecharge/Outlet.js"></script>
+<div id="transactionvalueoutletRegistrationid" class="modal scale fade transdOutletRegForm" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" style="max-width: 700px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">BBPS Verification Form</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12" style="padding: 0 60px;">
+                    <div style="box-shadow: 5px 10px #3e50b4; border: 1px solid #3e50b4; padding:20px;" class="clearfix row">
+                        <div class="col-md-8">
+                            <div class="form-group row">
+                                <label class="control-label col-md-4" style="padding-top:10px;">Mobile No</label>
+                                <div class="col-md-8">
+                                    <div class="inputer">
+                                        <div class="input-wrapper">                                          
+                                            <input type="text" value="Mobile No" class="form-control text-box single-line" id="txtOutletMobileNo" placeholder="Mobile Number" readonly="readonly" />                                          
+                                        </div>
+                                        <span class="help-block"><small></small></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="javascript:void(0)" id="SendOTP" onclick="GenerateOutletOTP($('#txtOutletMobileNo').val())" class="btn btn-primary"><b>Get OTP</b></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12" style="padding: 0 20px;">
+                    <div style="box-shadow: 5px 10px #3e50b4; border: 1px solid #3e50b4; padding:20px 0; margin:40px;" class="clearfix">
+                        <div class=" col-md-12 row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-4" style="padding-top:10px;"> Name</label>
+                                    <div class="col-md-8">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">
+                                                <input type="text" value="Customer Name" class="form-control text-box single-line" id="txtOutletCustomerName" placeholder="Customer Name" readonly="readonly" />
+                                            </div>
+                                            <span class="help-block"><small></small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-4" style="padding-top:10px;">Address</label>
+                                    <div class="col-md-8">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">
+                                              
+                                                <input type="text" value="Customer Address" class="form-control text-box single-line" id="txtOutletCustomerAddress" placeholder="Customer Address" readonly="readonly" />
+                                            </div>
+                                            <span class="help-block"><small></small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-4" style="padding-top:10px;">Pincode</label>
+                                    <div class="col-md-8">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">                                                
+                                                <input type="text" value="PinCode" class="form-control text-box single-line" id="txtOutletPincode" placeholder="Pincode" readonly="readonly" />
+                                            </div>
+
+                                            <span class="help-block"><small></small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-4" style="padding-top:10px;">Email</label>
+                                    <div class="col-md-8">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">
+                                                
+                                                <input type="text" value="Customer Email" class="form-control text-box single-line" id="txtOutletCustomerEmail" placeholder="Customer Email" readonly="readonly" />
+                                            </div>
+
+                                            <span class="help-block"><small></small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-4" style="padding-top:10px;">Company Name</label>
+                                    <div class="col-md-8">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">
+                                                
+                                                <input type="text" value="Company Name" class="form-control text-box single-line" id="txtOutletCompanyName" placeholder="Company Name" readonly="readonly" />
+                                            </div>
+
+                                            <span class="help-block"><small></small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-4" style="padding-top:10px;">Pan No</label>
+                                    <div class="col-md-8">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">
+                                                
+                                                <input type="text" value="Pancard No" class="form-control text-box single-line" id="txtOutletPancardNo" placeholder="Pancard No" />
+                                            </div>
+
+                                            <span class="help-block"><small></small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-4" style="padding-top:10px;">OTP</label>
+                                    <div class="col-md-8">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">                                                
+                                                <input type="text" value="OTP" class="form-control text-box single-line" id="txtOutletOTP" placeholder="OTP" />
+                                            </div>
+                                            <span class="help-block"><small></small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center col-md-12">
+                            <input type="submit" value="Verify Yourself" class="btn btn-primary" id="btnOutletsubmit" onclick="RegisteredOutletInformation($('#txtOutletPancardNo').val(),$('#txtOutletOTP').val());" />
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>*@

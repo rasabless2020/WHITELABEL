@@ -1,0 +1,231 @@
+﻿@model WHITELABEL.Web.Areas.Admin.Models.MemberCreditBalanceModel
+@{
+    ViewBag.Title = "Credit Managment System";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<link href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-2.2.4.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="~/Areas/Admin/AdminHelperJS/DebitCreditJs/CreditWalletJS.js"></script>
+@using (Ajax.BeginForm("PostCREDITBALANCE", "MemberCreditManagment", new AjaxOptions { Confirm = "Do you want to give credit balance", OnSuccess = "OnSuccessCreditDistributor", OnFailure = "OnFailureCreditDistributor", LoadingElementId = "progressCreditDistributor" }, new { area = "Admin", @id = "ADDCreditDISTRIBUTOR" }))
+{
+    <div class="form-horizontal">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.SLN)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="clearfix">
+            @*<div class="col-md-12">
+                <div class="col-md-12 row headcolor">
+                    <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-list fa-3x"></i></div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4" style="text-align:right; padding-top:10px;">
+                        <h3>
+                            Credit Note
+                        </h3>
+                    </div>
+                </div>
+            </div>*@
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="panel-heading">
+                        </div><!--.panel-heading-->
+                        <div class="panel-body">
+                            <div class="row ">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6 row">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="text-align:left;">Note Apply To</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.DropDownListFor(model => model.MEMBER_ROLE, new SelectList((ViewBag.RoleDetails) as SelectList, "Value", "Text"), "Select Role", new { id = "txtRoleDetails", @class = "form-control" })
+                                                    </div>
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.MEMBER_ROLE, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="text-align:left;">Member Name</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.EditorFor(m => m.FromUser, new { htmlAttributes = new { @id = "txtMemberaName", style = " width:100%; padding:5px;", placeholder = "User Name", @class = "form-control" } })
+                                                        @Html.HiddenFor(model => model.FROM_MEM_ID, new { id = "hfOperator" })
+
+                                                    </div>
+                                                    @Html.ValidationMessageFor(model => model.FromUser, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="text-align:left;">Credit Note Type</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.DropDownListFor(m => m.CREDIT_TYPE, new List<SelectListItem>
+                                                                            { new SelectListItem{Text="Debit Note", Value="DR"},
+                                                                                new SelectListItem{Text="Credit Note", Value="CR"}},
+                                                                                "--Select--", new { id = "ddlCreditNoteType", @class = "form-control" })
+
+                                                        <span>@Html.ValidationMessageFor(model => model.CREDIT_TYPE, "", new { @class = "text-danger" })</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="text-align:left;">Credit Amount</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.EditorFor(model => model.CREDIT_AMOUNT, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
+                                                    </div>
+                                                    <span>@Html.ValidationMessageFor(model => model.CREDIT_AMOUNT, "", new { @class = "text-danger" })</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="text-align:left;">Credit Note Discription</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.TextAreaFor(model => model.CREDIT_NOTE_DESCRIPTION, 5, 52, new { htmlAttributes = new { @class = "form-control", @style = "border-radius:5px", @placeholder = "Description" } })
+                                                    </div>
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CREDIT_NOTE_DESCRIPTION, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" id="ddlGSTValue">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="text-align:left;">Is GST APPLY</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.DropDownListFor(m => m.GSTAPPLY, new List<SelectListItem>
+                                                                            { new SelectListItem{Text="Yes", Value="Yes"},
+                                                                                new SelectListItem{Text="No", Value="No"}},
+                                                                                "--Select--", new { id = "GSTMethod", @class = "form-control" })
+
+                                                        <span>@Html.ValidationMessageFor(model => model.GSTAPPLY, "", new { @class = "text-danger" })</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="text-align:left;">Is TDS APPLY</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.DropDownListFor(m => m.TDSAPPLY, new List<SelectListItem>
+                                                                            { new SelectListItem{Text="Yes", Value="Yes"},
+                                                                                new SelectListItem{Text="No", Value="No"}},
+                                                                                "--Select--", new { id = "TDSMethod", @class = "form-control" })
+
+                                                        <span>@Html.ValidationMessageFor(model => model.TDSAPPLY, "", new { @class = "text-danger" })</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <div class="inputer" style="text-align:center">
+                                                    <input type="submit" value="Proceed" class="btn btn-primary" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div><!--.row-->
+                        </div>
+                        </div><!--.panel-body-->
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div>
+    </div>
+}
+<div class="preloader hidden" id="progressCreditDistributor" style="display:none;">
+    <div id="loading"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#progressCreditDistributor').removeClass("hidden");
+        $('#progressCreditDistributor').hide();
+    })
+    function OnSuccessCreditDistributor(response) {
+        var message = response;
+        $("#ADDCreditDISTRIBUTOR").trigger("reset");
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+                var url = "/Admin/MemberCreditManagment/GetCreditNoteList";
+                window.location.href = url;
+            }
+        });      
+    }
+    function OnFailureCreditDistributor(response) {
+        alert("Error occured.");
+    }
+</script>
+
+<script>
+    
+
+
+    //$("#txtMemberaName").autocomplete({
+    //    source: function (request, response) {
+    //        var MEm_Type = $('#txtRoleDetails').val();            
+    //        $.ajax({
+    //            url: '/Admin/MemberCreditManagment/GetMemberName/',
+    //            data: "{ 'prefix': '" + request.term + "','MemberType':'" + MEm_Type + "'}",
+    //            dataType: "json",
+    //            type: "POST",
+    //            contentType: "application/json; charset=utf-8",
+    //            success: function (data) {
+    //                response($.map(data, function (item) {
+    //                    return item;
+    //                }))
+    //            },
+    //            error: function (response) {
+    //                alert(response.responseText);
+    //            },
+    //            failure: function (response) {
+    //                alert(response.responseText);
+    //            }
+    //        });
+    //    },
+    //    focus: function (event, ui) {
+    //        $('#txtMemberaName').val(ui.item.label);
+    //        return true;
+    //    },
+    //    select: function (e, i) {
+    //        $("#hfOperator").val(i.item.val);
+    //        return true;
+    //    },
+    //    minLength: 1
+    //});
+    ////    .data("ui-autocomplete")._renderItem = function (ul, item) {
+    ////    return $("<li></li>")
+    ////        .data("item.autocomplete", item)
+    ////        .append("<a>" + "<img style='width:40px;height:40px' src='data:image;base64," + item.image + "' /> " + item.label + "</a>")
+    ////        .appendTo(ul);
+    ////};
+</script>

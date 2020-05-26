@@ -1,0 +1,16 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@*@model IEnumerable<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>*@
+@model IGrid<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>
+@{
+    ViewBag.Title = "BankDetailGrid";
+    //Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@(new HtmlGrid<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>(Html, Model))
+
+<style>
+    .RowColorchange {
+        background-color: sandybrown;
+    }
+</style>
+

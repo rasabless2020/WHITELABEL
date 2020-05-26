@@ -1,0 +1,26 @@
+﻿
+@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IGrid<WHITELABEL.Data.Models.TBL_DMR_FUND_TRANSFER_DETAILS>
+@{
+    ViewBag.Title = "PartialDMRList";
+    Layout = null;
+    //Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+}
+
+@(new HtmlGrid<WHITELABEL.Data.Models.TBL_DMR_FUND_TRANSFER_DETAILS>(Html, Model))
+
+@*<table>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td colspan="2"><b>Average</b></td>
+        <td><b>@(Model.Rows.Sum(row => row.Model.AMOUNT))</b></td>
+        <td></td>
+        <td></td>
+    </tr>
+</table>*@

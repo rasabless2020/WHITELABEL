@@ -1,0 +1,121 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_ACCOUNTS>
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+         @*<div class="col-md-12">
+            <div class="col-md-12 row headcolor">
+                <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-edit   fa-3x"></i> </div>
+
+                <div class="col-md-8" style="text-align:right; padding-top:10px;">
+                    <h3>
+                        Admin Commission Report
+                    </h3>
+                </div>
+            </div>
+        </div>*@
+
+        <div class="col-md-12">
+            <div class=" card">
+                <div class="card-body">
+                    <div class="panel-heading" style="padding-bottom:10px;">
+                        <div class="card-title row" align="right">
+                            <div class="col-md-6 text-left">
+                                <button id="btnExport" class="btn btn-info btn-xs"><span class="ion-forward"></span> EXPORT</button>
+                                @*<a href="@(Url.Action("GridExportIndex", "MemberRequisition", new { area = "Admin" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="row example-row">
+                            <div class="col-md-12 row mb-2">
+                            <div class="col-md-2">Service Type@*@Html.DropDownList("MemberService", new SelectList((ViewBag.MemberService) as SelectList, "Value", "Text"), "Select Member", new { id = "MemberList", @class = "form-control" })*@</div>
+                            <div class="col-md-4">
+                                <div class="inputer">
+                                    <div class="md-form">
+                                        @Html.DropDownList("MemberTransactionStatus", new List<SelectListItem>
+                                                                            { new SelectListItem{Text="Mobile Recharge", Value="Mobile Recharge"},
+                                                                                new SelectListItem{Text="DMR", Value="DMR"},
+                                                                                new SelectListItem{Text="Requisition", Value="Requisition"} },
+                                                                               "Select Status", new { id = "TransactionStatus", @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                                </div>
+                            
+                            <div class="col-md-12">@Html.AjaxGrid(Url.Action("IndexGrid", "MemberTransactionReport", new { area = "Admin" }))</div>
+
+
+
+                        </div>
+                    </div>
+                    @*<div class="panel-footer text-right">
+                <button id="btnExport" class="btn btn-info btn-xs">EXPORT</button>
+                @*<a href="#" id="btnExportrecoardadmin" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                    @*<a href="@(Url.Action("ExportIndex","MemberTransactionReport",new {area="Admin" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*
+                </div>*@
+
+                </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+<script>
+    $(document).on('change', '#TransactionStatus', function () {
+        var dropdownval = $('#MemberList').val();
+        $('.mvc-grid').mvcgrid({
+            query: 'search=' + dropdownval + '&Status=' + this.value,
+            //query: 'search=' + this.value+'&Satus'+this.value,
+            reload: true,
+            reloadStarted: function () {
+                $(".divFooterTotalComm").remove();
+            },
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('.mvc-grid').mvcgrid({
+            reload: true,
+            reloadStarted: function () {
+                $(".divFooterTotalComm").remove();
+            },
+        });
+    });
+</script>
+<script>
+    //$(document).on('change', '.mvc-grid-search', function () {
+    $("#MemberList").change(function () {
+        var status = $('#TransactionStatus').val();
+        $('.mvc-grid').mvcgrid({
+            //query: 'search=' + this.value,
+            query: 'search=' + this.value + '&Status=' + status,
+            reload: true,
+            reloadStarted: function () {
+                $(".divFooterTotalComm").remove();
+            },
+        });
+    });
+</script>
+<script type="text/javascript">
+    $("#btnExportrecoardadmin").click(function () {
+        var url = '@(Url.Action("ExportIndexAdminReport", "MemberTransactionReport",new {area="Admin" }) + ViewContext.HttpContext.Request.QueryString)?statusval=' + $("#TransactionStatus").val();
+        window.location.href = url;
+    })
+</script>
+<script type="text/javascript">
+    $("[id$=btnExport]").click(function (e) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=my-ajax-grid]').html()));
+        e.preventDefault();
+    });
+</script>
+

@@ -1,0 +1,109 @@
+﻿@using NonFactors.Mvc.Grid;
+@model WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS  
+@{
+    ViewBag.Title = "Declined Requisition";
+    //Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Html.AntiForgeryToken()
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        @*<div class="col-md-12">
+            <div class="col-md-12 row headcolor">
+                <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-wallet  fa-3x"></i> </div>
+
+                <div class="col-md-8" style="text-align:right; padding-top:10px;">
+                    <h3>
+                       Decline Requisition List
+                    </h3>
+                </div>
+            </div>
+        </div>*@
+        <div class="col-md-12">
+            <div class=" card">
+                <div class="card-body">
+                    <div class="panel-heading">                        
+                    </div><!--.panel-heading-->
+                    <div class="panel-body">
+                        <div class="col-md-12 row" style="margin-bottom:10px;">
+                            <div class="col-md-5">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3">Date From</label>
+                                    <div class="col-md-9">
+                                        <div class="inputer">
+                                            <div class="md-form">
+                                                @Html.EditorFor(model => model.FROM_DATE, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control date", id = "txtFromDate", @onkeydown = "return false;", @placeholder = "yyyy-MM-dd" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3">Date From</label>
+                                    <div class="col-md-9">
+                                        <div class="inputer">
+                                            <div class="md-form">
+                                                @Html.EditorFor(model => model.TO_DATE, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control date", id = "txtToDate", @onkeydown = "return false;", @placeholder = "yyyy-MM-dd" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="inputer">
+                                    <div class="md-form">
+                                        <a href="#" class="btn btn-primary" id="btnSearchDAteWise">Search Date Wise</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row example-row">
+                            @Html.AjaxGrid(Url.Action("DeclinedIndexGrid", "MemberRequisition", new { area = "Admin" }))
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+                </div><!--.panel-->
+            </div>
+        </div><!--.col-md-12-->
+    </div><!--.row-->
+
+</div>
+@Scripts.Render("~/bundles/MemberRequisition")
+
+<script type="text/javascript">
+        $(function () {
+            $('#txtFromDate').datepicker({
+                format: "yyyy-MM-dd",
+                language: "es",
+                autoclose: true,
+                todayHighlight: true,
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+        $(function () {
+            $('#txtToDate').datepicker({
+                format: "yyyy-MM-dd",
+                language: "es",
+                autoclose: true,
+                todayHighlight: true,
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+        $("#btnSearchDAteWise").on("click", function () {
+            var MerId = $('#TransactionStatus').val();
+            //var MerchantVal = $('#ddlMemberRDSBookingList').val();
+            var Date_From = $('#txtFromDate').val();
+            var Date_TO = $('#txtToDate').val();
+            $('.mvc-grid').mvcgrid({
+                query: 'DateFrom=' + Date_From + '&Date_To=' + Date_TO,
+                //query: 'DateFrom=' + Date_From + '&Date_To=' + Date_TO,
+                reload: true,
+                reloadStarted: function () {
+                    $(".divFooterTotalComm").remove();
+                },
+            });
+        });
+
+</script>

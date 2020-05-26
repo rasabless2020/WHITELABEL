@@ -1,0 +1,211 @@
+﻿@model WHITELABEL.Web.Areas.Merchant.Models.TransXTDMR_Transaction
+@{
+    ViewBag.Title = "Transfer Money";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+
+    //Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+<script src='https://www.google.com/recaptcha/api.js'></script>
+@using (Ajax.BeginForm("PostTransferAmountToRecipient", "MerchantDMRSection", new AjaxOptions { Confirm = "Do you want to transfer Amount", OnSuccess = "OnSuccessTransferAmt", OnFailure = "OnFailureTransferAmt", LoadingElementId = "progressTransferAmt" }, new { area = "Merchant", @id = "MoneyTransfer" }))
+{
+    <div class="form-horizontal padding-top-20">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row ">
+                            <div class="col-md-12">
+
+                                <div class="col-md-12 row" style=" border: 1px solid #888888; padding:20px;">
+                                    <div class="col-md-6" style="height:75px;">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="padding-top:10px;">Customer ID</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.EditorFor(model => model.customerId, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Customer Id", id = "txtCustomerID", @readonly = "readonly" } })
+                                                        @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                    </div>
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.customerId, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" style="height:75px;">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="padding-top:10px;">Recipient ID</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.EditorFor(model => model.recSeqId, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Recipient Id", id = "txtRecipientID", @readonly = "readonly" } })
+                                                        @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                    </div>
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.recSeqId, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6" style="height:75px;">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="padding-top:10px;"> Recipient Mobile No</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.EditorFor(model => model.RecipientMobileNo, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Recipient Mobile No", id = "txtAReciptMobileNo", @readonly = "readonly" } })
+                                                        @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                    </div>
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.RecipientMobileNo, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" style="height:75px;">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="padding-top:10px;">Recipient Name</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.EditorFor(model => model.RecipientName, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Recipient Name", id = "txtAReciptName", @readonly = "readonly" } })
+                                                        @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                    </div>
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.RecipientName, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" style="height:75px;">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="padding-top:10px;">Recipient Account No.</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.EditorFor(model => model.RecipientAccountNo, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Account No.", id = "txtAccountNo", @readonly = "readonly" } })
+                                                        @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                    </div>
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.RecipientAccountNo, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" style="height:75px;">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="padding-top:10px;">Recipient IFSC Code. </label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.EditorFor(model => model.RecipientIFSCCode, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "IFSC Code", id = "txtIFSCCode", @readonly = "readonly" } })
+                                                        @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                        <div style="display:none;">
+                                                            @Html.EditorFor(m => m.geolocation, new { htmlAttributes = new { @class = "form-control", id = "GeolocationDMR", @readonly = "readonly" } })
+                                                            @Html.EditorFor(m => m.IpAddress, new { htmlAttributes = new { @class = "form-control", id = "DMRIpaddress", @readonly = "readonly" } })
+                                                        </div>
+                                                    </div>
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.RecipientIFSCCode, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12" style="margin-top:30px; border: 1px solid #888888; padding:20px;">
+                                    <div class="col-md-12 row">
+
+                                        <div class="col-md-8">
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3" style="padding-top:10px;">Amount</label>
+                                                <div class="col-md-9">
+                                                    <div class="inputer">
+                                                        <div class="md-form">
+                                                            @Html.EditorFor(model => model.amount, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "xxxxx.xx", id = "txtAmount" } })
+                                                            @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                        </div>
+                                                        <span class="help-block"><small>@Html.ValidationMessageFor(model => model.amount, "", new { @class = "text-danger" })</small></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            @*<div class="g-recaptcha" data-type="image" data-theme="light" data-sitekey="6LdoCJwUAAAAACmvnVIV_bIPPj-Mz-cmyHDtOq-A"></div>*@
+                                            <div class="form-group" style="text-align:left;margin-top: 15px;padding-left: 68px;">
+                                                <input type="submit" value="Transfer Amount" class="btn btn-cyan" id="btnsubmit1" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div><!--.panel-body-->
+                    <div class="card-footer">
+                        <div class="text-center">
+
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div>
+
+    </div>
+
+}
+@Scripts.Render("~/bundles/MerchantDMRAPIAngularjsFiles")
+@Scripts.Render("~/bundles/MerchantDMRAPIJsFiles")
+<div id="progressTransferAmt" class="loading hidden">Loading&#8230;</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#progressTransferAmt').removeClass("hidden");
+        $('#progressTransferAmt').hide();
+    })
+    function OnSuccessTransferAmt(response) {
+        debugger;
+        var message = response;
+        var CustId = $('#txtCustomerID').val();
+        $("#MoneyTransfer").trigger("reset");
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+                if (message != 'Your Google reCaptcha validation failed') {
+                    var url = "/Merchant/MerchantDMRSection/MoneyTransferList";
+                    window.location.href = url;
+                }
+                else {
+                    $('#progressTransferAmt').removeClass("hidden");
+                    $('#progressTransferAmt').hide();
+                }
+            }
+        })
+        callGeocodeMobile();
+        //alert(message);
+    }
+    function OnFailureTransferAmt(response) {
+        debugger;
+        alert("Error occured.");
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        callGeocodeDMR();
+    });
+    function callGeocodeDMR() {
+        $.getJSON('http://www.geoplugin.net/json.gp?jsoncallback=?', function (data) {
+            //debugger;
+            var information = JSON.stringify(data, null, 2);
+            //alert(information[0]);
+            //alert(JSON.stringify(data, null, 2));
+            console.log(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 2));
+            $('#GeolocationDMR').val(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 0));
+            $('#DMRIpaddress').val(JSON.stringify(data.geoplugin_request, null, 0));
+            console.log(JSON.stringify(data, null, 2));
+        });
+    }
+
+</script>
+

@@ -1,0 +1,84 @@
+﻿@*@model WHITELABEL.Web.Models.MemberView*@
+@{
+    ViewBag.Title = "White Level Details";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<img src="~/images/under_construction.jpg" />*@
+
+@*<div class="full-content margin-top-40 margin-bottom-40 bg-white">*@
+ <div class="form-horizontal padding-top-20">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-heading text-center">
+                    <div class="panel-title ">
+                        <h3> White Level Details</h3>
+                        <div class="clearfix"></div>
+                    </div>
+                </div><!--.panel-heading-->
+                <div class="panel-body">
+                    <div class="row example-row">
+
+                        @if (ViewBag.whitelevel != null)
+                        {
+                            <table class="table table-bordered table-responsive table-hover">
+                                <tr>
+                                    <th>User Name </th>
+                                    <th>Join Date </th>
+                                </tr>
+                                @foreach (var d in ViewBag.whitelevel)
+                                {
+                                    <tr>
+                                        <td>@d.UName</td>
+                                        <td>
+                                            @Html.FormatValue((object)Convert.ChangeType(@d.JOINING_DATE, typeof(object)),
+                                                    "{0: yyyy-MM-dd}")
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        }
+
+                    </div><!--.row-->
+                </div><!--.panel-body-->
+            </div><!--.panel-->
+        </div><!--.col-md-6-->
+        <div class="col-md-6">
+            <div class="panel">
+                <div class="panel-heading text-center">
+                    <div class="panel-title ">
+                        <h3> White Level Requisition Details</h3>
+                        <div class="clearfix"></div>
+                    </div>
+                </div><!--.panel-heading-->
+                <div class="panel-body">
+                    <div class="row example-row">
+                        @if (ViewBag.RequisitionList != null)
+                        {
+                            <table class="table table-bordered table-responsive table-hover">
+                                <tr>
+                                    <th>Transaction No </th>
+                                    <th>User</th>
+                                    <th>Request Date </th>
+                                </tr>
+                                @foreach (var d in ViewBag.RequisitionList)
+                                {
+                                    <tr>
+                                        <td>@d.TransactionID</td>
+                                        <td>@d.TransUserName</td>
+                                        <td>
+                                            @Html.FormatValue((object)Convert.ChangeType(@d.TransDate, typeof(object)),
+                                                    "{0: yyyy-MM-dd}")
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        }
+                    </div><!--.row-->
+                </div><!--.panel-body-->
+            </div><!--.panel-->
+        </div><!--.col-md-6-->
+    </div><!--.row-->
+    <!--.row-->
+</div>

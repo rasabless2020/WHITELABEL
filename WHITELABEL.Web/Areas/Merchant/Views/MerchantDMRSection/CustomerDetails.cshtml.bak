@@ -1,0 +1,409 @@
+﻿@model WHITELABEL.Web.Areas.Merchant.Models.TransXT_ADDCustomerModal
+@using WHITELABEL.Web.Helper;
+@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "Customer Information";
+    var CustomerID = "";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+    //Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+    var modalval = Model;
+    if (modalval != null)
+    {
+        if (Model.MobileNumber != null)
+        {
+            CustomerID = Model.MobileNumber;
+        }
+        else
+        {
+            CustomerID = "121";
+        }
+    }
+    else
+    {
+        Response.Redirect(Url.Action("SearchDMRCustomer", "MerchantDMRSection", new { area = "Merchant" }));
+    }
+
+}
+
+<script src="~/Areas/Merchant/MerchantHelperJS/TransXTAPI/DMTMoneyTransfer.js"></script>
+@using (Html.BeginForm(new { @id = "DMTCustomerDetails" }))
+{
+    
+<div class="row">
+    @Html.AntiForgeryToken()
+    <div class="col-md-12">
+        <div class="col-md-12 row headcolor">
+            <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-align-left fa-3x"></i></div>
+            <div class="col-md-4"></div>
+            <div class="col-md-4" style="text-align:right; padding-top:10px;">
+                <h3>
+                    Customer Details 
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 padding-top-20">
+        <div class="card" style="margin-bottom:20px;">
+            <div class="card-heading text-right">
+                @if (Session["msg"] != null)
+                {
+                    <div id="informationMessage" class="text-center alert alert-success">
+                        <span style="width:100%;text-align:center;">@Session["msg"].ToString() </span>
+                        @if (Session["msg"].ToString() == "Data Saved Successfully" || Session["msg"].ToString() == "Data Updated Successfully")
+                        {
+                            Session.Remove("msg");
+                        }
+                    </div>
+                }
+                <div class="card-title text-left col-md-12" style="padding-top:5px;">
+                    <span>Customer details</span>
+                </div>
+            </div><!--.panel-heading-->
+            <div class="card-body">
+                <div class="row example-row" style="box-shadow: 5px 10px #888888; border: 1px solid #888888; padding:20px;">
+                    <div class="col-md-12 row">
+                        <div class="col-md-4 row">
+                            <div class="col-md-3" style="text-align:center;"><i class="fa fa-mobile fa-2x"></i></div>
+                            <div class="col-md-9 ">
+                                <div>
+                                    <div style="border-bottom:1px solid #ccc; margin-bottom:10px;">
+                                        <div class="input-wrapper">
+                                            @Html.DisplayFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;" } })
+                                            @*<input class="form-control" type="text" id="CustomerMobile" placeholder="Customer Mobile" name="search">*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 row">
+                            <div class="col-md-3" style="text-align:center;"><i class="fa fa-user fa-2x"></i> </div>
+                            <div class="col-md-9 ">
+                                <div>
+                                    <div style="border-bottom:1px solid #ccc; margin-bottom:10px;">
+                                        <div class="input-wrapper">
+                                            @Html.DisplayFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;" } })
+                                            @*<input class="form-control" type="text" id="CustomerName" placeholder="Name" name="search">*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 row">
+                            <div class="col-md-3" style="text-align:center;"><i class="fa fa-wallet fa-2x"></i></div>
+                            <div class="col-md-9 ">
+                                <div>
+                                    <div style="border-bottom:1px solid #ccc; margin-bottom:10px;">
+                                        <div class="input-wrapper">
+                                            @Html.DisplayFor(model => model.TRANSACTIONLIMIT, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;" } })
+                                            @*<input class="form-control" type="text" placeholder="City" id="CITY" name="search">*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 row" style="display:none;">
+                            <div class="col-md-3" style="text-align:center;"><i class="fa fa-map-marker fa-2x"></i></div>
+                            <div class="col-md-9 ">
+                                <div>
+                                    <div style="border-bottom:1px solid #ccc; margin-bottom:10px;">
+                                        <div class="input-wrapper">
+                                            @Html.DisplayFor(model => model.Address, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;" } })
+                                            @*<input class="form-control" type="text" placeholder="Address" id="CustAddress" name="search">*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 row" style="display:none;">
+                            <div class="col-md-3" style="text-align:center;"><i class="fa fa-calendar fa-2x"></i> </div>
+                            <div class="col-md-9 ">
+                                <div>
+                                    <div style="border-bottom:1px solid #ccc; margin-bottom:10px;">
+                                        <div class="input-wrapper">
+                                            @Html.DisplayFor(model => model.DOB, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;" } })
+                                            @*<input class="form-control" type="text" placeholder="DOB" id="CustomerDOB" name="search">*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="text-align:center; padding-top:20px;">
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="card">
+            <div class="card-heading text-center">
+                <div class="card-title row " style=" padding-top:20px;">
+                    <div class="col-md-6" style="text-align:left;"> <span>Beneficiary List</span></div>
+                    <div class="col-md-6" style="text-align:right;">
+                        <a href='@Url.Action("AddRecipient","MerchantDMRSection",new {area="Merchant",CustId=Encrypt.EncryptMe(CustomerID.ToString()) })' class="btn btn-primary" Title='Edit' style='margin-right:10px;'>Add Beneficiary</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                @*@Html.AjaxGrid(Url.Action("GetAllRecipientLIst", "MerchantDMRSection", new { area = "Merchant", id = "my-BeneficiaryList", CustId = CustomerID }))*@
+                @Html.AjaxGrid(Url.Action("GetAllRecipientLIst", "MerchantDMRSection", new { area = "Merchant"}))
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <!--.col-md-12-->
+</div>
+
+    @*@Scripts.Render("~/bundles/MemberApilevel")*@
+    @Scripts.Render("~/bundles/MerchantDMRAPIAngularjsFiles")
+    @Scripts.Render("~/bundles/MerchantDMRAPIJsFiles")
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <script>
+        $(document).ready(function () {
+            window.setTimeout(function () {
+                $("#informationMessage").fadeOut('slow');
+            }, 2000);
+        });
+    </script>
+
+
+
+
+
+    <div id="transactionvalueAdminid" class="modal scale fade transd" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center">Transfer Amount</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12 row">
+                        <div class="col-md-4" style="padding-top:10px;">Beneficiary Name : </div>
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    <input type="text" id="txtBenificiaryName" value="" class="form-control" readonly />
+                                    <input type="hidden" id="sln" />
+                                    <input type="hidden" id="IpAddress" />
+                                    <input type="hidden" id="GeoLocation" />
+                                    <input type="hidden" id="txtCustomerNo" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 row">
+                        <div class="col-md-4" style="padding-top:10px;">Beneficiary Acnt No : </div>
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    <input type="text" id="txtBenificiaryAccountno" value="" class="form-control bootstrap-daterangepicker-basic" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 row">
+                        <div class="col-md-4" style="padding-top:10px;">IFSC Code: </div>
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    <input type="text" id="txtBenificiaryIFSC" value="" class="form-control bootstrap-daterangepicker-basic" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 row">
+                        <div class="col-md-4" style="padding-top:10px;">Beneficiary Mobile : </div>
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    <input type="text" id="txtBeneficiaryMobile" value="" class="form-control" readonly />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 row">
+                        <div class="col-md-4" style="padding-top:10px;">Sender Name : </div>
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    <input type="text" id="txtSenderName" value="" maxlength="150" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 row">
+                        <div class="col-md-4" style="padding-top:10px;">Sender Mobile : </div>
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    <input type="text" id="txtMobileNo" value="" maxlength="11" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 row">
+                        <div class="col-md-4" style="padding-top:10px;">Amount : </div>
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    <input type="text" id="txtTransferAmt" value="" maxlength="4" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="modal-footer text-center">
+                    <button type="button" class="btn btn-success" onclick="TransferAmountToReceipent($('#sln').val(), $('#txtCustomerNo').val());">Transfer</button>
+
+                    @*<button type="button" class="btn btn-primary btn-lg" id="btnload" onclick="TransferAmountToReceipent($('#sln').val(), $('#txtCustomerNo').val());" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing Order">Submit Order</button>*@
+
+                </div>
+            </div><!--.modal-content-->
+        </div><!--.modal-dialog-->
+    </div>
+
+
+    <div class="preloader hidden" id="transactionvalueAdminidLoader" style="display:none;">
+        <div id="loading"></div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#transactionvalueAdminidLoader').removeClass("hidden");
+            $('#transactionvalueAdminidLoader').hide();
+            callGeocodeDMR();
+        });
+        function callGeocodeDMR() {
+            $.getJSON('http://www.geoplugin.net/json.gp?jsoncallback=?', function (data) {
+                //debugger;
+                var information = JSON.stringify(data, null, 2);
+                //alert(information[0]);
+                //alert(JSON.stringify(data, null, 2));
+                console.log(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 2));
+                $('#GeoLocation').val(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 0));
+                $('#IpAddress').val(JSON.stringify(data.geoplugin_request, null, 0));
+                console.log(JSON.stringify(data, null, 2));
+            });
+        }
+        $('#txtTransferAmt').keyup(function () {
+            if (!this.value.match(/[0-9]/)) {
+                this.value = this.value.replace(/[^0-9]/g, '');
+            }
+        });
+    </script>
+
+    <script>
+
+                //function TransferAmountToReceipent(Recipientid, CustomerId) {
+                //    var RecipientId = Recipientid;
+                //    var CustomerId = CustomerId;
+                //    var amount = $("#txtTransferAmt").val();
+                //    var SenderMobileNo = $("#txtMobileNo").val();
+                //    var SenderName = $("#txtSenderName").val();
+                //    var RecipientMobileNo = $("#txtBeneficiaryMobile").val();
+                //    var RecipientName = $("#txtBenificiaryName").val();
+                //    var RecipientAccountNo = $("#txtBenificiaryAccountno").val();
+                //    var RecipientIFSCCode = $("#txtBenificiaryIFSC").val();
+                //    var geolocation = $("#GeoLocation").val();
+                //    var IpAddress = $("#IpAddress").val();
+                //    if (amount != '') {
+                //        bootbox.confirm({
+                //            title: "Message",
+                //            message: "Do you want to transfer amount",
+                //            buttons: {
+                //                confirm: {
+                //                    label: 'Confirm',
+                //                    className: 'btn-success btn-sm'
+                //                },
+                //                cancel: {
+                //                    label: 'Cancel',
+                //                    className: 'btn-danger btn-sm'
+                //                }
+                //            },
+                //            callback: function (result) {
+                //                if (result) {
+                //                    //var $this = $(this);
+                //                    //$this.button('loading');
+                //                    $('#transactionvalueAdminidLoader').show();
+                //                    $('#loading').show();
+                //                    var data = {
+                //                        recSeqId: RecipientId,
+                //                        customerId: CustomerId,
+                //                        amount: amount,
+                //                        SenderMobileNo: SenderMobileNo,
+                //                        SenderName: SenderName,
+                //                        RecipientMobileNo: RecipientMobileNo,
+                //                        RecipientName: RecipientName,
+                //                        RecipientAccountNo: RecipientAccountNo,
+                //                        RecipientIFSCCode: RecipientIFSCCode,
+                //                        geolocation: geolocation,
+                //                        IpAddress: IpAddress,
+                //                    };
+                //                    $.ajax({
+                //                        url: "/Merchant/MerchantDMRSection/PostTransferAmountToRecipient",
+                //                        data: data,
+                //                        cache: false,
+                //                        type: "POST",
+                //                        dataType: "json",
+                //                        beforeSend: function () {
+                //                        },
+                //                        success: function (data) {
+
+                //                            $("#transactionvalueAdminid").modal("hide");
+                //                            var message = data;
+                //                            bootbox.alert({
+                //                                message: message,
+                //                                size: 'small',
+                //                                callback: function () {
+                //                                    console.log(message);
+                //                                    var url = "/Merchant/MerchantDMRSection/CustomerDetails";
+                //                                    window.location.href = url;
+                //                                    //$("#DMTCustomerDetails").trigger("reset");
+                //                                    //$(".modal").hide();
+                //                                    //$(".modal").remove();
+                //                                    //$("#transactionvalueAdminid").hide();
+                //                                    //$('.mvc-grid').mvcgrid('reload');
+                //                                    //$('#my-ajax-grid').mvcgrid('reload');
+                //                                }
+                //                            })
+
+                //                            $('#transactionvalueAdminidLoader').removeClass("hidden");
+                //                            $('#transactionvalueAdminidLoader').hide();
+                //                            $('#loading').removeClass("hidden");
+                //                            $('#loading').hide();
+                //                        },
+                //                        error: function (xhr, status, error) {
+                //                            console.log(status);
+                //                        }
+                //                    });
+                //                }
+                //            }
+                //        });
+                //    }
+                //    else {
+                //        bootbox.alert({
+                //            message: "Please Enter Transfer Amount",
+                //            backdrop: true
+                //        });
+                //    }
+                //}
+
+
+    </script>
+
+}
+
+

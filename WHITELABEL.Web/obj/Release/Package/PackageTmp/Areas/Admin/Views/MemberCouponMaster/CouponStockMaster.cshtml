@@ -1,0 +1,51 @@
+﻿@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "Coupon Stock Master";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="row">
+    <div style="background-color:#ccc; border-radius:5px; color:#3e50b4; padding:5px 20px 10px 20px; margin-top:20px;" class="col-md-12"><h3 style="color:#3e50b4"><i class="fas fa-angle-double-right"></i> Coupon Stock Master</h3></div>
+
+    <div class="col-md-12 padding-top-20" style="margin-top:20px;">
+        <div class="card">
+            <div class="card-body">
+                <div class="card-heading text-right" style="margin-bottom:10px;">
+                    <div class="panel-title ">
+                        <div class="col-md-12 text-right">
+                            <a href="@Url.Action("AddCouponStock", "MemberCouponMaster",new {area="Admin" },null)" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New Coupon Stock</a>
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div><!--.panel-heading-->
+                <div class="panel-body">
+                    <div class="row example-row" id="ExportDiv">
+
+                        @Html.AjaxGrid(Url.Action("StockGrid", "MemberCouponMaster", new { area = "Admin" }))
+
+                    </div><!--.row-->
+                </div><!--.panel-body-->
+                </div>
+
+            </div><!--.panel-->
+        </div><!--.col-md-12-->
+</div><!--.row-->
+    @Scripts.Render("~/bundles/MemberApilevel")
+    <script>
+        $(document).ready(function () {
+
+            window.setTimeout(function () {
+                $("#informationMessage").fadeOut('slow');
+            }, 2000);
+        });
+
+
+
+    </script>
+
+}
+

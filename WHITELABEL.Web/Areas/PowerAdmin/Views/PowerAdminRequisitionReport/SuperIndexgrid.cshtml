@@ -1,0 +1,36 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>
+@{
+    ViewBag.Title = "RequisitionGrid";
+    Layout = null;
+}
+
+
+@(Html
+                            .Grid(Model)
+                            .Build(columns =>
+                            {
+                                columns.Add(model => model.Serial_No).Titled("Sr Id");
+                                //columns.Add(model => model.ToUser).Titled("To User");
+                                columns.Add(model => model.FromUser).Titled("From Member");
+                                columns.Add(model => model.REQUEST_DATE).Titled("Req Date").Formatted("{0:d}");
+                                columns.Add(model => model.REQUEST_TIME).Titled("Req Time").Formatted("{0:T}");
+                                columns.Add(model => model.AMOUNT).Titled("Amount");
+                                columns.Add(model => model.BANK_ACCOUNT).Titled("Bank Account");
+                                columns.Add(model => model.TRANSACTION_DETAILS).Titled("Pay Method");
+                                columns.Add(model => model.STATUS).Titled("Status");
+                                columns.Add(model => model.APPROVAL_DATE).Titled("Apprv/Decline Date");
+                                columns.Add(model => model.APPROVED_BY).Titled("Apprv/Decline By");
+                            })
+                            .RowCss(model => model.STATUS == "Decline" ? "danger" : model.STATUS == "Pending" ? "info" : "")
+                            .Empty("No data found")
+                            .Id("my-ajax-grid")
+                            .Pageable(pager =>
+                            {
+                                pager.PagesToDisplay = 10;
+                                pager.RowsPerPage = 10;
+                            })
+                            .Filterable()
+                            .Sortable()
+)

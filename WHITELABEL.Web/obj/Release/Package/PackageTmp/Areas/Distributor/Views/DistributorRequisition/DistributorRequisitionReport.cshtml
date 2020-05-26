@@ -1,0 +1,164 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS
+@{
+    ViewBag.Title = "Distributor Requisition Report";
+    //Layout = "~/Areas/Distributor/Views/Shared/_DistributorLayout.cshtml";
+    Layout = "~/Areas/Distributor/Views/Shared/_LayoutDistributor.cshtml";
+}
+
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        @*<div class="col-md-12">
+            <div class="col-md-12 row headcolor">
+                <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-wallet  fa-3x"></i> </div>
+
+                <div class="col-md-8" style="text-align:right; padding-top:10px;">
+                    <h3>
+                        Distributor Requisition Report
+                    </h3>
+                </div>
+            </div>
+        </div>*@
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-heading">
+                        <div class="card-title">
+                            <div class="col-md-12 text-left">
+                                <button id="btnExportDistributorrecoard" class="btn btn-info btn-xs"><span class="ion-forward"></span>EXPORT</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row example-row "  style="margin-bottom:10px;">
+                            <div class="col-md-2">Requisition Status:-</div>
+                            <div class="col-md-5">
+                                <div class="inputer">
+                                    <div class="md-form">
+                                        @Html.DropDownList("MemberTransactionStatus", new List<SelectListItem>
+                                                                    { new SelectListItem{Text="Approve", Value="Approve"},
+                                                                        new SelectListItem{Text="Pending", Value="Pending"},
+                                                                        new SelectListItem{Text="Decline", Value="Decline"} },
+                                                                       "Select Status", new { id = "TransactionStatus", @class = "form-control" })
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div class="col-md-5"></div>
+                            <div class="col-md-12 mt-2"></div>
+                        </div>
+
+                        <div class="row example-row " style="margin-bottom:10px;">
+                            <div class="col-md-5">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3">Date From</label>
+                                    <div class="col-md-9">
+                                        <div class="inputer">
+                                            <div class="md-form">
+                                                @Html.EditorFor(model => model.FROM_DATE, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control date", id = "txtFromDate", @onkeydown = "return false;", @placeholder = "yyyy-MM-dd" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3">Date From</label>
+                                    <div class="col-md-9">
+                                        <div class="inputer">
+                                            <div class="md-form">
+                                                @Html.EditorFor(model => model.TO_DATE, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control date", id = "txtToDate", @onkeydown = "return false;", @placeholder = "yyyy-MM-dd" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="inputer">
+                                    <div class="md-form">
+                                        <a href="#" class="btn btn-primary" id="btnSearchDAteWise">Search Date Wise</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row example-row">
+                            @Html.AjaxGrid(Url.Action("DistributorIndexGrid", "DistributorRequisition", new { area = "Distributor" }))
+                        </div>
+                    </div>
+
+
+                    <div class="panel-footer text-right">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $('#txtFromDate').datepicker({
+            format: "yyyy-MM-dd",
+            language: "es",
+            autoclose: true,
+            todayHighlight: true,
+            changeMonth: true,
+            changeYear: true
+        });
+    });
+    $(function () {
+        $('#txtToDate').datepicker({
+            format: "yyyy-MM-dd",
+            language: "es",
+            autoclose: true,
+            todayHighlight: true,
+            changeMonth: true,
+            changeYear: true
+        });
+    });
+
+    $("#btnSearchDAteWise").on("click", function () {
+        var Status = $('#TransactionStatus').val();
+        var Date_From = $('#txtFromDate').val();
+        var Date_TO = $('#txtToDate').val();
+        $('.mvc-grid').mvcgrid({
+            query: 'search=' + Status + '&DateFrom=' + Date_From + '&Date_To=' + Date_TO,
+            reload: true,
+            reloadStarted: function () {
+                $(".divFooterTotalComm").remove();
+            },
+        });
+    });
+
+</script>
+<script>
+    $(document).on('change', '#TransactionStatus', function () {       
+        var Date_From = $('#txtFromDate').val();
+        var Date_TO = $('#txtToDate').val();
+        $('.mvc-grid').mvcgrid({
+            //query: 'search=' + this.value,
+            query: 'search=' + this.value + '&DateFrom=' + Date_From + '&Date_To=' + Date_TO,
+            reload: true,
+            reloadStarted: function () {
+                $(".divFooterTotalComm").remove();
+            },
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $("#btnExportDistributorrecoard").click(function () {
+        var Date_From = $('#txtFromDate').val();
+        var Date_TO = $('#txtToDate').val();
+        var url = '@(Url.Action("ExportDistributorRequisitionIndex", "DistributorRequisition", new {area= "Distributor" }) + ViewContext.HttpContext.Request.QueryString)?statusval=' + $("#TransactionStatus").val() + '&DateFrom=' + Date_From + '&Date_To=' + Date_TO;
+        window.location.href = url;
+    })
+</script>
+@*<script type="text/javascript">
+    $("[id$=btnExport]").click(function (e) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=my-ajax-grid]').html()));
+        e.preventDefault();
+    });
+</script>*@

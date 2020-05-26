@@ -1,0 +1,66 @@
+﻿
+@{
+                /**/
+
+                ViewBag.Title = "DMR";
+                //Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+                Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+@*<script src="~/newpanel/assets/js/vendor/jquery-3.3.1.min.js"></script>*@
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @*<div class="display-animation" ng-app="TransXT_DMR_API_APP" ng-controller="TransXTApi_CallController">*@
+    <div>
+
+
+        <div class="row">
+            <div class="col-md-12 padding-top-20">
+                <div class="card" style=" top: 40%; position:fixed; width:80%; left:14%">
+                    <!--.panel-heading-->
+                    <div class="card-body clearfix">
+                        <div class="row example-row">
+                            <div class="col-md-12">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div class="col-md-12 clearfix row">
+                                            <div class="col-md-3" style="padding-top:10px; font-weight:bold;">Customer Mobile no. </div>
+                                            <div class="col-md-9 row">
+
+                                                <div class="col-md-11">
+                                                    <div class="inputer">
+                                                        <div class="input-wrapper">
+                                                            @*<input class="form-control" type="text" placeholder="Search.." name="search" id="TransxtID" onblur="FetchCustomerDetails(this.value)">*@
+                                                            <input class="form-control" type="text" placeholder="Search.." name="search" id="TransxtID">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <a onclick="FetchCustomerDetails($('#TransxtID').val())"><i class="fa fa-search"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--.row-->
+                        </div><!--.panel-body-->
+                    </div>
+
+                </div><!--.col-md-12-->
+            </div><!--.row-->
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/MerchantDMRAPIAngularjsFiles")
+    @Scripts.Render("~/bundles/MerchantDMRAPIJsFiles")
+    <script>
+        $(document).ready(function () {
+
+            window.setTimeout(function () {
+                $("#informationMessage").fadeOut('slow');
+            }, 2000);
+        });
+
+    </script>
+
+}
+

@@ -1,0 +1,211 @@
+﻿@model WHITELABEL.Web.Areas.Merchant.Models.MerchantOutletModelview
+@{
+    ViewBag.Title = "Generate Outlet Id";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+<script src="~/Areas/Merchant/MerchantHelperJS/MobileRecharge/Outlet.js"></script>
+
+@using (Ajax.BeginForm("PostOutletInformation", "MerchantOutlet", new AjaxOptions { OnSuccess = "OnSuccessMsgOutletRegistration", OnFailure = "OnFailureMsgOutletRegistration", LoadingElementId = "progressMsgOutletRegistration" }, new { area = "Merchant", id = "Index" }))
+{
+<div class="form-horizontal padding-top-20">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row ">
+                        <div class="col-md-12" style="padding: 0 60px;">
+
+                            <div style="box-shadow: 5px 10px #3e50b4; border: 1px solid #3e50b4; padding:20px;" class="clearfix row">
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-4" style="padding-top:10px;">Mobile No</label>
+                                        <div class="col-md-8">
+                                            <div class="inputer">
+                                                <div class="input-wrapper">
+                                                    @Html.EditorFor(model => model.Reg_Mobile, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Mobile Number", id = "MobileNumber" } })
+
+                                                    @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                </div>
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Reg_Mobile, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="javascript:void(0)" id="SendOTP" onclick="GenerateOutletOTP($('#MobileNumber').val())"  class="btn btn-primary" ><b>Get OTP</b></a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="padding: 0 20px;"> 
+                            <div style="box-shadow: 5px 10px #3e50b4; border: 1px solid #3e50b4; padding:20px 0; margin:40px;" class="clearfix">
+                                <div class=" col-md-12 row">
+                                    <div class="col-md-6">
+
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-4" style="padding-top:10px;"> Name</label>
+                                            <div class="col-md-8">
+                                                <div class="inputer">
+                                                    <div class="input-wrapper">
+                                                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Customer Name" } })
+
+                                                        @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                    </div>
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-4" style="padding-top:10px;">Address</label>
+                                            <div class="col-md-8">
+                                                <div class="inputer">
+                                                    <div class="input-wrapper">
+                                                        @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Address" } })
+                                                        @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                    </div>
+
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-4" style="padding-top:10px;">Pincode</label>
+                                            <div class="col-md-8">
+                                                <div class="inputer">
+                                                    <div class="input-wrapper">
+                                                        @Html.EditorFor(model => model.Pincode, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Pincode" } })
+                                                        @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                    </div>
+
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-4" style="padding-top:10px;">Email</label>
+                                            <div class="col-md-8">
+                                                <div class="inputer">
+                                                    <div class="input-wrapper">
+                                                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Email" } })
+                                                        @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                    </div>
+
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-4" style="padding-top:10px;">Company Name</label>
+                                            <div class="col-md-8">
+                                                <div class="inputer">
+                                                    <div class="input-wrapper">
+                                                        @Html.EditorFor(model => model.Company, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Company Name" } })
+                                                        @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                    </div>
+
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Company, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-4" style="padding-top:10px;">Pan No</label>
+                                            <div class="col-md-8">
+                                                <div class="inputer">
+                                                    <div class="input-wrapper">
+                                                        @Html.EditorFor(model => model.PanNo, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Pan No" } })
+                                                        @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                    </div>
+
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.PanNo, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-4" style="padding-top:10px;">OTP</label>
+                                            <div class="col-md-8">
+                                                <div class="inputer">
+                                                    <div class="input-wrapper">
+                                                        @Html.EditorFor(model => model.OTP, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "OTP" } })
+                                                        @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                    </div>
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.OTP, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="text-center col-md-12">
+                                    <input type="submit" value="Add Customer" class="btn btn-primary" id="btnOutletsubmit" />
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div><!--.panel-->
+        </div><!--.col-md-12-->
+    </div>
+</div>
+}
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {            
+            $('#btnOutletsubmit').prop('disabled', true);
+        $('#progressMsgRegistration').removeClass("hidden");
+        $('#progressMsgRegistration').hide();
+    })
+        function OnSuccessMsgOutletRegistration(response) {
+
+        var message = response;
+        if (message == "TXN") {
+            bootbox.alert({
+                message: "Outlet Added Successfully",
+                size: 'small',
+                callback: function () {
+                    console.log(message);
+                    var url = '@Url.Action("Index", "MerchantRechargeService", new { area="Merchant" })';
+                    window.location.href = url;
+                }
+            })
+        }
+        else {
+            bootbox.alert({
+                message: message,
+                size: 'small',
+                callback: function () {
+                    console.log(message);
+                }
+            })
+        }
+
+
+        //alert(message);
+    }
+        function OnFailureMsgOutletRegistration(response) {
+        alert("Error occured.");
+    }
+    </script>

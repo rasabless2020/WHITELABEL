@@ -1,0 +1,30 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_ACCOUNT_VERIFICATION_TABLE>
+@{
+    ViewBag.Title = "IndexGrid";
+    Layout = null;
+}
+
+@(Html
+                                        .Grid(Model)
+                                        .Build(columns =>
+                                        {
+                                            columns.Add(model => model.ID).Titled("Id").Filterable(true).Sortable(true);
+                                            columns.Add(model => model.RECIPIENT_ACNT_VRT_AMTt).Titled("Amt Cut By Api.").Filterable(true).Sortable(true);
+                                            columns.Add(model => model.APPLIED_AMT_TO_MERCHANT).Titled("Amt Cut By Merchant.").Filterable(true).Sortable(true);
+                                            columns.Add(model => model.APINAME).Titled("API Name").Filterable(true).Sortable(true);
+                                            columns.Add(model => model.ID).Encoded(false).Filterable(false).Sortable(false).Titled("Action")
+                                                .RenderedAs(model => "<div style='text-align:center'><a href='javascript:void(0);' data-toggle='modal' data-target='.transd' id='transactionvalueid' data-id=" + model.ID + " onclick='GetAPIAccountVerifyAmt(" + model.ID + ");' style='margin-right:10px' title='Edit'><i class='fa fa-edit'></i></a></div>");
+                                        })
+                                        .Empty("No data found")
+                                        .Id("my-ajax-grid")
+                                        .Pageable(pager =>
+                                        {
+                                            pager.PagesToDisplay = 5;
+                                            pager.RowsPerPage = 5;
+                                        })
+                                        .Filterable()
+                                        .Sortable()
+)
+

@@ -1,0 +1,262 @@
+﻿@model WHITELABEL.Data.Models.TBL_DMR_RECIPIENT_DETAILS
+@{
+    ViewBag.Title = "AddRecipient";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+    //Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+@using (Ajax.BeginForm("PostData_AddRecipient", "MerchantDMRSection", new AjaxOptions { OnSuccess = "OnSuccessAddRecipient", OnFailure = "OnFailureAddRecipient", LoadingElementId = "progressAddReciepent" }, new { area = "Merchant", @id = "AddRecipient" }))
+{
+    <div class="form-horizontal padding-top-20">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            @*<div class="col-md-12">
+                    <div class="col-md-12 row headcolor">
+                        <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-align-left fa-3x"></i></div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4" style="text-align:right; padding-top:10px;">
+                            <h3>
+                               Add Beneficiary
+                            </h3>
+                        </div>
+                    </div>
+                </div>*@
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row ">
+                            <div class="col-md-12 row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="padding-top:10px;">Customer ID</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="input-wrapper">
+                                                    @*@Html.EditorFor(model => model.UName, new { htmlAttributes = new { @class = "form-control", @placeholder = "User Name" } })*@
+                                                    @Html.EditorFor(model => model.CUSTOMER_ID, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Customer ID", id = "CUSTOMER_ID" } })
+                                                    @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                </div>
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CUSTOMER_ID, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="padding-top:10px;">Beneficiary Name. </label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="input-wrapper">
+                                                    @Html.EditorFor(model => model.BENEFICIARY_NAME, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Beneficiary Name" } })
+                                                    @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                </div>
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.BENEFICIARY_NAME, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="padding-top:10px;"> Account No.</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="input-wrapper">
+                                                    @Html.EditorFor(model => model.ACCOUNT_NO, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Accoount No" } })
+                                                    @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                </div>
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.ACCOUNT_NO, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="padding-top:10px;">IFSC Code.</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="input-wrapper">
+                                                    @Html.EditorFor(model => model.IFSC_CODE, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Ifsc Code " } })
+                                                    @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                </div>
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.IFSC_CODE, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="padding-top:10px;">Mobile No.</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="input-wrapper">
+                                                    @Html.EditorFor(model => model.BENEFICIARY_MOBILE, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Beneficiary mobile no " } })
+                                                    @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                </div>
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.BENEFICIARY_MOBILE, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @*<div class="col-md-6 ">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="padding-top:10px;">Email Id</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="input-wrapper">
+                                                        @Html.EditorFor(model => model.EMAIL_ID, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Beneficiary email Id " } })
+
+                                                    </div>
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.EMAIL_ID, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 ">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="padding-top:10px;">Remarks</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="input-wrapper">
+                                                        @Html.EditorFor(model => model.REMARKS, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Beneficiary Remarks " } })
+
+                                                    </div>
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.REMARKS, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>*@
+                            </div>
+                        </div>
+
+                    </div><!--.panel-body-->
+                    <div class="card-footer">
+                        <div class="text-center">
+                            <input type="submit" value="Add Beneficiary " class="btn btn-primary" id="btnsubmit" />
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div>
+
+    </div>
+}
+
+<div id="progressAddReciepent" class="loading hidden">Loading&#8230;</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.transdDMRBeneficiaryRegForm').modal('hide');
+        $('#progressAddReciepent').removeClass("hidden");
+        $('#progressAddReciepent').hide();
+    })
+    function OnSuccessAddRecipient(response) {
+        debugger;
+        var message = response;
+        var CustId = $('#CUSTOMER_ID').val();
+
+        //$('#txtDMTCustomerMobile').val(CustId);
+        $('#hdnRemitterId').val(Remitterid);
+        $('#hdnBeneficairyId').val(Remitterid);
+        $('.transdDMRBeneficiaryRegForm').modal('show');
+
+        //$("#AddRecipient").trigger("reset");
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+                if (message == "Beneficiary Added Successfully.") {
+                    var url = "/Merchant/MerchantDMRSection/CustomerDetails?CustId=" + CustId;
+                    window.location.href = url;
+                }
+                else {
+                    $('#progressAddReciepent').removeClass("hidden");
+                    $('#progressAddReciepent').hide();
+                }
+            }
+        })
+        callGeocodeMobile();
+        //alert(message);
+    }
+    function OnFailureAddRecipient(response) {
+        alert("Error occured.");
+    }
+</script>
+
+
+
+<script src="~/Areas/Merchant/MerchantHelperJS/TransXTAPI/InstantPayAPIJs.js"></script>
+<div id="transactionvalueDMRBeneficiaryRegistrationid" class="modal scale fade transdDMRBeneficiaryRegForm" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" style="max-width: 700px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Validate Mobile No</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12" style="padding: 0 20px;">
+                    <div style="box-shadow: 5px 10px #3e50b4; border: 1px solid #3e50b4; padding:20px 0; margin:40px;" class="clearfix">
+                        <div class=" col-md-12 row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-4" style="padding-top:10px;">Beneficiary Name</label>
+                                    <div class="col-md-8">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">
+                                                <input type="text" value="Name" class="form-control text-box single-line" id="txtDMTBeneficiaryName" placeholder="Beneficiary Name" readonly="readonly" />
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-4" style="padding-top:10px;">Beneficiary Account</label>
+                                    <div class="col-md-8">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">
+                                                <input type="text" value="Account No" class="form-control text-box single-line" id="txtDMTBeneficiaryAccount" placeholder="Beneficiary Account No" readonly="readonly" />
+                                                <input type="hidden" id="hdnRemitterId" />
+                                                <input type="hidden" id="hdnBeneficairyId" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-4" style="padding-top:10px;"> OTP</label>
+                                    <div class="col-md-8">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">
+                                                <input type="text" value="OTP" class="form-control text-box single-line" id="txtDMTBeneficairyOTP" placeholder="Enter OTP" />
+                                            </div>
+                                            <a href="javascript:void(0)" id="SendOTP" onclick="GenerateOTP($('#hdnRemitterId').val(),$('#hdnBeneficairyId').val())" style="padding:20px 0 0 30px; "><b>Get OTP</b></a>
+                                            <span class="help-block"><small>@*@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })*@</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center col-md-12">
+                            <input type="submit" value="Verify Yourself" class="btn btn-primary" id="btnOutletsubmit" onclick="VerifyBeneficaryAccountNo($('#hdnRemitterId').val(),$('#hdnBeneficairyId').val(),$('#txtDMTBeneficairyOTP').val());" />
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div><!--.modal-content-->
+    </div><!--.modal-dialog-->
+</div>

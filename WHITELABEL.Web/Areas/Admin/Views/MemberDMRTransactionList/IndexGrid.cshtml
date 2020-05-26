@@ -1,0 +1,39 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_DMR_TRANSACTION_LOGS>
+@{
+    Layout = null;
+}
+@(Html
+                .Grid(Model)
+                .Build(columns =>
+                {
+                    columns.Add(model => model.ID).Titled("Id").Filterable(true).Sortable(true);
+                    columns.Add(model => model.CUSTOMER_ID).Titled("Customer Id").Filterable(true).Sortable(true);
+                    columns.Add(model => model.RECIPIENT_ID).Titled("Recipient ID").Filterable(true).Sortable(true);
+                    columns.Add(model => model.ACCOUNT_NO).Titled("Account No").Filterable(true).Sortable(true);
+                    columns.Add(model => model.IFSC_CODE).Titled("IFSC Code").Filterable(true).Sortable(true);
+                    columns.Add(model => model.TRANSACTION_STATUS).Titled("Status").Filterable(true).Sortable(true);                    
+                    columns.Add(model => model.CORELATIONID).Encoded(false).Filterable(false).Sortable(false).Titled("Action")
+                        .RenderedAs(model => "<div style='text-align:center'><a href='javascript:void(0);' data-toggle='modal' data-target='.transd' id='transactionvalueid' onclick='ExecuteDMRTransaction(" + model.CORELATIONID + ");' style='margin-right:10px' title='Commission Distribute'>Commission Disburse</a></div>");
+                })
+                .RowCss(model => model.TRANSACTION_STATUS == "Pending" ? "bolded" : "active")
+                .Empty("No data found")
+                .Id("my-ajax-grid")
+                .Pageable(pager =>
+                {
+                    pager.PagesToDisplay = 5;
+                    pager.RowsPerPage = 5;
+                })
+                .Filterable()
+                .Sortable()
+)
+<style>
+    .bolded {
+        color: black;
+    }
+
+    .active {
+        color: green;
+    }
+</style>

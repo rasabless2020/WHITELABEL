@@ -1,0 +1,155 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_ACCOUNTS>
+@{
+    ViewBag.Title = "Commission Report";
+    //Layout = "~/Areas/Super/Views/Shared/_LayoutSuper.cshtml";
+    Layout = "~/Areas/Super/Views/Shared/_LayoutSuper.cshtml";
+}
+
+<div class="form-horizontal padding-top-20">
+    <!--Super Commission-->
+    <h3>Super Commission Details</h3>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row example-row">
+                        @*<div class="col-md-6">@Html.DropDownList("MemberService", new SelectList((ViewBag.MemberService) as SelectList, "Value", "Text"), "Select Member", new { id = "MemberList", @class = "form-control" })</div>*@
+                        <div class="col-md-2">Service List:-</div>
+                        <div class="col-md-4">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    @Html.DropDownList("MemberTransactionStatus", new List<SelectListItem>
+                                                                    { new SelectListItem{Text="Mobile Recharge", Value="Mobile Recharge"},
+                                                                        new SelectListItem{Text="DMR", Value="DMR"},
+                                                                        new SelectListItem{Text="Requisition", Value="Requisition"} },
+                                                                       "Select Status", new { id = "TransactionStatus", @class = "form-control" })
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="col-md-6"></div>
+                                <div class="col-md-12 mt-2">@Html.AjaxGrid(Url.Action("IndexGridSuper", "SuperTransactionReport", new { area = "Super" }))</div>
+                            </div>
+                        </div>
+                <div class="card-footer text-center">
+                    <button id="btnExport" class="btn btn-info btn-xs">EXPORT</button>
+                     @*<a href="#" id="btnExportSuperrecoard" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                    @*<a href="@(Url.Action("ExportIndex","DistributorTransactionReport",new {area="Distributor" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Distributor Commission-->
+
+    
+
+    
+
+</div>
+<!-- For Super-->
+<script>
+    $(document).on('change', '#TransactionStatus', function () {        
+        $('#my-ajax-gridSuper').mvcgrid({
+            query: 'search=' + this.value,            
+            reload: true,
+            reloadStarted: function () {
+                $(".divFooterTotalComm1").remove();
+            },
+        });
+    });
+</script>
+
+<!-- For Distrinutor-->
+<script>
+    $(document).on('change', '#TransactionDisStatus', function () {
+        debugger;
+        var dis_Id = $("#DistributorList").val();
+        $('#gridDistributor').mvcgrid({
+            query: 'search=' + dis_Id + '&Status=' + this.value,            
+            reload: true,
+            reloadStarted: function () {
+                $(".divFooterTotalComm").remove();
+            },
+        });
+    });
+</script>
+
+<script>
+    $(document).on('change', '#DistributorList', function () {
+        debugger;
+        var status = $("#TransactionDisStatus").val();
+        $('#gridDistributor').mvcgrid({
+            query: 'search=' + this.value + '&Status=' + status,
+            //query: 'search=' + this.value,
+            reload: true,
+            reloadStarted: function () {
+                $(".divFooterTotalComm").remove();
+            },
+        });
+
+        $("#MerchantList").empty();
+                $("#MerchantList").val("--Select--");
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetMerchant")',
+                    dataType: 'json',
+                    data: { Disid: $("#DistributorList").val() },
+                    success: function (states) {
+                        debugger;
+                        $.each(states, function (i, state) {
+                            $("#MerchantList").append('<option value="' + state.IDValue + '">' +
+                                state.TextValue + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve data.' + ex);
+                    }
+                });
+
+    });
+</script>
+
+<!-- For Merchant-->
+@*<script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#DistributorList").change(function () {
+                debugger;
+                $("#MerchantList").empty();
+                $("#MerchantList").val("--Select--");
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetMerchant")',
+                    dataType: 'json',
+                    data: { Disid: $("#DistributorList").val() },
+                    success: function (states) {
+                        debugger;
+                        $.each(states, function (i, state) {
+                            $("#MerchantList").append('<option value="' + state.IDValue + '">' +
+                                state.TextValue + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve data.' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+
+    </script>*@   
+<script type="text/javascript">
+    $("[id$=btnExport]").click(function (e) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=my-ajax-gridSuper]').html()));
+        e.preventDefault();
+    });
+</script>
+<script type="text/javascript">
+    $("#btnExportSuperrecoard").click(function () {
+        var url = '@(Url.Action("ExportIndexAdminReport", "SuperTransactionReport", new {area= "Super" }) + ViewContext.HttpContext.Request.QueryString)?statusval=' + $("#TransactionStatus").val();
+        window.location.href = url;
+    })
+</script>

@@ -1,0 +1,185 @@
+﻿@using NonFactors.Mvc.Grid;
+@model WHITELABEL.Data.Models.TBL_DMT_BANK_MARGIN
+@{
+    ViewBag.Title = "DMT Bank Margin";
+    Layout = "~/Areas/PowerAdmin/Views/Shared/_LayoutPowerAdmin.cshtml";
+}
+
+@Scripts.Render("~/bundles/PowerAdminDMTBankMarginJs")
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal padding-top-20">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <div class="text-right col-md-12">
+                                <div class="panel-title" align="right"><a href="#" data-toggle="modal" data-target=".transd" id="transactionvalueid" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New DMT Bank Master</a></div>
+                            </div>
+                        </div>
+                    </div><!--.panel-heading-->
+                    <div class="panel-body">
+                        <div class="row example-row">
+                            @Html.AjaxGrid(Url.Action("IndexGrid", "PowerAdminDMT_BankMargin", new { area = "PowerAdmin" }))
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div><!--.row-->
+    </div>
+
+}
+
+<div id="transactionvalueid" class="modal scale fade transd" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Bank Margin</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+
+            </div>
+            <div class="modal-body">
+
+                <div class="col-md-12">
+                    <div class="col-md-4" style="padding-top:10px;">DMT Account validation margin  : </div>
+
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <div class="input-wrapper">
+                                    @*@Html.EditorFor(model => model.DMTBANK_MARGIN, new { htmlAttributes = new { @class = "form-control", @placeholder = "XXXXX.XX" } })*@
+                                    <input type="text" id="DMTBANK_MARGIN" value="" class="form-control" pattern="\d{1,2}(\.\d{0,4})?" onkeypress="return isNumberKey(event)" />
+                                    <input type="hidden" id="IDDMT" />
+                                    <span style="color:red" id="informationMessage"><lable id="lblmsg"></lable></span>
+                                </div>
+                                <span><small>@*@Html.ValidationMessageFor(model => model.DMTBANK_MARGIN, "", new { @class = "text-danger" })*@</small></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-danger" onclick="TransactionDecline($('#sln').val());">Decline</button>*@
+                @*<button type="button" class="btn btn-success" onclick="updateStatus($('#sln').val());">Approve</button>*@
+                <button type="button" id="valuesubmit" class="btn btn-success" onclick="SaveDMTBankMargin($('#DMTBANK_MARGIN').val());">Save</button>
+            </div>
+        </div><!--.modal-content-->
+    </div><!--.modal-dialog-->
+
+</div>
+<script type="text/javascript">
+    //function getDMTvalue(transid) {
+    //    var idval = transid;
+
+    //    $.ajax({
+    //        url: "/PowerAdminDMT_BankMargin/GetDMT_BankMargin?area=PowerAdmin",
+    //        data: {
+    //            TransId: transid
+    //        },
+    //        cache: false,
+    //        type: "POST",
+    //        dataType: "json",
+    //        beforeSend: function () {
+    //        },
+    //        success: function (data) {
+
+    //            var traninfo = data;
+    //            //var dateval = new Date(traninfo.data.REQUEST_DATE)
+    //            $('#DMTBANK_MARGIN').val(data.DMTBANK_MARGIN);
+    //            $('#ID').val(data.ID);
+    //        },
+    //        error: function (xhr, status, error) {
+    //            console.log(status);
+    //        }
+    //    });
+    //}
+
+    //function SaveDMTBankMargin(transid) {
+    //    var idval = transid;
+    //    $.ajax({
+    //        url: "/PowerAdminDMT_BankMargin/DMTBank_Margin?area=PowerAdmin",
+    //        data: {
+    //            TransId: transid
+    //        },
+    //        cache: false,
+    //        type: "POST",
+    //        dataType: "json",
+    //        beforeSend: function () {
+    //        },
+    //        success: function (data) {
+    //            $('.mvc-grid').mvcgrid('reload');
+    //            $(".overlaydiv").fadeOut("slow");
+    //            bootbox.alert({
+    //                size: "small",
+    //                message: "DMT Bank Margin Added",
+    //                backdrop: true
+    //            });
+    //            $('.transd').modal('hide');
+
+    //        },
+    //        error: function (xhr, status, error) {
+    //            console.log(status);
+    //        }
+    //    });
+    //}
+   
+    //$("#DMTBANK_MARGIN").inputFilter(function (value) {
+    //    debugger;
+    //    return /^-?\d*[.,]?\d{0,2}$/.test(value);
+    //});
+    
+
+    function isNumberKey(evt) {
+        
+            document.getElementById("valuesubmit").disabled = false;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode != 46 && charCode > 31
+                && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+       
+
+    }
+    //var numbersOnly = /^\d+$/;
+    //var decimalOnly = /^\s*-?[1-9]\d*(\.\d{1,2})?\s*$/;
+    //var uppercaseOnly = /^[A-Z]+$/;
+    //var lowercaseOnly = /^[a-z]+$/;
+    //var stringOnly = /^[A-Za-z0-9]+$/;
+
+    //function testInputData(myfield, restrictionType) {
+    //    debugger;
+    //    var myData = document.getElementById(myfield).value;
+    //    if (myData !== '') {
+    //        if (restrictionType.test(myData)) {
+                
+    //        } else {
+    //            var lblValue = document.getElementById("lblValue");
+    //            //lblValue.innerHTML = "Only decimal value are allowed";                
+    //            $('#lblValue').html("Only decimal value are allowed");
+    //        }
+    //    } else {
+            
+            
+    //        var lblValue = document.getElementById("lblValue");
+            
+    //        $('#lblValue').html("Enter Some Decimal Value");
+    //    }
+    //    return;
+
+    //}
+    //$(document).ready(function () {
+    //    window.setTimeout(function () {
+    //        $("#informationMessage").fadeOut('slow');
+    //    }, 2000);
+    //});
+</script>

@@ -1,0 +1,125 @@
+﻿@using NonFactors.Mvc.Grid;
+@model WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS
+@{
+    ViewBag.Title = "Retailer Requisition List";
+    //Layout = "~/Areas/Distributor/Views/Shared/_DistributorLayout.cshtml";
+    Layout = "~/Areas/Distributor/Views/Shared/_LayoutDistributor.cshtml";
+}
+@Html.AntiForgeryToken()
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        @*<div class="col-md-12">
+            <div class="col-md-12 row headcolor">
+                <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-wallet  fa-3x"></i> </div>
+
+                <div class="col-md-8" style="text-align:right; padding-top:10px;">
+                    <h3>
+                        Requisition List
+                    </h3>
+                </div>
+            </div>
+        </div>*@
+        <div class="col-md-12">
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-heading" style="padding-bottom:10px;">
+                        <div class="card-title row">
+                            <div class="col-md-6 text-left">
+                                <a href="@(Url.Action("GridExportIndex","DistributorRequisition",new { area="Distributor"}) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <a href="@Url.Action("RequisitionDetails", "DistributorRequisition",new { area="Distributor"})" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New Requisition</a>
+                            </div>
+                        </div>
+
+                    </div><!--.panel-heading-->
+                    <div class="panel-body">
+                        <div class="row example-row">
+
+                            @Html.AjaxGrid(Url.Action("IndexGrid", "DistributorRequisition", new { area = "Distributor" }))
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+                    <div class="panel-footer text-right">
+
+                    </div>
+
+                </div><!--.panel-->
+            </div>
+        </div><!--.col-md-12-->
+    </div><!--.row-->
+</div>
+
+@Scripts.Render("~/bundles/DistributorRequisition")
+
+<div  id="transactionvalueid" class="modal scale fade transd" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Transaction Information</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                
+
+            </div>
+            <div class="modal-body">
+
+                <div class="col-md-12">
+                    <div class="col-md-4" style="padding-top:10px;">Member Name : </div>
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <input type="text" id="username" value="" class="form-control" />
+                                <input type="hidden" id="sln" />
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-4" style="padding-top:10px;">Transaction Date : </div>
+
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <input type="text" id="TransactionDate" value="" class="form-control bootstrap-daterangepicker-basic" />
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+
+                <div class="col-md-12">
+                    <div class="col-md-4" style="padding-top:10px;">Bank Details : </div>
+
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <input type="text" id="BankDetails" value="" class="form-control" />
+
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                <div class="col-md-12">
+                    <div class="col-md-4" style="padding-top:10px;">Amount : </div>
+
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                 <input type="text" id="Amount" value="" class="form-control" />
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="TransactionDecline($('#sln').val());">Decline</button>
+                <button type="button" class="btn btn-success" onclick="updateStatus($('#sln').val());">Approve</button>
+            </div>
+        </div><!--.modal-content-->
+    </div><!--.modal-dialog-->
+</div>

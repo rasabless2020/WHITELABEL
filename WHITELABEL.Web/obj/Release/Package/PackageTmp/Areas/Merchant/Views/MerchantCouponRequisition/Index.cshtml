@@ -1,0 +1,42 @@
+﻿@using NonFactors.Mvc.Grid;
+@model WHITELABEL.Data.Models.TBL_COUPON_TRANSFER_LOGS
+@{
+    /**/
+
+    ViewBag.Title = "Merchant Coupon Requisition";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+
+@Html.AntiForgeryToken()
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        <div style="background-color:#ccc; border-radius:5px; color:#3e50b4; padding:5px 20px 10px 20px; margin-bottom:20px;" class="col-md-12"><h3 style="color:#3e50b4"><i class="fas fa-angle-double-right"></i> Merchant Coupon Requisition</h3></div>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-heading" style="padding-bottom:10px;">
+                    <div class="card-title row" style="padding: 10px 10px 0 0;">
+                        <div class="col-md-6 text-left"></div>
+                        <div class="col-md-6 text-right">
+                            <a href="@Url.Action("ApplyForCoupon", "MerchantCouponRequisition",new { area="Merchant"})" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New Apply for Coupon</a>
+                        </div>
+
+                    </div>
+                </div><!--.panel-heading-->
+                <div class="card-body">
+                    <div class="row example-row">
+
+                        @Html.AjaxGrid(Url.Action("IndexGrid", "MerchantCouponRequisition", new { area = "Merchant" }))
+                    </div><!--.row-->
+                </div><!--.panel-body-->
+                <div class="card-footer text-right">
+
+                </div>
+
+            </div><!--.panel-->
+        </div><!--.col-md-12-->
+    </div><!--.row-->
+
+</div>
+
+
+

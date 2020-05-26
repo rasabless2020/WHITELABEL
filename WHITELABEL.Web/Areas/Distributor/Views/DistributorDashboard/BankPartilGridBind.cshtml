@@ -1,0 +1,9 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IGrid<WHITELABEL.Data.Models.TBL_SETTINGS_BANK_DETAILS>
+@{
+    ViewBag.Title = "BankPartilGridBind";    
+}
+
+@(new HtmlGrid<WHITELABEL.Data.Models.TBL_SETTINGS_BANK_DETAILS>(Html, Model))
+

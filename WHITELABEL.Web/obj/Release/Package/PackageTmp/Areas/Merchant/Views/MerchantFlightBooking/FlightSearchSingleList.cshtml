@@ -1,0 +1,312 @@
+﻿
+@{
+    ViewBag.Title = "FlightSearchSingleList";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+
+<div class="content" style="margin-top:20px;">
+    <div class="display-animation">
+        <div class="full-content margin-bottom-40 bg-white" id="Bill_page">
+            <div class="row example-row" style="min-height:350px;">
+                <div class="card" style="width:100%;">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-3 material-animate padding-right-40">
+                                <ul class="list-group ">
+                                    <li class="list-group-item">
+                                        <div class="form-group">
+                                            <label>Price range:</label>
+
+
+                                            <div id="extra-small-slider-circle-filled" class="circle-filled slider-default slider-extra-small slider-custom noUi-target noUi-ltr noUi-horizontal" style="margin-top:10px;">
+
+                                                <div class="noUi-base">
+                                                    <div class="noUi-origin" style="left: 14.2857%;">
+                                                        <div class="noUi-handle noUi-handle-lower" data-handle="0" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="0.0" aria-valuemax="71.4" aria-valuenow="14.3" aria-valuetext="20.00" style="z-index: 5;"></div>
+                                                    </div>
+                                                    <div class="noUi-connect" style="left: 14.2857%; right: 28.5714%;"></div>
+
+                                                    <div class="noUi-origin" style="left: 71.4286%;">
+                                                        <div class="noUi-handle noUi-handle-upper" data-handle="1" tabindex="0" role="slider" aria-orientation="horizontal" aria-valuemin="14.3" aria-valuemax="100.0" aria-valuenow="71.4" aria-valuetext="60.00" style="z-index: 4;"></div>
+                                                    </div>
+                                                </div>
+
+
+
+
+                                            </div>
+                                            <!--.row-->
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Time slots for the flight
+                                        <div class="checkboxer">
+                                            <input type="checkbox" value="" id="check1">
+                                            <label for="check1"> Early Morning <small>12am - 8am</small></label>
+                                        </div>
+                                        <!--.checkbox-->
+
+                                        <div class="checkboxer">
+                                            <input type="checkbox" value="" id="check2">
+                                            <label for="check2"> Morning <small>8am - 12pm</small></label>
+                                        </div>
+                                        <!--.checkbox-->
+
+                                        <div class="checkboxer">
+                                            <input type="checkbox" value="" id="check3">
+                                            <label for="check3">Mid-Day <small>12pm - 4pm</small></label>
+                                        </div>
+                                        <!--.checkbox-->
+
+                                        <div class="checkboxer">
+                                            <input type="checkbox" value="" id="check4">
+                                            <label for="check4">Evening <small>4pm - 8pm</small></label>
+                                        </div>
+                                        <!--.checkbox-->
+
+                                        <div class="checkboxer">
+                                            <input type="checkbox" value="" id="check5">
+                                            <label for="check5">Night <small>8pm - 12am</small></label>
+                                        </div>
+                                        <!--.checkbox-->
+
+                                    </li>
+                                    <li class="list-group-item">
+                                        Stops for that flight
+                                        <div class="clearfix"></div>
+                                        <div class="btn-group btn-group-xs" data-toggle="buttons">
+                                            <label class="btn btn-blue-grey active">
+                                                <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                                                1
+                                            </label>
+                                            <label class="btn btn-blue-grey">
+                                                <input type="radio" name="options" id="option2" autocomplete="off">
+                                                2
+                                            </label>
+                                            <label class="btn btn-blue-grey">
+                                                <input type="radio" name="options" id="option3" autocomplete="off">
+                                                3
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Refundable:
+                                        <div class="btn-group btn-group-xs" data-toggle="buttons">
+                                            <label class="btn btn-blue-grey active">
+                                                <input type="radio" name="optionsa" id="option1" autocomplete="off" checked>
+                                                yes
+                                            </label>
+                                            <label class="btn btn-blue-grey">
+                                                <input type="radio" name="optionsa" id="option2" autocomplete="off">
+                                                No
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Checkbox:
+                                        <div class="checkboxer">
+                                            <input type="checkbox" value="" id="check6">
+                                            <label for="check6"> For all Airlines</label>
+                                        </div>
+                                        <!--.checkbox-->
+
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="form-group">
+                                            <label>Promo Code </label>
+                                            <input class="form-control" type="text" placeholder="promo">
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--.col-->
+
+                            <div class="col-md-9 material-animate">
+
+
+                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                    <div class="list-group-item bg-blue text-color-white mb-1 text-center">
+
+
+
+
+
+                                        <div class="col-md-12 row">
+                                            <div class="col-md-2">Airlines</div>
+                                            <div class="col-md-3">Departure </div>
+                                            <div class="col-md-3">Arrival Time</div>
+                                            <div class="col-md-2">Refundable</div>
+                                            <div class="col-md-2">Price</div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="list-group-item bg-blue text-color-white mb-1 text-center">
+
+                                        <div class="col-md-12 row" style="padding:0px;">
+                                            <div class="col-md-2">
+
+                                                <img class="" src="images/indiGo_Logo.jpg" width="24" height="24"><br>
+                                                <span>Indigo</span>
+
+                                            </div>
+
+
+
+
+                                            <div class="col-md-3">
+
+                                                14:20<br>
+                                                <span class="label label-info">CCU → JAI</span>
+
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                16:40<br>
+                                                <span class="label label-info">Duration: 2h:30m</span>
+
+                                            </div>
+                                            <div class="col-md-2">
+                                                <i class="fa fa-check text-amber"></i>
+                                            </div>
+                                            <div class="col-md-2">
+                                                6,600/-
+                                                <button class="btn btn-primary btn-xs "> Book</button>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="list-group-item bg-blue text-color-white mb-1 text-center">
+
+                                        <div class="col-md-12 row" style="padding:0px;">
+                                            <div class="col-md-2">
+
+                                                <img class="" src="images/indiGo_Logo.jpg" width="24" height="24"><br>
+                                                <span>Indigo</span>
+
+                                            </div>
+
+
+
+
+                                            <div class="col-md-3">
+
+                                                14:20<br>
+                                                <span class="label label-info">CCU → JAI</span>
+
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                16:40<br>
+                                                <span class="label label-info">Duration: 2h:30m</span>
+
+                                            </div>
+                                            <div class="col-md-2">
+                                                <i class="fa fa-check text-amber"></i>
+                                            </div>
+                                            <div class="col-md-2">
+                                                6,600/-
+                                                <button class="btn btn-primary btn-xs "> Book</button>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="list-group-item bg-blue text-color-white mb-1 text-center">
+
+                                        <div class="col-md-12 row" style="padding:0px;">
+                                            <div class="col-md-2">
+
+                                                <img class="" src="images/indiGo_Logo.jpg" width="24" height="24"><br>
+                                                <span>Indigo</span>
+
+                                            </div>
+
+
+
+
+                                            <div class="col-md-3">
+
+                                                14:20<br>
+                                                <span class="label label-info">CCU → JAI</span>
+
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                16:40<br>
+                                                <span class="label label-info">Duration: 2h:30m</span>
+
+                                            </div>
+                                            <div class="col-md-2">
+                                                <i class="fa fa-check text-amber"></i>
+                                            </div>
+                                            <div class="col-md-2">
+                                                6,600/-
+                                                <button class="btn btn-primary btn-xs "> Book</button>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="list-group-item bg-blue text-color-white mb-1 text-center">
+
+                                        <div class="col-md-12 row" style="padding:0px;">
+                                            <div class="col-md-2">
+
+                                                <img class="" src="images/indiGo_Logo.jpg" width="24" height="24"><br>
+                                                <span>Indigo</span>
+
+                                            </div>
+
+
+
+
+                                            <div class="col-md-3">
+
+                                                14:20<br>
+                                                <span class="label label-info">CCU → JAI</span>
+
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                16:40<br>
+                                                <span class="label label-info">Duration: 2h:30m</span>
+
+                                            </div>
+                                            <div class="col-md-2">
+                                                <i class="fa fa-check text-amber"></i>
+                                            </div>
+                                            <div class="col-md-2">
+                                                6,600/-
+                                                <button class="btn btn-primary btn-xs "> Book</button>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+
+
+
+                            </div>
+                            <!--.col-->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

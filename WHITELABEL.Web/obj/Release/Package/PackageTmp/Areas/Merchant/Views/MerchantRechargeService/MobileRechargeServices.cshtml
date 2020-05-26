@@ -1,0 +1,402 @@
+﻿@model WHITELABEL.Web.Areas.Merchant.Models.MobileRechargeModel
+@{
+    ViewBag.Title = "MobileRechargeServices";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+@Scripts.Render("~/bundles/MerchantMobileRecharge")
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+@using (Ajax.BeginForm("PostMobileRecharge", "MerchantRechargeService", new AjaxOptions { Confirm = "Do you want to recharge", OnSuccess = "OnSuccessMobile", OnFailure = "OnFailureMobile", LoadingElementId = "progressMobile" }, new { area = "Merchant", @id = "MobileRecharge" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="col-md-12">
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class=" row" style="margin-bottom:40px;">
+                <div class="col-md-4"><h5>Mobile Recharge or Bill Payment</h5></div>
+                <div class="col-md-8 row">
+                    @*<div class="col-md-3">
+                            @Html.RadioButtonFor(m => m.PrepaidRecharge, "Prepaid", new { id = "PrepaidRecharge1", Checked = "checked", style = " width:18px; height:18px;", onclick = "DisplayButton()" })
+                            @*<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">*
+                            <label for="inlineRadio1" style="font-size:18px;">Prepaid</label>
+                        </div>*@
+                    @*<div class="col-md-3">
+                            @Html.RadioButtonFor(m => m.PrepaidRecharge, "Postpaid", new { id = "PostpaidRecharge2", style = " width:18px; height:18px; margin-left:40px;", onclick = "DisplayButton()" })
+                            @*<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">*
+                            <label for="inlineRadio2" style="font-size:18px;">Postpaid</label>
+                        </div>*@
+                    <div class="col-md-6"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 row">
+                    <div class="col-md-12 row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6 row">
+
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class="md-form">
+
+                                @Html.DropDownListFor(m => m.PrepaidRecharge, new List<SelectListItem>
+                                                        { new SelectListItem{Text="PREPAID", Value="PREPAID"},
+                                                        new SelectListItem{Text="POSTPAID", Value="POSTPAID"}},
+                                                    new { id = "txtPrepaidRecharge", @class = "form-control" })
+                                    </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @Html.EditorFor(m => m.ContactNo, new { htmlAttributes = new { @style = " width:100%; padding:5px;", placeholder = "Mobile Number", @class = "form-control", @id = "txtContactNo" } })
+                                            <label for="exampleInput1"></label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                        <div style="display:none" id="idGeolocmob">
+                                            @Html.EditorFor(m => m.geolocation, new { htmlAttributes = new { @class = "form-control", id = "GeolocationMobile", @readonly = "readonly" } })
+                                            @Html.EditorFor(m => m.IpAddress, new { htmlAttributes = new { @class = "form-control", id = "MobileIpaddress", @readonly = "readonly" } })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    <div class="input-group" style=" height:37px;">
+                                        <div class="inputer" style="width:91%;">
+                                            <div class="md-form">
+                                                @Html.EditorFor(m => m.OperatorName, new { htmlAttributes = new { @id = "txtOperator", style = " width:97%; padding:5px;", placeholder = "Operator Name", @class = "form-control1" } })
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.OperatorName, "", new { @class = "text-danger" })</small></span>
+                                                <input type="hidden" id="hfOperator" name="OperatorId" />
+                                            </div> 
+                                        </div>
+                                        <span class="input-group-btn">
+                                            <button href="javascript:void(0)" type="button" class="btn btn-default" onclick='ShowEmployee()'>...</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class="floating-label">
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @Html.EditorFor(m => m.RechargeAmt, new { htmlAttributes = new { @id = "txtRechargeAmt", @style = " width:100%; padding:5px;", placeholder = "Amount", @class = "form-control" } })
+                                            <label for="amount"></label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.RechargeAmt, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                    <span class="input-group-btn" id="displayPlanForJio">
+                                        @Html.HiddenFor(m=>m.JIO_Plan_Id,new {id= "hdnJIO_Plan_Id" })
+                                        <button href="javascript:void(0)" type="button" class="btn btn-default" onclick='ShowJioPlan()'>...</button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class=" floating-label">
+                                    <div class="input-group" style=" height:37px;">
+                                        <div class="inputer" style="width:100%;">
+                                            <div class="md-form">
+                                                @Html.EditorFor(m => m.CircleName, new { htmlAttributes = new { @id = "txtCircleName", style = " width:100%; padding:5px;", placeholder = "Circle Name", @class = "form-control" } })
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CircleName, "", new { @class = "text-danger" })</small></span>
+                                                <input type="hidden" id="hfCircleCode" name="CircleCodeId" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="text-align:center; margin-top:20px;">
+                                <a href="#" onclick="GetPostPaidBillDetails();" class="btn btn-primary btn-lg" style="color:white; display:none;" id="btnDisplay">Get Bill</a>
+                                <input type="submit" value="Pay" class="btn btn-primary btn-lg" id="btnsubmit" /><br />
+                            </div>
+                        </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                        <div class="col-md-12 row" style=" margin-top:30px; border:1px solid #ccc; padding:20px 0; margin-bottom:20px; display:none; margin-left:12px;" id="PostPaidDivElm">
+                            <div class="col-md-4 row">
+                                <div class="col-md-6"> Due Amount :-</div>
+                                <div class="col-md-6"><div id="txtPostdueamount"></div></div>
+                            </div>
+                            <div class="col-md-4 row">
+                                <div class="col-md-6"> Due Date :-</div>
+                                <div class="col-md-6"><div id="txtpostpaidduedate"></div></div>
+                            </div>
+                            <div class="col-md-4 row">
+                                <div class="col-md-6">Bill No :-</div>
+                                <div class="col-md-6"><div id="txtpostpaidbillNo"></div></div>
+                            </div>
+                            <div class="col-md-4 row">
+                                <div class="col-md-6"> Bill Date :-</div>
+                                <div class="col-md-6"><div id="txtPostpaidbilldate"></div></div>
+                            </div>
+                            <div class="col-md-4 row">
+                                <div class="col-md-6"> Bill Period :-</div>
+                                <div class="col-md-6"><div id="txtPostpaidbillperiod"></div></div>
+                            </div>
+                            <div class="col-md-4 row">
+                                <div class="col-md-6"> Customer Details :-</div>
+                                <div class="col-md-6"><div id="txtpostpaidcustomerparamsdetails"></div></div>
+                            </div>
+                            <div class="col-md-4 row">
+                                <div class="col-md-6"> Bill Details :-</div>
+                                <div class="col-md-6"><div id="txtPostpaidcustomername"></div></div>
+                            </div>
+                            <div class="col-md-4 row">
+                                <div class="col-md-6"> </div>
+                                <div class="col-md-6" style="display:none;">
+                                    @*<input type="hidden" id="hdnPostpaidreference_id" name="POstpaidBillReferenceNo" />*@
+                                    @Html.EditorFor(m => m.Reference_Id, new { htmlAttributes = new { @class = "form-control", id = "hdnPostpaidreference_id", @readonly = "readonly" } })
+                                </div>
+                            </div>
+
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#txtOperator").change(function () {
+            
+            var GetOperatorname = $('#txtOperator').val();
+            if (GetOperatorname == 'Reliance JIO') {
+                $('#displayPlanForJio').show();
+            }
+            else {
+                $('#displayPlanForJio').hide();
+            }
+        });
+    });
+
+    function setServiseOperator($key, $name) {
+        $('#txtOperator').val($name).focus();
+        $('#hfOperator').val($key);
+        $('#RechargeAmt').focus();
+        $('#transactmodal').modal('hide');
+    }
+
+    function setServiseJioService($price,$jioIdVal) {
+        $('#hdnJIO_Plan_Id').val($jioIdVal);    
+        $('#txtRechargeAmt').val($price);
+        $('#myJioPlanbrowseModal').modal('hide');
+    }
+
+</script>
+<div id="dialog" style="display: none">
+</div>
+
+<div class="preloader hidden" id="progressMobile" style="display:none">
+    <div id="loading"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#displayPlanForJio').hide();
+        $('#btnDisplay').hide();
+        $('#progressMobile').removeClass("hidden");
+        $('#progressMobile').hide();
+        $('#PostPaidDivElm').hide();
+    })
+    function OnSuccessMobile(response) {
+        $('#progressMobile').removeClass("hidden");
+        $('#progressMobile').hide();
+        $('#loading').removeClass("hidden");
+        $('#loading').hide();
+        var message = response;
+        $("#MobileRecharge").trigger("reset");
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                $('#PostPaidDivElm').hide();
+                console.log(message);
+            }
+        })
+        $('#PostPaidDivElm').hide();
+        $("#MobileRecharge").trigger("reset");
+        callGeocodeMobile();
+    }
+    function OnFailureMobile(response) {
+        alert("Error occured.");
+    }
+
+    //function DisplayButton() {
+    //    var PrepaidchkYes = document.getElementById("PrepaidRecharge1");
+    //    var PostPaidchkYes = document.getElementById("PostpaidRecharge2");
+    //    var dvPassport = document.getElementById("btnDisplay");
+    //    if (PrepaidchkYes.checked) {
+    //        $('#btnDisplay').hide();
+    //    }
+    //    else if (PostPaidchkYes.checked) {
+    //        $('#btnDisplay').show();
+    //        $('#btnsubmit').hide();
+    //    }
+    //    else {
+    //        $('#btnsubmit').show();
+    //    }
+    //}
+    //$("#txtPrepaidRecharge").change(function () {
+    //    var OperatorType = $('#txtPrepaidRecharge').val();
+    //    if (OperatorType == 'PREPAID') {
+    //        $('#btnDisplay').hide();
+    //        $('#btnsubmit').show();
+    //    }
+    //    else {
+    //        $('#btnDisplay').show();
+    //        $('#btnsubmit').hide();
+    //    }
+    //});
+
+</script>
+
+<script type="text/javascript">
+    //$("#transactionvalueid").click(function () {        
+    //    var radioValue = $("input[name='PrepaidRecharge']:checked").val();
+    //    $.ajax({
+    //        url: "/MerchantRechargeService/OpenAllProviderList?area=Merchant",
+    //        data: {
+    //            radioValue: radioValue
+    //        },
+    //        cache: false,
+    //        type: "POST",
+    //        dataType: "json",
+    //        beforeSend: function () {
+    //        },
+    //        success: function (data) {                
+    //            if (data.Result === "true") {
+    //                //$('.mvc-grid').mvcgrid('reload');
+    //                //$(".overlaydiv").fadeOut("slow");
+    //                //bootbox.alert({
+    //                //    size: "small",
+    //                //    message: "Status changed successfully",
+    //                //    backdrop: true
+    //                //});
+    //                $('#transactmodal').trigger();
+    //            }
+    //            else {
+    //                //$(".overlaydiv").fadeOut("slow");
+    //                //bootbox.alert({
+    //                //    message: "there is some thing error",
+    //                //    backdrop: true
+    //                //});
+    //            }
+    //        },
+    //        error: function (xhr, status, error) {
+    //            console.log(status);
+    //        }
+    //    });
+
+
+
+    //});
+</script>
+
+<script>
+    //var ShowEmployee = function () {
+        
+    //    var OperatorType = $('#txtPrepaidRecharge').val();
+    //    //var OperatorType = "";
+    //    //if (document.getElementById("PrepaidRecharge1").checked) {
+    //    //    OperatorType = "PREPAID";
+    //    //}
+    //    //if (document.getElementById("PostpaidRecharge2").checked) {
+    //    //    OperatorType = "POSTPAID";
+    //    //}
+    //    var customerId = $("input[name='PrepaidRecharge']:checked").val();
+    //    var url = "Merchant/MerchantRechargeService/CheckOperator?EmployeeId=" + customerId;
+    //    $.ajax({
+
+    //        type: "POST",
+    //        url: "/Merchant/MerchantRechargeService/CheckOperator",
+    //        data: { OperatorType: OperatorType },
+    //        success: function (response) {
+    //            $("#myModalBodyDiv").html(response);
+    //            $("#myModal").modal("show");
+    //        }
+    //    })
+    //}
+</script>
+
+<script type="text/javascript">
+    function check(param) {
+        if (confirm("Are you sure you want to create Id ?")) {
+            OnSuccessMobile(param);
+        }
+        else {
+            alert("Failed");
+        }
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        callGeocodeMobile();
+    });
+    function callGeocodeMobile() {
+        $.getJSON('http://www.geoplugin.net/json.gp?jsoncallback=?', function (data) {
+
+            var information = JSON.stringify(data, null, 2);
+            //alert(information[0]);
+            //alert(JSON.stringify(data, null, 2));
+            console.log(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 2));
+            $('#GeolocationMobile').val(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 0));
+            $('#MobileIpaddress').val(JSON.stringify(data.geoplugin_request, null, 0));
+            console.log(JSON.stringify(data, null, 2));
+        });
+    }
+
+    function callTestMobile() {
+        debugger;
+        $.getJSON('http://api.ipstack.com/59.90.54.218?access_key=805262c39880cc939a7e18a3c0781cc4', function (data) {
+            debugger;
+            var information = JSON.stringify(data, null, 2);
+            //alert(information[0]);
+            //alert(JSON.stringify(data, null, 2));
+            console.log(JSON.stringify(data.latitude + ',' + data.longitude, null, 2));
+            console.log(JSON.stringify(data.latitude + ',' + data.longitude, null, 2));
+            console.log(JSON.stringify(data.latitude + ',' + data.longitude, null, 2));
+            $('#txtLatitude').val(JSON.stringify(data.latitude + ',' + data.longitude, null, 0));
+            $('#txtIP').val(JSON.stringify(data.ip, null, 0));
+            console.log(JSON.stringify(data, null, 2));
+        });
+    }
+
+</script>
+
+
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Service Provider Details</h3>
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+            </div>
+            <div class="modal-body" id="myModalBodyDiv">
+
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="myJioPlanbrowseModal">
+    <div class="modal-dialog" style="max-width:700px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Jio Plan</h3>
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+            </div>
+            <div class="modal-body" id="myModalJioPlanList" style="height:450px; overflow:scroll;">
+
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+            </div>
+        </div>
+    </div>
+</div>

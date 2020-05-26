@@ -1,0 +1,416 @@
+﻿@model WHITELABEL.Web.Areas.Merchant.Models.MobileRechargeModel
+@{
+    /**/
+
+    ViewBag.Title = "MobileRecharge";
+    Layout = null;
+}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+@*@using (Ajax.BeginForm("PostMobileRecharge", "MerchantRechargeService", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", LoadingElementId = "progress" }, new { area = "Merchant" }))*@
+@*@using (Ajax.BeginForm("PostMobileRecharge", "MerchantRechargeService", new AjaxOptions { OnSuccess = "OnSuccessMobile", OnFailure = "OnFailureMobile", LoadingElementId = "progressMobile", Confirm = "Are you sure?" }, new { area = "Merchant", id = "MobileRecharge11" }))*@
+@using (Ajax.BeginForm("PostMobileRecharge", "MerchantRechargeService", new AjaxOptions { Confirm = "Do you want to recharge", OnSuccess = "OnSuccessMobile", OnFailure = "OnFailureMobile", LoadingElementId = "progressMobile" }, new { area = "Merchant", @id = "MobileRecharge" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="card-body">
+        <div class=" row" style="margin-bottom:40px;">
+            <div class="col-md-4"><h5>Mobile Recharge or Bill Payment</h5></div>
+            <div class="col-md-8 row">
+                <div class="col-md-3">
+                    @Html.RadioButtonFor(m => m.PrepaidRecharge, "Prepaid", new { id = "PrepaidRecharge1", Checked = "checked", style = " width:18px; height:18px;", onclick = "DisplayButton()" })
+                    @*<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">*@
+                    <label for="inlineRadio1" style="font-size:18px;">Prepaid</label>
+                </div>
+                <div class="col-md-3">
+                    @Html.RadioButtonFor(m => m.PrepaidRecharge, "Postpaid", new { id = "PostpaidRecharge2", style = " width:18px; height:18px; margin-left:40px;" })
+                    @*<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">*@
+                    <label for="inlineRadio2" style="font-size:18px;">Postpaid</label>
+                </div>
+                <div class="col-md-6"></div>
+            </div>
+
+        </div>
+
+        <div>
+            <form>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class=" floating-label">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    @Html.EditorFor(m => m.ContactNo, new { htmlAttributes = new { @style = " width:100%; padding:5px;", placeholder = "Mobile Number", @class = "form-control" } })
+                                    <label for="exampleInput1"> @*Mobile Number*@</label>
+                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })</small></span>
+                                </div>
+                                <div style="display:none" id="idGeolocmob">
+                                    @Html.EditorFor(m => m.geolocation, new { htmlAttributes = new { @class = "form-control", id = "GeolocationMobile", @readonly = "readonly" } })
+                                    @Html.EditorFor(m => m.IpAddress, new { htmlAttributes = new { @class = "form-control", id = "MobileIpaddress", @readonly = "readonly" } })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class=" floating-label">
+                            <div class="input-group" style=" height:37px;">
+                                <div class="inputer" style="width:85%;">
+                                    <div class="input-wrapper">
+                                        @Html.EditorFor(m => m.OperatorName, new { htmlAttributes = new { @id = "txtOperator", style = " width:100%; padding:5px;", placeholder = "Operator Name", @class = "form-control" } })
+                                        <span class="help-block"><small>@Html.ValidationMessageFor(model => model.OperatorName, "", new { @class = "text-danger" })</small></span>
+                                        <input type="hidden" id="hfOperator" name="OperatorId" />
+                                    </div>
+                                </div>
+                                <span class="input-group-btn">
+                                    @*<a href="#" class="btn btn-default">...</a>*@
+                                    <button href="javascript:void(0)" type="button" class="btn btn-default" onclick='ShowEmployee()'>...</button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="floating-label">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+
+                                    @Html.EditorFor(m => m.RechargeAmt, new { htmlAttributes = new { @style = " width:100%; padding:5px;", placeholder = "Amount", @class = "form-control" } })
+                                    @*<input type="text" class="form-control" id="amount">*@
+                                    <label for="amount">@*Amount*@</label>
+                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.RechargeAmt, "", new { @class = "text-danger" })</small></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class=" floating-label">
+                            <div class="input-group" style=" height:37px;">
+                                <div class="inputer">
+                                    <div class="input-wrapper">
+                                        @Html.EditorFor(m => m.CircleName, new { htmlAttributes = new { @id = "txtCircleName", style = " width:100%; padding:5px;", placeholder = "Circle Name", @class = "form-control" } })
+                                        <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CircleName, "", new { @class = "text-danger" })</small></span>
+                                        <input type="hidden" id="hfCircleCode" name="CircleCodeId" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <input type="submit" value="Pay" class="btn btn-info btn-lg" id="btnsubmit" /><br />
+                        @*<input type="button" value="Pay" class="btn btn-info btn-lg" id="btnsubmit" />*@<br />
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+    <script type="text/javascript">
+        function setServiseOperator($key, $name) {
+            $('#txtOperator').val($name).focus();
+            $('#hfOperator').val($key);
+            $('#RechargeAmt').focus();
+            $('#transactmodal').modal('hide');
+        }
+    </script>
+<div id="dialog" style="display: none">
+</div>
+
+<div class="preloader hidden" id="progressMobile"  style="display:none">
+    <div id="loading"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#progressMobile').removeClass("hidden");
+        $('#progressMobile').hide();
+    })
+    function OnSuccessMobile(response) {
+        $('#progressMobile').removeClass("hidden");
+        $('#progressMobile').hide();
+        $('#loading').removeClass("hidden");
+        $('#loading').hide();
+        var message = response;
+        $("#MobileRecharge").trigger("reset");
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                $('#PostPaidDivElm').hide();
+                console.log(message);
+            }
+        })
+        $('#PostPaidDivElm').hide();
+        $("#MobileRecharge").trigger("reset");
+        callGeocodeMobile();
+    }
+    function OnFailureMobile(response) {
+        alert("Error occured.");
+    }
+
+    function DisplayButton() {
+        debugger;
+        var PrepaidchkYes = document.getElementById("PrepaidRecharge1");
+        var PostPaidchkYes = document.getElementById("PostpaidRecharge2");
+        var dvPassport = document.getElementById("btnDisplay");
+        if (PrepaidchkYes.checked) {
+            $('#btnDisplay').hide();
+        }
+        else if (PostPaidchkYes.checked) {
+
+            $('#btnDisplay').show();
+            $('#btnsubmit').hide();
+        }
+        else {
+            $('#btnsubmit').show();
+        }
+        //dvPassport.style.display = PrepaidchkYes.checked ? "block" : "none";
+    }
+
+</script>
+
+<script type="text/javascript">
+    $("#transactionvalueid").click(function () {
+        debugger;
+        var radioValue = $("input[name='PrepaidRecharge']:checked").val();
+        $.ajax({
+            url: "/MerchantRechargeService/OpenAllProviderList?area=Merchant",
+            data: {
+                radioValue: radioValue
+            },
+            cache: false,
+            type: "POST",
+            dataType: "json",
+            beforeSend: function () {
+            },
+            success: function (data) {
+                debugger;
+                if (data.Result === "true") {
+                    //$('.mvc-grid').mvcgrid('reload');
+                    //$(".overlaydiv").fadeOut("slow");
+                    //bootbox.alert({
+                    //    size: "small",
+                    //    message: "Status changed successfully",
+                    //    backdrop: true
+                    //});
+                    $('#transactmodal').trigger();
+                }
+                else {
+                    //$(".overlaydiv").fadeOut("slow");
+                    //bootbox.alert({
+                    //    message: "there is some thing error",
+                    //    backdrop: true
+                    //});
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(status);
+            }
+        });
+
+
+
+    });
+</script>
+
+<script>
+    var ShowEmployee = function () {
+        debugger;
+        var OperatorType = "";
+        if (document.getElementById("PrepaidRecharge1").checked) {
+            OperatorType = "Prepaid";
+        }
+        if (document.getElementById("PostpaidRecharge2").checked) {
+            OperatorType = "POSTPAID";
+        }
+        var customerId = $("input[name='PrepaidRecharge']:checked").val();
+        var url = "Merchant/MerchantRechargeService/CheckOperator?EmployeeId=" + customerId;
+        $.ajax({
+
+            type: "POST",
+            url: "/Merchant/MerchantRechargeService/CheckOperator",
+            data: { OperatorType: OperatorType },
+            success: function (response) {
+                $("#myModalBodyDiv").html(response);
+                $("#myModal").modal("show");
+            }
+        })
+    }
+</script>
+
+<script type="text/javascript">
+    function check(param) {
+        if (confirm("Are you sure you want to create Id ?")) {
+            OnSuccessMobile(param);
+        }
+        else {
+            alert("Failed");
+        }
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        callGeocodeMobile();
+    });
+    function callGeocodeMobile() {
+        $.getJSON('http://www.geoplugin.net/json.gp?jsoncallback=?', function (data) {
+            
+            var information = JSON.stringify(data, null, 2);
+            //alert(information[0]);
+            //alert(JSON.stringify(data, null, 2));
+            console.log(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 2));
+            $('#GeolocationMobile').val(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 0));
+            $('#MobileIpaddress').val(JSON.stringify(data.geoplugin_request, null, 0));
+            console.log(JSON.stringify(data, null, 2));
+        });
+    }
+
+    function callTestMobile() {
+        debugger;
+        $.getJSON('http://api.ipstack.com/59.90.54.218?access_key=805262c39880cc939a7e18a3c0781cc4', function (data) {
+            debugger;
+            var information = JSON.stringify(data, null, 2);
+            //alert(information[0]);
+            //alert(JSON.stringify(data, null, 2));
+            console.log(JSON.stringify(data.latitude + ',' + data.longitude, null, 2));
+            console.log(JSON.stringify(data.latitude + ',' + data.longitude, null, 2));
+            console.log(JSON.stringify(data.latitude + ',' + data.longitude, null, 2));
+            $('#txtLatitude').val(JSON.stringify(data.latitude + ',' + data.longitude, null, 0));
+            $('#txtIP').val(JSON.stringify(data.ip, null, 0));
+            console.log(JSON.stringify(data, null, 2));
+        });
+    }
+
+</script>
+
+
+<script>
+    //var GetPostPaidBillDetails = function () {
+    //    $('#progressMobile').show();
+    //    debugger;
+    //    var _accountNo = $('#txtContactNo').val();
+    //    var _mobileNo = $('#txtContactNo').val();
+    //    var _geoLocation = $('#GeolocationMobile').val();
+    //    var Service_Key = $('#hfOperator').val();
+    //    var RechargeAmt = $('#txtRechargeAmt').val();
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/Merchant/MerchantRechargeService/GetPostPaidBillInformation",
+    //        data: { AccountNo: _accountNo, MobileNo: _mobileNo, GeoLocation: _geoLocation, ServiceKey: Service_Key },
+    //        success: function (data) {
+    //            debugger;
+    //            var Electricitybill = JSON.parse(data);
+    //            if (Electricitybill != "Invalid outletid") {
+    //                var status = Electricitybill.statuscode;
+    //                var statusvalue = Electricitybill.status;
+    //                if (status === "TXN") {
+    //                    //document.getElementById("RechargeAmt").innerHTML = JSON.stringify(Electricitybill.data.dueamount);
+    //                    var amount = Electricitybill.data.dueamount;
+    //                    var Gas_Reff = Electricitybill.data.reference_id;
+    //                    $('#BroadbandAmount').val(amount);
+    //                    $('#Broadband_referenceID').val(Gas_Reff);
+    //                    $('#broadbandDueDate').html(Electricitybill.data.duedate);
+    //                    $('#BroadbandCustomerName').html(Electricitybill.data.customername);
+    //                    $('#PostPaidErrormsg').html('');
+    //                }
+    //                else {
+    //                    $('#PostPaidErrormsg').html(statusvalue);
+    //                }
+    //                $('#progressMobile').hide();
+    //            }
+    //            else {
+    //                bootbox.alert({
+    //                    message: "Please Create Outlet Id>This Outlet Id is Created from Landline Tab",
+    //                    size: 'small',
+    //                    backdrop: true,
+    //                    callback: function () {
+    //                        //var urlPath = "/Merchant/MerchantOutletRegistration/Index";
+    //                        //window.location.href = urlPath;
+    //                        console.log(Electricitybill);
+    //                        $('#progressMobile').hide();
+    //                    }
+    //                })
+    //            }
+    //            $('#progressMobile').hide();
+
+    //        }
+
+    //    })
+    //}
+
+    //function GetPostPaidBillDetails() {
+    //    //GetPostPaidBillDetails = function () {
+    //    $('#progressMobile').show();
+    //    debugger;
+    //    var _accountNo = $('#txtContactNo').val();
+    //    var _mobileNo = $('#txtContactNo').val();
+    //    var _geoLocation = $('#GeolocationMobile').val();
+    //    var Service_Key = $('#hfOperator').val();
+    //    var RechargeAmt = $('#txtRechargeAmt').val();
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/Merchant/MerchantRechargeService/GetPostPaidBillInformation",
+    //        data: { AccountNo: _accountNo, MobileNo: _mobileNo, GeoLocation: _geoLocation, ServiceKey: Service_Key, Amount: RechargeAmt },
+    //        success: function (data) {
+    //            debugger;
+    //            var Electricitybill = JSON.parse(data);
+    //            if (Electricitybill != "Invalid outletid") {
+    //                if (Electricitybill != "Invalid amount") {
+    //                    var status = Electricitybill.statuscode;
+    //                    var statusvalue = Electricitybill.status;
+    //                    if (status === "TXN") {
+
+    //                        //document.getElementById("RechargeAmt").innerHTML = JSON.stringify(Electricitybill.data.dueamount);
+    //                        var amount = Electricitybill.data.dueamount;
+    //                        var Gas_Reff = Electricitybill.data.reference_id;
+    //                        $('#txtPostdueamount').text(amount);
+    //                        $('#txtpostpaidduedate').text(Electricitybill.data.duedate);
+    //                        $('#txtpostpaidbillNo').text(Electricitybill.data.billnumber);
+    //                        $('#txtPostpaidbilldate').text(Electricitybill.data.billdate);
+    //                        $('#txtPostpaidbillperiod').text(Electricitybill.data.billperiod);
+    //                        $('#txtpostpaidcustomerparamsdetails').text(Electricitybill.data.customerparamsdetails);
+    //                        $('#txtPostpaidcustomername').text(Electricitybill.data.customername);
+    //                        $('#hdnPostpaidreference_id').val(Electricitybill.data.reference_id);
+    //                        $('#progressMobile').hide();
+    //                    }
+    //                    else {
+    //                        $('#PostPaidErrormsg').html(statusvalue);
+    //                    }
+    //                }
+    //                else {
+    //                    bootbox.alert({
+    //                        message: Electricitybill,
+    //                        size: 'small',
+    //                        backdrop: true,
+    //                        callback: function () {
+    //                            //var urlPath = "/Merchant/MerchantOutletRegistration/Index";
+    //                            //window.location.href = urlPath;
+    //                            console.log(Electricitybill);
+    //                            $('#progressMobile').hide();
+    //                        }
+    //                    })
+    //                }
+
+    //                $('#progressMobile').hide();
+    //            }
+    //            else {
+    //                bootbox.alert({
+    //                    message: "Please Create Outlet Id>This Outlet Id is Created from Landline Tab",
+    //                    size: 'small',
+    //                    backdrop: true,
+    //                    callback: function () {
+    //                        //var urlPath = "/Merchant/MerchantOutletRegistration/Index";
+    //                        //window.location.href = urlPath;
+    //                        console.log(Electricitybill);
+    //                        $('#progressMobile').hide();
+    //                    }
+    //                })
+    //            }
+    //            $('#progressMobile').hide();
+
+    //        }
+
+    //    })
+    //}
+
+
+</script>

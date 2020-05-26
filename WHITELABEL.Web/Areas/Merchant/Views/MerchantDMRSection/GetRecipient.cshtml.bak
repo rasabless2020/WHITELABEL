@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewBag.Title = "Beneficiary Details";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+    //Layout = "~/Areas/Merchant/Views/Shared/_newmarchantLayoutPage.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-12 padding-top-20">
+            <div class="card">
+                <div class="panel-heading text-right">
+                    @*@if (Session["msg"] != null)
+                        {
+                            <div id="informationMessage" class="text-center alert alert-success">
+                                <span style="width:100%;text-align:center;">@Session["msg"].ToString() </span>
+                                @if (Session["msg"].ToString() == "Data Saved Successfully" || Session["msg"].ToString() == "Data Updated Successfully")
+                                {
+                                    Session.Remove("msg");
+                                }
+                            </div>
+                        }*@
+                    <div class="card-title row ">
+                        <div class="col-md-6 text-left">
+                            @*<a href="@(Url.Action("ExportIndex","MemberAPILabel", new {area="Admin" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span> Export</a>*@
+                        </div>
+                        <div class="col-md-6 text-right pt-2" >
+                            <a href="@Url.Action("AddRecipient", "MerchantDMRSection",new {area="Merchant" },null)" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New Beneficiary (Recipient)</a>
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div><!--.panel-heading-->
+                <div class="card-body">
+                    <div class="row example-row">
+                        <div class="mvc-grid">
+                            <table border="1">
+                                <tr class="mvc-grid-headers ">
+                                    <th>Beneficiary ID </th>
+                                    <th>Mobile No. </th>
+                                    <th>Beneficiary Name </th>
+                                    <th>Account No</th>
+                                    <th>IFSC Code</th>
+                                    <th>Delete</th>
+                                    <th>Transfer Amount</th>
+
+
+                                </tr>
+
+                                <tr>
+                                    <td>123456</td>
+                                    <td>12345667890</td>
+                                    <td>A Das </td>
+                                    <td>1234567890</td>
+                                    <td>SBIN0001899</td>
+                                    <td><input type="submit" value="Delete" class="btn btn-danger" id="btnsubmit1" /></td>
+                                    <td><a href="@Url.Action("MoneyTransfer","MerchantDMRSection", new {area= "Merchant" })" class="btn btn-cyan">Transfer</a></td>
+                                </tr>
+
+                                <tr>
+                                    <td>123456</td>
+                                    <td>12345667890</td>
+                                    <td>A Das </td>
+                                    <td>1234567890</td>
+                                    <td>SBIN0001899</td>
+                                    <td><input type="submit" value="Delete" class="btn btn-danger" id="btnsubmit1" /></td>
+                                    <td><a href="@Url.Action("MoneyTransfer","MerchantDMRSection", new {area= "Merchant" })" class="btn btn-cyan">Transfer</a></td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>123456</td>
+                                    <td>12345667890</td>
+                                    <td>A Das </td>
+                                    <td>1234567890</td>
+                                    <td>SBIN0001899</td>
+                                    <td><input type="submit" value="Delete" class="btn btn-danger" id="btnsubmit1" /></td>
+                                    <td><a href="@Url.Action("MoneyTransfer","MerchantDMRSection", new {area= "Merchant" })" class="btn btn-cyan">Transfer</a></td>
+                                </tr>
+
+                                <tr>
+                                    <td>123456</td>
+                                    <td>12345667890</td>
+                                    <td>A Das </td>
+                                    <td>1234567890</td>
+                                    <td>SBIN0001899</td>
+                                    <td><input type="submit" value="Delete" class="btn btn-danger" id="btnsubmit1" /></td>
+                                    <td><a href="@Url.Action("MoneyTransfer","MerchantDMRSection", new {area= "Merchant" })" class="btn btn-cyan">Transfer</a></td>
+                                </tr>
+
+                            </table>
+
+                            @*@Html.AjaxGrid(Url.Action("IndexGrid", "MemberAPILabel", new { area = "Admin" }))*@
+                        </div>
+                    </div><!--.row-->
+                </div><!--.panel-body-->
+                @*<div class="panel-footer text-right">
+                        <a href="@(Url.Action("ExportIndex","MemberAPILabel", new {area="Admin" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span> Export</a>
+                    </div>*@
+            </div><!--.panel-->
+        </div><!--.col-md-12-->
+    </div><!--.row-->
+    @Scripts.Render("~/bundles/MemberApilevel")
+    <script>
+        $(document).ready(function () {
+
+            window.setTimeout(function () {
+                $("#informationMessage").fadeOut('slow');
+            }, 2000);
+        });
+
+    </script>
+
+}
+

@@ -1,0 +1,37 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Web.Areas.Distributor.Models.DistributorAccouontsModel>
+@{
+    ViewBag.Title = "IndexGridGetDatewiseClosingReport";
+    Layout = null;
+}
+
+
+
+@(Html
+                                    .Grid(Model)
+                                    .Build(columns =>
+                                    {
+                                        columns.Add(model => model.SlNo).Titled("Sln");
+                                        columns.Add(model => model.UserName).Titled("Mem ID");
+                                        columns.Add(model => model.MEMBER_Name).Titled("Name");
+                                        columns.Add(model => model.COMPANYNAME).Titled("Company");
+                                        columns.Add(model => model.Trans_Date).Formatted("{0:yyyy-MM-dd}").Titled("Trans Date").MultiFilterable(true);
+                                        columns.Add(model => model.OpeningAmt).Titled("Opening Amt");
+                                        columns.Add(model => model.Trans_Amt).Titled("Trans Amt");
+                                        columns.Add(model => model.ClosingAmt).Titled("Closing Amt");
+
+                                    })
+                                     .Css("css-classes")
+                                            .AppendCss("table table-striped")
+                                    //.RowCss(model => model.STATUS == "Decline" ? "danger" : model.STATUS == "Pending" ? "info" : "")
+                                    .Empty("No data found")
+                                    .Id("my-ajax-grid")
+                                    //.Pageable(pager =>
+                                    //{
+                                    //    pager.PagesToDisplay = 20;
+                                    //    pager.RowsPerPage = 20;
+                                    //})
+                                    .Filterable()
+                                    .Sortable()
+)

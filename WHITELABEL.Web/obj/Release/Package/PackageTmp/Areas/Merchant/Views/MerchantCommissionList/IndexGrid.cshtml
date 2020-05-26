@@ -1,0 +1,32 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_COMM_SLAB_MOBILE_RECHARGE>
+@{
+    ViewBag.Title = "IndexGrid";
+    //Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+    Layout = null;
+}
+
+
+@(Html
+              .Grid(Model)
+              .Build(columns =>
+              {
+                  columns.Add(model => model.COMM_TYPE).Titled("Slab Name").Filterable(true).Sortable(true);
+                  columns.Add(model => model.OPERATOR_NAME).Titled("Operator Name").Filterable(true).Sortable(true);
+                  columns.Add(model => model.OPERATOR_CODE).Titled("Operator Code").Filterable(true).Sortable(true);
+                  columns.Add(model => model.OPERATOR_TYPE).Titled("Operator Type").Filterable(true).Sortable(true);
+                  columns.Add(model => model.COMMISSION_TYPE).Titled("Merchant Comm Type").Filterable(true).Sortable(true);
+                  columns.Add(model => model.MERCHANT_COM_PER).Titled("Merchant Comm Amt").Filterable(true).Sortable(true);
+              })
+              .Empty("No data found")
+              .Id("my-ajax-grid")
+              .Pageable(pager =>
+                                    {
+                                        pager.PagesToDisplay = 15;
+                                        pager.RowsPerPage = 15;
+                                    })
+              .Filterable()
+              .Sortable()
+)
+

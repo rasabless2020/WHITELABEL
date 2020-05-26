@@ -1,0 +1,121 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>
+
+@{
+    ViewBag.Title = "Requisition Details";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                @*<div class="panel-heading">
+
+                    <div class="col-md-3">
+                        <div class="inputer floating-label">
+                            <div class="input-wrapper">
+                                <input type="text" value="@ViewBag.datefrom" id="datefrom" class="form-control bootstrap-daterangepicker-basic" placeholder="Date From" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="inputer floating-label">
+                            <div class="input-wrapper">
+                                <input type="text" value="@ViewBag.DateTo" id="dateTo" class="form-control bootstrap-daterangepicker-basic" placeholder="Date To" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="floating-label">
+                            <div class="input-wrapper">
+                                <input type="button" class="btn btn-default" value="Search" onclick="javascript: getdataaccordingdatewise();" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                                <input type="button" class="btn btn-default" value="Search All" onclick="javascript: GetAllTransactionDetails();" />
+                    </div>
+                </div>*@
+                <div class="panel-body">
+                    <div class="row example-row">                        
+                        @Html.AjaxGrid(Url.Action("RequisitionGrid", "Requisition"))
+                        @*@(Html
+                        .Grid(Model)
+                        .Build(columns =>
+                        {
+                            columns.Add(model => model.SLN).Titled("Trans Id");
+                            columns.Add(model => model.ToUser).Titled("To User");
+                            columns.Add(model => model.FromUser).Titled("From Member");                            
+                            columns.Add(model => model.REQUEST_DATE).Titled("REQ DATE").Formatted("{0:d}");
+                            columns.Add(model => model.AMOUNT).Titled("AMOUNT");
+                            columns.Add(model => model.BANK_ACCOUNT).Titled("BANK ACCNT");
+                            columns.Add(model => model.TRANSACTION_DETAILS).Titled("PAY METHOD");
+                            columns.Add(model => model.STATUS).Titled("STATUS");
+                            columns.Add(model => model.APPROVAL_DATE).Titled("APPRV DATE").Formatted("{0:d}");
+                            columns.Add(model => model.APPROVED_BY).Titled("APPRV BY");
+                        })
+                        .RowCss(model => model.STATUS == "Decline" ? "danger" : model.STATUS == "Pending" ? "info" : "")
+                        .Empty("No data found")
+                        .Id("my-ajax-grid")                        
+                        .Pageable(pager =>
+                        {
+                            pager.PagesToDisplay = 10;
+                            pager.RowsPerPage = 10;
+                        })
+                        .Filterable()
+                        .Sortable()
+                        )*@
+                    </div>
+                </div>
+                <div class="panel-footer text-right">
+                    <a href="@(Url.Action("ExportIndex") + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>                    
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+   <script type="text/javascript">
+       function getdataaccordingdatewise() {
+           var datefrom = $("#datefrom").val();           
+           var dateto = $("#dateTo").val();
+           //var MemberId = $('#MemberList').val();  RequisitionGrid
+           if (datefrom != "" && dateto != "") {
+               var url = "/Requisition/RequisitionReport?Datefrom=" +  datefrom + "&dateto=" + dateto + "";
+               //var url = "/Requisition/RequisitionGrid?Datefrom=" + datefrom + "&dateto=" + dateto + "";
+               window.location = url;
+           }
+           else
+           {
+               var url = "/Requisition/RequisitionReport";
+               //var url = "/Requisition/RequisitionGrid";
+               window.location = url;
+           }
+       }
+       function GetAllTransactionDetails() {           
+               var url = "/Requisition/RequisitionReport";
+           //var url = "/Requisition/RequisitionGrid";
+               window.location = url;           
+       }
+       $(document).ready(function () {
+          
+           var url_string = window.location.href; //window.location.href
+           var url = new URL(url_string);
+           var Datefrom = getParameterByName("Datefrom");
+           var dateto = getParameterByName("dateto");
+           //$("#MemberList").val(c);
+           $("#Datefrom").val(Datefrom);
+           $("#dateto").val(dateto);
+       });
+
+       function getParameterByName(id) {
+           name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+           var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+               results = regex.exec(location.search);
+           return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+       }
+
+   </script>
+

@@ -1,0 +1,212 @@
+﻿@model WHITELABEL.Data.Models.TBL_DETAILS_MEMBER_COMMISSION_SLAB
+@{
+    ViewBag.Title = "Commission Slab Tagging";
+    Layout = "~/Areas/Super/Views/Shared/_SuperLayout.cshtml";
+}
+
+@Scripts.Render("~/bundles/MemberCommissionTaggingJs")
+
+<script src="~/Areas/Super/SuperHelperJS/SuperCommissionTaggingJs/Index.js"></script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @*<div ng-app="CommissionSlabTagging" ng-controller="TagCommissionSlab" ng-init="FetchOperator()" class="form-horizontal padding-top-20">*@
+    <div ng-app="SuperCommissionSlabTagging" ng-controller="SuperTagCommissionSlab" ng-init="FetchOperator()" class="form-horizontal padding-top-20">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="panel-title row">
+                            <div class="col-lg-2">
+                                <select data-ng-model="WHITELEVELNAME1" ng-change="FetchOperatorByName()" class="form-control">
+                                    <option ng-repeat="list in WHITELEVELNAME" value="{{list.MEM_ID}}">{{list.UName}}</option>
+                                    <option value="">Select Super Level </option>
+                                </select>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+
+                    </div>
+                    <div class="panel-body">
+                        <table class="table responsive table-responsive table-striped table-bordered table-hover" id="SalaryTable1">
+                            <thead style=" background-color:#4b5961; color:#fff;">
+                                <tr>
+                                    <th>
+                                        Recharge Slab
+                                    </th>
+                                    <th>
+                                        Bill Slab
+                                    </th>
+                                    <th>
+                                        DMR Slab
+                                    </th>
+                                    <th>
+                                        Air Slab
+                                    </th>
+                                    <th>
+                                        Bus Slab
+                                    </th>
+                                    <th>
+                                        Hotel Slab
+                                    </th>
+                                    <th>
+                                        Cash Card Slab
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <select data-ng-model="MobileRechargeSlabdetails" class="form-control">
+                                            <option ng-repeat="list in MobileRecharge" value="{{list.SLN}}">{{list.SLAB_NAME}}</option>
+                                            <option value="">Select Mobile Slab </option>
+                                        </select>
+
+                                        @*<select data-ng-model="MobileRechargeSlabdetails" data-ng-options="c.SLN as c.SLAB_NAME for c in MobileRecharge">
+                                                <option ng-value="c.SLN">{{c.SLAB_NAME}}</option>
+                                            </select>*@
+                                    </td>
+                                    <td>
+                                        <select data-ng-model="UtilityRechargeSlabdetails" class="form-control">
+                                            <option ng-repeat="list in UtilityRecharge" value="{{list.SLN}}">{{list.SLAB_NAME}}</option>
+                                            <option value="">Select Utility Slab </option>
+                                        </select>
+                                        @*<select data-ng-model="UtilityRechargeSlabdetails" data-ng-options="c.SLN as c.SLAB_NAME for c in UtilityRecharge">
+                                                <option ng-value="c.SLN">{{c.SLAB_NAME}}</option>
+                                            </select>*@
+                                    </td>
+                                    <td>
+                                        <select data-ng-model="DMRRechargeSlabdetails" class="form-control">
+                                            <option ng-repeat="list in DMRRecharge" value="{{list.SLN}}">{{list.SLAB_NAME}}</option>
+                                            <option value="">Select DMR Slab </option>
+                                        </select>
+                                        @*<select data-ng-model="DMRRechargeSlabdetails" data-ng-options="c.SLN as c.SLAB_NAME for c in DMRRecharge">
+                                                <option ng-value="c.SLN">{{c.SLAB_NAME}}</option>
+                                            </select>*@
+                                    </td>
+                                    <td>
+                                        <select data-ng-model="AIRSlabdetailsList" class="form-control">
+                                            <option ng-repeat="list in AIRSlabDetails" value="{{list.SLN}}">{{list.SLAB_NAME}}</option>
+                                            <option value="">Select AIR Slab </option>
+                                        </select>
+                                        @*<select data-ng-model="AIRSlabdetailsList" data-ng-options="c.SLN as c.SLAB_NAME for c in AIRSlabDetails">
+                                                <option ng-value="c.SLN">{{c.SLAB_NAME}}</option>
+                                            </select>*@
+
+                                    </td>
+                                    <td>
+                                        <select data-ng-model="BusSlabdetailsList" class="form-control">
+                                            <option ng-repeat="list in BusSlabDetails" value="{{list.SLN}}">{{list.SLAB_NAME}}</option>
+                                            <option value="">Select Bus Slab </option>
+                                        </select>
+                                        @*<select data-ng-model="BusSlabdetailsList" data-ng-options="c.SLN as c.SLAB_NAME for c in BusSlabDetails">
+                                                <option ng-value="c.SLN">{{c.SLAB_NAME}}</option>
+                                            </select>*@
+
+                                    </td>
+                                    <td>
+                                        @*<select data-ng-model="HotelSlabdetailsList" data-ng-options="c.SLN as c.SLAB_NAME for c in HotelSlabDetails">
+                                                <option ng-value="c.SLN">{{c.SLAB_NAME}}</option>
+                                            </select>*@
+                                        <select data-ng-model="HotelSlabdetailsList" class="form-control">
+                                            <option ng-repeat="list in HotelSlabDetails" value="{{list.SLN}}">{{list.SLAB_NAME}}</option>
+                                            <option value="">Select Hotel Slab </option>
+                                        </select>
+
+                                    </td>
+                                    <td>
+                                        @*<select data-ng-model="CashCardSlabdetailsList" data-ng-options="c.SLN as c.SLAB_NAME for c in CashCardSlabDetails">
+                                                <option ng-value="c.SLN">{{c.SLAB_NAME}}</option>
+                                            </select>*@
+                                        <select data-ng-model="CashCardSlabdetailsList" class="form-control">
+                                            <option ng-repeat="list in CashCardSlabDetails" value="{{list.SLN}}">{{list.SLAB_NAME}}</option>
+                                            <option value="">Select Cash Card Slab </option>
+                                        </select>
+                                    </td>
+                                    <td style="display:none;">{{SL_NO}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="7">
+                                        @*<input type="submit" value="{{WHITELEVELNAME1 == '' || WHITELEVELNAME1 == null ? 'Create' : 'Update'}}" class="btn btn-cyan" ng-click="SaveData()" />*@
+                                        @*<input type="submit" value="{{SL_NO == '' || SL_NO == null ? 'Create' : 'Update'}}" class="btn btn-cyan" ng-click="SaveData()" />*@
+                                        <button type="button"  class="btn btn-cyan" ng-click="SaveData()" >{{SL_NO == '' || SL_NO == null ? 'Create' : 'Update'}}</button>
+                                        @*{{SL_NO}}*@
+                                    </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                        <table class="table responsive table-responsive table-striped table-bordered table-hover" id="SalaryTable21">
+                            <thead style=" background-color:#4b5961; color:#fff;">
+                                <tr>
+                                    @*<th>
+                                            ID
+                                        </th>*@
+                                    <th>
+                                        White Level ID
+                                    </th>
+                                    <th>
+                                        Recharge Slab
+                                    </th>
+                                    <th>
+                                        Bill Slab
+                                    </th>
+                                    <th>
+                                        DMR Slab
+                                    </th>
+                                    <th>
+                                        Air Slab
+                                    </th>
+                                    <th>
+                                        Bus Slab
+                                    </th>
+                                    <th>
+                                        Hotel Slab
+                                    </th>
+                                    <th>
+                                        Cash Card Slab
+                                    </th>
+                                    <th>
+                                        Edit
+                                    </th>
+                                </tr>
+                            </thead>
+
+
+
+                            <tbody ng-repeat="m in ServiceInformation">
+                                <tr>
+
+                                    <td style="display:none;">
+                                        {{m.WHITE_LEVEL_ID}}
+                                    </td>
+                                    <td>
+                                        <input type="hidden" ng-model="m.SL_NO" ng-value="m.SL_NO" class="form-control">
+                                        <input type="hidden" ng-model="m.WHITE_LEVEL_ID" ng-value="m.WHITE_LEVEL_ID" class="form-control">
+
+                                        {{m.WHITELEVELNAME1}}
+                                    </td>
+                                    <td>{{m.RechargeName}}</td>
+                                    <td>{{m.BillName}}</td>
+                                    <td>{{m.DMR_SLAB_Name}}</td>
+                                    <td>{{m.AIR_SLAB_Name}}</td>
+                                    <td>{{m.BUS_SLAB_Name}}</td>
+                                    <td>{{m.HOTEL_SLAB_Name}}</td>
+                                    <td>{{m.CASHCARD_SLAB_Name}}</td>
+                                    <td> <a href="#" ng-model="m.SL_NO" ng-value="m.SL_NO" ng-click="EditValue($index)">Edit</a> </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div><!--.panel-body-->
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div>
+
+
+    </div>
+}
+

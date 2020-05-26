@@ -1,0 +1,143 @@
+﻿@model  WHITELABEL.Web.Areas.Merchant.Models.MoneyTransferModelView
+@{
+    ViewBag.Title = "FundTransfer";
+    Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+}
+
+@using (Html.BeginForm("FundTransfer", "MerchantDMRDashboard", FormMethod.Post, new { area = "Merchant", enctype = "multipart/form-data",id="FormFundTransfer", role = "form", name = "myform" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.RemitterId)
+    @Html.HiddenFor(model => model.BeneficiaryID)
+    @Html.HiddenFor(model => model.BeneficiaryIFSC)
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="display-animation">
+        <div class="row no-gutters">
+            <div class="col-md-12">
+                <div class="panel">    
+                    <div class="panel-heading text-right">
+                        @if (ViewBag.message != null)
+                        {
+                            if (ViewBag.message == "Transaction Successful")
+                            {
+                                <div id="informationMessage" class="text-center alert alert-success">
+                                    <span style="width:100%;text-align:center;">@ViewBag.message </span>
+                                </div>
+                            }
+                            else
+                            {
+                                <div id="informationMessage" class="text-center alert alert-danger">
+                                    <span style="width:100%;text-align:center;">@ViewBag.message </span>
+                                </div>
+                            }
+
+                        }                       
+                    </div><!--.panel-heading-->
+                    <div class="panel-body">
+                        <fieldset>                            
+                            @*<h3>@ViewBag.message</h3>*@
+                            <div class="row"> </div>
+                            <div class="form-group has-iconed">
+                                <label>Beneficiary Name</label>
+                                <div class="iconed-input">
+                                    @Html.EditorFor(m => m.BeneficiaryName, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.BeneficiaryName, "", new { @class = "text-danger" })</small></span>
+                                </div>
+                            </div>
+                            <div class="form-group has-iconed">
+                                <label>Beneficiary Account</label>
+                                <div class="iconed-input">
+                                    @Html.EditorFor(m => m.BeneficiaryAccount, new { htmlAttributes = new { @class = "form-control" , @readonly = "readonly" } })
+                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.BeneficiaryAccount, "", new { @class = "text-danger" })</small></span>
+                                </div>
+                            </div>
+                            <div class="form-group has-iconed">
+                                <label>Bank Name</label>
+                                <div class="iconed-input">
+                                    @Html.EditorFor(m => m.BeneficiaryBankName, new { htmlAttributes = new { @class = "form-control" , @readonly = "readonly" } })
+                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.BeneficiaryBankName, "", new { @class = "text-danger" })</small></span>
+                                </div>
+                            </div>
+                            <div class="form-group has-iconed">
+                                <label>Mobile No.</label>
+                                <div class="iconed-input">
+                                    @Html.EditorFor(m => m.RemitterMobileNo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.RemitterMobileNo, "", new { @class = "text-danger" })</small></span>
+                                </div>
+                            </div>
+                            <div class="form-group has-iconed">
+                                <label>Amount</label>
+                                <div class="iconed-input">
+                                    @Html.EditorFor(m => m.Amount, new { htmlAttributes = new { @class = "form-control", @Value = "10" } })
+                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger"  })</small></span>
+                                </div>
+                            </div>
+                            <div class="form-group has-iconed">
+                                <label>Amount</label>
+                                <div class="iconed-input">
+                                    @Html.DropDownListFor(m => m.PaymentMode, new List<SelectListItem>
+                                            { new SelectListItem{Text="NEFT", Value="NEFT"},
+                                            new SelectListItem{Text="RTGS", Value="RTGS"},
+                                            new SelectListItem{Text="IMPS", Value="IMPS"},
+                                            new SelectListItem{Text="Cash Deposit in bank", Value="Cash Deposit in bank"}},     
+                                        "Select Payment Method", new { id = "Paymentmethod", @class = "form-control" })
+                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.PaymentMode, "", new { @class = "text-danger" })</small></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" id="process11" class="btn btn-primary"><i class="fa fa-ok"></i>Transfer Amount</button>
+                                @*class="btn icon icon-location-arrow"*@
+                                @*<a href="@Url.Action("DMRInformation", "MerchantDMRDashboard", new { area = "Merchant"})" class="btn btn-primary">Back to previous page</a>*@
+                            </div>
+                        </fieldset>
+                    </div><!--.panel-body-->
+                </div><!--.panel-->
+            </div>
+        </div>
+        <!--.full-content-->
+    </div>
+
+    @*<img src="http://www.mytreedb.com/uploads/mytreedb/loader/ajax_loader_gray_512.gif" id="form_loading_img" style="display:none">
+    <script>
+        (function ($) {
+            $(function () {
+                $('#FormFundTransfer').submit(function (event) {
+                    event.preventDefault();
+                    var loading_image = $('#form_loading_img'),
+                        data = $(this).serialize(),
+                        form = $(this);
+                    loading_image.show();
+                    $.ajax({
+                        url: form.attr('action'),
+                        type: form.attr('method'),
+                        data: data,
+                        success: function () {
+                            window.location.reload();
+                        },
+                        error: function () {
+                            alert('Something goes wrong. Please check the form and try again.');
+                        },
+                        complete: function () {
+                            loading_image.hide();
+                        }
+                    });
+                });
+            });
+        })(jQuery);
+
+    </script>*@
+
+    @*<script>       
+        $(document).ready(function () {
+            window.setTimeout(function () {
+                $("#informationMessage").fadeOut('slow');
+            }, 2000);
+            $("#FormFundTransfer").submit(function (e) {
+                console.log(JSON.stringify(e));
+                $('#progress').removeClass('hidden').show();
+            });
+        });        
+    </script>*@
+    
+    
+}

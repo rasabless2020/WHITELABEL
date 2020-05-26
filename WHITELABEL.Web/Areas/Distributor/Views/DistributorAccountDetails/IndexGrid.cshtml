@@ -1,0 +1,12 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@*@model IEnumerable<WHITELABEL.Data.Models.TBL_ACCOUNTS>*@
+@model IGrid<WHITELABEL.Data.Models.TBL_ACCOUNTS>
+@{
+    ViewBag.Title = "IndexGrid";
+    //Layout = "~/Areas/Distributor/Views/Shared/_DistributorLayout.cshtml";
+}
+
+
+@(new HtmlGrid<WHITELABEL.Data.Models.TBL_ACCOUNTS>(Html, Model))
+

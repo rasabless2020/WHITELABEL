@@ -1,0 +1,69 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_SETTINGS_SERVICES_MASTER>
+@{
+    ViewBag.Title = "Service Master";
+    //Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminLayout.cshtml";
+   Layout = "~/Areas/PowerAdmin/Views/Shared/_LayoutPowerAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{   
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal padding-top-20">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        @*<div class="panel-title" align="right"><a href="@Url.Action("AddService", "PowerAdminServicesMaster", new { area = "PowerAdmin" })" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span>Add New Commission</a></div>*@
+                    </div><!--.panel-heading-->
+                    <div class="panel-body">
+                        <div class="row example-row">
+                            @Html.AjaxGrid(Url.Action("IndexGrid", "PowerAdminServicesMaster", new { area = "PowerAdmin" }))
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*@Html.AntiForgeryToken()
+    <div class="form-horizontal padding-top-20">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel"> 
+                    <div class="panel-heading">
+                        <div class="panel-title" align="right"><a href="@Url.Action("AddService", "PowerAdminServicesMaster", new { area = "PowerAdmin" })" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span>Add New Bank</a></div>
+                    </div>
+                    <div class="panel-body">
+                        @(Html
+                                .Grid(Model)
+                                .Build(columns =>
+                                {
+                                    columns.Add(model => model.SERVICE_NAME).Titled("Service Name");
+
+                                    columns.Add(model => model.SERVICE_DESC).Titled("Service Description");//columns.Add(model => model.ACTIVE_SERVICE).Titled("Active Service");
+                                    columns.Add(model => model.UPDATED_ON).Titled("Create Date");//columns.Add(model => model.ACTIVE_SERVICE).Titled("Active Service");
+                                    columns.Add(model => model.ACTIVESTATUS).Titled("Status");//columns.Add(model => model.ACTIVE_SERVICE).Titled("Active Service");
+                                    columns.Add(model => model.SLN).Titled("").Encoded(false).Filterable(false).Sortable(false)
+                                        .RenderedAs(model => "<a href='" + @Url.Action("AddService", "PowerAdminServicesMaster", new { area = "PowerAdmin", ServiceId = Encrypt.EncryptMe(model.SLN.ToString()) }) + "' class='btn btn-primary btn-xs'>Edit</a> &nbsp; <div class='btn-group btn-group-xs'> &nbsp;&nbsp;&nbsp;  <a href='javascript:void(0)' class='btn btn-danger' onclick='DeactivateOperator(" + model.SLN + ")'>Deactivate</a></div>");                                 
+                                })
+                                .Empty("No data found")
+                                .Id("my-ajax-grid")                                
+                                .Pageable(pager =>
+                                {
+                                    pager.PagesToDisplay = 6;
+                                    pager.RowsPerPage = 6;
+                                })
+                                .Filterable()
+                                .Sortable()
+                        )
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+    @Scripts.Render("~/bundles/PowerAdminServiceMasterJs");
+}
+

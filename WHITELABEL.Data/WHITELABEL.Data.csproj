@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AB4D4170-295D-4CD5-AF0A-6582A71D01AD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WHITELABEL.Data</RootNamespace>
+    <AssemblyName>WHITELABEL.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.6\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.6\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Attribute\ConditionalValidationAttribute.cs" />
+    <Compile Include="DBContext.cs" />
+    <Compile Include="Models\TBL_ACCOUNT_VERIFICATION_TABLE.cs" />
+    <Compile Include="Models\TBL_API_CALLBACK_LOGS.cs" />
+    <Compile Include="Models\TBL_API_TOKEN.cs" />
+    <Compile Include="Models\TBL_ACCOUNTS.cs" />
+    <Compile Include="Models\TBL_AIRPORT_DETAILS.cs" />
+    <Compile Include="Models\TBL_API_COMMISION_STRUCTURE.cs" />
+    <Compile Include="Models\TBL_API_RESPONSE_OUTPUT.cs" />
+    <Compile Include="Models\TBL_API_SETTING.cs" />
+    <Compile Include="Models\TBL_APPLICATION_FOR_RAIL_UTILITY.cs" />
+    <Compile Include="Models\TBL_AUTH_ADMIN_USER .cs" />
+    <Compile Include="Models\TBL_AUTH_AUDIT_LOG.cs" />
+    <Compile Include="Models\TBL_BALANCE_TRANSFER_LOGS.cs" />
+    <Compile Include="Models\TBL_BANK_MASTER.cs" />
+    <Compile Include="Models\TBL_CIRCLE_OPERATOR.cs" />
+    <Compile Include="Models\TBL_COMM_SLAB_DMR_PAYMENT.cs" />
+    <Compile Include="Models\TBL_COMM_SLAB_MOBILE_RECHARGE.cs" />
+    <Compile Include="Models\TBL_COMM_SLAB_UTILITY_RECHARGE.cs" />
+    <Compile Include="Models\TBL_COUNTRY.cs" />
+    <Compile Include="Models\TBL_COUPON_COMMISSION_SLAB.cs" />
+    <Compile Include="Models\TBL_COUPON_MASTER.cs" />
+    <Compile Include="Models\TBL_COUPON_STOCK.cs" />
+    <Compile Include="Models\TBL_COUPON_TRANSFER_LOGS.cs" />
+    <Compile Include="Models\TBL_CREDIT_BALANCE_DISTRIBUTION.cs" />
+    <Compile Include="Models\TBL_CREDIT_LIMIT_BALANCE_DISTRIBUTION.cs" />
+    <Compile Include="Models\TBL_DEBIT_CREDIT_NOTE_REMARK_SETTING.cs" />
+    <Compile Include="Models\TBL_DEBIT_CREDIT_SETTIING.cs" />
+    <Compile Include="Models\TBL_DETAILS_MEMBER_COMMISSION_SLAB.cs" />
+    <Compile Include="Models\TBL_DMR_API_RESPONSE.cs" />
+    <Compile Include="Models\TBL_DMR_APPLICANT_INFO.cs" />
+    <Compile Include="Models\TBL_DMR_CUSTOMER_DETAILS.cs" />
+    <Compile Include="Models\TBL_DMR_FUND_TRANSFER_DETAILS.cs" />
+    <Compile Include="Models\TBL_DMR_RECIPIENT_DETAILS.cs" />
+    <Compile Include="Models\TBL_DMR_REMITTER_INFORMATION.cs" />
+    <Compile Include="Models\TBL_DMR_TRANSACTION_LOGS.cs" />
+    <Compile Include="Models\TBL_DMT_BANK_MARGIN.cs" />
+    <Compile Include="Models\TBL_FINGERPRINT_DEVICE_MASTER.cs" />
+    <Compile Include="Models\TBL_INSTANTPAY_RECHARGE_RESPONSE.cs" />
+    <Compile Include="Models\TBL_JIO_PLAN_LIST.cs" />
+    <Compile Include="Models\TBL_MASTER_MEMBER.cs" />
+    <Compile Include="Models\TBL_MASTER_MEMBER_ROLE.cs" />
+    <Compile Include="Models\TBL_MEMBER_CREDIT_ACCOUNT_LOGS.cs" />
+    <Compile Include="Models\TBL_MEMBER_CREDIT_TRANSFER_LOGS.cs" />
+    <Compile Include="Models\TBL_MERCHANT_OUTLET_INFORMATION.cs" />
+    <Compile Include="Models\TBL_MULTILINK_API_RESPONSE.cs" />
+    <Compile Include="Models\TBL_NOTIFICATION_SETTING.cs" />
+    <Compile Include="Models\TBL_OPERATOR_MASTER.cs" />
+    <Compile Include="Models\TBL_PASSWORD_RESET.cs" />
+    <Compile Include="Models\TBL_REMITTER_BENEFICIARY_INFO.cs" />
+    <Compile Include="Models\TBL_SERVICE_PROVIDERS.cs" />
+    <Compile Include="Models\TBL_SETTINGS_BANK_DETAILS.cs" />
+    <Compile Include="Models\TBL_SETTINGS_SCREEN.cs" />
+    <Compile Include="Models\TBL_SETTINGS_SERVICES_MASTER.cs" />
+    <Compile Include="Models\TBL_SETTING_USER_GROUP_DETAILS.cs" />
+    <Compile Include="Models\TBL_SETTING_USER_GROUP_MASTER.cs" />
+    <Compile Include="Models\TBL_STATES.cs" />
+    <Compile Include="Models\TBL_TAX_MASTER.cs" />
+    <Compile Include="Models\TBL_TAX_MASTERS.cs" />
+    <Compile Include="Models\TBL_TRACE_MEMBER_LOGIN_DETAILS.cs" />
+    <Compile Include="Models\TBL_TRANSXT_DMR_TRANSACTION_LIST.cs" />
+    <Compile Include="Models\TBL_VENDOR_MASTER.cs" />
+    <Compile Include="Models\TBL_WHITELABLE_SERVICE.cs" />
+    <Compile Include="Models\TBL_WHITE_LEVEL_COMMISSION_SLAB.cs" />
+    <Compile Include="Models\TBL_WHITE_LEVEL_HOSTING_DETAILS.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

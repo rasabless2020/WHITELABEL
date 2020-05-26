@@ -1,0 +1,29 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_INSTANTPAY_RECHARGE_RESPONSE>
+@{    
+}
+
+@(Html
+    .Grid(Model)
+        .Build(columns =>
+        {
+            columns.Add(model => model.ID).Titled("Id");
+            columns.Add(model => model.Ipay_Id).Titled("Txn Id");
+            //columns.Add(model => model.CORELATIONID).Titled("Unique ID");
+            columns.Add(model => model.AccountNo).Titled("Account No");
+            columns.Add(model => model.Sp_Key).Titled("Service Name");
+            columns.Add(model => model.Trans_Amt).Titled("Recharge Amt");
+            columns.Add(model => model.DateVal).Titled("Recharge Date");
+            columns.Add(model => model.Status).Titled("Status"); ;
+            columns.Add(model => model.res_msg).Titled("Narration");
+            columns.Add(model => model.RechargeType).Titled("Recharge Type");
+            columns.Add(model => model.ERROR_TYPE).Titled("Commission Status");
+            columns.Add(model => model.ID).Encoded(false).Filterable(false).Sortable(false).Titled("Action")            
+                .RenderedAs(model => "<a href='javascript:void(0)' onclick='DistributeCommission(" + model.ID + ");return 0;'> <span class='btn btn-info btn-xs'>Distribute Comm</span></a>");
+        })        
+        .Empty("No data found")
+        .Id("my-ajax-grid")
+        .Filterable()
+        .Sortable()
+)

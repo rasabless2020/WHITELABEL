@@ -1,0 +1,33 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_COUPON_TRANSFER_LOGS>
+@{
+    /**/
+    ViewBag.Title = "SuperRequisitionIndexGrid";
+    Layout = null;
+}
+
+@(Html
+                      .Grid(Model)
+                      .Build(columns =>
+                      {
+                          columns.Add(model => model.SLN).Titled("Sln").Filterable(true).Sortable(true);
+                          columns.Add(model => model.Member_Name).Titled("Member Name").Filterable(true).Sortable(true);
+                          columns.Add(model => model.COUPON_Name).Titled("Coupon Type").Filterable(true).Sortable(true);
+                          columns.Add(model => model.REFERENCE_NO).Titled("Ref No").Filterable(true).Sortable(true);
+                          columns.Add(model => model.QTY).Titled("Qty").Filterable(true).Sortable(true);
+                          columns.Add(model => model.REQUEST_DATE).Titled("Request Date").Filterable(true).Sortable(true).Formatted("{0:d}");
+                          columns.Add(model => model.STATUS).Titled("Status").Filterable(true).Sortable(true);
+
+                      })
+                       .Empty("No data found")
+                       .Id("my-ajax-grid")
+                       .Pageable(pager =>
+                       {
+                           pager.PagesToDisplay = 5;
+                           pager.RowsPerPage = 5;
+                       })
+                       .Filterable()
+                       .Sortable()
+)
+

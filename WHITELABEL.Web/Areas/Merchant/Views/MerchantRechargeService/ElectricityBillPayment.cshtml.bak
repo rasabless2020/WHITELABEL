@@ -1,0 +1,253 @@
+﻿@model  WHITELABEL.Web.Areas.Merchant.Models.ElectricityViewModel
+@{
+    ViewBag.Title = "ElectricityBillPayment";
+    Layout = null;
+    //Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+}
+
+<link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+@using (Ajax.BeginForm("PostElectricityBill", "MerchantRechargeService", new AjaxOptions { Confirm = "Do you want to pay bill", OnSuccess = "OnElectricitySuccess", OnFailure = "OnElectricityFailure", LoadingElementId = "Electricityprogress" }, new { area = "Merchant", @id = "ElectricityBillPayment" }))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <h5>Electricity Bill Payment</h5>
+        <form>
+
+            <div class="col-md-12" style="text-align:center; color:red; margin-bottom:30px;">
+                <div id="Errormsg"></div>
+            </div>
+
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class=" floating-label">
+                        @*<div class="input-wrapper"> </div>*@
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                @Html.EditorFor(m => m.CustomerId, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Account No", @class = "form-control" } })
+                                <label for="exampleInput1">@*Account No*@</label>
+                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })</small></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class=" floating-label">
+                        @*<div class="input-wrapper"></div>*@
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                @Html.EditorFor(m => m.MobileNo, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Mobile", @class = "form-control" } })
+                                <label for="amount">@*Mobile*@</label>
+                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })</small></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class=" floating-label">
+                        <div class="input-group" style=" height:37px;">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    @Html.EditorFor(m => m.Service_Name, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Operator Name", id = "txtElectricityOperator", @class = "form-control", onkeydown = "GetElectricityBillDetails()", onblur = "checkOperator()" } })
+                                    <input type="hidden" id="hfElectricityperator" name="ElectricityoperId" />
+                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Service_Name, "", new { @class = "text-danger" })</small></span>
+                                </div>
+                            </div>
+
+                            <span class="input-group-btn">
+                                <button href="javascript:void(0)" data-toggle='modal' data-target='.transdElectricity' id='transactionvalueElectricityid' type="button" class="btn btn-default">...</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class=" floating-label">
+                        @*<div class="input-wrapper"></div>*@
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                @Html.EditorFor(m => m.RechargeAmt, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Bill Amount", @class = "form-control", id = "BillAMount", @readonly = "readonly" } })
+                                <label for="exampleInput1">@*Recharge amt*@</label>
+                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.RechargeAmt, "", new { @class = "text-danger" })</small></span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class=" floating-label">
+                        @*<div class="input-wrapper"></div>*@
+                        <div id="ModelElectricityUnit">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+
+                                    @Html.EditorFor(m => m.BillUnit, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Bill Unit", @class = "form-control", id = "BillUnitData" } })
+                                    <label for="exampleInput1">@*Recharge amt*@</label>
+                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.BillUnit, "", new { @class = "text-danger" })</small></span>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-12 row" style=" margin-top:30px;">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="col-md-12 row">
+                        <div class="col-md-3"> Due Date :-</div>
+                        <div class="col-md-9"><div id="DueDate"></div></div>
+                    </div>
+
+                    <div class="col-md-12 row">
+                        <div class="col-md-3"> Customer Name :- </div>
+                        <div class="col-md-9">
+                            <div id="CustomerName"></div>
+                            <input type="hidden" id="ELECreferenceID" name="REfferenceElecId" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div style="display:none" id="idGeolocbrod"> @Html.EditorFor(m => m.geolocation, new { htmlAttributes = new { @class = "form-control", id = "GeolocationElectricity" } })</div>
+                </div>
+
+            </div>
+
+
+
+            <div class="clearfix"></div>
+            <div class="col-md-12" style="text-align:right; margin-top:30px;">
+                <input type="submit" value="Pay" class="btn btn-primary btn-lg" id="btnsubmitDTH" />
+            </div>
+
+        </form>
+    </div>
+}
+
+
+<div id="dialog" style="display: none">
+</div>
+@*<div id="Electricityprogress" class="loading hidden">Loading&#8230;</div>*@
+<div class="preloader hidden" id="Electricityprogress">
+    <div id="loading"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#divElecBillDisplay').hide();
+        $('#btnsubmitElectricity').hide();
+        $('#Electricityprogress').removeClass("hidden");
+        $('#Electricityprogress').hide();
+        $('#ModelElectricityUnit').hide();
+    })
+    function OnElectricitySuccess(response) {
+        $('#Electricityprogress').removeClass("hidden");
+        $('#Electricityprogress').hide();
+        $('#loading').removeClass("hidden");
+        $('#loading').hide();
+        var message = response;
+        $("#ElectricityBillPayment").trigger("reset");
+        //window.location.reload();
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+            }
+        })
+        callGeocodeElectricity();
+        //alert(message);
+    }
+    function OnElectricityFailure(response) {
+        alert("Error occured.");
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+
+        callGeocodeElectricity();
+
+    });
+    function callGeocodeElectricity() {
+        $.getJSON('http://www.geoplugin.net/json.gp?jsoncallback=?', function (data) {
+            var information = JSON.stringify(data, null, 2);
+            //alert(information[0]);
+            //alert(JSON.stringify(data, null, 2));
+            console.log(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 2));
+            $('#GeolocationElectricity').val(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 0));
+            $('#ElectricityIpaddress').val(JSON.stringify(data.geoplugin_request, null, 0));
+            console.log(JSON.stringify(data, null, 2));
+        });
+    }
+    function checkOperator() {        
+        var Servicekey = $('#hfElectricityperator').val();
+
+        if (Servicekey == "MDE") {
+            $('#ModelElectricityUnit').show();
+        }
+        else {
+            $('#ModelElectricityUnit').hide();
+        }
+    }
+</script>
+
+<script>
+    //var GetElectricityBillDetails = function () {
+    //    debugger;
+    //    $('#divElecBillDisplay').show();
+    //    $('#Electricityprogress').show();
+    //    var _accountNo = $('#CustomerId').val();
+    //    var _mobileNo = $('#MobileNo').val();
+    //    var _geoLocation = $('#GeolocationElectricity').val();
+    //    var Service_Key = $('#hfElectricityperator').val();
+    //    var UnitNo = "";
+    //    var CityName = $('#txtCityName').val();
+    //    if (Service_Key == "MDE") {
+    //        UnitNo = $('#BillUnitData').val();
+    //    }
+    //    else { UnitNo = ""; }
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/Merchant/MerchantRechargeService/GetBillInformation",
+    //        data: { AccountNo: _accountNo, MobileNo: _mobileNo, GeoLocation: _geoLocation, ServiceKey: Service_Key, Unitno: UnitNo, CityName: CityName },
+    //        success: function (data) {             
+    //            if (data == "Unauthorized Access") {
+    //                bootbox.alert({
+    //                    message: data,
+    //                    backdrop: true
+    //                });
+    //                $('#Electricityprogress').hide();
+    //            }
+    //            else {
+    //                var Electricitybill = JSON.parse(data);
+    //                debugger;
+    //                var status = Electricitybill.statuscode;
+    //                if (status === "TXN") {
+    //                    debugger;
+    //                    //document.getElementById("RechargeAmt").innerHTML = JSON.stringify(Electricitybill.data.dueamount);
+    //                    var amount = Electricitybill.data.dueamount;
+    //                    var elec_Ref = Electricitybill.data.reference_id;
+    //                    $('#BillAMount').val(amount);
+    //                    $('#ELECreferenceID').val(elec_Ref);
+    //                    $('#DueDate').html(Electricitybill.data.duedate);
+    //                    $('#CustomerName').html(Electricitybill.data.customername);
+    //                    $('#txtElecbillnumber').html(Electricitybill.data.billnumber);
+    //                    $('#txtElectricityRefNo').val(Electricitybill.data.reference_id);
+    //                    $('#btnEleDisplay').hide();
+    //                    $('#btnsubmitElectricity').show();
+    //                    $('#Errormsg').html('');
+
+    //                }
+    //                else {
+    //                    $('#Errormsg').html(Electricitybill.status);
+    //                }
+    //                $('#Electricityprogress').hide();
+    //            }
+    //        }
+    //    })
+    //}
+</script>

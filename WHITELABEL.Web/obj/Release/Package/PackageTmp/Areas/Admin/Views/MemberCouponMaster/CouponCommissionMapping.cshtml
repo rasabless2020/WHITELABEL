@@ -1,0 +1,181 @@
+﻿
+@{
+    ViewBag.Title = "Coupon Commission Mapping";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@*@Scripts.Render("~/bundles/CouponCommissionSlab")*@
+
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Areas/Admin/AdminHelperJS/MemberCommSlabSetting/CouponAutoComplete.js"></script>
+<script src="~/Areas/Admin/AdminHelperJS/MemberCommSlabSetting/CouponMappingJs.js"></script>
+
+<div ng-app="CouponCommissionMappingApp" id="CouponCommissionMappingController" ng-controller="CouponCommissionMappingController" ng-init="OnLoadDataBind()" class="form-horizontal padding-top-20">
+
+    <form name="userForm" novalidate>
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div style="background-color:#ccc; border-radius:5px; color:#3e50b4; padding:5px 20px 10px 20px; margin-bottom:20px;" class="col-md-12"><h3 style="color:#3e50b4"><i class="fas fa-angle-double-right"></i> Coupon Commission Mapping</h3></div>
+            <div class="col-md-12">
+                <div class="card">
+                    <!--.panel-heading-->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12 row">
+                                <div class="clearfix"></div>
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3">Slab Name</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="input-wrapper">
+                                                        <div class="md-form">
+                                                            <input type="hidden" ng-model="SLN" ng-value="SLN" />
+                                                            <input type="text" ng-model="SLAB_NAME" name="SlabName" class="form-control" required="" maxlength="150" ng-change='CheckSlabName()' />
+                                                        </div>
+                                                    </div>
+                                                    <div ng-show="userForm.$submitted || userForm.SlabName.$touched">
+                                                        <div class="form-control" style="color:red;" ng-show="userForm.SlabName.$error.required">Enter Slab Name</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Slab Details</label>
+                                                <div class="col-md-9">
+                                                    <div class="inputer">
+                                                        <div class="md-form">
+                                                            <input type="text" id="SLAB_DETAILS" name="SLAB_DETAILS" ng-model="SLAB_DETAILS" class="form-control" required="" maxlength="350" />
+                                                        </div>
+                                                        <div ng-show="userForm.$submitted || userForm.SLAB_DETAILS.$touched">
+                                                            <div class="form-control" style="color:red;" ng-show="userForm.SLAB_DETAILS.$error.required">Enter Details..</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Slab Type</label>
+                                                <div class="col-md-9">
+                                                    <div class="inputer">
+                                                        <div class="md-form">
+                                                            @*<input type="text" id="txtNewServiceType" ng-change="FetchOperator()" name="Service" ng-model="ServiceType" class="form-control" required="" />*@
+                                                            <input type="text" id="txtNewServiceType" ng-change="ClearData()" name="Service" ng-model="ServiceType" class="form-control" required="" />
+                                                            <input type="hidden" id="hftNewServiceType" ng-value="SLAB_TYPE" ng-model="SLAB_TYPE" name="ServiceTypeId" />
+                                                        </div>
+                                                        <div ng-show="userForm.$submitted || userForm.Service.$touched">
+                                                            <div class="form-control" style="color:red;" ng-show="userForm.Service.$error.required">Enter Service Type..</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Slab Status</label>
+                                                <div class="col-md-9">
+                                                    <div class="inputer">
+                                                        <div class="md-form">
+                                                            <select name="singleSelect" id="singleSelect" ng-model="SLAB_STATUS" class="form-control">
+                                                                <option value="Active">Active</option>
+                                                                <option value="Inactive"> Inactive</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3"></div>
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <div class="col-md-12"><h3></h3></div>
+                                        <span style="display:none;"> {{CommissionPer}}</span>
+                                        <table class="table responsive table-responsive table-striped table-bordered table-hover" id="SalaryTable1">
+                                            <thead style=" background-color:#4b5961; color:#fff;">
+                                                <tr>
+                                                    <th>
+                                                        Coupon Name
+                                                    </th>
+                                                    <th>
+                                                        TYPE
+                                                    </th>
+                                                    <th>
+                                                        Coupon Purchase Value
+                                                    </th>
+                                                    <th>
+                                                        Super Coupon Value
+                                                    </th>
+                                                    <th>
+                                                        Distributor Coupon Value
+                                                    </th>
+                                                    <th>
+                                                        Merchant Coupon Value
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-repeat="m in ServiceInformation">
+                                                <tr>
+                                                    <td style="display:none;">
+                                                        {{m.sln}}
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" ng-model="m.coupon_id" class="form-control">
+                                                        <input type="text" ng-model="m.Coupon_Name" class="form-control" readonly>
+                                                    </td>
+                                                    <td><input type="text" ng-model="m.Comm_TYPE" class="form-control" readonly></td>
+                                                    <td><input type="text" ng-model="m.Comm_Value" class="form-control" readonly></td>
+                                                    <td><input type="text" ng-model="m.Super_Comm_Value" class="form-control">  </td>
+                                                    @*<td ng-hide="true"><input type="text" ng-model="m.CommissionPercentage" maxlength="5" class="form-control" ng-change="EditValue(m.OldCommissionPercentage,$index)"></td>*@
+                                                    <td><input type="text" ng-model="m.Dist_Comm_value" maxlength="5" class="form-control" ng-decimal="10"></td>
+                                                    <td><input type="text" ng-model="m.Merchant_Comm_Value" maxlength="5" class="form-control" ng-decimal="10"></td>
+                                                    @*<td><input type="text" ng-model="m.RetailerCommissionPer" maxlength="5" class="form-control" ng-decimal="10" ng-keyup="CheckcommissionValidation($index,3)"></td>*@
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+
+                            <div class="col-lg-12 text-center">
+                                @if (ViewBag.checkStatus == "0")
+                                {
+                                    @*<input type="submit" value="Create" class="btn btn-cyan" ng-click="SaveData()" ng-disabled="buttondisplay" id="btnsave" />*@
+                                    <input type="submit" value="Add" class="btn btn-cyan" ng-click="SaveData()" id="btnsave" ng-disabled="userForm.$invalid" />
+                                }
+                                else
+                                {
+                                    <input type="submit" value="Add" class="btn btn-cyan" ng-click="SaveData()" id="btnsave" ng-disabled="userForm.$invalid" />
+                                }
+                                <a href="@Url.Action("Index", "MemberCommissionSlab", new { area = "Admin" })" class="btn btn-cyan">Back</a>
+
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="margin-top-20"></div>
+
+                            @if (ViewBag.msg != null && ViewBag.msg != "")
+                            {
+                                <div id="informationMessage" class="text-center alert alert-success">
+                                    <span style="width:100%;text-align:center;">@ViewBag.msg </span>
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="serviceOperator"></div>
+            </div>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,63 @@
+﻿@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "Retailer List";
+    //Layout = "~/Areas/Distributor/Views/Shared/_DistributorLayout.cshtml";
+    Layout = "~/Areas/Distributor/Views/Shared/_DistributorNewLayout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="card">
+
+            <div class="card-body">
+                <div class="card-heading" style="padding-bottom:10px;">
+                    @if (Session["msg"] != null)
+                    {
+                        <div id="informationMessage" class="text-center alert alert-success">
+                            <span style="width:100%;text-align:center;">@Session["msg"].ToString() </span>
+                            @if (Session["msg"].ToString() == "Data Saved Successfully" || Session["msg"].ToString() == "Data Updated Successfully")
+                            {
+                                Session.Remove("msg");
+                            }
+                        </div>
+                    }
+                    <div class="card-title row ">
+                        <div class="col-md-6 text-left">
+                            <a href="@(Url.Action("ExportIndex", "Retailer", new { area = "Distributor" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span> Export</a>
+                        </div>
+                        <div class="col-md-6 text-right"><a href="@Url.Action("CreateMember", "Retailer", new { area = "Distributor" }, null)" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New Retailer</a></div>
+
+                    </div>
+                </div><!--.panel-heading-->
+                <div class="card-body">
+                    <div class="row example-row">
+
+                        @Html.AjaxGrid(Url.Action("IndexGrid", "Retailer", new { area = "Distributor" }))
+
+                    </div><!--.row-->
+                </div><!--.panel-body-->
+                <div class="panel-footer text-right">
+                    </div>
+                </div>
+            </div><!--.panel-->
+        </div><!--.col-md-12-->
+    </div><!--.row-->
+</div>
+    @Scripts.Render("~/bundles/RetailerAPILevel")
+
+    <script>
+        $(document).ready(function () {
+
+            window.setTimeout(function () {
+                $("#informationMessage").fadeOut('slow');
+            }, 2000);
+        });
+
+    </script>
+}
+
+

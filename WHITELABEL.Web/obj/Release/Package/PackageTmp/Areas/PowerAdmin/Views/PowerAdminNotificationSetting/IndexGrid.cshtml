@@ -1,0 +1,37 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_NOTIFICATION_SETTING>
+@{
+    //Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminLayout.cshtml";
+    Layout = null;
+}
+
+
+
+@(Html
+                .Grid(Model)
+                .Build(columns =>
+                {
+                    columns.Add(model => model.ID).Titled("Nofify Id").Filterable(true).Sortable(true);
+                    columns.Add(model => model.NOTIFICATION_SUBJECT).Titled("Notify Sub").Filterable(true).Sortable(true);
+                    columns.Add(model => model.NOTIFICATION_DESCRIPTION).Titled("Notify Desc").Filterable(true).Sortable(true);
+                    columns.Add(model => model.NOTIFICATION_DATE).Titled("Date").Filterable(false).Sortable(false);
+                    //columns.Add(model => model.NOTIFICATION_TIME).Titled("Time").Filterable(true).Sortable(false);
+                    columns.Add(model => model.MEM_ID).Encoded(false).Filterable(false).Sortable(false).Titled("Action")
+                        .RenderedAs(model => "<div style='text-align:center'><a href='" + @Url.Action("AddNotification", "PowerAdminNotificationSetting", new { area = "PowerAdmin", NofifyID = Encrypt.EncryptMe(model.ID.ToString()) }) + "' style='margin-right:10px' title='Edit'><i class='fa fa-edit'></i></a></div>");
+                    columns.Add(model => model.MEM_ID).Encoded(false).Filterable(false).Sortable(false).Titled("Action")
+                  .RenderedAs(model => "<div style='text-align:center'>" + (model.STATUS == 0 ? "Active" : "Deactive") + "</div>");
+
+                })
+                .Empty("No data found")
+                .Id("my-ajax-grid")
+                .Pageable(pager =>
+                {
+                    pager.PagesToDisplay = 20;
+                    pager.RowsPerPage = 20;
+                })
+//.Filterable()
+//.Sortable()
+)
+
+

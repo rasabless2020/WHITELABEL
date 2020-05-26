@@ -1,0 +1,37 @@
+﻿@using NonFactors.Mvc.Grid;
+
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_WHITE_LEVEL_COMMISSION_SLAB>
+@{
+    ViewBag.Title = "White Level Commission Slab";
+    //Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminLayout.cshtml";
+   Layout = "~/Areas/PowerAdmin/Views/Shared/_LayoutPowerAdmin.cshtml";
+}
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
+@Scripts.Render("~/bundles/PowerAdminSlabCommJsDeactivateStatus")
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal padding-top-20">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                <div class="card-body">
+                    <div class="panel-heading">
+                        <div class="card-title" align="right"><a href="@Url.Action("AddCommissionSlab", "PowerAdminCommissionSlab", new { area = "PowerAdmin" })" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New Commission</a></div>
+                    </div><!--.panel-heading-->
+                    <div class="panel-body">
+                        <div class="row example-row">
+                            @*@Html.AjaxGrid(Url.Action("IndexGrid", "PowerAdminCommissionSlab", new { area = "PowerAdmin" }))*@
+                            @Html.AjaxGrid(Url.Action("PoweradminComIndexGrid", "PowerAdminCommissionSlab", new { area = "PowerAdmin" }))
+                            @*@Html.AjaxGrid(Url.Action("IndexGrid", "PowerAdminCommissionSlab", new { area = "PowerAdmin" }))*@
+                        </div>
+                    </div>
+                </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+   
+}

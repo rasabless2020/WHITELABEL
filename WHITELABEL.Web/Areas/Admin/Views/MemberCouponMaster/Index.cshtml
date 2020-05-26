@@ -1,0 +1,108 @@
+﻿@using NonFactors.Mvc.Grid;
+@model WHITELABEL.Data.Models.TBL_COUPON_MASTER
+@{
+    /**/
+
+    ViewBag.Title = "Coupon Master";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script src="~/Areas/Admin/AdminHelperJS/CouponJs/Index.js"></script>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal padding-top-20">
+        <div class="row">
+            <div style="background-color:#ccc; border-radius:5px; color:#3e50b4; padding:5px 20px 10px 20px; margin-bottom:20px;" class="col-md-12"><h3 style="color:#3e50b4"><i class="fas fa-angle-double-right"></i> Coupon Master</h3></div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-heading"  style="padding-bottom:10px;">
+                            <div class="panel-title">
+                                <div class="text-right col-md-12">
+                                    <div class="panel-title" align="right"><a href="#" data-toggle="modal" data-target=".transd" id="transactionvalueid" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New Coupon</a></div>
+                                </div>
+                            </div>
+                        </div><!--.panel-heading-->
+                        <div class="panel-body">
+                            <div class="row example-row">
+                                @Html.AjaxGrid(Url.Action("IndexGrid", "MemberCouponMaster", new { area = "Admin" }))
+                            </div><!--.row-->
+                        </div><!--.panel-body-->
+                    </div>
+                    </div><!--.panel-->
+                </div><!--.col-md-12-->
+        </div><!--.row-->
+    </div>
+
+}
+
+<div id="transactionvalueid" class="modal scale fade transd" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title">Coupon Master</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+
+                <div class="col-md-12 row" style="margin-bottom:10px;">
+                    <div class="col-md-4" style="padding-top:10px;">Coupon Name : </div>
+
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <div class="md-form">
+                                    @*@Html.EditorFor(model => model.DMTBANK_MARGIN, new { htmlAttributes = new { @class = "form-control", @placeholder = "XXXXX.XX" } })*@
+                                    <input type="text" id="txtCouponName" value="" class="form-control" />
+                                    <input type="hidden" id="hdnCouponId" />
+                                    <span style="color:red" id="informationMessage"><lable id="lblmsg"></lable></span>
+                                </div>
+                                <span><small>@*@Html.ValidationMessageFor(model => model.DMTBANK_MARGIN, "", new { @class = "text-danger" })*@</small></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12 row">
+                    <div class="col-md-4" style="padding-top:10px;">Coupon Amount : </div>
+
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <div class="md-form">
+                                    @*@Html.EditorFor(model => model.DMTBANK_MARGIN, new { htmlAttributes = new { @class = "form-control", @placeholder = "XXXXX.XX" } })*@
+                                    <input type="text" id="txtCouponAmount" value="" class="form-control" pattern="\d{1,2}(\.\d{0,4})?" onkeypress="return isNumberKey(event)" />                                    
+                                    <span style="color:red" id="informationMessage"><lable id="lblmsg"></lable></span>
+                                </div>
+                                <span><small>@*@Html.ValidationMessageFor(model => model.DMTBANK_MARGIN, "", new { @class = "text-danger" })*@</small></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-danger" onclick="TransactionDecline($('#sln').val());">Decline</button>*@
+                @*<button type="button" class="btn btn-success" onclick="updateStatus($('#sln').val());">Approve</button>*@
+                <button type="button" id="valuesubmit" class="btn btn-success" onclick="SaveCouponMaster($('#txtCouponName').val(),$('#txtCouponAmount').val(),$('#hdnCouponId').val());">Save</button>
+            </div>
+        </div><!--.modal-content-->
+    </div><!--.modal-dialog-->
+
+</div>
+<script type="text/javascript">
+    function isNumberKey(evt) {
+            document.getElementById("valuesubmit").disabled = false;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if (charCode != 46 && charCode > 31
+                && (charCode < 48 || charCode > 57))
+                return false;
+        return true;
+    }
+</script>
+
+

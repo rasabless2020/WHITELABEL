@@ -1,0 +1,74 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+
+#search_home a[data-toggle="tab"]{ font-size:18px}
+#search_list p{ margin:0;}
+#search_list .panel-body{  padding:15px 0 5px 0;}
+#filter .dropdown > .btn{border-radius: 20px; color:#FFF;}
+#filter .dropdown > .btn:hover{ color:#FFF;}
+#bus_search li h4 {
+    font-weight: 500;
+    color: #000;
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+#bus_search li p {
+    font-weight: 300;
+    color: #666;
+    font-size: 14px;
+}
+
+#bus_search .list-group-item {
+    position: relative;
+    padding-left: 50px;
+}
+
+    #bus_search .list-group-item:after {
+        content: '';
+        display: block;
+        width: 50px;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background: url(images/bus_icon.png) center no-repeat;
+        background-size: 100%;
+    }
+
+
+#hotel_listing .media-left {
+    max-width: 180px;
+}
+
+    #hotel_listing .media-left img {
+        max-width: 180px;
+    }
+
+#hotel_listing a {
+    text-decoration: none;
+}
+
+
+#utiliti_css li a svg {
+    -webkit-transition: all 500ms ease;
+    -moz-transition: all 500ms ease;
+    -ms-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    transition: all 500ms ease;
+    -moz-transform: scale(1);
+    -webkit-transform: scale(1);
+    -o-transform: scale(1);
+    -ms-transform: scale(1);
+    transform: scale(1);
+}
+
+#utiliti_css li a:hover svg {
+    /*-moz-transform: scale(1.02);
+-webkit-transform: scale(1.02);
+-o-transform: scale(1.02);
+-ms-transform: scale(1.02);*/
+    transform: scale(1.5);
+    fill: #337ab7;
+}

@@ -1,0 +1,42 @@
+﻿@using WHITELABEL.Web.Helper;
+@*@model IEnumerable<WHITELABEL.Data.Models.TBL_ACCOUNTS>*@
+@model IGrid<WHITELABEL.Data.Models.TBL_ACCOUNTS>
+@{
+    ViewBag.Title = "IndexGrid";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<a href="@(Url.Action("ExportIndex") + ViewContext.HttpContext.Request.QueryString)">Export</a>*@
+
+@(new HtmlGrid<WHITELABEL.Data.Models.TBL_ACCOUNTS>(Html, Model))
+
+
+                     @*@(Html
+                                .Grid(Model)
+                                .Build(columns =>
+                                {
+                                    columns.Add(model => model.ACC_NO).Titled("Trans Id");
+                                    columns.Add(model => model.UserName).Titled("User Name");
+                                    columns.Add(model => model.MEMBER_TYPE).Titled("Member");
+                                    columns.Add(model => model.TRANSACTION_TYPE).Titled("Trans Type");                                    
+                                    columns.Add(model => model.TRANSACTION_DATE).Titled("Date").Formatted("{0:d}").MultiFilterable(true); ;
+                                    columns.Add(model => model.timevalue).Titled("Time").MultiFilterable(true);
+                                    columns.Add(model => model.DR_CR).Titled("DR_CR");
+                                    columns.Add(model => model.AMOUNT).Titled("AMOUNT");
+                                    columns.Add(model => model.OPENING).Titled("OPENING");
+                                    columns.Add(model => model.CLOSING).Titled("CLOSING");
+                                })                                
+                                .Empty("No data found")
+                                .Id("my-ajax-grid")
+                                .Pageable(pager =>
+                                {
+                                    pager.PagesToDisplay = 10;
+                                    pager.RowsPerPage = 10;
+                                })                                
+                                .Filterable()
+                                .Sortable()
+                    )*@
+                        
+
+
+

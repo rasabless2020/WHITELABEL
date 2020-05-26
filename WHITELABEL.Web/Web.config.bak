@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+  For more information on how to configure your ASP.NET application, please visit
+  https://go.microsoft.com/fwlink/?LinkId=301880
+  -->
+<configuration>
+  <configSections>
+    <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+    <section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
+  </configSections>
+
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="myAssembly"
+                          publicKeyToken="32ab4ba45e0a69a1"
+                          culture="neutral" />
+        <bindingRedirect oldVersion="1.0.0.0"
+                         newVersion="2.0.0.0" />
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+  <log4net>
+    <!--AdoNet appender is use for write log file into sql server-->
+    <appender name="AdoNetAppender" type="log4net.Appender.AdoNetAppender">
+      <bufferSize value="1" />
+      <connectionType value="System.Data.SqlClient.SqlConnection, System.Data, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+      <!--<connectionString value="Data Source=103.48.51.94,1232;Initial Catalog=TEST_VAPRON_WL;integrated Security=false;User ID=vapron;Password=vapron12345@#;MultipleActiveResultSets=True" />-->
+      <!--<connectionString value="Data Source=1DESKTOP-H2KTRM4\SQLEXPRESS;Initial Catalog=VP_DB;Integrated Security=false;uid=sa;pwd=india123;MultipleActiveResultSets=True" />-->
+      <!--<connectionString value="Data Source=DESKTOP-U8JLICB;Initial Catalog=VP_Live_TestDB_Backup;integrated Security=true;User ID=sa;Password=india123;MultipleActiveResultSets=True" />-->
+      <connectionString value="Data Source=DESKTOP-U8JLICB;Initial Catalog=TravelIq_DB;integrated Security=true;User ID=sa;Password=india123;MultipleActiveResultSets=True" />
+      <!--<connectionString value="Data Source=DESKTOP-U8JLICB;Initial Catalog=VP_Live;integrated Security=false;User ID=sa;Password=india123;MultipleActiveResultSets=True" />-->
+      <commandText value="INSERT INTO AppLog ([Date],[Thread],[Level],[Logger],[Message],[Exception]) VALUES (@log_date, @thread, @log_level, @logger, @message, @exception)" />
+      <parameter>
+        <parameterName value="@log_date" />
+        <dbType value="DateTime" />
+        <layout type="log4net.Layout.RawTimeStampLayout" />
+      </parameter>
+      <parameter>
+        <parameterName value="@thread" />
+        <dbType value="String" />
+        <size value="255" />
+        <layout type="log4net.Layout.PatternLayout">
+          <conversionPattern value="%thread" />
+        </layout>
+      </parameter>
+      <parameter>
+        <parameterName value="@log_level" />
+        <dbType value="String" />
+        <size value="50" />
+        <layout type="log4net.Layout.PatternLayout">
+          <conversionPattern value="%level" />
+        </layout>
+      </parameter>
+      <parameter>
+        <parameterName value="@logger" />
+        <dbType value="String" />
+        <size value="255" />
+        <layout type="log4net.Layout.PatternLayout">
+          <conversionPattern value="%logger" />
+        </layout>
+      </parameter>
+      <parameter>
+        <parameterName value="@message" />
+        <dbType value="String" />
+        <size value="4000" />
+        <layout type="log4net.Layout.PatternLayout">
+          <conversionPattern value="%message" />
+        </layout>
+      </parameter>
+      <parameter>
+        <parameterName value="@exception" />
+        <dbType value="String" />
+        <size value="2000" />
+        <layout type="log4net.Layout.ExceptionLayout" />
+      </parameter>
+    </appender>
+    <!--Add appender which you want to use, You can add more then one appender . Like if you want save log both plain text or sql server ,Add both appender.-->
+    <root>
+      <level value="ALL" />
+      <appender-ref ref="AdoNetAppender" />
+      <!--Enable this line if you want write log file into sql server-->
+    </root>
+  </log4net>
+
+  <connectionStrings>
+    <add name="DefaultConnection" connectionString="Data Source=DESKTOP-U8JLICB;Initial Catalog=TravelIq_DB;uid=sa;pwd=india123;Integrated Security=true;" providerName="System.Data.SqlClient" />
+    <!--<add name="DefaultConnection" connectionString="Data Source=DESKTOP-U8JLICB;Initial Catalog=VP_Live;uid=sa;pwd=india123;Integrated Security=true;" providerName="System.Data.SqlClient" />-->
+    <!--<add name="DefaultConnection" connectionString="Data Source=103.240.90.56;Initial Catalog=VP_LIVE_DB;uid=sa;pwd=zXUN24yk5Rge;Integrated Security=false;" providerName="System.Data.SqlClient" />-->
+  </connectionStrings>
+  <appSettings>
+    <add key="aspnet:MaxJsonDeserializerMembers" value="150000" />
+    <add key="webpages:Version" value="3.0.0.0" />
+    <add key="webpages:Enabled" value="false" />
+    <add key="ClientValidationEnabled" value="true" />
+    <add key="UnobtrusiveJavaScriptEnabled" value="true" />
+    <add key="authToken" value="eyJhbGciOiJIUzUxMiJ9.eyJqdGkiOiIxMDgiLCJzdWIiOiJhdXRoIiwiaXNzIjoiVFJBTlNYVCJ9.OpZ9MHoX7f33pME7fk5JepGlb9Vxgxdf851oiKSwNicv_E90xNOPN8f4SvXLYZ6LDpFr5b0qygHj1VUa0UDOAQ"/>
+
+    <!--<add key="username" value="edpl"/>
+    <add key="password" value=" O7amm1MvvsUPJX0dGiBc3w=="/>-->
+    <add key="username" value="edpl"/>
+    <add key="password" value="kZEZaznAP4NYuCR/VtjPtQ=="/>
+    <add key="secret" value="eutEE4loO9ZaLEdKdLyV1Jg7y3xPV3Ea"/>
+    <add key="authUrl" value="https://uatportal.transxtnow.com:8443/api/1.0/auth"/>
+    <add key="checkSumUrl" value="https://uatportal.transxtnow.com:8443/api/1.0/checksum"/>
+    <add key="GST_Amount" value="5"/>
+    <add key="TDS_Amount" value="5"/>    
+    <add key="LeadLoanUserName" value="EDPLLoanLead"/>
+    <add key="LeadLoanPassword" value="EDPLLoanLead123"/>
+    <add key="LeadLoanAgentCode" value="1583710771"/>
+    <add key="recaptchaPublickey" value="6LdgBZwUAAAAAINkzAQx465DMqz0DO2yMSdJlyGX"/>
+    <add key="recaptchaPrivatekey" value="6LdgBZwUAAAAAKl6fF-O3QHVy0dqN57Yt34YQDDI"/>
+  </appSettings>
+  <system.web>
+    <customErrors mode="On">
+      <!--put your own customized error page-->
+      <!--<error statusCode="404" redirect="~/PowerAdmin/PowerAdminError/NotFound" />-->
+      <error statusCode="404" redirect="~/ErrorHandler/NotFound" />
+      <error statusCode="500" redirect="~/ErrorHandler/Exception" />
+      <error statusCode="200" redirect="~/ErrorHandler/Exception" />
+    </customErrors>
+
+    <authentication mode="Forms">
+      <!--<forms loginUrl="~/Login" timeout="2880" defaultUrl="~/Home/Index" />-->
+      <forms loginUrl="~/Login" timeout="2880" defaultUrl="~/Login/index?area=''" />
+    </authentication>
+    <compilation debug="true" targetFramework="4.6.1" />
+    <httpRuntime targetFramework="4.6.1" />
+    <httpModules>
+      <add name="ApplicationInsightsWebTracking" type="Microsoft.ApplicationInsights.Web.ApplicationInsightsHttpModule, Microsoft.AI.Web" />
+    </httpModules>
+    <pages>
+      <namespaces>
+        <add namespace="GridMvc" />
+      </namespaces>
+    </pages>
+  </system.web>
+  <system.webServer>
+    <modules>
+      <!--<remove name="FormsAuthentication" />-->
+      <remove name="ApplicationInsightsWebTracking" />
+      <add name="ApplicationInsightsWebTracking" type="Microsoft.ApplicationInsights.Web.ApplicationInsightsHttpModule, Microsoft.AI.Web" preCondition="managedHandler" />
+    </modules>
+    <handlers>
+      <remove name="ExtensionlessUrlHandler-Integrated-4.0" />
+      <remove name="OPTIONSVerbHandler" />
+      <remove name="TRACEVerbHandler" />
+      <add name="ExtensionlessUrlHandler-Integrated-4.0" path="*." verb="*" type="System.Web.Handlers.TransferRequestHandler" preCondition="integratedMode,runtimeVersionv4.0" />
+    </handlers>
+    <validation validateIntegratedModeConfiguration="false" />
+  </system.webServer>
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.Owin.Security" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="0.0.0.0-3.0.1.0" newVersion="3.0.1.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.Owin.Security.OAuth" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="0.0.0.0-3.0.1.0" newVersion="3.0.1.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.Owin.Security.Cookies" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="0.0.0.0-3.0.1.0" newVersion="3.0.1.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.Owin" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="0.0.0.0-3.0.1.0" newVersion="3.0.1.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Newtonsoft.Json" culture="neutral" publicKeyToken="30ad4fe6b2a6aeed" />
+        <bindingRedirect oldVersion="0.0.0.0-6.0.0.0" newVersion="6.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Optimization" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="1.0.0.0-1.1.0.0" newVersion="1.1.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="WebGrease" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="0.0.0.0-1.5.2.14234" newVersion="1.5.2.14234" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Helpers" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="1.0.0.0-3.0.0.0" newVersion="3.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.Mvc" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="0.0.0.0-5.2.3.0" newVersion="5.2.3.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Web.WebPages" publicKeyToken="31bf3856ad364e35" />
+        <bindingRedirect oldVersion="0.0.0.0-3.0.0.0" newVersion="3.0.0.0" />
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+  <entityFramework>
+    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.LocalDbConnectionFactory, EntityFramework">
+      <parameters>
+        <parameter value="mssqllocaldb" />
+      </parameters>
+    </defaultConnectionFactory>
+    <providers>
+      <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+    </providers>
+  </entityFramework>
+  <system.codedom>
+    <compilers>
+      <compiler language="c#;cs;csharp" extension=".cs" type="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.CSharpCodeProvider, Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" warningLevel="4" compilerOptions="/langversion:default /nowarn:1659;1699;1701" />
+      <compiler language="vb;vbs;visualbasic;vbscript" extension=".vb" type="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.VBCodeProvider, Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" warningLevel="4" compilerOptions="/langversion:default /nowarn:41008 /define:_MYTYPE=\&quot;Web\&quot; /optionInfer+" />
+    </compilers>
+  </system.codedom>
+</configuration>

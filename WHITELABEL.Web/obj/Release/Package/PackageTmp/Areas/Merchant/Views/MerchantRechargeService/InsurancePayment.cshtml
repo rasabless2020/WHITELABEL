@@ -1,0 +1,48 @@
+﻿@model WHITELABEL.Web.Areas.Merchant.Models.InsuranceViewModel
+@{
+    ViewBag.Title = "InsurancePayment";
+    //Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+}
+
+@using (Ajax.BeginForm("PostInsurancerecharge", "MerchantRechargeService", new AjaxOptions { OnSuccess = "OnSuccess", OnFailure = "OnFailure", LoadingElementId = "progress" }, new { area = "Merchant" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="panel-body">
+        <h5>Broadnand Payment</h5>
+        <form>
+            <div class="clearfix"></div>
+            <div class="col-md-5">
+                <div>
+                    <div class="input-wrapper">
+                        @Html.EditorFor(m => m.PolicyNo, new { htmlAttributes = new { @class = "form-control" } })
+                        <label for="exampleInput1">Policy No</label>
+                        <span class="help-block"><small>@Html.ValidationMessageFor(model => model.PolicyNo, "", new { @class = "text-danger" })</small></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div>
+                    <div class="input-wrapper">
+                        @Html.EditorFor(m => m.PolicyAmount, new { htmlAttributes = new { @class = "form-control" } })
+                        <label for="amount">Amount</label>
+                        <span class="help-block"><small>@Html.ValidationMessageFor(model => model.PolicyAmount, "", new { @class = "text-danger" })</small></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div>
+                    <div class="input-wrapper">
+                        @Html.EditorFor(m => m.Service_Name, new { htmlAttributes = new { @class = "form-control", id = "txtInsuranceServiceOperator" } })
+                        <input type="hidden" id="hfInsuranceServiceOperator" name="InsuranceOperId" />
+                        <label for="exampleInput1">Service Name</label>
+                        <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Service_Name, "", new { @class = "text-danger" })</small></span>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <input type="submit" value="Pay" class="btn btn-primary btn-lg" id="btnsubmitDTH" />
+
+        </form>
+    </div>
+}
+

@@ -1,0 +1,32 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_COUPON_MASTER>
+@{
+
+        ViewBag.Title = "IndexGrid";
+        Layout = null;
+    }
+
+@(Html
+                .Grid(Model)
+                .Build(columns =>
+                {
+                    columns.Add(model => model.sln).Titled("Sln No").Filterable(true).Sortable(true);
+                    columns.Add(model => model.couponType).Titled("Coupon Name").Filterable(true).Sortable(true);
+                    columns.Add(model => model.vendor_coupon_price).Titled("Coupon Price").Filterable(true).Sortable(true);
+                    columns.Add(model => model.sln).Encoded(false).Filterable(false).Sortable(false).Titled("Action")
+                        .RenderedAs(model => "<div style='text-align:center'><a href='javascript:void(0);' data-toggle='modal' data-target='.transd' id='transactionvalueid' data-id=" + model.sln + " onclick='getCouponvalue(" + model.sln + ");' style='margin-right:10px' title='Edit'><i class='fa fa-edit'></i></a></div>");
+                })
+                .Empty("No data found")
+                .Id("my-ajax-grid")
+                .Pageable(pager =>
+                {
+                    pager.PagesToDisplay = 5;
+                    pager.RowsPerPage = 5;
+                })
+                .Filterable()
+                .Sortable()
+)
+
+
+

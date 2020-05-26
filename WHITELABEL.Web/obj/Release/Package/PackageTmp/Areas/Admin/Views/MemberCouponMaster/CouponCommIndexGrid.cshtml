@@ -1,0 +1,39 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_COUPON_COMMISSION_SLAB>
+@{
+    /**/
+
+    ViewBag.Title = "";
+    //Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    Layout = null;
+}
+
+
+@(Html
+          .Grid(Model)
+          .Build(columns =>
+              {
+                  columns.Add(model => model.sln).Titled("Sln").Filterable(true).Sortable(true);
+                  columns.Add(model => model.CouponSlab_Name).Titled("Slab Name").Filterable(true).Sortable(true);
+                  columns.Add(model => model.Coupon_Name).Titled("Coupon Type").Filterable(true).Sortable(true);
+                  columns.Add(model => model.Comm_TYPE).Titled("Type").Filterable(true).Sortable(true);
+                  columns.Add(model => model.Comm_Value).Titled("Purchase Value").Filterable(true).Sortable(true);
+                  columns.Add(model => model.Super_Comm_Value).Titled("Super Sale Value").Filterable(true).Sortable(true);
+                  columns.Add(model => model.Dist_Comm_value).Titled("Dist. Sale Value").Filterable(true).Sortable(true);
+                  columns.Add(model => model.Merchant_Comm_Value).Titled("Mer. Sale Value").Filterable(true).Sortable(true);
+                  columns.Add(model => model.sln).Encoded(false).Filterable(false).Sortable(false).Titled("Action")
+                      .RenderedAs(model => "<div>&nbsp;<a href='" + @Url.Action("CouponCommissionMapping","MemberCouponMaster", new { area = "Admin", coupid = Encrypt.EncryptMe(model.sln.ToString()) }) + "' Title='Edit' style='margin-right:10px;'><i class='fa fa-edit'></i></a></div>");
+              })
+           .Empty("No data found")
+           .Id("my-ajax-grid")
+           .Pageable(pager =>
+               {
+                   pager.PagesToDisplay = 5;
+                   pager.RowsPerPage = 5;
+               })
+           .Filterable()
+           .Sortable()
+)
+
+

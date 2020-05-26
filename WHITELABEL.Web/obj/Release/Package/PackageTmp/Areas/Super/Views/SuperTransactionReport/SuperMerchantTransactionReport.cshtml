@@ -1,0 +1,126 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_ACCOUNTS>
+@{
+    ViewBag.Title = "Merchant Transaction Report";
+    //Layout = "~/Areas/Super/Views/Shared/_LayoutSuper.cshtml";
+
+    Layout = "~/Areas/Super/Views/Shared/_LayoutSuper.cshtml";
+}
+<div class="form-horizontal padding-top-20">
+    <!--Merchant Commission-->
+    
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row example-row">
+                        <div class="col-md-4">
+                            <div class="inputer">
+                                <div class="md-form">
+                                @Html.DropDownList("MemberService", new SelectList((ViewBag.MemberService) as SelectList, "Value", "Text"), "Select Distributor", new { id = "DistributorList", @class = "form-control" })
+                                    </div>
+                                </div>
+                                </div>
+                                @*<div class="col-md-4">@Html.DropDownList("MemberService", new SelectList((ViewBag.MemberService) as SelectList, "Value", "Text"), "Select Merchnat", new { id = "MerchantList", @class = "form-control" })</div>*@
+                        <div class="col-md-4">
+                            <div class="inputer">
+                                <div class="md-form">
+                                    @Html.DropDownList("Merchant", new SelectList(string.Empty, "Value", "Text"), "--Select Merchant--", new { @class = "form-control", id = "MerchantList" })
+                                    </div>
+                                </div>
+                                </div>
+                        <div class="col-md-4">
+                            <div class="inputer">
+                                <div class="md-form">
+                                    @Html.DropDownList("MemberTransactionStatus", new List<SelectListItem>
+                                                                        { new SelectListItem{Text="Mobile Recharge", Value="Mobile Recharge"},
+                                                                            new SelectListItem{Text="DMR", Value="DMR"},
+                                                                            new SelectListItem{Text="Requisition", Value="Requisition"} },
+                                                                           "Select Status", new { id = "TransactionMerchantStatus", @class = "form-control" })
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="col-md-12 mt-2">@Html.AjaxGrid(Url.Action("IndexGridMerchant", "SuperTransactionReport", new { area = "Super" }))</div>
+                            </div>
+                        </div>
+                <div class="card-footer text-center">
+                    <button id="btnExport" class="btn btn-info btn-xs">EXPORT</button>
+                    @*<a href="#" id="btnExportSuperrecoard" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                        @*<a href="@(Url.Action("ExportIndex","DistributorTransactionReport",new {area="Distributor" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+        $(document).on('change', '#TransactionMerchantStatus', function () {
+            debugger;
+            var dis_Id = $("#MerchantList").val();
+            $('#gridMerchant').mvcgrid({
+                query: 'search=' + dis_Id + '&Status=' + this.value,
+                reload: true,
+                reloadStarted: function () {
+                    $(".divFooterTotalCommRetailer").remove();
+                },
+            });
+        });
+</script>
+
+<script>
+        $(document).on('change', '#MerchantList', function () {
+            debugger;
+            var status = $("#TransactionMerchantStatus").val();
+            $('#gridMerchant').mvcgrid({
+                query: 'search=' + this.value + '&Status=' + status,
+                //query: 'search=' + this.value,
+                reload: true,
+                reloadStarted: function () {
+                    $(".divFooterTotalCommRetailer").remove();
+                },
+            });
+        });
+</script>
+<script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#DistributorList").change(function () {
+                debugger;
+                $("#MerchantList").empty();
+                $("#MerchantList").val("--Select--");
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetMerchant")',
+                    dataType: 'json',
+                    data: { Disid: $("#DistributorList").val() },
+                    success: function (states) {
+                        $("#MerchantList").append('<option selected value="">--Select Merchant--</option>');
+                        $.each(states, function (i, state) {
+                            $("#MerchantList").append('<option value="' + state.IDValue + '">' +
+                                state.TextValue + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        $("#MerchantList").append('<option selected value="">--Select Merchant--</option>');
+                        //alert('Failed to retrieve data.' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+
+    </script>   
+<script type="text/javascript">
+    $("#btnExportSuperrecoard").click(function () {
+        var url = '@(Url.Action("ExportIndexSuperMerchantReport", "SuperTransactionReport", new {area= "Super" }) + ViewContext.HttpContext.Request.QueryString)?Disid=' + $("#MerchantList").val() + '&statusval=' + $("#TransactionMerchantStatus").val();
+        window.location.href = url;
+    })
+</script>
+<script type="text/javascript">
+    $("[id$=btnExport]").click(function (e) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=gridMerchant]').html()));
+        e.preventDefault();
+    });
+</script>

@@ -1,0 +1,34 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>
+@{
+    Layout = null;
+}
+
+@(Html
+                            .Grid(Model)
+                            .Build(columns =>
+                            {
+                                columns.Add(model => model.SLN).Titled("Trans Id");
+                                columns.Add(model => model.ToUser).Titled("To User");
+                                columns.Add(model => model.FromUser).Titled("From Member");
+                                columns.Add(model => model.REQUEST_DATE).Titled("REQ DATE");
+                                columns.Add(model => model.AMOUNT).Titled("AMOUNT");
+                                columns.Add(model => model.BANK_ACCOUNT).Titled("BANK ACCNT");
+                                columns.Add(model => model.TRANSACTION_DETAILS).Titled("PAY METHOD");
+                                columns.Add(model => model.STATUS).Titled("STATUS");
+                                columns.Add(model => model.APPROVAL_DATE).Titled("APPRV DATE");
+                                columns.Add(model => model.APPROVED_BY).Titled("APPRV BY");
+                            })
+                            .RowCss(model => model.STATUS == "Decline" ? "danger" : model.STATUS == "Pending" ? "info" : "")
+                            .Empty("No data found")
+                            .Id("my-ajax-grid")
+                            .Pageable(pager =>
+                            {
+                                pager.PagesToDisplay = 10;
+                                pager.RowsPerPage = 10;
+                            })
+                            .Filterable()
+                            .Sortable()
+)
+

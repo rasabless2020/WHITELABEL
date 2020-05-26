@@ -1,0 +1,23 @@
+﻿@*@{
+        ViewBag.Title = "CheckOperator";
+        Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    }*@
+
+<table>
+  
+@if (ViewBag.operatorList != null)
+{
+
+    foreach (var d in ViewBag.operatorList)
+    {
+        <tr>            
+            <td> @d.SERVICE_NAME (@d.TYPE)</td>
+            <td><a href="javascript:void(0)" class="btn btn-default" onclick="setServiseOperator('@d.SERVICE_KEY','@d.SERVICE_NAME')"  data-dismiss="modal">Select..</a></td>
+        </tr>
+    }
+}
+
+
+
+</table>
+

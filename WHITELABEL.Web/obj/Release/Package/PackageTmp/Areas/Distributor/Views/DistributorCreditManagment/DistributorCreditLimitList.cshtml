@@ -1,0 +1,107 @@
+﻿@using NonFactors.Mvc.Grid;
+@model WHITELABEL.Data.Models.TBL_CREDIT_LIMIT_BALANCE_DISTRIBUTION
+@{
+    ViewBag.Title = "Distributor Credit Limit Report";
+    Layout = "~/Areas/Distributor/Views/Shared/_LayoutDistributor.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12 row headcolor">
+                <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-list fa-3x"></i></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4" style="text-align:right; padding-top:10px;">
+                    <h3>
+                        List of Credit Balance Report
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 padding-top-20">
+            <div class=" card">
+                <div class="card-body">
+                    <div class="panel-body">
+                        <div class="row example-row" style="margin-bottom:10px;">
+                            <div class="col-md-5">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3">Date From</label>
+                                    <div class="col-md-9">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">
+                                                @Html.EditorFor(model => model.FROM_DATE, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control date", id = "txtFromDate", @onkeydown = "return false;", @placeholder = "yyyy-MM-dd" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-3">Date From</label>
+                                    <div class="col-md-9">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">
+                                                @Html.EditorFor(model => model.TO_DATE, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control date", id = "txtToDate", @onkeydown = "return false;", @placeholder = "yyyy-MM-dd" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="inputer">
+                                    <div class="input-wrapper">
+                                        <a href="#" class="btn btn-primary" id="btnSearchDAteWise">Search Date Wise</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row example-row" style="width:100%">
+                            @Html.AjaxGrid(Url.Action("DistributorCreditReportindexgrid", "DistributorCreditManagment", new { area = "Distributor" }))
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<script type="text/javascript">
+    $(function () {
+        $('#txtFromDate').datepicker({
+            format: "yyyy-MM-dd",
+            language: "es",
+            autoclose: true,
+            todayHighlight: true,
+            changeMonth: true,
+            changeYear: true
+        });
+    });
+    $(function () {
+        $('#txtToDate').datepicker({
+            format: "yyyy-MM-dd",
+            language: "es",
+            autoclose: true,
+            todayHighlight: true,
+            changeMonth: true,
+            changeYear: true
+        });
+    });
+
+    $("#btnSearchDAteWise").on("click", function () {
+        var Date_From = $('#txtFromDate').val();
+        var Date_TO = $('#txtToDate').val();
+        $('.mvc-grid').mvcgrid({
+            query: 'DateFrom=' + Date_From + '&Date_To=' + Date_TO,
+            reload: true,
+            reloadStarted: function () {
+                $(".divFooterTotalComm").remove();
+            },
+        });
+    });
+
+</script>

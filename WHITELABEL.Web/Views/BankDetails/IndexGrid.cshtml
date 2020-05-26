@@ -1,0 +1,34 @@
+﻿@using WHITELABEL.Web.Helper;
+@*@model IEnumerable<WHITELABEL.Data.Models.TBL_SETTINGS_BANK_DETAILS>*@
+@model IGrid<WHITELABEL.Data.Models.TBL_SETTINGS_BANK_DETAILS>
+@{
+    ViewBag.Title = "IndexGrid";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@(new HtmlGrid<WHITELABEL.Data.Models.TBL_SETTINGS_BANK_DETAILS>(Html, Model))
+@*@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.BANK).Titled("BANK");
+        columns.Add(model => model.IFSC).Titled("IFSC");
+        columns.Add(model => model.ACCOUNT_NO).Titled("ACCOUNT NO");
+        columns.Add(model => model.BRANCH).Titled("BRANCH");
+        columns.Add(model => model.CONTACT).Titled("CONTACT");
+        columns.Add(model => model.MEM_ID).Titled("").Filterable(false).Sortable(false).RenderedAs(m => Html.ActionLink("Edit", "BankDetails", "BankDetails", new { Bankid = Encrypt.EncryptMe(m.SL_NO.ToString()) }, new { @class = "btn btn-primary btn-xs" }));
+        columns.Add(model => Html.Hidden("")).Titled("").Encoded(false)
+                .RenderedAs(model => "<a href='javascript:void(0)' class='btn btn-denger btn-xs' onclick='DeActivateBank(" + model.SL_NO + ");return 0;'>Deactivate</a>");
+    })    
+    .Empty("No data found")
+    .Id("my-ajax-grid")
+    .Pageable(pager =>
+    {
+        pager.PagesToDisplay = 10;
+        pager.RowsPerPage = 10;
+    })
+    .Filterable()
+    .Sortable()
+
+)*@
+

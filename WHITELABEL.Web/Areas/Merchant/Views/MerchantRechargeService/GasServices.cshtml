@@ -1,0 +1,410 @@
+﻿@model  WHITELABEL.Web.Areas.Merchant.Models.GasBillPaymentViewModel
+@{
+    ViewBag.Title = "GasServices";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+@Scripts.Render("~/bundles/MerchantGasBillRecharge")
+@using (Ajax.BeginForm("PostGasBillPayment", "MerchantRechargeService", new AjaxOptions { Confirm = "Do you want to pay bill", OnSuccess = "OnSuccessGasBill", OnFailure = "OnFailureGasBill", LoadingElementId = "progressGasBill" }, new { area = "Merchant", @id = "GasBillPayment" }))
+{
+    @Html.AntiForgeryToken()
+
+    @*<div class="col-md-12">
+            <div class="col-md-12 row headcolor">
+                <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-tint  fa-3x"></i> </div>
+
+                <div class="col-md-8" style="text-align:right; padding-top:10px;">
+                    <h3>
+                        Gas Bill Payment
+                    </h3>
+                </div>
+            </div>
+        </div>*@
+
+    <div class="col-md-12">
+        <div class="card">
+
+
+            <div class="card-body">
+                <h5>Gas Payment</h5>
+                <form>
+
+                    <div class="col-md-12" style="text-align:center; color:red; margin-bottom:30px;">
+                        <div id="GasErrormsg"></div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="row">
+
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    <div class="input-group" style=" height:37px;">
+                                        <div class="inputer" style="width:91%;">
+                                            <div class="md-form">
+                                                @Html.EditorFor(m => m.Service_Name, new { htmlAttributes = new { @style = "width:97%; padding:5px;", placeholder = "Service Name", id = "txtGassServiceOperator", @class = "form-control" } })
+                                                <input type="hidden" id="hfGassServiceOperator" name="GassServiceOperId" />
+                                                <label for="exampleInput1">@*Service Name*@</label>
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Service_Name, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                        <span class="input-group-btn">
+                                            <button href="javascript:void(0)" data-toggle='modal' data-target='.transdGass' id='transactionvalueGassid' type="button" class="btn btn-default">...</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    @*<div class="input-wrapper"></div>*@
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @Html.EditorFor(m => m.CustomerID, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Customer ID", @class = "form-control", id = "GASBillAccountNo" } })
+                                            <label for="exampleInput1">@*Customer ID*@</label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                    <div style="display:none">
+                                        @Html.EditorFor(m => m.geolocation, new { htmlAttributes = new { @class = "form-control", id = "GeolocationGasBill", @readonly = "readonly" } })
+                                        @Html.EditorFor(m => m.IpAddress, new { htmlAttributes = new { @class = "form-control", id = "GassBillIpadress", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    @*<div class="input-wrapper"></div>*@
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @Html.EditorFor(m => m.CUSTOMER_FIRST_NAME, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Customer First Name", @class = "form-control", id = "CustomerFirstName" } })
+                                            <label for="amount">@*Mobile*@</label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CUSTOMER_FIRST_NAME, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    @*<div class="input-wrapper"></div>*@
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @Html.EditorFor(m => m.CUSTOMER_LAST_NAME, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Customer Last Name", @class = "form-control", id = "CustomerLastName" } })
+                                            <label for="amount">@*Mobile*@</label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CUSTOMER_LAST_NAME, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    @*<div class="input-wrapper"></div>*@
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @Html.EditorFor(m => m.CUSTOMER_EMAIL_ID, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Customer Email Id", @class = "form-control", id = "CUSTOMER_EMAIL_ID" } })
+                                            <label for="amount">@*Mobile*@</label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CUSTOMER_EMAIL_ID, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    @*<div class="input-wrapper"></div>*@
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @Html.EditorFor(m => m.ContactNo, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Customer Mobile No", @class = "form-control", id = "GasContactNo" } })
+                                            <label for="exampleInput1">@*Customer ID*@</label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                    @*@Html.EditorFor(m => m.geolocation, new { htmlAttributes = new { @class = "form-control", id = "GeolocationGasBill", @readonly = "readonly" } })*@
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    @*<div class="input-wrapper"></div>*@
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @Html.EditorFor(m => m.PIN, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Enter Pin No", @class = "form-control", id = "txtPin" } })
+                                            <label for="amount">@*Mobile*@</label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.PIN, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @*<div class="input-wrapper"></div>*@
+                                            @Html.EditorFor(m => m.RechargeAmount, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Bill Amount", @class = "form-control", id = "GassBillAmount", @readonly = "readonly" } })
+                                            <label for="amount">@*Amount*@</label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.RechargeAmount, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-top:20px; text-align:center;">
+                                <a href="#" onclick="GetGASBillDetails();" style="color:white;" class="btn btn-info btn-lg" id="btnGasBillDisplay">Get Bill</a>
+                                <input type="submit" value="Pay" class="btn btn-primary btn-lg" id="btnsubmitGasBill" />
+                            </div>
+
+                        </div>
+                        <div class="col-md-3"></div>
+
+
+
+
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 row" style=" margin-top:15px; border:1px solid #ccc; padding:20px 0; margin-bottom:20px; display:none;margin-left:12px;" id="divGasdetailsBillDisplay">
+                        <div class="col-md-12 row">
+                            <div class="col-md-4 row">                                
+                                    <div class="col-md-4"> Due Date :-</div>
+                                    <div class="col-md-8"><div id="txtGasDueDate"></div></div>
+                            </div>
+                            <div class="col-md-4 row">                              
+                                    <div class="col-md-4"> Customer Name :- </div>
+                                    <div class="col-md-8">
+                                        <div id="txtGasCustomerName"></div>
+                                        <input type="hidden" id="Gas_referenceID" name="GassReferenceId" />
+                                    </div>
+                            </div>
+                            <div class="col-md-4 row">
+                                <div class="col-md-4"> Bill No :- </div>
+                                <div class="col-md-8">
+                                    <div id="txtGassBillbillnumber"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 row">
+                            <div class="col-md-4 row">
+                                    <div class="col-md-4"> Bill Date :-</div>
+                                    <div class="col-md-8"><div id="txtGasBillDate"></div></div>
+                            </div>
+                            <div class="col-md-4 row">
+                                    <div class="col-md-4"> Bill Status :- </div>
+                                    <div class="col-md-8">
+                                        <div id="txtGasBillStatus"></div>
+                                    </div>    
+                            </div>
+                            <div class="col-md-4 row">
+                             
+                            </div>
+                        </div>                       
+                        <div class="col-md-12 row" style="display:none">
+                            <div style="display:none" id="idGeolocbrod"> </div>
+
+                            @Html.EditorFor(m => m.GassReferenceNo, new { htmlAttributes = new { @class = "form-control", id = "txtGasscityRefNo" } })
+                        </div>
+                    </div>
+
+
+                    <div class="clearfix"></div>
+                    <div class="col-md-12" style="text-align:center; margin-top:30px;">
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+}
+
+<div id="dialog" style="display: none">
+</div>
+@*<div id="progressGasBill" class="loading hidden">Loading&#8230;</div>*@
+<div class="preloader hidden" id="progressGasBill">
+    <div id="loading"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnsubmitGasBill').hide();
+        $('#divGasdetailsBillDisplay').hide();
+        $('#progressGasBill').removeClass("hidden");
+        $('#progressGasBill').hide();
+    })
+    function OnSuccessGasBill(response) {
+        $('#progressGasBill').removeClass("hidden");
+        $('#progressGasBill').hide();
+        $('#loading').removeClass("hidden");
+        $('#loading').hide();
+        var message = response;
+        $("#GasBillPayment").trigger("reset");
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+            }
+        })
+        $('#btnsubmitGasBill').hide();
+        $('#divGasdetailsBillDisplay').hide();
+        $('#btnGasBillDisplay').show();
+        callGeocodeGasBill();
+        //alert(message);
+    }
+    function OnFailureGasBill(response) {
+        alert("Error occured.");
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+
+        callGeocodeGasBill();
+
+    });
+    function callGeocodeGasBill() {
+        $.getJSON('http://www.geoplugin.net/json.gp?jsoncallback=?', function (data) {
+
+            var information = JSON.stringify(data, null, 2);
+            //alert(information[0]);
+            //alert(JSON.stringify(data, null, 2));
+            console.log(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 2));
+            $('#GeolocationGasBill').val(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 0));
+            $('#GassBillIpadress').val(JSON.stringify(data.geoplugin_request, null, 0));
+            console.log(JSON.stringify(data, null, 2));
+        });
+    }   
+    function setGasOperatorServiseOperator($key, $name) {
+        $('#txtGassServiceOperator').val($name).focus();
+        $('#hfGassServiceOperator').val($key);
+        //$('#RechargeAmt').focus();
+        $('#transactionvalueGassid').modal('hide');
+        $('.transdGass').modal('hide');
+    }
+</script>
+
+<script>
+    var GetGASBillDetails = function () {
+        $('#progressGasBill').show();
+        $('#divGasdetailsBillDisplay').show();
+        debugger;
+        var _accountNo = $('#GASBillAccountNo').val();
+        var _mobileNo = $('#GasContactNo').val();
+        var _geoLocation = $('#GeolocationGasBill').val();
+        var Service_Key = $('#hfGassServiceOperator').val();
+        var GasBillAmt = $('#GassBillAmount').val();
+        var FirstName = $('#CustomerFirstName').val();
+        var LastName = $('#CustomerLastName').val();
+        var EmailId = $('#CUSTOMER_EMAIL_ID').val();
+        var PinCode = $('#txtPin').val();
+        $.ajax({
+            type: "POST",
+            url: "/Merchant/MerchantRechargeService/GetGasBillInformation",
+            data: { AccountNo: _accountNo, MobileNo: _mobileNo, GeoLocation: _geoLocation, ServiceKey: Service_Key, GasBillAmt: GasBillAmt, FName: FirstName, LName: LastName, EmailId: EmailId, PinNo: PinCode },
+            success: function (data) {
+                debugger;
+                var result = data.Result;
+                if (result == '0') {
+                    var GasBillValue = JSON.parse(data.data);
+                    var BillerId = GasBillValue.billerid;
+                    var amount = GasBillValue.billlist[0].net_billamount;
+                    var BillNoVal = GasBillValue.billlist[0].billnumber;
+                    var BillStatus = GasBillValue.billlist[0].billstatus;
+                    var BillDate = GasBillValue.billlist[0].billdate;
+                    //R202010172851
+                    var elec_Ref = GasBillValue.billlist[0].billid;
+                    $('#GassBillAmount').val(amount);
+                    $('#Gas_referenceID').val(elec_Ref);
+                    $('#txtGasDueDate').html(GasBillValue.billlist[0].billduedate);
+                    $('#txtGasCustomerName').html(GasBillValue.billlist[0].customer_name);
+                    //$('#txtElecbillnumber').html(Electricitybill.billlist[0].billnumber);
+                    $('#txtGassBillbillnumber').html(BillNoVal);
+                    $('#txtGasscityRefNo').val(GasBillValue.billlist[0].billid);
+                    $('#txtGasBillDate').html(BillDate);
+                    $('#txtGasBillStatus').html(BillStatus);
+                    $('#btnGasBillDisplay').hide();
+                    $('#btnsubmitGasBill').show();
+                    $('#GasErrormsg').html('');
+                    $('#progressGasBill').hide();
+
+                }
+                else {
+                    var msg = data.data;
+                    bootbox.alert({
+                        message: msg,
+                        backdrop: true
+                    });
+                    //$('#Errormsg').html(Electricitybill.status);
+                    $('#GasErrormsg').html(data);
+                }
+                $('#progressGasBill').hide();
+                //var GasBillValue = JSON.parse(data);
+                //var status = GasBillValue.statuscode;
+                //var statusvalue = GasBillValue.status;
+                //if (status === "TXN") {
+                //    //document.getElementById("RechargeAmt").innerHTML = JSON.stringify(GasBillValue.data.dueamount);
+                //    var amount = GasBillValue.data.dueamount;
+                //    var Gas_Reff = GasBillValue.data.reference_id;
+                //    $('#GassBillAmount').val(amount);
+                //    $('#Gas_referenceID').val(Gas_Reff);
+                //    $('#txtGasDueDate').html(GasBillValue.data.duedate);
+                //    $('#txtGasCustomerName').html(GasBillValue.data.customername);
+                //    $('#txtGassBillbillnumber').html(BroadBandbill.data.billnumber);
+                //    $('#txtGasscityRefNo').val(Gas_Reff);
+                //    $('#GasErrormsg').html('');
+                //    $('#btnsubmitGasBill').show();
+                //    $('#btnGasBillDisplay').hide();
+                //    $('#progressGasBill').hide();
+                //}
+                //else {
+                //    $('#GasErrormsg').html(statusvalue);
+                //}
+                //$('#progressGasBill').hide();
+
+            }
+
+        })
+    }
+</script>
+
+<div id="transactionvalueGassid" class="modal scale fade transdGass" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Service Provider Name List</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table style="width:100%">
+                    <tr>
+                        <th>Operator Name </th>
+                        <th></th>
+                    </tr>
+                    @foreach (var d in ViewBag.GasOperator)
+                    {
+                        <tr>
+                            <td>
+                                @d.SERVICE_NAME (@d.TYPE)
+                                <input type="hidden" value="@d.SERVICE_KEY" />
+                            </td>
+
+                            <td><a href="javascript:void(0)" class="btn btn-default" onclick="setGasOperatorServiseOperator('@d.SERVICE_KEY','@d.SERVICE_NAME')"><img src="@d.IMAGE" width="40" height="40" /></a></td>
+                            @*<td><a href="javascript:void(0)" class="btn btn-default" onclick="setGasOperatorServiseOperator('@d.SERVICE_KEY','@d.SERVICE_NAME')"><img src="data:image;base64,@d.IMAGE" width="60" height="60" /></a></td>*@
+                        </tr>
+                    }
+                </table>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div><!--.modal-content-->
+    </div><!--.modal-dialog-->
+</div>

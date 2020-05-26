@@ -1,0 +1,80 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_ACCOUNTS>
+@{
+   ViewBag.Title = "IndexGrid";
+    Layout = null;
+    //Layout = "~/Areas/Distributor/Views/Shared/_DistributorLayout.cshtml";
+}
+
+@(Html
+                            .Grid(Model)
+                            .Build(columns =>
+                            {
+                                //columns.Add(model => model.ACC_NO).Titled("Sln");
+                                columns.Add(model => model.SerialNo).Titled("Id");
+                                columns.Add(model => model.UserName).Titled("Merchant");
+                                columns.Add(model => model.MEMBER_TYPE).Titled("Member Type");
+                                columns.Add(model => model.TRANSACTION_TYPE).Titled("Trans Type");
+                                columns.Add(model => model.TRANSACTION_DATE).Formatted("{0:yyyy-MM-dd}").Titled("Trans Date").MultiFilterable(true);
+                                //columns.Add(model => model.AMOUNT).Titled("Amount");
+                                //columns.Add(model => model.DR_CR).Titled("Dr/Cr");
+                                columns.Add(model => model.OPENING).Titled("Opening Amt");
+                                columns.Add(model => model.CR_Col).Titled("Cr");
+                                columns.Add(model => model.DR_Col).Titled("Dr");                                
+                                columns.Add(model => model.CLOSING).Titled("Closing Amt");
+                                columns.Add(model => model.COMM_AMT).Titled("Commission");
+
+                            })
+                             .Css("css-classes")
+                                    .AppendCss("table table-striped")
+                            //.RowCss(model => model.STATUS == "Decline" ? "danger" : model.STATUS == "Pending" ? "info" : "")
+                            .Empty("No data found")
+                            
+                            .Id("my-ajax-grid")
+                            .Pageable(pager =>
+                            {
+                                pager.PagesToDisplay = 35;
+                                pager.RowsPerPage = 35;
+                                
+                            })
+                            .Filterable()
+                            .Sortable()
+                            
+                           
+
+)
+
+<table class="divFooterTotalComm" style="width:100%">
+    <tr>
+        
+        <td style="width:25%;">Total opening Amt:- <b>@Model.Sum(z => z.OPENING)</b></td>
+        <td style="width:25%;">Total Credit Amt:- <b>@Model.Where(z => z.DR_CR == "CR").Sum(z => z.AMOUNT)</b></td>
+        <td style="width:25%;">Total Debit Amt:- <b>@Model.Where(z => z.DR_CR == "DR").Sum(z => z.AMOUNT)</b></td>
+        <td style="width:25%;">Total closing Amt:- <b>@Model.Sum(z => z.CLOSING)</b></td>
+        <td></td>
+    </tr>
+</table>
+@*<div class="divFooterTotalComm">
+    <div class="row">
+        <div class="col-md-2">
+            <b> Total :-</b>
+        </div>
+        <div class="col-md-2" align="center">
+            <b></b>
+        </div>
+        <div class="col-md-2" align="center">
+            <b>@Model.Where(z => z.DR_CR == "CR").Sum(z => z.OPENING)</b>
+        </div>
+        <div class="col-md-2" align="center">
+            <b>@Model.Where(z => z.DR_CR == "DR").Sum(z => z.OPENING)</b>
+        </div>
+        <div class="col-md-2" align="center">
+            <b>@Model.Sum(z => z.OPENING)</b>
+        </div>
+
+        <div class="col-md-2" align="center">
+
+        </div>
+    </div>
+</div>*@

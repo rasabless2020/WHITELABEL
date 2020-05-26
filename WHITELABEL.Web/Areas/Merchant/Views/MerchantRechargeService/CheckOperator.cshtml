@@ -1,0 +1,26 @@
+﻿@*@{
+        ViewBag.Title = "CheckOperator";
+        Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    }*@
+
+<table style="width:100%">
+  
+@if (ViewBag.operatorList != null)
+{
+
+    foreach (var d in ViewBag.operatorList)
+    {
+    <tr>
+        
+        <td > @d.SERVICE_NAME (@d.TYPE)</td>
+        @*<td><a href="javascript:void(0)" class="btn btn-default" onclick="setServiseOperator('@d.SERVICE_KEY','@d.SERVICE_NAME')"  data-dismiss="modal">Select..</a></td>*@
+        
+        <td  style="text-align:right"><a href="javascript:void(0)" class="btn btn-default" onclick="setServiseOperator('@d.SERVICE_KEY','@d.SERVICE_NAME')" data-dismiss="modal"><img src="data:image;base64,@d.IMAGE"  width="40" height="40" /></a></td>
+    </tr>
+    }
+}
+
+
+
+</table>
+

@@ -1,0 +1,72 @@
+﻿//import { debug } from "util";
+
+//var app = angular.module('TransXTDMRAPIAPP', [])
+var app = angular.module('TransXTDMRAPIAPP', ["angularUtils.directives.dirPagination"]) // For Paging Code
+//app.filter('offset', function () {
+//    return function (input, start) {
+//        start = parseInt(start, 2);
+//        return input.slice(start);
+//    };
+//});
+app.controller('TransXTApiCallController', function ($scope, $http, $window, $location) {    
+        $scope.getTransactionList = function () {
+        $http({
+            url: '/MerchantDMRSection/GEtAll_TransactionInformation?area=Merchant',
+            method: "POST"
+        }).then(function (response) {
+            debugger;
+            $scope.AllTransactionList = response.data;
+            console.log(response.data);
+        },
+        function (response) {
+            console.log(response.data);            
+        });
+    };
+
+    $scope.reverseSort = false;
+    $scope.sortData = function (column) {
+        $scope.reverseSort = ($scope.sortColumn == column) ?
+            !$scope.reverseSort : false;
+        $scope.sortColumn = column;
+    }
+    $scope.getSortClass = function (column) {
+
+        if ($scope.sortColumn == column) {
+            return $scope.reverseSort
+                ? 'arrow-down'
+                : 'arrow-up';
+        }
+
+        return '';
+    }
+
+    //$scope.PrintInvoice = function (txnId, refid) {
+    //    debugger;
+    //    var url = "/Merchant/MerchantDMRSection/PrintDMRInvoice?txnid=" + txnId +"&RefClientid="+refid;
+    //    window.location.href = url;
+    //};
+
+    $scope.PrintInvoice = function (txnId, refid) {
+        debugger;
+        $http({
+            url: '/MerchantDMRSection/PrintTransferAmountInvoice?area=Merchant',
+            method: "POST",
+            data: { 'txnID': txnId, 'RefId': refid}
+            }).then(function (response) {
+                $scope.GetTransactionValue = response.data;
+                console.log(response.data);
+            },
+            function (response) {
+                console.log(response.data);
+            });
+    };
+
+/////////////////////////////////////////////////////////////////////////////////////////////////// 
+   
+
+
+
+
+});
+
+

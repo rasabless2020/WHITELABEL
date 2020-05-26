@@ -1,0 +1,147 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>
+@{
+    ViewBag.Title = "RequisitionReport";
+    Layout = "~/Areas/Super/Views/Shared/_SuperLayout.cshtml";
+}
+
+
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row example-row">
+
+                        
+                            <div class="col-md-6">@Html.DropDownList("MemberService", new SelectList((ViewBag.MemberService) as SelectList, "Value", "Text"), "Select Distributor", new { id = "DistributorList", @class = "form-control" })</div>
+                            @*<div class="col-md-4">@Html.DropDownList("Merchant", new SelectList(string.Empty, "Value", "Text"),"--Select--", new { @class = "form-control",id="MerchantId" })</div>*@                        
+                            <div class="col-md-6">
+                                @Html.DropDownList("MemberTransactionStatus", new List<SelectListItem>
+                                                                { new SelectListItem{Text="Approve", Value="Approve"},
+                                                                    new SelectListItem{Text="Pending", Value="Pending"},
+                                                                    new SelectListItem{Text="Decline", Value="Decline"} },
+                                                                   "Select Status", new { id = "TransactionStatus", @class = "form-control" })
+                            </div>
+
+                            <div class="col-md-12">@Html.AjaxGrid(Url.Action("RequisitionGrid", "SuperRequisition", new { area = "Super" }))</div>
+
+
+
+                        </div>
+                    @*<div class="row example-row">
+                        @Html.AjaxGrid(Url.Action("RequisitionGrid", "SuperRequisition", new { area = "Super" }))
+                    </div>*@
+                </div>
+                @*<div class="panel-footer text-right">
+                    <a href="@(Url.Action("ExportIndex","SuperRequisition",new {area="Super" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>
+                </div>*@
+
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+       function getdataaccordingdatewise() {
+           var datefrom = $("#datefrom").val();
+           var dateto = $("#dateTo").val();
+           //var MemberId = $('#MemberList').val();  RequisitionGrid
+           if (datefrom != "" && dateto != "") {
+               var url = "/SuperRequisition/RequisitionReport?Datefrom=" +  datefrom + "&dateto=" + dateto + "";
+               //var url = "/Requisition/RequisitionGrid?Datefrom=" + datefrom + "&dateto=" + dateto + "";
+               window.location = url;
+           }
+           else
+           {
+               var url = "/StockistRequisition/RequisitionReport";
+               //var url = "/Requisition/RequisitionGrid";
+               window.location = url;
+           }
+       }
+       function GetAllTransactionDetails() {
+           var url = "/StockistRequisition/RequisitionReport";
+           //var url = "/Requisition/RequisitionGrid";
+               window.location = url;
+       }
+       $(document).ready(function () {
+
+           var url_string = window.location.href; //window.location.href
+           var url = new URL(url_string);
+           var Datefrom = getParameterByName("Datefrom");
+           var dateto = getParameterByName("dateto");
+           //$("#MemberList").val(c);
+           $("#Datefrom").val(Datefrom);
+           $("#dateto").val(dateto);
+       });
+
+       function getParameterByName(id) {
+           name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+           var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+               results = regex.exec(location.search);
+           return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+       }
+
+</script>
+
+
+@*<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#DistributorList").change(function () {
+            debugger;
+            $("#MerchantId").empty();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetMerchant")',
+                dataType: 'json',
+                data: { Disid: $("#DistributorList").val() },
+                success: function (states) {
+                    debugger;
+                    $.each(states, function (i, state) {
+                        $("#MerchantId").append('<option value="' + state.IDValue + '">' +
+                            state.TextValue + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve data.' + ex);
+                }
+            });
+            return false;
+        })
+    });
+
+</script>*@   
+
+<script>
+    $(document).on('change', '#TransactionStatus', function () {
+        debugger;
+        var dropdownval = $('#DistributorList').val();
+           //var dropdownMerchantval = $('#MerchantId').val();
+           //var dropdownService = $('#MerchantId').val();
+           $('.mvc-grid').mvcgrid({
+               query: 'search=' + dropdownval + '&Status=' + this.value ,
+               //query: 'search=' + this.value+'&Satus'+this.value,
+               reload: true
+           });
+       });
+</script>
+
+<script>
+       //$(document).on('change', '.mvc-grid-search', function () {
+    $("#DistributorList").change(function () {
+        debugger;
+        var status = $('#TransactionStatus').val();   
+        //var dropdownMerchantval = $('#MerchantId').val();
+           $('.mvc-grid').mvcgrid({
+               //query: 'search=' + this.value,
+               query: 'search=' + this.value + '&Status=' + status,
+               reload: true
+           });
+       });
+</script>
+
+
+
+

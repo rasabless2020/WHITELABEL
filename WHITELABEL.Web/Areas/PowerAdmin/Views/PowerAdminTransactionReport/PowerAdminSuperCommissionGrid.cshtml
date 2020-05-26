@@ -1,0 +1,51 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_ACCOUNTS>
+@{
+    ViewBag.Title = "PowerAdminSuperCommissionGrid";
+    Layout = null;
+    //Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminLayout.cshtml";
+}
+
+
+@(Html
+                            .Grid(Model)
+                            .Build(columns =>
+                            {
+                                //columns.Add(model => model.ACC_NO).Titled("Sln");
+                                columns.Add(model => model.SerialNo).Titled("Id").Filterable(false);
+                                columns.Add(model => model.UserName).Titled("User Name");
+                                //columns.Add(model => model.MEMBER_TYPE).Titled("Member Type");
+                                columns.Add(model => model.TRANSACTION_TYPE).Titled("Trans Type");
+                                columns.Add(model => model.TRANSACTION_DATE).Titled("Trans Date").MultiFilterable(true);
+                                columns.Add(model => model.TRANSACTION_TIME).Titled("Trans Time").Formatted("{0:T}");
+                                columns.Add(model => model.AMOUNT).Titled("Amount");
+                                columns.Add(model => model.DR_CR).Titled("Dr/Cr");
+                                columns.Add(model => model.OPENING).Titled("Opening Amt");
+                                columns.Add(model => model.CLOSING).Titled("Closing Amt");
+                                columns.Add(model => model.COMM_AMT).Titled("Commission");
+
+                            })
+                            //.RowCss(model => model.STATUS == "Decline" ? "danger" : model.STATUS == "Pending" ? "info" : "")
+                            .Empty("No data found")
+                            .Id("my-ajax-grid")
+                            //.Pageable(pager =>
+                            //{
+                            //    pager.PagesToDisplay = 10;
+                            //    pager.RowsPerPage = 10;
+                            //})
+                            .Filterable()
+                            .Sortable()
+)
+
+<div class="divFooterTotalComm">
+    <div class="row">
+        <div class="col-md-10">
+            <b> Total Commission</b>
+        </div>
+        <div class="col-md-2" align="center">
+            <b>@Model.Where(z => z.DR_CR == "CR").Sum(z => z.COMM_AMT)</b>
+        </div>
+    </div>
+</div>
+

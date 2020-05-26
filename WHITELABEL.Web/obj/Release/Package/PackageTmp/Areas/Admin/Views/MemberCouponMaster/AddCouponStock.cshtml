@@ -1,0 +1,182 @@
+﻿@model WHITELABEL.Data.Models.TBL_COUPON_STOCK
+
+@using WHITELABEL.Data.Models
+@using WHITELABEL.Web.Helper;
+@{
+    /**/
+
+    ViewBag.Title = "Add Master Coupon Stock";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Ajax.BeginForm("PostAddCouponStock", "MemberCouponMaster", new AjaxOptions {  OnSuccess = "OnSuccessCouponStock", OnFailure = "OnFailureCouponStock", LoadingElementId = "progressCouponStock" }, new { area = "Admin", @id = "ADDCouponStock" }))
+{
+
+    <div class="form-horizontal  padding-top-50">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.sln)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="clearfix">
+            <div style="background-color:#ccc; border-radius:5px; color:#3e50b4; padding:5px 20px 10px 20px; margin-bottom:20px;" class="col-md-12"><h3 style="color:#3e50b4"><i class="fas fa-angle-double-right"></i> Add Master Coupon Stock</h3></div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body" style="padding:30px 0; ">
+                        <div class=" col-md-12 row">
+
+                            <div class=" col-md-3"> @*<img src="~/images/UtiImage.png" />*@</div>
+                            <div class=" col-md-6">
+                                <div>
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="text-align:left;">Vendor Name</label>
+                                        <div class="col-md-9" style="padding-top:5px; ">
+                                            <div class="inputer">
+                                                <div class="md-form">
+                                                    @*<b> UTIITSL</b>*@
+                                                    <b>@Html.DropDownListFor(model => model.Vendor_Name, new SelectList((ViewBag.VendorName) as SelectList, "Value", "Text"), "Select Vender", new { id = "VendorListDis", @class = "form-control" })</b>
+                                                    </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="text-align:left;">Coupon Type</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="md-form">
+                                                    @Html.DropDownListFor(model => model.couponType, new SelectList((ViewBag.CouponList) as SelectList, "Value", "Text"), "Select Coupon", new { id = "CouponListDis", @class = "form-control" })
+                                                    @Html.HiddenFor(model => model.couponHoderID)
+                                                </div>
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.couponType, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="text-align:left;">Quantity</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="md-form">
+                                                    @Html.EditorFor(model => model.couponQty, new { htmlAttributes = new { @class = "form-control", @placeholder = "Quantity", @maxlength = "5" } })
+                                                </div>
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.couponQty, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="text-align:left;">Purchase Date</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="md-form">
+
+                                                    @Html.EditorFor(model => model.puchaseDate, "{0:dd/mm/yyyy}", new { htmlAttributes = new { @class = "form-control date", id = "txtPurchaseDate", type = "text" } })
+                                                </div>
+                                                <span><small> @Html.ValidationMessageFor(model => model.puchaseDate, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div>
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="text-align:left;">Stock Register Date</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="md-form">
+                                                    @Html.EditorFor(model => model.stockEntryDate, "{0:dd/mm/yyyy}", new { htmlAttributes = new { @class = "form-control date", id = "txtStockEntryDate", type = "text" } })
+                                                </div>
+                                                <span><small> @Html.ValidationMessageFor(model => model.stockEntryDate, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class=" col-md-3"></div>
+                        </div><!--.row-->
+                    </div>
+                    <div>
+                        <div class="text-center" style="padding-bottom:20px;">
+                            @if (ViewBag.btnStatus == "0")
+                            {
+                                <input type="submit" value="Create" class="btn btn-primary" id="btnsubmit" />
+                            }
+                            else
+                            {
+                                <input type="submit" value="Update" class="btn btn-primary" id="btnUpdatesubmit" />
+                            }
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div>
+    </div>
+}
+
+
+<div class="preloader hidden" id="progressCouponStock">
+    <div id="loading"></div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#progressCouponStock').removeClass("hidden");
+        $('#progressCouponStock').hide();
+    })
+    function OnSuccessCouponStock(response) {
+        var message = response; debugger;
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+                var url = "/Admin/MemberCouponMaster/CouponStockMaster";
+                window.location.href = url;
+            }
+        })
+        $("#ADDCouponStock").trigger("reset");
+        //callGeocodeMobile();
+        //alert(message);
+    }
+    function OnFailureCouponStock(response) {
+        alert("Error occured.");
+    }
+</script>
+<script>
+    $(document).ready(function () {
+
+        window.setTimeout(function () {
+            $("#informationMessage").fadeOut('slow');
+        }, 3000);
+    });
+    $(function () {
+        $('#txtPurchaseDate').datepicker({
+            format: "dd-MM-yyyy",
+            language: "es",
+            autoclose: true,
+            todayHighlight: true,
+            changeMonth: true,
+            changeYear: true
+        });
+        $('#txtStockEntryDate').datepicker({
+            format: "dd-MM-yyyy",
+            language: "es",
+            autoclose: true,
+            todayHighlight: true,
+            changeMonth: true,
+            changeYear: true
+        });
+    });
+
+
+</script>
+

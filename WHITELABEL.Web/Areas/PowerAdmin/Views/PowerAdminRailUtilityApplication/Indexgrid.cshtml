@@ -1,0 +1,38 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_APPLICATION_FOR_RAIL_UTILITY>
+@{
+    ViewBag.Title = "Indexgrid";
+    //Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminLayout.cshtml";
+    Layout = null;
+}
+
+
+
+@(Html
+                    .Grid(Model)
+                    .Build(columns =>
+                    {
+                        columns.Add(model => model.ID).Titled("Id");
+                        columns.Add(model => model.Member_Name).Titled("Appliciant Name");
+                        columns.Add(model => model.MemberRole).Titled("Member Type");
+                        columns.Add(model => model.APPLICATION_DATE).Titled("Application Date");
+                        columns.Add(model => model.ID).Encoded(false).Filterable(false).Sortable(false).Titled("Status")
+                        .RenderedAs(model => "<div style='text-align:center'><a href='javascript:void(0)' title='" + (model.STATUS == 0 ? "Approve": model.STATUS == 2 ? "Decline" : "Pending") + "'>" + (model.STATUS == 0 ? "<span style='color:green;'>Approve</span>": model.STATUS == 2 ? "<span style='color:red;'>Decline</span>" : "<span style='color:#856404;'>Pending</span>") + "</a></div>");
+                        columns.Add(model => model.ID).Encoded(false).Filterable(false).Sortable(false).Titled("Approve Application")
+                        .RenderedAs(model => "<div style='text-align:center'><a href='javascript:void(0);' data-toggle='modal' data-target='.transd' id='transactionvalueid' onclick='GetapplicationValue(" + model.ID+","+model.APPLIED_MER_ID+");' style='margin-right:10px' title='Edit'><i class='fa fa-edit'></i></a></div>");
+                        //columns.Add(model => model.ID).Titled("").Encoded(false).Filterable(false).Sortable(false).Titled("Action")
+                        //.RenderedAs(model => "<div style='text-align:center'><a href='javascript:void(0)'  data-id=" + model.ID + " onclick='ApplicationApprove(" + model.ID + ");' title='Approve'><span style='color:green'><i class='fa fa-thumbs-up'></i></span></a></div>");
+                        columns.Add(model => model.ID).Titled("").Encoded(false).Filterable(false).Sortable(false).Titled("Decline Application")
+                    .RenderedAs(model => "<div style='text-align:center'><a href='javascript:void(0)' data-id=" + model.ID + " onclick='ApplicationDeclined(" + model.ID + ");' title='Decline'><span style='color:red'><i class='fa fa-thumbs-down'></i></span></a></div>");
+                    })
+                    .Empty("No data found")
+                    .Id("my-ajax-grid")
+                    .Pageable(pager =>
+                    {
+                        pager.PagesToDisplay = 10;
+                        pager.RowsPerPage = 10;
+                    })
+                    .Filterable()
+                    .Sortable()
+)

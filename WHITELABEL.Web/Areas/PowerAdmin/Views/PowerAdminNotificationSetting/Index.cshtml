@@ -1,0 +1,54 @@
+﻿@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "Notification Setting";
+   Layout = "~/Areas/PowerAdmin/Views/Shared/_LayoutPowerAdmin.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal padding-top-20">
+    @if (Session["msg"] != null)
+    {
+        <div id="informationMessage" class="text-center alert alert-success">
+            <span style="width:100%;text-align:center;">@Session["msg"].ToString() </span>
+            @if (Session["msg"].ToString() == "Notification Saved Successfully" || Session["msg"].ToString() == "Notification Updated Successfully")
+            {
+                Session.Remove("msg");
+            }
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-heading">
+                    <div class="panel-title ">
+                        <div class="text-right">
+                            <a href="@Url.Action("AddNotification", "PowerAdminNotificationSetting", new { area = "PowerAdmin" })" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New Notification</a>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="panel-body">
+                    <div class="row example-row">
+
+                        @Html.AjaxGrid(Url.Action("IndexGrid", "PowerAdminNotificationSetting", new { area = "PowerAdmin" }))
+                    </div><!--.row-->
+                </div><!--.panel-body-->
+
+
+
+            </div><!--.panel-->
+        </div><!--.col-md-12-->
+    </div><!--.row-->
+
+</div>
+}
+
+<script>
+    $(document).ready(function () {
+        window.setTimeout(function () {
+            $("#informationMessage").fadeOut('slow');
+        }, 2000);
+    });
+
+</script>

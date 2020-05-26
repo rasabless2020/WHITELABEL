@@ -1,0 +1,142 @@
+﻿@model WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS
+@using WHITELABEL.Data.Models
+@using WHITELABEL.Web.Helper;
+@{
+    ViewBag.Title = "Debit and Credit";
+    //Layout = "~/Areas/Distributor/Views/Shared/_DistributorLayout.cshtml";
+    Layout = "~/Areas/Distributor/Views/Shared/_LayoutDistributor.cshtml";
+}
+@Scripts.Render("~/bundles/DistributorRequisition")
+@using (Html.BeginForm("Index", "DistributorDebitCreditRequest", FormMethod.Post, new { area = "Distributor" }))
+{
+    <div class="form-horizontal padding-top-20">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.SLN)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            @*<div class="col-md-12">
+                <div class="col-md-12 row headcolor">
+                    <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-wallet fa-3x"></i> </div>
+
+                    <div class="col-md-8" style="text-align:right; padding-top:10px;">
+                        <h3>
+                            Manual Balance Transfer List
+                        </h3>
+                    </div>
+                </div>
+            </div>*@
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-heading">
+                        </div><!--.panel-heading-->
+                        <div class="panel-body">
+                            @if (ViewBag.msg != null)
+                            {
+                                <div id="informationMessage" class="text-center alert alert-danger" style="background-color:red; margin-bottom:10px;">
+                                    <span style="width:100%;text-align:center;">@ViewBag.msg </span>
+                                </div>
+                            }
+                            <div class="clearfix"></div>
+                            <div class="row">
+                                <div class="col-md-12 row">
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            @Html.HiddenFor(model => model.FROM_MEMBER)
+                                            @Html.HiddenFor(model => model.SLN)
+                                            <label class="control-label col-md-3" style="text-align:left;">User List</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.AutocompleteFor(model => model.FromUser, model => model.FROM_MEMBER, "GetPeople", "DistributorRequisition", false, new { area = "Distributor", htmlAttributes = new { @class = "form-control", autocomplete = "off" } })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @Html.ValidationMessageFor(model => model.FromUser, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 row">
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-6">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="text-align:left;">Amount</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.EditorFor(model => model.AMOUNT, new { htmlAttributes = new { @class = "form-control", @placeholder = "XXXXX.XX" } })
+                                                    </div>
+                                                    <span><small>@Html.ValidationMessageFor(model => model.AMOUNT, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 row">
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-6 ">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="text-align:left;">Payment Method</label>
+                                            <div class="col-md-9 md-form">
+                                                @Html.DropDownListFor(m => m.PAYMENT_METHOD, new List<SelectListItem>
+                                                                { new SelectListItem{Text="Debit", Value="DR"},
+                                                                    new SelectListItem{Text="Credit", Value="CR"}},
+                                                                    "--Select--", new { id = "Paymentmethod", @class = "form-control" })
+                                                <span><small> @Html.ValidationMessageFor(model => model.PAYMENT_METHOD, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 row">
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-6 ">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="text-align:left;">Transaction Details</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.EditorFor(model => model.TRANSACTION_DETAILS, new { htmlAttributes = new { @class = "form-control", @placeholder = "Transaction Details" } })
+                                                    </div>
+                                                    <span><small>@Html.ValidationMessageFor(model => model.TRANSACTION_DETAILS, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3"></div>
+                                </div>
+                            </div>
+                        </div><!--.panel-body-->
+                        <div class="panel-footer">
+                            <div class="col-md-12 text-center">
+                                <input type="submit" value="Create" class="btn btn-primary" />
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div><!--.panel-->
+                </div>
+            </div><!--.col-md-12-->
+        </div>
+
+    </div>
+    <script>
+    $(document).ready(function () {
+
+        window.setTimeout(function () {
+            $("#informationMessage").fadeOut('slow');
+        }, 3000);
+    });
+
+    </script>
+}
+

@@ -1,0 +1,35 @@
+﻿namespace WHITELABEL.Data.Models
+{
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Web.Mvc;
+    [Table("SERVICE_PROVIDERS")]
+    public class TBL_SERVICE_PROVIDERS
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long ID { get; set; }
+        public string SERVICE_NAME{ get; set; }
+        public string TYPE { get; set; }
+        public string SERVICE_KEY { get; set; }
+        public string COMMERTIALS { get; set; }
+        public string BILLING_MODEL { get; set; }
+        public string HSN_SAC { get; set; }
+        public string TDS { get; set; }
+        public string BILL_FETCH { get; set; }
+        public string BBPS_ENABLED { get; set; }
+        public string OUTLET_VERIFICATION { get; set; }
+        public string PAYMENT_MODE { get; set; }
+        public string PAYMENT_CHANNEL { get; set; }
+        public string AMOUNT_RANGE { get; set; }
+        public string MIN_LENGTH { get; set; }
+        public string MAX_LENGTH { get; set; }
+        public string API_PARAMETERS { get; set; }
+        public string OPTION1 { get; set; }
+        public string OPTION2 { get; set; }
+        public string OPTION3 { get; set; }
+        public string OPTION4 { get;   set ; }
+        public string IMAGE { get; set; }
+    }
+}

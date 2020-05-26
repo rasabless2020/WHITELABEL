@@ -1,0 +1,27 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_COMM_SLAB_DMR_PAYMENT>
+@{
+    ViewBag.Title = "DMTCommissionIndexGrid";
+    //Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+    Layout = null;
+}
+
+
+@(Html
+          .Grid(Model)
+          .Build(columns =>
+          {
+              columns.Add(model => model.DISTRIBUTOR_COMM_TYPE).Titled("Slab Name").Filterable(true).Sortable(true);
+              columns.Add(model => model.SLAB_FROM).Titled("Slab From").Filterable(true).Sortable(true);
+              columns.Add(model => model.SLAB_TO).Titled("Slab to").Filterable(true).Sortable(true);
+              columns.Add(model => model.COMM_TYPE).Titled("Comm Type").Filterable(true).Sortable(true);
+              columns.Add(model => model.MERCHANT_COMM_TYPE).Titled("Merchant Comm Type").Filterable(true).Sortable(true);
+              columns.Add(model => model.MERCHANT_COM_PER).Titled("Merchant Comm Amt").Filterable(true).Sortable(true);
+          })
+          .Empty("No data found")
+          .Id("my-ajax-grid")
+          .Filterable()
+          .Sortable()
+)
+

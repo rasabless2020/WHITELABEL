@@ -1,0 +1,121 @@
+﻿@model WHITELABEL.Data.Models.TBL_WHITE_LEVEL_HOSTING_DETAILS
+@{
+    ViewBag.Title = "Hosting Details";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("HostingDetails", "MemberHosting", FormMethod.Post, new { area="Admin",enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.SLN)
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="panel-title ">
+                            <h4>
+                                Hi,@ViewBag.membername
+                            </h4>
+                        </div>
+                        @Html.HiddenFor(model => model.MEM_ID)
+                    </div><!--.panel - heading-->
+                    <div class="panel-body">
+                        <div class="row example-row">
+
+                            <div class="col-md-4">
+                                <div class="inputer floating-label">
+                                    <div class="input-wrapper">
+                                        @Html.EditorFor(model => model.COMPANY_NAME, new { htmlAttributes = new { @class = "form-control" } })
+                                        <label for="COMPANY_NAME">Company Name</label>
+                                    </div>
+                                    <span>@Html.ValidationMessageFor(model => model.COMPANY_NAME, "", new { @class = "text-danger" })</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="inputer floating-label">
+                                    <div class="input-wrapper">
+                                        @Html.EditorFor(model => model.DOMAIN, new { htmlAttributes = new { @class = "form-control" } })
+                                        <label for="DOMAIN">DOMAIN</label>
+                                    </div>
+                                    <span>@Html.ValidationMessageFor(model => model.DOMAIN, "", new { @class = "text-danger" })</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="inputer floating-label">
+                                    <div class="input-wrapper">
+                                        @Html.EditorFor(model => model.LONG_CODE, new { htmlAttributes = new { @class = "form-control" } })
+                                        <label for="LONG_CODE">LONG_CODE</label>
+                                    </div>
+                                    <span>@Html.ValidationMessageFor(model => model.LONG_CODE, "", new { @class = "text-danger" })</span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+
+
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+
+
+                    <ul class="list-group">
+                        <li class="list-group-item">
+
+                            <div class="form-group">
+                                <label for="exampleInputFile">Upload MOTO</label>
+                                <input type="file" name="MotoFile" id="exampleInputMotoFile">
+                            </div><!--.form-group-->
+
+
+
+                        </li>
+                        <li class="list-group-item">
+
+                            <div class="form-group">
+                                <label for="exampleInputLogoFile">Upload Logo</label>
+                                <input type="file" name="LogoFile" id="exampleInputLogoFile">
+
+                            </div><!--.form-group-->
+
+
+                        </li>
+                        <li class="list-group-item">
+
+                            <div class="form-group">
+                                <label for="exampleInputBannerFile">Upload Banner</label>
+                                <input type="file" name="BannerFile" id="exampleInputBannerFile">
+
+                            </div><!--.form-group-->
+
+                        </li>
+                    </ul>
+                    <div class="panel-footer">
+                        <div class="col-lg-6">
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+
+                        <div class="col-lg-6 text-right">
+                            @if (ViewBag.checkbtn == "0")
+                {
+                                <input type="submit" value="Create" class="btn btn-cyan" />
+                            }
+                            else
+                            {
+                                <input type="submit" value="Update" class="btn btn-cyan" />
+                            }
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div>
+    </div>
+}
+

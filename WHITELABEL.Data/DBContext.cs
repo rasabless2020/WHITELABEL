@@ -1,0 +1,78 @@
+﻿namespace WHITELABEL.Data
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+    using WHITELABEL.Data.Models;
+
+    public class DBContext : DbContext
+    {
+        public DBContext() : base("name=DefaultConnection") {
+            this.Configuration.ProxyCreationEnabled = false;
+        }
+        public DbSet<TBL_AUTH_ADMIN_USER> TBL_AUTH_ADMIN_USERS { get; set; }
+        public DbSet<TBL_MASTER_MEMBER> TBL_MASTER_MEMBER { get; set; }
+        public DbSet<TBL_MASTER_MEMBER_ROLE> TBL_MASTER_MEMBER_ROLE { get; set; }
+        public DbSet<TBL_WHITE_LEVEL_HOSTING_DETAILS> TBL_WHITE_LEVEL_HOSTING_DETAILS { get; set; }
+        public DbSet<TBL_SETTINGS_SERVICES_MASTER> TBL_SETTINGS_SERVICES_MASTER { get; set; }
+        public DbSet<TBL_WHITELABLE_SERVICE> TBL_WHITELABLE_SERVICE { get; set; }
+        public DbSet<TBL_SETTINGS_BANK_DETAILS> TBL_SETTINGS_BANK_DETAILS { get; set; }
+        public DbSet<TBL_BALANCE_TRANSFER_LOGS> TBL_BALANCE_TRANSFER_LOGS { get; set; }
+        public DbSet<TBL_ACCOUNTS> TBL_ACCOUNTS { get; set; }
+        public DbSet<TBL_STATES> TBL_STATES { get; set; }
+        public DbSet<TBL_API_RESPONSE_OUTPUT> TBL_API_RESPONSE_OUTPUT { get; set; }
+        public DbSet<TBL_OPERATOR_MASTER> TBL_OPERATOR_MASTER { get; set; }
+        public DbSet<TBL_BANK_MASTER> TBL_BANK_MASTER { get; set; }
+        public DbSet<TBL_API_SETTING> TBL_API_SETTING { get; set; }
+        public DbSet<TBL_DMR_API_RESPONSE> TBL_DMR_API_RESPONSE { get; set; }
+        public DbSet<TBL_DMR_APPLICANT_INFO> TBL_DMR_APPLICANT_INFO { get; set; }
+        public DbSet<TBL_SERVICE_PROVIDERS> TBL_SERVICE_PROVIDERS { get; set; }
+        public DbSet<TBL_INSTANTPAY_RECHARGE_RESPONSE> TBL_INSTANTPAY_RECHARGE_RESPONSE{ get; set; }
+        public DbSet<TBL_DMR_REMITTER_INFORMATION> TBL_DMR_REMITTER_INFORMATION { get; set; }
+        public DbSet<TBL_REMITTER_BENEFICIARY_INFO> TBL_REMITTER_BENEFICIARY_INFO { get; set;    }
+        public DbSet<TBL_DMR_FUND_TRANSFER_DETAILS> TBL_DMR_FUND_TRANSFER_DETAILS { get; set; }
+        public DbSet<TBL_API_COMMISION_STRUCTURE> TBL_API_COMMISION_STRUCTURE { get; set; }
+        public DbSet<TBL_WHITE_LEVEL_COMMISSION_SLAB> TBL_WHITE_LEVEL_COMMISSION_SLAB { get; set; }
+        public DbSet<TBL_COMM_SLAB_MOBILE_RECHARGE> TBL_COMM_SLAB_MOBILE_RECHARGE { get; set; }
+        public DbSet<TBL_COMM_SLAB_UTILITY_RECHARGE> TBL_COMM_SLAB_UTILITY_RECHARGE { get; set; }
+        public DbSet<TBL_COMM_SLAB_DMR_PAYMENT> TBL_COMM_SLAB_DMR_PAYMENT { get; set; }
+        public DbSet<TBL_DETAILS_MEMBER_COMMISSION_SLAB> TBL_DETAILS_MEMBER_COMMISSION_SLAB { get; set; }
+        public DbSet<TBL_AIRPORT_DETAILS> TBL_AIRPORT_DETAILS { get; set; }
+        public DbSet<TBL_MERCHANT_OUTLET_INFORMATION> TBL_MERCHANT_OUTLET_INFORMATION { get; set; }
+        public DbSet<TBL_API_TOKEN> TBL_API_TOKEN { get; set; }
+        public DbSet<TBL_COUNTRY> TBL_COUNTRY { get; set; }
+        
+        public DbSet<TBL_PASSWORD_RESET> TBL_PASSWORD_RESET { get; set; }
+        public DbSet<TBL_DMT_BANK_MARGIN> TBL_DMT_BANK_MARGIN { get; set; }
+        public DbSet<TBL_TAX_MASTER> TBL_TAX_MASTER { get; set; }
+        public DbSet<TBL_NOTIFICATION_SETTING> TBL_NOTIFICATION_SETTING { get; set; }
+        public DbSet<TBL_CIRCLE_OPERATOR> TBL_CIRCLE_OPERATOR { get; set; }
+        public DbSet<TBL_MULTILINK_API_RESPONSE> TBL_MULTILINK_API_RESPONSE { get; set; }
+        public DbSet<TBL_DMR_CUSTOMER_DETAILS> TBL_DMR_CUSTOMER_DETAILS { get; set; }
+        public DbSet<TBL_DMR_RECIPIENT_DETAILS> TBL_DMR_RECIPIENT_DETAILS { get; set; }
+        public DbSet<TBL_TRANSXT_DMR_TRANSACTION_LIST> TBL_TRANSXT_DMR_TRANSACTION_LIST { get; set; }
+        public DbSet<TBL_ACCOUNT_VERIFICATION_TABLE> TBL_ACCOUNT_VERIFICATION_TABLE { get; set; }
+        public DbSet<TBL_FINGERPRINT_DEVICE_MASTER> TBL_FINGERPRINT_DEVICE_MASTER { get; set; }
+        public DbSet<TBL_APPLICATION_FOR_RAIL_UTILITY> TBL_APPLICATION_FOR_RAIL_UTILITY { get; set; }
+        public DbSet<TBL_DEBIT_CREDIT_SETTIING> TBL_DEBIT_CREDIT_SETTIING { get; set; }
+        public DbSet<TBL_DEBIT_CREDIT_NOTE_REMARK_SETTING> TBL_DEBIT_CREDIT_NOTE_REMARK_SETTING { get; set; }
+        public DbSet<TBL_TRACE_MEMBER_LOGIN_DETAILS> TBL_TRACE_MEMBER_LOGIN_DETAILS { get; set; }
+        public DbSet<TBL_TAX_MASTERS> TBL_TAX_MASTERS { get; set; }
+        public DbSet<TBL_API_CALLBACK_LOGS> TBL_API_CALLBACK_LOGS { get; set; }
+        public DbSet<TBL_DMR_TRANSACTION_LOGS> TBL_DMR_TRANSACTION_LOGS { get; set; }
+        public DbSet<TBL_MEMBER_CREDIT_ACCOUNT_LOGS> TBL_MEMBER_CREDIT_ACCOUNT_LOGS { get; set;  }
+        public DbSet<TBL_COUPON_MASTER> TBL_COUPON_MASTER { get; set; }
+        public DbSet<TBL_COUPON_STOCK> TBL_COUPON_STOCK { get; set; }
+        public DbSet<TBL_COUPON_TRANSFER_LOGS> TBL_COUPON_TRANSFER_LOGS { get; set; }
+        public DbSet<TBL_COUPON_COMMISSION_SLAB> TBL_COUPON_COMMISSION_SLAB { get; set; }
+        public DbSet<TBL_MEMBER_CREDIT_TRANSFER_LOGS> TBL_MEMBER_CREDIT_TRANSFER_LOGS { get; set; }
+        public DbSet<TBL_VENDOR_MASTER> TBL_VENDOR_MASTER { get; set; }
+        public DbSet<TBL_JIO_PLAN_LIST> TBL_JIO_PLAN_LIST { get; set; }
+        public DbSet<TBL_CREDIT_BALANCE_DISTRIBUTION> TBL_CREDIT_BALANCE_DISTRIBUTION { get; set; }
+        public DbSet<TBL_CREDIT_LIMIT_BALANCE_DISTRIBUTION> TBL_CREDIT_LIMIT_BALANCE_DISTRIBUTION { get; set; }
+    }
+    
+}

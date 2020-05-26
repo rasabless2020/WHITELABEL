@@ -1,0 +1,91 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_MASTER_MEMBER>
+@{
+    ViewBag.Title = "IndexGrid";
+    //Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminLayout.cshtml";
+}
+
+@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.UName).Titled("UserName");
+        columns.Add(model => model.AADHAAR_NO).Titled("Aadhaar Card").Encoded(false)
+            .RenderedAs(model => model.AADHAAR_NO + "<br /> <a href='javascript:void(0)' onclick='showimages(\"" + model.AADHAAR_FILE_NAME + "\")'>View Image</a>  " + Html.ActionLink("Download", "downloadfiles", "PowerAdminKYCVerification", new { area="PowerAdmin", type = "Aadhaar", memid = Encrypt.EncryptMe(model.MEM_ID.ToString()) }, new { }));
+        columns.Add(model => Html.Hidden("")).Titled("Pan Card").Encoded(false)
+            .RenderedAs(model => model.PAN_NO + "<br /> <a href='javascript:void(0)' onclick='showimages(\"" + model.PAN_FILE_NAME + "\")'>View Image</a>  " + Html.ActionLink("Download", "downloadfiles", "PowerAdminKYCVerification", new { area= "PowerAdmin", type = "Pan", memid = Encrypt.EncryptMe(model.MEM_ID.ToString()) }, new { }));
+        columns.Add(model => Html.Hidden("")).Titled("").Encoded(false)
+           .RenderedAs(model => "<div class='btn-group btn-group-xs'><a href='javascript:void(0)' class='btn btn-primary' onclick='KYCDocApprove(" + model.MEM_ID + ")'>Approve</a>&nbsp;&nbsp;  <a href='javascript:void(0)' class='btn btn-denger' onclick='KYCDocReject(" + model.MEM_ID + ")'>Reject</a></div>");
+        //columns.Add(model => Html.Hidden("")).Titled("").Encoded(false)
+        //    .RenderedAs(model => "<div class='btn-group btn-group-xs'><a href='javascript:void(0)' class='btn btn-denger' onclick='KYCDocReject(" + model.MEM_ID + ")'>Reject</a></div>");
+    })
+
+    .Empty("No data found")
+    .Id("my-ajax-grid")
+    .Pageable(pager =>
+    {
+        pager.PagesToDisplay = 2;
+        pager.RowsPerPage = 2;
+    })
+    .Filterable()
+    .Sortable()
+
+)
+
+<script type="text/javascript">
+   @*function KYCDocApprove(id, valtype) {
+        alert(val);
+        debugger;
+        bootbox.confirm({
+            title: "Message",
+            message: "Do you want to Approve Document",
+            buttons: {
+                confirm: {
+                    label: 'Confirm',
+                    className: 'btn-success btn-sm'
+                },
+                cancel: {
+                    label: 'Cancel',
+                    className: 'btn-danger btn-sm'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    $.ajax({
+                        url: "@Url.Content("~/KYCVerification/ApproveKYCDocument")",
+                        data: {
+                            id: id,
+                            val=valtype
+                        },
+                        cache: false,
+                        type: "POST",
+                        dataType: "json",
+                        beforeSend: function () {
+                        },
+                        success: function (data) {
+
+                            if (data.Result === "true") {
+                                $('.mvc-grid').mvcgrid('reload');
+                                $(".overlaydiv").fadeOut("slow");
+                            }
+                            else {
+                                $(".overlaydiv").fadeOut("slow");
+                                bootbox.alert({
+                                    message: "there is some thing error",
+                                    backdrop: true
+                                });
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(status);
+                        }
+                    });
+                }
+            }
+        });
+
+    }*@
+
+</script>
+

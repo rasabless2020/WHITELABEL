@@ -1,0 +1,9 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IGrid<WHITELABEL.Data.Models.TBL_MASTER_MEMBER>
+@{
+    ViewBag.Title = "MemberGrid";
+    //Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@(new HtmlGrid<WHITELABEL.Data.Models.TBL_MASTER_MEMBER>(Html, Model))
+

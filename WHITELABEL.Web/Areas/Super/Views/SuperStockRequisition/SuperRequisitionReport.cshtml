@@ -1,0 +1,164 @@
+﻿@using NonFactors.Mvc.Grid;
+@model WHITELABEL.Data.Models.TBL_COUPON_TRANSFER_LOGS
+@{
+    ViewBag.Title = "Super Requisition Report";
+    Layout = "~/Areas/Super/Views/Shared/_LayoutSuper.cshtml";
+}
+<script src="~/Areas/Super/SuperHelperJS/CouponJs/Index.js"></script>
+<style>
+    .bborder {
+        border-bottom: 5px solid #ccc !important;
+        padding-bottom: 30px;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal padding-top-20">
+        <div class="row">
+            <div style="background-color:#ccc; border-radius:5px; color:#3e50b4; padding:5px 20px 10px 20px; margin-bottom:20px;" class="col-md-12"><h3 style="color:#3e50b4"><i class="fas fa-angle-double-right"></i> Super Requisition Report</h3></div>
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+
+                        </div>
+                    </div><!--.panel-heading-->
+                    <div class="panel-body">
+                        <div class="row example-row">
+                            @Html.AjaxGrid(Url.Action("SuperRequisitionReportIndexGrid", "SuperStockRequisition", new { area = "Super" }))
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div><!--.row-->
+    </div>
+}
+<div id="PrintDiv">
+    <div id="PrinttransactionvalueAdminid" class="modal scale fade printTransd" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+        <div class="modal-dialog modal-lg" style="margin-bottom:100px;">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div>
+                        <div style=" margin-bottom:20px; text-align:center; width:22%; float:left;">
+                            <img src="" width="100" />
+                            <img src="~/images/EDPL_LOGO.png" width="100" /> @*<img id="txtImgPath" src="compman.gif" width="107" height="100">*@
+                        </div>
+                        <div style="text-decoration:underline; text-align:center; width:50%; float:left;"><h4>Coupon Print Invoice</h4></div>
+                        <div style=" margin-bottom:20px; text-align:center; width:22%; float:left;"></div>
+                        <div style="clear:both;"></div>
+                    </div>
+                </div>
+                <div class="modal-body" style="max-height:700px;">
+                    <div class="col-md-12" style="border-bottom:1px solid #ccc; margin-bottom:30px; text-align:center;">
+                        <div style=" text-align:left; width:50%; float:left;">
+                            <span id="txtmemberName"></span><br>
+                            <span id="txtCompanyName"></span><br>
+                            <b> GST:</b> <span id="txtCompanyGSTNo"></span><br>
+                            <b>Address: </b><span id="txtAddress"></span><br>
+                            <b>Mobile: </b><span id="txtMember_mobile"></span>
+                        </div>
+                        <div style="text-align:right; font-weight:bold; width:50%; float:right;">Invoice Date :-  <span id="txtInvoiceDate"></span></div>
+                        <div style="clear:both;"></div>
+                    </div>
+                    <div class="col-md-12">
+
+
+                        <div class="col-md-12 row">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><strong>Order summary</strong></h3>
+                                </div>
+
+                                <div class="panel-body">
+                                    <div class="" style="width:100%">
+                                        <table class="table" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <td><strong>Coupon</strong></td>
+                                                    <td style="text-align:center;"><strong>Price</strong></td>
+                                                    <td style="text-align:center;"><strong>Quantity</strong></td>
+                                                    <td style="text-align:right;"><strong>Totals</strong></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="border-bottom:none;">
+                                                    <td><span id="txtCouponName"></span></td>
+                                                    <td style="text-align:center;"><span id="txtCouponSellValue"></span></td>
+                                                    <td style="text-align:center;"><span id="txtCouponQuantity"></span></td>
+                                                    <td style="text-align:right;"><span id="txtCouponTotalAmt"></span></td>
+                                                </tr>
+                                                <tr class="bborder">
+                                                    <td colspan="4"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="thick-line"></td>
+                                                    <td class="thick-line"></td>
+                                                    <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                                                    <td class="thick-line text-right"><span id="txtCouponSubTotalAmt"></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td class=" text-center"><strong>GST Amt</strong></td>
+                                                    <td class=" text-right"><span id="txtCouponGstTotalAmt"></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="no-line"></td>
+                                                    <td class="no-line"></td>
+                                                    <td class="no-line text-center"><strong>TDS Amount</strong></td>
+                                                    <td class="no-line text-right"><span id="txtCouponTDSAmt"></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="no-line"></td>
+                                                    <td class="no-line"></td>
+                                                    <td class="no-line text-center"><strong>Grand Total</strong></td>
+                                                    <td class="no-line text-right"><span id="txtCouponGrandAmt"></span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+
+                        @*<div class="col-md-12" style="border-top:1px solid #ccc; margin-bottom:10px; padding-top:10px;">
+                                <div style="width:25%; float:left;"><b> {{GetTransactionValue.PowerBy}}</b></div>
+                                <div style="width:25%; float:left;"><b>CIN : {{GetTransactionValue.GSTNo}}</b></div>
+                                <div style="width:25%; float:left;"> <b>Email : {{GetTransactionValue.EmailID}}</b></div>
+                                <div style="width:25%; float:left; text-align:right;"> <b>Website : {{GetTransactionValue.Website}}</b></div>
+                                <div class="clearfix"></div>
+                            </div>*@
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <br />
+                <div class="modal-footer text-center">
+                    <a href="#" class="btn btn-primary" onclick="PrintDiv();">Print Receipts</a>
+                </div>
+            </div><!--.modal-content-->
+        </div><!--.modal-dialog-->
+    </div>
+</div>
+
+<script>
+    function PrintDiv() {
+        var divContents = document.getElementById("PrintDiv").innerHTML;
+        var printWindow = window.open('', '', 'height=400,width=600');
+        printWindow.document.write('<html><head><title>DMT Receipt</title>');
+        printWindow.document.write('</head><body>');
+        printWindow.document.write(divContents);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    }
+</script>

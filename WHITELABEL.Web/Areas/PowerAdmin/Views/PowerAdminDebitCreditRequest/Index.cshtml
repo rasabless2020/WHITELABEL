@@ -1,0 +1,169 @@
+﻿@model WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS
+@using WHITELABEL.Data.Models
+@using WHITELABEL.Web.Helper;
+@{
+    ViewBag.Title = "Debit and Credit";
+    //Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminLayout.cshtml";
+   Layout = "~/Areas/PowerAdmin/Views/Shared/_LayoutPowerAdmin.cshtml";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+@Scripts.Render("~/bundles/PowerAdminAutocompleteDomain")
+@using (Html.BeginForm("Index", "PowerAdminDebitCreditRequest", FormMethod.Post, new { area = "PowerAdmin" }))
+{
+    <div class="form-horizontal padding-top-20">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.SLN)
+        @Html.HiddenFor(model => model.FROM_MEMBER)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                    </div><!--.panel-heading-->
+                    <div class="panel-body">
+                        @if (ViewBag.msg != null)
+                        {
+                            <div id="informationMessage" class="text-center alert alert-danger" style="background-color:red; margin-bottom:10px;">
+                                <span style="width:100%;text-align:center;">@ViewBag.msg </span>
+                            </div>
+                        }
+                        <div class="clearfix"></div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        @Html.HiddenFor(model => model.FROM_MEMBER, new { htmlAttributes = new { id = "txtMem_ID" } })
+                                        @Html.HiddenFor(model => model.SLN)
+                                        <label class="control-label col-md-3" style="text-align:left;">User List</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="input-wrapper">
+                                                    @Html.EditorFor(m => m.FromUser, new { htmlAttributes = new { @class = "form-control", id = "txtMemberDomain" } })
+                                                    <input type="hidden" id="hfmemberDomain" name="memberDomainId" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                        </div><!--.row-->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3" style="text-align:left;">Amount</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="input-wrapper">
+                                                    @Html.EditorFor(model => model.AMOUNT, new { htmlAttributes = new { @class = "form-control", @placeholder = "XXXXX.XX", id = "txtAmount" } })
+                                                </div>
+                                                <span><small>@Html.ValidationMessageFor(model => model.AMOUNT, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div>
+                        </div>
+                           
+                            @*<div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Request Date</label>
+                                    <div class="col-md-9">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">
+                                                @Html.EditorFor(model => model.REQUEST_DATE, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control", id = "txtRequestDate" } })
+                                            </div>
+                                            <span><small> @Html.ValidationMessageFor(model => model.REQUEST_DATE, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>*@
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3" style="text-align:left;">Debit / Credit</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="input-wrapper">
+                                                        <select class="form-control">
+                                                            <option style="color:red">Debit</option>
+                                                            <option style="color:green">Credit</option>
+                                                            
+                                                        </select>
+                                                    
+                                                    @*@Html.DropDownListFor(m => m.PAYMENT_METHOD, new List<SelectListItem>
+                            { new SelectListItem{Text="Debit", Value="DR"},
+                                new SelectListItem{Text="Credit", Value="CR"}},
+                                "--Select--", new { id = "Paymentmethod", @class = "form-control" })
+        <span><small> @Html.ValidationMessageFor(model => model.PAYMENT_METHOD, "", new { @class = "text-danger" })</small></span>*@
+                                                </div>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                <div class="col-md-3"></div>
+
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3" style="text-align:left;">Transaction Details</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="input-wrapper">
+                                                    @Html.EditorFor(model => model.TRANSACTION_DETAILS, new { htmlAttributes = new { @class = "form-control", @placeholder = "Transaction Details", id = "txtTransactiondetails" } })
+                                                </div>
+                                                <span><small>@Html.ValidationMessageFor(model => model.TRANSACTION_DETAILS, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3"></div>
+
+                            </div>
+                        </div>
+                       
+                    </div><!--.panel-body-->
+
+                    <div class="panel-footer">
+                        <div class="col-md-12 text-center">                        
+                                <input type="submit" value="Create" class="btn btn-cyan" />
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div>
+
+    </div>
+}
+<script>
+    $(document).ready(function () {
+
+        $('#Paymentmethod option:eq(0)').css('background-color', 'white');
+        $('#Paymentmethod option:eq(1)').css('background-color', 'red');
+        $('#Paymentmethod option:eq(2)').css('background-color', 'green');
+
+         window.setTimeout(function () {
+             $("#informationMessage").fadeOut('slow');
+         }, 3000);
+    });
+
+
+   
+
+</script>
+

@@ -1,0 +1,39 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@*@model IEnumerable<WHITELABEL.Data.Models.TBL_WHITE_LEVEL_HOSTING_DETAILS>*@
+@model IGrid<WHITELABEL.Data.Models.TBL_WHITE_LEVEL_HOSTING_DETAILS>
+
+@{
+    ViewBag.Title = "IndexGrid";
+
+}
+
+
+<!-- Should only include the grid -->
+@(new HtmlGrid<WHITELABEL.Data.Models.TBL_WHITE_LEVEL_HOSTING_DETAILS>(Html, Model))
+@*@(Html
+        .Grid(Model)
+        .Build(columns =>
+        {
+            columns.Add(model => model.memberName).Titled("Member");
+            columns.Add(model => model.COMPANY_NAME).Titled("COMPANY");
+            columns.Add(model => model.DOMAIN).Titled("DOMAIN");
+            columns.Add(model => model.LONG_CODE).Titled("LONG_CODE");
+            columns.Add(model => model.MEM_ID).Titled("").Filterable(false).Sortable(false).RenderedAs(m => Html.ActionLink("Edit", "UpdateHostingDetails", "Hosting", new { memid = Encrypt.EncryptMe(m.SLN.ToString())  }, new { @class = "btn btn-primary" }));
+        })
+
+        .Empty("No data found")
+        .Id("my-ajax-grid")
+        .Pageable(pager =>
+        {
+            pager.PagesToDisplay = 2;
+            pager.RowsPerPage = 2;
+        })
+        .Filterable()
+        .Sortable()
+
+    )*@
+
+
+
+

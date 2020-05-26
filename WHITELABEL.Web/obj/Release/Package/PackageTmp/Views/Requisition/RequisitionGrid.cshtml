@@ -1,0 +1,37 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@*@model IEnumerable<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>*@
+@model IGrid<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>
+@{
+    ViewBag.Title = "RequisitionGrid";
+   // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@(new HtmlGrid<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>(Html, Model))
+@*@(Html
+                        .Grid(Model)
+                        .Build(columns =>
+                        {
+                            columns.Add(model => model.SLN).Titled("Trans Id");
+                            columns.Add(model => model.ToUser).Titled("To User");
+                            columns.Add(model => model.FromUser).Titled("From Member");
+                            columns.Add(model => model.REQUEST_DATE).Titled("Req Date").Formatted("{0:d}").MultiFilterable(true); ;
+                            columns.Add(model => model.AMOUNT).Titled("Amount");
+                            columns.Add(model => model.BANK_ACCOUNT).Titled("Bank Acnt");
+                            columns.Add(model => model.TRANSACTION_DETAILS).Titled("Pay Method");
+                            columns.Add(model => model.STATUS).Titled("STATUS");
+                            columns.Add(model => model.APPROVAL_DATE).Titled("Apprv/Decline Date").Formatted("{0:d}").MultiFilterable(true); ;
+                            columns.Add(model => model.APPROVED_BY).Titled("Apprv By");
+                        })
+                        .RowCss(model => model.STATUS == "Decline" ? "danger" : model.STATUS == "Pending" ? "info" : "")
+                        .Empty("No data found")
+                        .Id("my-ajax-grid")
+                        .Pageable(pager =>
+                        {
+                            pager.PagesToDisplay = 10;
+                            pager.RowsPerPage = 10;
+                        })
+                        .MultiFilterable()
+                        .Filterable()
+                        .Sortable()
+)*@
+

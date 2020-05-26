@@ -1,0 +1,39 @@
+﻿@using NonFactors.Mvc.Grid;
+@model WHITELABEL.Data.Models.TBL_COUPON_TRANSFER_LOGS
+@{
+    ViewBag.Title = "Distributor Coupon Requisition";
+    Layout = "~/Areas/Distributor/Views/Shared/_LayoutDistributor.cshtml";
+}
+
+@Html.AntiForgeryToken()
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                @*<div class="panel-heading" style="padding-bottom:10px;">
+                    <div class="panel-title">
+                        <div class="col-md-6 text-left"></div>
+                        <div class="col-md-6 text-right">
+                            <a href="@Url.Action("ApplyForCoupon", "DistributorCouponManagment",new { area="Distributor"})" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New Apply for Coupon</a>
+                        </div>
+                    </div>
+                </div>*@
+                <div class="panel-body">
+                    <div class="row example-row">
+
+                        @Html.AjaxGrid(Url.Action("IndexGrid", "DistributorCouponManagment", new { area = "Distributor" }))
+                    </div><!--.row-->
+                </div><!--.panel-body-->
+                <div class="panel-footer text-right">
+
+                </div>
+
+            </div><!--.panel-->
+        </div><!--.col-md-12-->
+    </div><!--.row-->
+
+</div>
+
+
+
+

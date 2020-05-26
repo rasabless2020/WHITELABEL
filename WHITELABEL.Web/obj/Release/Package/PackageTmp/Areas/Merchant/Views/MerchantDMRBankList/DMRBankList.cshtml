@@ -1,0 +1,10 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IGrid<WHITELABEL.Web.Areas.Merchant.Models.DMR_Bank_List>
+@{
+    ViewBag.Title = "DMRBankList";
+    Layout = null;
+    //Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+}
+
+@(new HtmlGrid<WHITELABEL.Web.Areas.Merchant.Models.DMR_Bank_List>(Html, Model))

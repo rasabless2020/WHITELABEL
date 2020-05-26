@@ -1,0 +1,48 @@
+﻿namespace WHITELABEL.Web.Areas.Merchant.Models
+{
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Linq;
+    using System.Web;
+    public class TransXTDMR_Transaction
+    {
+        [Required(ErrorMessage = "Recipient Code is required")]
+        public string recSeqId { get; set; }
+        [Required(ErrorMessage = "Customer Code is required")]
+        public string customerId { get; set; }
+        [Required(ErrorMessage = "Transfer Amount is required")]
+        [MaxLength(10, ErrorMessage = "Amount not greater then 10 digit")]
+        [MinLength(2, ErrorMessage = "Amount not less then 2 digit")]
+        //[RegularExpression(@"^\d*(\.\d{1,4})?$", ErrorMessage = "Enter Valid Amount")]
+        //[RegularExpression(@"^\d+(.\d{1,2})?$", ErrorMessage = "Enter Valid Amount")]
+        [Range(1.00, 5000.00, ErrorMessage = "Please enter a Amount between 1.00 and 5000.00")]
+        public string amount { get; set; }
+        [Required(ErrorMessage = "Sender mobile no is required")]
+        [MaxLength(15, ErrorMessage = "Sender mobile no is not greater then 15 digit")]
+        [MinLength(10, ErrorMessage = "Sender mobile no is not less then 10 digit")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Mobile must be number")]
+        public string SenderMobileNo { get; set; }
+        [Required(ErrorMessage = "Sender Name is required")]
+        [MaxLength(250, ErrorMessage = "Sender name is not greater then 255 digit")]
+        [MinLength(5, ErrorMessage = "Sender name is not less then 5 digit")]
+        public string SenderName { get; set; }
+        [Required(ErrorMessage = "Recipient mobile no is required")]
+        public string RecipientMobileNo { get; set; }
+        [Required(ErrorMessage = "Recipient name is required")]
+        public string RecipientName { get; set; }
+        [Required(ErrorMessage = "Recipient account no is required")]
+        public string RecipientAccountNo { get; set; }
+        [Required(ErrorMessage = "Recipient ifsc code is required")]
+        public string RecipientIFSCCode { get; set; }
+    }
+    public class GetDMRCustomerInfo {
+        [Required(ErrorMessage = "Customer mobile no is required")]
+        [MaxLength(10, ErrorMessage = "Customer mobile no is not greater then 10 digit")]
+        [MinLength(10, ErrorMessage = "Customer mobile no is not less then 10 digit")]
+        [RegularExpression("^[0-9]*$", ErrorMessage = "Mobile must be number")]
+        public string CustomerMobileNo { get; set; }
+    }
+
+}

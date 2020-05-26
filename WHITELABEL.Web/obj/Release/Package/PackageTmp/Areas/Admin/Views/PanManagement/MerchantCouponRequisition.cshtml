@@ -1,0 +1,295 @@
+﻿@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "MerchantCouponRequisition";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<script src="~/Areas/Admin/AdminHelperJS/CouponJs/Index.js"></script>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal padding-top-20">
+        <div class="row">
+            <div style="background-color:#ccc; border-radius:5px; color:#3e50b4; padding:5px 20px 10px 20px; margin-bottom:20px;" class="col-md-12"><h3 style="color:#3e50b4"><i class="fas fa-angle-double-right"></i> Merchant Coupon Purchase Requisition</h3></div>
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            @*<div class="text-right col-md-12">
+                                    <div class="panel-title" align="right"><a href="#" data-toggle="modal" data-target=".transd" id="transactionvalueid" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New Coupon</a></div>
+                                </div>*@
+                        </div>
+                    </div><!--.panel-heading-->
+                    <div class="panel-body">
+                        <div class="row example-row">
+                            @Html.AjaxGrid(Url.Action("MerchantRequisitionIndexGrid", "MemberCouponMaster", new { area = "Admin" }))
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div><!--.row-->
+    </div>
+
+}
+
+<div id="transactionvalueAdminid" class="modal scale fade transd" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" style="width:60%;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Update Merchant's Coupon Purchase Requisition</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="col-md-6">
+                    <div class="col-md-4" style="padding-top:10px;">Member Name : </div>
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <input type="text" id="txtusername" value="" class="form-control" />
+                                <input type="hidden" id="sln" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-4" style="padding-top:10px;">GST No. : </div>
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <input type="text" id="txtCompanyGstNo" value="" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-4" style="padding-top:10px;">Coupon Type: </div>
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <input type="text" id="txtCouponType" value="" class="form-control" />
+                                <input type="hidden" id="hdnCouponId" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-4" style="padding-top:10px;">Requisition Date : </div>
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <input type="text" id="txtReqDate" value="" class="form-control bootstrap-daterangepicker-basic" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-4" style="padding-top:10px;">Quantity : </div>
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <input type="text" id="txtCouponQty" value="" class="form-control" />
+                                <input type="hidden" id="hdnCouponCommAmt" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-4" style="padding-top:10px;">Coupon Sell Price (INR): </div>
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <input type="text" id="txtAmount" value="" class="form-control" readonly />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="col-md-4" style="padding-top:10px;">Coupon Start No : </div>
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <input type="text" id="txtCouponStartNo" class="form-control" maxlength="15" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-4" style="padding-top:10px;">Coupon End No : </div>
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <input type="text" id="txtCouponEndNo" class="form-control" maxlength="15" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-4" style="padding-top:10px;">Dist. Sell Price (INR): </div>
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <input type="text" id="txtDistributorComm" class="form-control" readonly />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-4" style="padding-top:10px;">Super Sell Price (INR): </div>
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <input type="text" id="txtSuperComm" class="form-control" readonly />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-4" style="padding-top:10px;">Distributor Gap Comm (INR): </div>
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <input type="text" id="txtDistributorGapComm" class="form-control" readonly maxlength="3" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-4" style="padding-top:10px;">Super Gap Comm (INR): </div>
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <input type="text" id="txtSuperGapComm" class="form-control" readonly maxlength="3" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-4" style="padding-top:10px;">(Merchant) GST Applicable: </div>
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <select id="ddlIsGSTMode" class="form-control">
+                                    <option value="No">No</option>
+                                    <option value="Yes">Yes</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-4" style="padding-top:10px;">TDS Applicable (%): </div>
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <input type="text" id="ddlIsTDSMode" class="form-control" onkeypress="return isNumberKey(event)" />
+                                @*<select id="ddlIsTDSMode" class="form-control">
+                                        <option value="No">No</option>
+                                        <option value="Yes">Yes</option>
+                                    </select>*@
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                @*<div class="col-md-6">
+                        <div class="col-md-4"><label>Is GST Apply</label></div>
+                        <div class="col-md-8">
+                            <select id="ChkDistributorGST" class="form-control">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-4"><label>Is GST Apply</label></div>
+                        <div class="col-md-8">
+                            <select id="ChkSuperGST" class="form-control">
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                        </div>
+                    </div>*@
+
+                @*<div class="col-md-6">
+                        <div class="col-md-4" style="padding-top:10px;">UTI Transfer Date : </div>
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    <input type="text" id="txtRealTransferDate" class = "form-control date" />
+                                    <input type="hidden" id="hdfrealtime" />
+                                    <div style="display:none">
+                                        <input type="text" id="txtdate" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+
+                @*<div class="col-md-6">
+                        <div class="col-md-4" style="padding-top:10px;">UTI Payment ID : </div>
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    <input type="text" id="txtUTINo" class="form-control" maxlength="15"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer" style="text-align:center;">
+                <button type="button" class="btn btn-danger" onclick="TransactionDecline($('#sln').val());">Decline</button>
+                @*<button type="button" class="btn btn-success" onclick="updateStatus($('#sln').val(), $('#txtAmount').val(),$('#hdnCouponCommAmt').val(),$('#ddlIsGSTMode').val(),$('#ddlIsTDSMode').val());">Approve</button>*@
+                @*<button type="button" class="btn btn-success" onclick="updateStatus($('#sln').val(), $('#txtAmount').val(),$('#hdnCouponCommAmt').val(),$('#ddlIsGSTMode').val(),$('#ddlIsTDSMode').val(),$('#txtCouponStartNo').val(),$('#txtCouponEndNo').val(),$('#txtDistributorGapComm').val(),$('#txtSuperGapComm').val(),$('#ChkDistributorGST').val(),$('#ChkSuperGST').val());">Approve</button>*@
+                <button type="button" class="btn btn-success" onclick="updateStatus($('#sln').val(), $('#txtAmount').val(),$('#hdnCouponCommAmt').val(),$('#ddlIsGSTMode').val(),$('#ddlIsTDSMode').val(),$('#txtCouponStartNo').val(),$('#txtCouponEndNo').val(),$('#txtDistributorGapComm').val(),$('#txtSuperGapComm').val());">Approve</button>
+
+                @*<button type="button" class="btn btn-success" onclick="updateStatus($('#sln').val(), $('#txtAmount').val(),$('#hdnCouponCommAmt').val(),$('#ddlIsGSTMode').val(),$('#ddlIsTDSMode').val(),$('#txtCouponStartNo').val(),$('#txtCouponEndNo').val(),$('#txtUTINo').val(),$('#hdfrealtime').val());">Approve</button>*@
+            </div>
+        </div><!--.modal-content-->
+    </div><!--.modal-dialog-->
+</div>
+<script>
+
+
+    $(function () {
+        $('#txtRealTransferDate').datepicker({
+            //format: "yyyy-MM-dd",
+            format: "YYYY-MM-DD",
+            language: "es",
+            autoclose: true,
+            todayHighlight: true,
+            changeMonth: true,
+            changeYear: true,
+            onSelect: function () {
+                var selected = $(this).val();
+                $('#hdfrealtime').val(selected);
+                $('#txtdate').val(selected);
+
+            }
+        });
+    });
+</script>
+<SCRIPT language=Javascript>
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+</SCRIPT>
+

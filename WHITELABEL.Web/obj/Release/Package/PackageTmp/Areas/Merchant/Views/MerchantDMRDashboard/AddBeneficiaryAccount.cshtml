@@ -1,0 +1,83 @@
+﻿@model WHITELABEL.Web.Areas.Merchant.Models.DMRAccountVerification
+@{
+    ViewBag.Title = "Add Beneficiary Account";
+    //Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+}
+
+@*@using (Html.BeginForm("", "", FormMethod.Post, new { area = "Merchant" }))*@
+@using (Ajax.BeginForm("PostAddBeneficiaryAccount", "MerchantDMRDashboard", new AjaxOptions { OnSuccess = "OnSuccessMsg1", OnFailure = "OnFailureMsg1", LoadingElementId = "progressMsg1" }, new { area = "Merchant" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="display-animation">
+        <div class="row no-gutters">
+            <div class="col-md-12">
+                <div class="panel">
+                    @*<div class="panel-heading">
+                            <div class="panel-title">
+                                <h4> Money Remittance Beneficiary Registration</h4>
+                                <div class="panel-action">
+                                    <a href="javascript:;" data-toggle="panel"></a>
+                                    <a href="javascript:;" data-toggle="remove"></a>
+                                </div>
+                            </div>
+                        </div>*@
+                    <div class="panel-body">
+
+                        <fieldset>
+                            @*<legend>Please Enter Beneficiary Details</legend>*@
+                            <div class="row"> </div>
+                            <input name="mobile" value="9903116214" type="hidden">
+                            <div class="form-group has-iconed">
+                                <label>Remitter Mobile</label>
+                                <div class="iconed-input">
+                                    @Html.EditorFor(m => m.RemitterMobile, new { htmlAttributes = new { @class = "form-control", placeholder = "Remitter Mobile" } })
+                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.RemitterMobile, "", new { @class = "text-danger" })</small></span>
+                                </div>
+                            </div>
+                            <div class="form-group has-iconed">
+                                <label>Account No</label>
+                                <div class="iconed-input">
+                                    @Html.EditorFor(m => m.Account, new { htmlAttributes = new { @class = "form-control", placeholder = "Account No", type = "password" } })
+                                    <span class="help-block"><small>@Html.ValidationMessageFor(m => m.Account, "", new { @class = "text-danger" })</small></span>
+                                </div>
+                            </div>
+                            <div class="form-group has-iconed">
+                                <label>IFSC Code</label>
+                                <div class="iconed-input">
+                                    @Html.EditorFor(m => m.IFSC, "", new { htmlAttributes = new { @class = "form-control", placeholder = "Enter IFSC Code" } })
+                                    <span class="help-block"><small>@Html.ValidationMessageFor(m => m.IFSC, "", new { @class = "text-danger" })</small></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-ok"></i> Submit Form</button>
+                            </div>
+                        </fieldset>
+                    </div><!--.panel-body-->
+                </div><!--.panel-->
+            </div>
+
+
+        </div>
+        <!--.full-content-->
+    </div>
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#progressMsg1').removeClass("hidden");
+        $('#progressMsg1').hide();
+    })
+    function OnSuccessMsg1(response) {
+        var message = response;
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+            }
+        })
+    }
+    function OnFailureMsg1(response) {
+        alert("Error occured.");
+    }
+</script>

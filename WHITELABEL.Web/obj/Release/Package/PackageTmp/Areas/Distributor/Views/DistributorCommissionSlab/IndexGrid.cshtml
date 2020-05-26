@@ -1,0 +1,11 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IGrid<WHITELABEL.Data.Models.TBL_WHITE_LEVEL_COMMISSION_SLAB>
+@{
+    ViewBag.Title = "IndexGrid";
+    //Layout = "~/Areas/Distributor/Views/Shared/_DistributorLayout.cshtml";
+}
+
+
+@(new HtmlGrid<WHITELABEL.Data.Models.TBL_WHITE_LEVEL_COMMISSION_SLAB>(Html, Model))
+

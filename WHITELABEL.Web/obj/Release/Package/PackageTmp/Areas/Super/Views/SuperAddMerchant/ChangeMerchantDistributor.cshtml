@@ -1,0 +1,139 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model WHITELABEL.Data.Models.TBL_MASTER_MEMBER
+@{
+                /**/
+
+                ViewBag.Title = "Change Merchant Introducer";
+                Layout = "~/Areas/Super/Views/Shared/_LayoutSuper.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-12 padding-top-20">
+            <div class="panel">
+                <div class="panel-heading text-right">
+                    <div class="panel-title ">
+                        <div class="col-md-12 text-right">
+                            <a href="@Url.Action("Index", "SuperAddMerchant",new {area="Super" },null)" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New Merchant</a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row example-row">
+                        @Html.AjaxGrid(Url.Action("ChangeMerchantGridIndex", "SuperAddMerchant", new { area = "Super" }))
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@Scripts.Render("~/bundles/CheckMerchantEmailOnSuperAdd")
+
+<!-- Change Merchant Introducer  -->
+@using (Ajax.BeginForm("PostChangeMerchantInformation", "SuperAddMerchant", new AjaxOptions { Confirm = "Do you want to change Merchant Introducer", OnSuccess = "OnSuccessChangeMerchantDistID", OnFailure = "OnFailureChangeMerchantDist", LoadingElementId = "progressChangeMerchantDistID" }, new { area = "Super", @id = "ChangeMerchantDistID" }))
+{
+    <div id="transactionMerchantDistid" class="modal scale fade transdMerchantDistId" tabindex="-1" role="dialog" aria-hidden="true">
+        @Html.AntiForgeryToken()
+        @*@Html.HiddenFor(m => m.MEM_ID, new { htmlAttributes = new { @id = "distributorMem_ID" } })*@
+        @Html.EditorFor(m => m.MEM_ID, new { htmlAttributes = new { @id = "MerchantMem_ID", @style = "display:none;" } })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Change Merchant Introducer </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <div class="col-md-4" style="padding-top:10px;">Distributor User Name : </div>
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    @Html.DropDownListFor(model => model.DISTRIBUTOR_ID, new SelectList((ViewBag.DistributorList) as SelectList, "Value", "Text"), "Select Distributor", new { id = "DistributorIntroId", @class = "form-control" })
+                                    @*@Html.HiddenFor(model => model.DISTRIBUTOR_ID, new { htmlAttributes = new { id = "DistributorID" } })*@
+                                </div>
+                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.SUPER_ID, "", new { @class = "text-danger" })</small></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-12">
+                        <div class="col-md-4" style="padding-top:10px;">Merchant Name : </div>
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    @Html.EditorFor(m => m.MEMBER_NAME, new { htmlAttributes = new { @style = " width:100%; padding:5px;", @class = "form-control", @id = "txtMerchantName", @readonly = true } })
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-12">
+                        <div class="col-md-4" style="padding-top:10px;">Merchant Email ID : </div>
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    @Html.EditorFor(m => m.EMAIL_ID, new { htmlAttributes = new { @style = " width:100%; padding:5px;", @class = "form-control", @id = "txtMerchantEmail", @readonly = true } })
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-12">
+                        <div class="col-md-4" style="padding-top:10px;">Merchant Mobile No : </div>
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    @Html.EditorFor(m => m.MEMBER_MOBILE, new { htmlAttributes = new { @style = " width:100%; padding:5px;", @class = "form-control", @id = "txtMerchantMobile", @readonly = true } })
+                                    @Html.EditorFor(m => m.MEM_ID, new { htmlAttributes = new { @id = "Merchant_MID", @style = "display:none;" } })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" value="Change Distributor" class="btn btn-info btn-lg" id="valuesubmit" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+<div id="progressChangeMerchantDistID" class="loading hidden">Loading&#8230;</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#progressChangeMerchantDistID').removeClass("hidden");
+        $('#progressChangeMerchantDistID').hide();
+    })
+    function OnSuccessChangeMerchantDistID(response) {
+        debugger;
+        $('.mvc-grid').mvcgrid('reload');
+        var message = response;
+        //$("#FingerPrintForm").trigger("reset");
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+                $('#ChangeMerchantDistID').modal('hide');
+                $('.transdMerchantDistId').modal('hide');
+            }
+        })
+        $('.mvc-grid').mvcgrid('reload');
+        //callGeocodeMobile();
+        //alert(message);
+    }
+    function OnFailureChangeMerchantDist(response) {
+        alert("Error occured.");
+    }
+</script>
+<!-- End code for change distributor introducer -->

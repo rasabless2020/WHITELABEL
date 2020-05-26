@@ -1,0 +1,193 @@
+﻿@model WHITELABEL.Data.Models.TBL_COUPON_TRANSFER_LOGS
+@using WHITELABEL.Data.Models
+@using WHITELABEL.Web.Helper;
+@{
+    /**/
+
+    ViewBag.Title = "Requisition for coupon purchase";
+    Layout = "~/Areas/Distributor/Views/Shared/_LayoutDistributor.cshtml";
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+@using (Ajax.BeginForm("PostDistributorCouponStockRequisition", "DistributorCouponManagment", new AjaxOptions { Confirm = "Do you want to appply coupon", OnSuccess = "OnSuccessDistributorCouponStock", OnFailure = "OnFailureDistributorCouponStock", LoadingElementId = "progressDistributorCouponStock" }, new { area = "Distributor", @id = "ApplyForCoupon" }))
+{
+    <div class="form-horizontal padding-top-20">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.SLN)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            @Html.HiddenFor(model => model.FROM_MEMBER)
+            @Html.HiddenFor(model => model.SLN)
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                    </div><!--.panel-heading-->
+                    <div class="panel-body">
+
+                        <div class="clearfix"></div>
+                        <div class="row ">
+                            <div class=" col-md-3"> <img src="~/images/UtiImage.png" /></div>
+                            <div class="col-md-6">
+                                <div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3" style="text-align:left;">Requisition Date</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                @{
+                                                    DateTime date = DateTime.Now;
+                                                    DateTime min = date.AddYears(-10);
+                                                    DateTime max = date.AddYears(10);
+                                                }
+                                                <div class="input-wrapper">
+                                                    @Html.EditorFor(model => model.REQUEST_DATE, "{0:dd/mm/yyyy}", new { htmlAttributes = new { @class = "form-control date", id = "txtDistributorReqRequisition", type = "text" } })
+                                                </div>
+                                                <span><small> @Html.ValidationMessageFor(model => model.REQUEST_DATE, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3" style="text-align:left;">Coupon Type</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="input-wrapper">
+                                                    @Html.DropDownListFor(model => model.COUPON_Name, new SelectList((ViewBag.BankInformation) as SelectList, "Text", "Text"), "Select Coupon", new { id = "ddlcoupontype", @class = "form-control" })
+                                                    <span><small>@Html.ValidationMessageFor(model => model.COUPON_Name, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3" style="text-align:left;">Quantity</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="input-wrapper">
+
+                                                    @Html.EditorFor(model => model.QTY, new { htmlAttributes = new { @class = "form-control", @placeholder = "XXX", id = "txtcouponQUantity", } })
+                                                </div>
+                                                <span><small>@Html.ValidationMessageFor(model => model.QTY, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3" style="text-align:left;">Remarks </label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="input-wrapper">
+                                                    @Html.EditorFor(model => model.REMARKS, new { htmlAttributes = new { @class = "form-control", @placeholder = "Transaction Details" } })
+                                                </div>
+                                                <span><small>@Html.ValidationMessageFor(model => model.REMARKS, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="col-md-3"></div>
+
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+
+                    <div class="panel-footer">
+
+                        <div class="col-lg-12 text-center">
+                            @if (ViewBag.checkbank == "0")
+                            {
+                                <input type="submit" value="Proceed" class="btn btn-cyan" />
+                            }
+                            else
+                            {
+                                <input type="submit" value="Proceed" class="btn btn-cyan" />
+                            }
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div>
+
+    </div>
+
+}
+
+<div class="preloader hidden" id="progressDistributorCouponStock">
+    <div id="loading"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#progressDistributorCouponStock').removeClass("hidden");
+        $('#progressDistributorCouponStock').hide();
+        //$("#ddlcoupontype").change(function () {
+        //    $.ajax({
+        //        type: 'POST',
+        //        url: "/Super/SuperStockRequisition/GetCouponPrice",
+        //            dataType: 'json',
+        //                data: { couponid: $("#ddlcoupontype").val() },
+        //    success: function (response) {
+        //        debugger;
+        //        $('#divBindprice').html(response.vendor_coupon_price);
+        //        $('#hdncouponprice').val(response.vendor_coupon_price);
+        //    },
+        //    error: function (ex) {
+        //        //alert('Failed to retrieve data.' + ex);
+        //    }
+        //});
+        //});
+        //$("#txtcouponQUantity").keyup(function () {
+        //    debugger;
+        //    var Amount = $('#hdncouponprice').val();
+        //    var Qty = $('#txtcouponQUantity').val();
+        //    var Price = Amount * Qty;
+        //    $('#txtcouponprice').val(Price);
+        //});
+})
+    function OnSuccessDistributorCouponStock(response) {
+        var message = response; debugger;
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+                var url = "/Distributor/DistributorCouponManagment/Index";
+                window.location.href = url;
+            }
+        })
+        $("#ADDCouponStock").trigger("reset");
+        //callGeocodeMobile();
+        //alert(message);
+    }
+    function OnFailureDistributorCouponStock(response) {
+        alert("Error occured.");
+    }
+</script>
+<script>
+    $(document).ready(function () {
+       
+    });
+    $(function () {
+        $('#txtDistributorReqRequisition').datepicker({
+            format: "dd-MM-yyyy",
+            language: "es",
+            autoclose: true,
+            todayHighlight: true,
+            changeMonth: true,
+            changeYear: true
+        });
+
+    });
+
+
+</script>
+

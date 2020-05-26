@@ -1,0 +1,208 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_MASTER_MEMBER>
+@{
+    ViewBag.Title = "All Member Details";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal padding-top-20">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    @*<div class="panel-heading" style="padding-bottom:10px;">
+                            <div class="panel-title" align="right">
+                            </div>
+                        </div>*@
+                    <div class="panel-body">
+                        <div class="row example-row">
+                            <div class="col-md-4">
+                                <div class="inputer">
+                                    <div class="input-wrapper">
+                                        @Html.DropDownList("MemberService", new SelectList((ViewBag.MemberService) as SelectList, "Value", "Text"), "Select Super", new { id = "SuperList", @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="inputer">
+                                    <div class="input-wrapper">
+                                        @*@Html.DropDownList("SuperService", new SelectList(string.Empty, "Value", "Text"), "Value", "Text"), "Select Super Distributor", new { id = "SuperDisList", @class = "form-control" })*@
+                                        @Html.DropDownList("MemberService", new SelectList(string.Empty, "Value", "Text"), "--Select Super Distributor--", new { @class = "form-control", id = "SuperDisList" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="inputer">
+                                    <div class="input-wrapper">
+                                        @Html.DropDownList("MemberService", new SelectList(string.Empty, "Value", "Text"), "--Select Merchant--", new { @class = "form-control", id = "MemberList" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-12">@Html.AjaxGrid(Url.Action("IndexGrid", "MemberTotalDistributorList", new { area = "Admin" }))</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@Scripts.Render("~/bundles/ChannelLinkJsCall")
+<script>
+
+    //$(document).on('change', '#SuperList', function () {
+    //    debugger;
+    //    $('#my-ajax-grid').mvcgrid({
+    //        query: 'search=' + this.value,
+    //        //query: 'search=' + this.value+'&Satus'+this.value,
+    //        reload: true
+    //    });
+    //});
+    //$(document).on('change', '#SuperDisList', function () {
+    //    debugger;
+    //    $('#my-ajax-grid').mvcgrid({
+    //        query: 'search=' + this.value,
+    //        //query: 'search=' + this.value+'&Satus'+this.value,
+    //        reload: true
+    //    });
+    //});
+    $(document).on('change', '#MemberList', function () {
+        $('#my-ajax-grid').mvcgrid({
+            query: 'search=' + this.value,
+            //query: 'search=' + this.value+'&Satus'+this.value,
+            reload: true
+        });
+    });
+
+    $(document).ready(function () {
+        $("#SuperList").change(function () {
+            $("#SuperDisList").empty();
+            $("#SuperDisList").val("--Select--");
+            $.ajax({
+                type: 'POST',
+                url: "/MemberTotalDistributorList/GetSuperDistributor?area=Admin",
+                dataType: 'json',
+                data: { Disid: $("#SuperList").val() },
+                success: function (states) {
+                    $("#SuperDisList").append('<option selected value="">--Select Distributor--</option>');
+                    $.each(states, function (i, state) {
+                        $("#SuperDisList").append('<option value="' + state.IDValue + '">' +
+                            state.TextValue + '</option>');
+                    });
+                },
+                error: function (ex) {
+                    $("#SuperDisList").append('<option selected value="">--Select Distributor--</option>');
+                    $("#MemberList").append('<option selected value="">--Select Merchant--</option>');
+                    var SuperList = $('#SuperList').val();
+                    var DistributorList = $('#SuperDisList').val();
+                    var dropdownval = $('#MemberList').val();
+                    var status = $('#TransactionStatus').val();
+                    $('.mvc-grid').mvcgrid({
+                        query: 'search=' + SuperList,
+                        //query: 'Super=' + SuperList + '&Distributor=' + DistributorList + '&search=' + dropdownval + '&Status=' + status,
+                        reload: true,
+                        reloadStarted: function () {
+                            $(".divFooterTotalComm").remove();
+                        },
+                    });
+                }
+            });
+
+            var SuperList = $('#SuperList').val();
+            var DistributorList = ''
+            var dropdownval = '';
+            var status = '';
+            $('.mvc-grid').mvcgrid({
+                query: 'search=' + SuperList,
+                //query: 'Super=' + SuperList + '&Distributor=' + DistributorList + '&search=' + dropdownval + '&Status=' + status,
+                reload: true,
+                reloadStarted: function () {
+                    $(".divFooterTotalComm").remove();
+                },
+            });
+            return false;
+        })
+    });
+
+    $("#SuperDisList").change(function () {
+        $("#MemberList").empty();
+        $("#MemberList").val("--Select--");
+        $.ajax({
+            type: 'POST',
+
+            url: "/MemberTotalDistributorList/GetDistributorMerchant?area=Admin",
+            dataType: 'json',
+            data: { Disid: $("#SuperDisList").val() },
+            success: function (states) {
+                $("#MemberList").append('<option selected value="">--Select Merchant--</option>');
+                $.each(states, function (i, state) {
+                    $("#MemberList").append('<option value="' + state.IDValue + '">' +
+                        state.TextValue + '</option>');
+                });
+                var SuperList = $('#SuperList').val();
+                var DistributorList = $('#SuperDisList').val();
+                var dropdownval = $('#MemberList').val();
+                var status = $('#TransactionStatus').val();
+                $('.mvc-grid').mvcgrid({
+                    //query: 'Super=' + SuperList + '&Distributor=' + DistributorList + '&search=' + dropdownval + '&Status=' + status,
+                    query: 'search=' + DistributorList,
+                    reload: true,
+                    reloadStarted: function () {
+                        $(".divFooterTotalComm").remove();
+                    },
+                });
+            },
+            error: function (ex) {
+                $("#MemberList").append('<option selected value="">--Select Merchant--</option>');
+            }
+        });
+        var SuperList = $('#SuperList').val();
+        var DistributorList = $('#SuperDisList').val();
+        var dropdownval = '';
+        var status = '';
+        $('.mvc-grid').mvcgrid({
+            query: 'search=' + DistributorList,
+            //query: 'Super=' + SuperList + '&Distributor=' + DistributorList + '&search=' + dropdownval + '&Status=' + status,
+            reload: true,
+            reloadStarted: function () {
+                $(".divFooterTotalComm").remove();
+            },
+        });
+        return false;
+    })
+
+
+
+
+        //function GetMemberPassword(id) {
+        //    debugger;
+        //    var token = $(':input[name="__RequestVerificationToken"]').val();
+        //    $.ajax({
+
+        //        url: "/MemberTotalDistributorList/GetMemberPasswordDetails?area=Admin",
+        //        data: {
+        //            __RequestVerificationToken: token,
+        //            id: id
+        //        },
+        //        cache: false,
+        //        type: "POST",
+        //        dataType: "json",
+        //        beforeSend: function () {
+        //        },
+        //        success: function (data) {
+        //            console.log(data);
+        //            bootbox.alert({
+        //                size: "small",
+        //                message: "This is your password: <b>" + data.User_pwd + "</b>",
+        //                backdrop: true
+        //            });
+        //        },
+        //        error: function (xhr, status, error) {
+        //            console.log(status);
+        //        }
+        //    });
+        //}
+
+</script>

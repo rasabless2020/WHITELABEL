@@ -1,0 +1,29 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_DMT_BANK_MARGIN>
+@{
+    ViewBag.Title = "IndexGrid";
+    //Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminLayout.cshtml";
+    Layout = null;
+}
+
+
+@(Html
+                                .Grid(Model)
+                                .Build(columns =>
+                                {
+                                    columns.Add(model => model.ID).Titled("Sln No").Filterable(true).Sortable(true);
+                                    columns.Add(model => model.DMTBANK_MARGIN).Titled("Bank Margin").Filterable(true).Sortable(true);
+                                    columns.Add(model => model.ID).Encoded(false).Filterable(false).Sortable(false).Titled("Action")                                        
+                                        .RenderedAs(model => "<div style='text-align:center'><a href='javascript:void(0);' data-toggle='modal' data-target='.transd' id='transactionvalueid' data-id=" + model.ID + " onclick='getDMTvalue(" + model.ID + ");' style='margin-right:10px' title='Edit'><i class='fa fa-edit'></i></a></div>");                                    
+                    })
+                                .Empty("No data found")
+                                .Id("my-ajax-grid")
+                                .Pageable(pager =>
+                                {
+                                    pager.PagesToDisplay = 5;
+                                    pager.RowsPerPage = 5;
+                                })
+                                .Filterable()
+                                .Sortable()
+)

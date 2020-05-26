@@ -1,0 +1,50 @@
+﻿@using NonFactors.Mvc.Grid;
+@{
+    /**/
+
+    ViewBag.Title = "Credit Limit List";
+    Layout = "~/Areas/Distributor/Views/Shared/_LayoutDistributor.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12 row headcolor">
+                <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-list fa-3x"></i></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4" style="text-align:right; padding-top:10px;">
+                    <h3>
+                        List of Credit Note
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 padding-top-20">
+            <div class=" card">
+                <div class="card-body">
+                    <div class="panel-heading text-right">
+
+                        <div class="card-title row">
+                            <div class="col-md-12 text-right">
+                                <a href="@Url.Action("DistributCreditLimit", "DistributorCreditManagment",new {area="Distributor" },null)" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New Credit Limit Balance Distribution</a>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </div><!--.panel-heading-->
+                    <div class="panel-body">
+                        <div class="row example-row" style="width:100%">
+                            @Html.AjaxGrid(Url.Action("CREDITLimitIndexGrid", "DistributorCreditManagment", new { area = "Distributor" }))
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+                    @*<div class="panel-footer text-right">
+                            <a href="@(Url.Action("ExportIndex","MemberAPILabel", new {area="Admin" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span> Export</a>
+                        </div>*@
+                </div><!--.panel-->
+            </div>
+        </div><!--.col-md-12-->
+    </div><!--.row-->
+}
+

@@ -1,0 +1,252 @@
+﻿@model WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS
+@using WHITELABEL.Data.Models
+@using WHITELABEL.Web.Helper;
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Scripts.Render("~/bundles/MemberRequisition")
+@using (Html.BeginForm("SubmitRequestRequisition", "RequestRequisition", FormMethod.Post, new { area = "Admin" }))
+{
+    <div class="form-horizontal padding-top-20">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.SLN)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">           
+            <div class="col-md-12">
+                <div class=" card">
+                    <div class="card-body">
+                        <div class="panel-heading">
+                        </div>
+                        <div class="panel-body">
+                            <div class="row ">
+                                <div class="col-md-12">
+                                    <div>
+                                        <div>
+                                            @Html.HiddenFor(model => model.FROM_MEMBER)
+                                            <h3>Power Admin[@ViewBag.Introducer] <a href="javascript:void(0);" data-toggle="modal" data-target="#PoweradminMoreDetails"><i class="fa fa-question"></i></a></h3>
+                                        </div>
+                                        <span>@Html.ValidationMessageFor(model => model.ToUser, "", new { @class = "text-danger" })</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="padding-top:10px;">Reference No</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="md-form">
+                                                    @Html.EditorFor(model => model.REFERENCE_NO, "0", new { htmlAttributes = new { @class = "form-control", @placeholder = "Reference No", id = "txtRequestReferenceNumber", maxlength = 10 } })
+                                                </div>
+                                                @Html.ValidationMessageFor(model => model.REFERENCE_NO, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="padding-top:10px;">Request Date</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                @{
+                                                    DateTime date = DateTime.Now;
+                                                    DateTime min = date.AddYears(-10);
+                                                    DateTime max = date.AddYears(10);
+                                                }
+                                                <div class="md-form">
+                                                    @*@Html.EditorFor(model => model.REQUEST_DATE, new { htmlAttributes = new { @id = "requisitiondate", @class = "form-control", @min = min.ToString("yyyy-MM-dd"), @max = max.ToString("yyyy-MM-dd"), @onkeydown = "return false;" } })*@
+                                                    @Html.EditorFor(model => model.REQUEST_DATE, new { htmlAttributes = new { @id = "requisitiondate", @class = "form-control",  @onkeydown = "return false;" } })
+                                                </div>
+                                                <span>@Html.ValidationMessageFor(model => model.REQUEST_DATE, "", new { @class = "text-danger" })</span>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="padding-top:10px;">Amount</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="md-form">
+                                                    @Html.EditorFor(model => model.AMOUNT, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
+                                                </div>
+                                                <span>@Html.ValidationMessageFor(model => model.AMOUNT, "", new { @class = "text-danger" })</span>
+                                            </div>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="padding-top:10px;">Bank Account</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="md-form">
+                                                    @Html.DropDownListFor(model => model.BANK_ACCOUNT, new SelectList((ViewBag.BankInformation) as SelectList, "Text", "Text"), "Select Bank", new { id = "BankID", @class = "form-control" })
+                                                </div>
+                                                <span>@Html.ValidationMessageFor(model => model.BANK_ACCOUNT, "", new { @class = "text-danger" })</span>
+                                            </div>
+                                        </div>
+                                    </div>                                  
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="padding-top:10px;">Payment Method</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="md-form">
+                                                    @Html.DropDownListFor(m => m.PAYMENT_METHOD, new List<SelectListItem>
+                                                        { new SelectListItem{Text="NEFT", Value="NEFT"},
+                                                        new SelectListItem{Text="RTGS", Value="RTGS"},
+                                                        new SelectListItem{Text="IMPS", Value="IMPS"},
+                                                        new SelectListItem{Text="Cash Deposit in bank", Value="Cash Deposit in bank"}},
+                                                        "Select Payment Method", new { id = "Paymentmethod", @class = "form-control" })
+
+                                                    <span>@Html.ValidationMessageFor(model => model.PAYMENT_METHOD, "", new { @class = "text-danger" })</span>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!--.form-group-->
+
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="padding-top:10px;">Transaction Details</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="md-form">
+                                                    @Html.EditorFor(model => model.TRANSACTION_DETAILS, new { htmlAttributes = new { @class = "form-control", @placeholder = "Transaction Details" } })
+                                                </div>
+                                                <span>@Html.ValidationMessageFor(model => model.TRANSACTION_DETAILS, "", new { @class = "text-danger" })</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--.form-group-->
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3" style="padding-top:10px;">Bank Charges</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="md-form">
+                                                    @Html.EditorFor(model => model.BANK_CHARGES, new { htmlAttributes = new { @class = "form-control", @placeholder = "Bank Charges", maxlength = 5 } })
+                                                </div>
+                                                <span>@Html.ValidationMessageFor(model => model.BANK_CHARGES, "", new { @class = "text-danger" })</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!--.row-->
+                        </div><!--.panel-body-->
+
+                        <div class="panel-footer">
+                            <div class="col-lg-6">
+
+                            </div>
+
+                            <div class="col-lg-6 text-right">
+                                @if (ViewBag.checkbank == "0")
+                                {
+                                    <input type="submit" value="Create" class="btn btn-primary" />
+                                }
+                                else
+                                {
+                                    <input type="submit" value="Update" class="btn btn-primary" />
+                                }
+
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div><!--.panel-->
+                </div>
+            </div><!--.col-md-12-->
+        </div>
+
+    </div>
+    <div class="modal fade" id="PoweradminMoreDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Power Admin Information</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="col-md-12">
+                        <div class="col-md-4">Power Admin ID : </div>
+
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    @ViewBag.IntroducerMemberId
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <div class="col-md-4">Name </div>
+
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    @ViewBag.IntroducerName
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-12">
+                        <div class="col-md-4">Mobile: </div>
+
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    @ViewBag.IntroducerMobile
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-4"> Email : </div>
+
+
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    @ViewBag.IntroducerEmail
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+    <script>
+    $(function () {
+        $('#requisitiondate').datepicker({
+                format: "dd-MM-yyyy",
+                language: "es",
+                autoclose: true,
+                todayHighlight: true,
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+    </script>

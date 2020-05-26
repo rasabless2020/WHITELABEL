@@ -1,0 +1,170 @@
+﻿@model WHITELABEL.Web.Areas.Merchant.Models.LandlineRecharge
+@{
+                /**/
+
+                ViewBag.Title = "LandlineRecharge";
+                Layout = null;
+                //Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+}
+<link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet" />
+<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+@*@using (Html.BeginForm("PostLindlineRecharge", "MerchantRechargeService", FormMethod.Post, new { area = "Merchant" }))*@
+@using (Ajax.BeginForm("PostLindlineRecharge", "MerchantRechargeService", new AjaxOptions { Confirm = "Do you want to recharge", OnSuccess = "OnLandlineSuccess", OnFailure = "OnLandlineFailure", LoadingElementId = "LandLineprogress" }, new { area = "Merchant", @id = "LandLineRecharge" }))
+{
+    @Html.AntiForgeryToken()
+    <form>
+        <div class="panel-body">
+            <h5>Landline Bill Payment</h5>
+
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class=" floating-label">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                @Html.EditorFor(m => m.ContactNo, new { htmlAttributes = new { @style = " width:100%; padding:5px;", placeholder = "Registered Landline No. / Viewing Card No.", @class = "form-control", } })
+                                <label for="exampleInput1"></label>
+                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })</small></span>
+
+                            </div>
+                            <div style="display:none">
+                                @Html.EditorFor(m => m.geolocation, new { htmlAttributes = new { @class = "form-control", id = "GeolocationLandline" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class=" floating-label">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                @Html.EditorFor(m => m.CustomerNo, new { htmlAttributes = new { @style = " width:100%; padding:5px;", placeholder = "Customer Mobile No", @class = "form-control", } })
+                                <label for="amount"></label>
+                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CustomerNo, "", new { @class = "text-danger" })</small></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class=" floating-label">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                @Html.EditorFor(m => m.RechargeAmt, new { htmlAttributes = new { @style = " width:100%; padding:5px;", placeholder = "Amount", @class = "form-control", } })
+                                <label for="amount"></label>
+                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.RechargeAmt, "", new { @class = "text-danger" })</small></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class=" floating-label">
+
+                        <div class="input-group" style=" height:37px;">
+                            <div class="inputer" style="width:85%;">
+                                <div class="input-wrapper">
+                                    @Html.EditorFor(m => m.OperatorName, new { htmlAttributes = new { @style = "width:100%; padding:5px; border:none;", placeholder = "Operator Name", id = "txtLandlineOperator", @class = "form-control", } })
+                                    <input type="hidden" id="hfLandlineOperator" name="LandlineOperatorId" />
+                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })</small></span>
+                                </div>
+                            </div>
+                            <span class="input-group-btn">
+                                <button href="javascript:void(0)" data-toggle='modal' data-target='.transdLandLine' id='transactionvalueLandLineid' type="button" class="btn btn-default">...</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-1 clearfix">
+                    <div style="text-align:right;">
+                        <input type="submit" value="Pay" class="btn btn-primary btn-lg" id="btnsubmit" />
+
+                    </div>
+                </div>
+            </div>
+
+                <div class="clearfix"></div>
+
+            </div>
+        
+    </form>
+}
+
+<div id="dialog" style="display: none">
+</div>
+@*<div id="LandLineprogress" class="loading hidden">Loading&#8230;</div>*@
+<div class="preloader hidden" id="LandLineprogress">
+    <div id="loading"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#LandLineprogress').removeClass("hidden");
+        $('#LandLineprogress').hide();
+    })
+    function OnLandlineSuccess(response) {
+        $('#LandLineprogress').removeClass("hidden");
+        $('#LandLineprogress').hide();
+        $('#loading').removeClass("hidden");
+        $('#loading').hide();
+        var message = response;
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+            }
+        })
+        $("#LandLineRecharge").trigger("reset");
+        callGeocodeRecharge();
+        //window.location.reload();
+        //alert(message);
+    }
+    function OnLandlineFailure(response) {
+        alert("Error occured.");
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+
+        callGeocodeRecharge();
+
+    });
+    function callGeocodeRecharge() {
+        $.getJSON('http://www.geoplugin.net/json.gp?jsoncallback=?', function (data) {
+            
+            var information = JSON.stringify(data, null, 2);
+            
+            //alert(JSON.stringify(data, null, 2));
+            console.log(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 2));
+            $('#GeolocationLandline').val(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 0));
+            $('#LandlineIpaddress').val(JSON.stringify(data.geoplugin_request, null, 0));
+            console.log(JSON.stringify(data, null, 2));
+        });
+    }
+
+</script>
+
+@*<script>
+
+    var x = document.getElementById("demo");
+    function getLocationLandLine() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(LandLineshowPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+    function LandLineshowPosition(position) {        
+        var geolocation = position.coords.latitude.toFixed(6) + "," + position.coords.longitude;        
+        $('#GeolocationLandline').val(geolocation);
+    }
+    $(document).ready(function () {
+        getLocationLandLine();
+    });
+
+
+   
+
+</script>*@

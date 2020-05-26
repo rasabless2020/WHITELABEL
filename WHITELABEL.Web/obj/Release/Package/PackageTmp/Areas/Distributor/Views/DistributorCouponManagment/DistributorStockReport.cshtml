@@ -1,0 +1,33 @@
+﻿@using NonFactors.Mvc.Grid;
+@model WHITELABEL.Data.Models.TBL_COUPON_STOCK
+@{
+    ViewBag.Title = "Distributor Coupon Stock Report";
+    Layout = "~/Areas/Distributor/Views/Shared/_LayoutDistributor.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal padding-top-20">
+        <div class="row">
+            <div style="background-color:#ccc; border-radius:5px; color:#3e50b4; padding:5px 20px 10px 20px; margin-bottom:20px;" class="col-md-12"><h3 style="color:#3e50b4"><i class="fas fa-angle-double-right"></i> Distributor Coupon Stock Report</h3></div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+
+                        </div>
+                    </div><!--.panel-heading-->
+                    <div class="card-body">
+                        <div class="row example-row">
+                            @Html.AjaxGrid(Url.Action("GetDistributorCouponStockIndexGrid", "DistributorCouponManagment", new { area = "Distributor" }))
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div><!--.row-->
+    </div>
+
+}
+

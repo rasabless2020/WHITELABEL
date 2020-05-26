@@ -1,0 +1,47 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_CREDIT_BALANCE_DISTRIBUTION>
+@{
+    /**/
+
+    ViewBag.Title = "IndexGrid";
+    Layout = null;
+}
+
+@(Html
+                                        .Grid(Model)
+                                        .Build(columns =>
+                                        {
+                                            columns.Add(model => model.SLN).Titled("Sln").Filterable(true).Sortable(true);
+                                            columns.Add(model => model.FromUser).Titled("Member Name ").Filterable(true).Sortable(true);
+                                            columns.Add(model => model.Member_RoleName).Titled("Member Role").Filterable(true).Sortable(true);
+                                            columns.Add(model => model.CREDIT_TYPE).Titled("Credit Type").Filterable(true).Sortable(true);
+                                            columns.Add(model => model.CREDIT_AMOUNT).Titled("Credit Amount").Filterable(true).Sortable(true);
+                                            columns.Add(model => model.CREDIT_DATE).Titled("Credit Date").Filterable(true).Sortable(true).Formatted("{0:yyyy-MM-dd}");
+                                            columns.Add(model => model.CREDIT_NOTE_DESCRIPTION).Titled("Credit Note").Filterable(true).Sortable(true);
+                                            //       columns.Add(model => (model.ACTIVE_MEMBER == true ? "Active" : "Deactive")).Titled("Status").Css("<style>.table - hover tbody tr: hover {background - color:red;}</style> ").Filterable(true).Sortable(true);
+                                            //       columns.Add(model => model.MEM_ID).Titled("").Encoded(false).Filterable(false).Sortable(false).Titled("Password")
+                                            //.RenderedAs(model => "<div style='text-align:center'><a href='javascript:void(0)' onclick='SendMailToMember(" + model.MEM_ID + ");return 0;' title='Password'  style='margin-right:10px;'><i class='fa fa-key'></i></a> <a href='javascript:void(0);' onclick='GetPassword(" + model.MEM_ID + ");'><i class='fa fa-eye'></i></a> </div>");
+                                            //       columns.Add(model => model.MEM_ID).Encoded(false).Filterable(false).Sortable(false).Titled("Action")
+                                            //           //.RenderedAs(model => "<div style='text-align:center'><a href='" + @Url.Action("CreateMember", "PowerAdminMember", new { area = "PowerAdmin", memid = Encrypt.EncryptMe(model.MEM_ID.ToString()) }) + "' style='margin-right:10px' title='Edit'><i class='fa fa-edit'></i></a><a href='" + @Url.Action("HostingDetails", "PowerAdminHosting", new { area = "PowerAdmin", memid = Encrypt.EncryptMe(model.MEM_ID.ToString()) }) + "' style='margin-right:10px' title='Hosting'><i class='fa fa-server'></i></a><a href='" + @Url.Action("ServiceDetails", "PowerAdminService", new { area = "PowerAdmin", memid = Encrypt.EncryptMe(model.MEM_ID.ToString()) }) + "' style='margin-right:10px' title='Service'><i class='fa fa-cogs'></i></a></div>");
+                                            //           .RenderedAs(model => "<div>&nbsp;<a href='" + @Url.Action("CreateMember", "MemberAPILabel", new { area = "Admin", memid = Encrypt.EncryptMe(model.MEM_ID.ToString()) }) + "' Title='Edit' style='margin-right:10px;'><i class='fa fa-edit'></i></a><a href='" + @Url.Action("ServiceDetails", "MemberService", new { area = "Admin", memid = Encrypt.EncryptMe(model.MEM_ID.ToString()) }) + "' title='Services'><i class='fa fa-cogs'></i></a></div>");
+                                            //       columns.Add(model => model.MEM_ID).Encoded(false).Filterable(false).Sortable(false).Titled("Action")
+                                            //     //.RenderedAs(model => "<a href='javascript:void(0)' class='"+ (model.ACTIVE_MEMBER == true ? "btn btn-success" : "btn btn-danger") + "' onclick='MemberStatus(\"" + model.MEM_ID + "\",\"" + model.ACTIVE_MEMBER + "\");'>" + (model.ACTIVE_MEMBER == true ? "<i class='fa fa-toggle-on'></i>" : "<i class='fa fa-toggle-off'></i>") + "</a>");
+                                            //     .RenderedAs(model => "<a href='javascript:void(0)' onclick='MemberStatus(\"" + model.MEM_ID + "\",\"" + model.ACTIVE_MEMBER + "\");return 0;' title='" + (model.ACTIVE_MEMBER == true ? "Active" : "Deactive") + "'>" + (model.ACTIVE_MEMBER == true ? "<span style='color:green;'><i class='fa fa-toggle-on fa-2x'></i></span>" : "<span style='color:red;'><i class='fa fa-toggle-off fa-2x'></i></span>") + "</a>");
+
+
+
+                                        })
+                                        .Css("css-classes")
+    .AppendCss("table table-striped")
+                                        .Empty("No data found")
+                                        .Id("my-ajax-grid")
+                                        .Pageable(pager =>
+                                        {
+                                            pager.PagesToDisplay = 5;
+                                            pager.RowsPerPage = 5;
+                                        })
+                                        .Filterable()
+                                        .Sortable()
+)
+

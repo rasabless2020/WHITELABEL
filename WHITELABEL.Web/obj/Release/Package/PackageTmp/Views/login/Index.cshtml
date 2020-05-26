@@ -1,0 +1,87 @@
+﻿@model WHITELABEL.Web.Models.LoginViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<link rel="icon" type="image/png" href="images/icons/favicon.ico" />
+<link rel="stylesheet" type="text/css" href="~/newscript/vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="~/newscript/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="~/newscript/fonts/iconic/css/material-design-iconic-font.min.css">
+<link rel="stylesheet" type="text/css" href="~/newscript/vendor/animate/animate.css">
+<link rel="stylesheet" type="text/css" href="~/newscript/vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css" href="~/newscript/vendor/animsition/css/animsition.min.css">
+<link rel="stylesheet" type="text/css" href="~/newscript/vendor/select2/select2.min.css">
+
+<link rel="stylesheet" type="text/css" href="~/newscript/vendor/daterangepicker/daterangepicker.css">
+
+<link rel="stylesheet" type="text/css" href="~/newscript/css/util.css">
+<link rel="stylesheet" type="text/css" href="~/newscript/css/main.css">
+
+
+<div class="limiter">
+    <div class="container-login100" style="background-image: url('../../newscript/images/bg-01.jpg');">
+        <div class="wrap-login100">
+            <form class="login100-form validate-form" action="~/Login/Index@(ViewBag.ReturnURL==null?"":"?ReturnURL="+ViewBag.ReturnURL)" method="post">
+                <span style="text-align:center; width:100%; padding-left:31%;">
+
+                    <img src="~/images/logo.png" width="150" />
+                    @*<img src="@ViewBag.Logopath" width="200" />*@
+                </span>
+
+                <span class="login100-form-title p-b-34 p-t-27">
+                    Sign in
+                </span>
+
+                <div class="wrap-input100 validate-input" data-validate="Enter username">
+                    @*<input class="input100" type="text" name="username" placeholder="Username">*@
+                    @Html.TextBoxFor(m => m.Email, new { placeholder = "Enter your email address", @class = "input100", style = "padding-left:30px;" })
+                    <span class="focus-input100" data-placeholder="&#xf207;">@Html.ValidationMessageFor(model => model.Email)</span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Enter password">
+                    @*<input class="input100" type="password" name="pass" placeholder="Password">*@
+                    @Html.PasswordFor(m => m.Password, new { placeholder = "Enter your password", @class = "input100", style = "padding-left:30px;" })
+                    <span class="focus-input100" data-placeholder="&#xf191;">@Html.ValidationMessageFor(model => model.Password)</span>
+                </div>
+
+                <div class="contact100-form-checkbox">
+                    @Html.CheckBoxFor(m => m.RememberMe, new { @class = "input-checkbox100" })
+                    @Html.LabelFor(m => m.RememberMe, new { @class = "label-checkbox100" })
+                    @*<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                        <label class="label-checkbox100" for="ckb1">
+                            Remember me
+                        </label>*@
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn">
+                        Login
+                    </button>
+                </div>
+
+                <div class="text-center p-t-90">
+                    <div style="text-align:center; top: 20px; font-size:12px; color:#FF0000;">@ViewBag.Message</div>
+                    <a href="@Url.Action("ForgotPassword","Login",new {area="" })" class="text-muted"><u>Forgot Password?</u></a>
+                    @*<a class="txt1" href="#">
+                            Forgot Password?
+                        </a>*@
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="dropDownSelect1"></div>
+
+
+<script src="~/newscript/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="~/newscript/vendor/animsition/js/animsition.min.js"></script>
+<script src="~/newscript/vendor/bootstrap/js/popper.js"></script>
+<script src="~/newscript/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/newscript/vendor/select2/select2.min.js"></script>
+<script src="~/newscript/vendor/daterangepicker/moment.min.js"></script>
+<script src="~/newscript/vendor/daterangepicker/daterangepicker.js"></script>
+<script src="~/newscript/vendor/countdowntime/countdowntime.js"></script>
+<script src="~/newscript/js/main.js"></script>

@@ -1,0 +1,34 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_MASTER_MEMBER>
+@{
+    ViewBag.Title = "ChangeDistributorGridIndex";
+    Layout = null;
+}
+@(Html
+      .Grid(Model)
+      .Build(columns =>
+                                            {
+                                                columns.Add(model => model.SUPER_ID).Titled("Super ID").Filterable(true).Sortable(true);
+                                                columns.Add(model => model.SuperName).Titled("Super Dist Name").Filterable(true).Sortable(true);
+                                                columns.Add(model => model.MEM_ID).Titled("Distributor Id").Filterable(true).Sortable(true);
+                                                columns.Add(model => model.UName).Titled("Distributor Name").Filterable(true).Sortable(true);
+                                                columns.Add(model => model.EMAIL_ID).Titled("Email").Filterable(true).Sortable(true);
+                                                columns.Add(model => model.MEMBER_MOBILE).Titled("Mobile No").Filterable(true).Sortable(true);
+                                                columns.Add(model => model.JOINING_DATE).Titled("Join Date").Filterable(true).Sortable(true);
+                                                columns.Add(model => model.MEM_ID).Encoded(false).Filterable(false).Sortable(false).Titled("Action")
+                                                    .RenderedAs(model => "<div style='text-align:center'><a href='#' data-toggle='modal' data-target='.transd' id='transactionvalueid' onclick='GetDistributorInformation(" + model.MEM_ID + ");' style='margin-right:10px' title='Edit'><i class='fa fa-edit'></i></a></div>");
+                                    
+
+                                })
+      .Empty("No data found")
+      .Id("my-ajax-grid")
+      .Pageable(pager =>
+      {
+          pager.PagesToDisplay = 5;
+          
+      })
+      .Filterable()
+      .Sortable()
+)
+

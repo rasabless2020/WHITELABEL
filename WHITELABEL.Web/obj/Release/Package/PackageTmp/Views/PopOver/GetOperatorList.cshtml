@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "GetOperatorList";
+    //Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = null;
+}
+
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css" />
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>*@
+<table class="table table-bordered table-responsive table-hover">
+    <tr>
+        <th>Operator Name </th>
+        <th></th>
+    </tr>
+    @foreach (var d in ViewBag.operatorList)
+    {
+        <tr>
+            <td>
+                @d.SERVICE_NAME (@d.TYPE)
+                <input type="hidden" value="@d.SERVICE_KEY" />
+            </td>
+
+            <td><a href="javascript:void(0)" class="btn btn-default" onclick="setServiseOperator('@d.SERVICE_KEY','@d.SERVICE_NAME')">Select..</a></td>
+        </tr>
+    }
+</table>

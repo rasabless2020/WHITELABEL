@@ -1,0 +1,75 @@
+﻿@model WHITELABEL.Data.Models.TBL_MASTER_MEMBER
+@{
+    ViewBag.Title = "Add Channel Member";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Scripts.Render("~/bundles/CheckingEmailonRegistration")
+<div class="content" style="margin-top:20px;">
+    <div class="display-animation">
+        <div class="full-content margin-bottom-40 bg-white" id="Bill_page">
+            <div class="row example-row" style="min-height:350px;">
+                <div class="col-md-12">
+                    <div class="col-md-12 row headcolor">
+                        <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-align-left fa-3x"></i></div>
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4" style="text-align:right; padding-top:10px;">
+                            <h3>
+                                Add Channel Members
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <ul class="nav nav-tabs nav-justified" role="tablist" id="utiliti_css">
+                                @*<li class="active">
+                            <a href="#tab4_1" data-toggle="tab">
+                                <span class="svg_holder">
+                                </span> <span class="text_holder">ADD SUPER</span>
+                            </a>
+                        </li>*@
+                                <li class="active">
+                                    <a href="#tab4_2" data-toggle="tab">
+                                        <span class="svg_holder">
+                                        </span> <span class="text_holder">ADD DISTRIBUTOR</span>
+                                    </a>
+                                </li>
+                                <li class="">
+                                    <a href="#tab4_3" data-toggle="tab">
+                                        <span class="svg_holder">
+                                        </span> <span class="text_holder">ADD MERCHANT</span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                @*<div class="tab-pane active" id="tab4_1">
+                            @Html.Action("ADDSUPERDISTRIBUTOR", "MemberChannelRegistration", new { area = "Admin" })
+                        </div>*@
+                                <!--.tab-pane-->
+                                <div class="tab-pane active" id="tab4_2">
+                                    <div>
+                                        @Html.Action("ADDDISTRIBUTOR")
+                                    </div>
+                                </div>
+                                <!--.tab-pane-->
+                                <div class="tab-pane" id="tab4_3">
+                                    <div>
+                                        @Html.Action("ADDMERCHANT")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--.col-md-9-->
+            </div>
+            <!--.row-->
+            <!--.row-->
+        </div>
+        <!--.full-content-->
+    </div>
+    <!--.display-animation-->
+    <!-- content -->
+</div>
+

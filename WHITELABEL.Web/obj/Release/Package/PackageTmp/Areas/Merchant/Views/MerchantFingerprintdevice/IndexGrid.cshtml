@@ -1,0 +1,37 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_FINGERPRINT_DEVICE_MASTER>
+@{    
+    //Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+    Layout = null;
+}
+@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.ID).Titled("Id").Filterable(true).Sortable(true);
+        columns.Add(model => model.DEVICE_NAME).Titled("Device Name").Filterable(true).Sortable(true);
+        columns.Add(model => model.DEVICE_MODELNO).Titled("Model No").Filterable(true).Sortable(true);
+        columns.Add(model => model.DEVICE_CODE).Titled("Device Code").Filterable(true).Sortable(true);
+        columns.Add(model => model.ID).Encoded(false).Filterable(false).Sortable(false).Titled("Action")
+            .RenderedAs(model => "<div style='text-align:center'><a href='javascript:void(0);' data-toggle='modal' data-target='.transd' id='transactionvalueid' onclick='GetFingerPrinterInfoDetails(" + model.ID + ");' style='margin-right:10px' title='Edit'><i class='fa fa-edit'></i></a></div>");
+    })
+    .RowCss(model => model.STATUS == 1 ? "bolded" : "active")
+    .Empty("No data found")
+    .Id("my-ajax-grid")
+    .Pageable(pager =>
+    {
+        pager.PagesToDisplay = 5;
+        pager.RowsPerPage = 5;
+    })
+    .Filterable()
+    .Sortable()
+)
+<style>
+    .bolded {
+        color:red;
+    }
+    .active {
+        color: black;
+    }
+</style>

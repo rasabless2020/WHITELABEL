@@ -1,0 +1,573 @@
+E:\WhiteLevel\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+E:\WhiteLevel\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+E:\WhiteLevel\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+E:\WhiteLevel\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+E:\WhiteLevel\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+E:\WhiteLevel\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+E:\WhiteLevel\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+E:\WhiteLevel\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+E:\WhiteLevel\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+E:\WhiteLevel\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojResolveAssemblyReference.cache
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+E:\WhiteLevel\21-05-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojResolveAssemblyReference.cache
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojResolveAssemblyReference.cache
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+E:\my project\WhiteLevel\26-11-18-new\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojResolveAssemblyReference.cache
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+E:\WhiteLevel\21-05-2018\Latest_WL04-09-2018\Latest\WHITELABEL\Latest_28-11-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojResolveAssemblyReference.cache
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CopyComplete
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+D:\Rahul_27-11-2018\vapron\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+E:\WhiteLevel\Latest Vapron_28-11-2018\VP_11-12-2018\WHITELABEL\WHITELABEL\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CopyComplete
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+D:\Project\vp\Latest_21-12-2018\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojAssemblyReference.cache
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojAssemblyReference.cache
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CopyComplete
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+D:\Project\vp\Latest_08-01-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojAssemblyReference.cache
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CopyComplete
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+D:\Project\vp\Latest_07-02-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojAssemblyReference.cache
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CopyComplete
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+D:\project\traveliq\14-02-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojAssemblyReference.cache
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CopyComplete
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojAssemblyReference.cache
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CopyComplete
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+D:\Project\TravelIQ\MIlan Pro\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojAssemblyReference.cache
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CopyComplete
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+D:\project\traveliq\1-8-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojAssemblyReference.cache
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CopyComplete
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+D:\Project\TravelIQ\04-04-2019\14-02-2019\08-08-2019\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojAssemblyReference.cache
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CopyComplete
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+D:\project\traveliq\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojAssemblyReference.cache
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CopyComplete
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+D:\project\vp\new project\04-12-2019\WLP\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojAssemblyReference.cache
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CopyComplete
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+D:\Project\Latest_Updated_Vapron\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojAssemblyReference.cache
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CopyComplete
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+D:\Project\Latest_Updated_Vapron\Updated_14-01-2020\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojAssemblyReference.cache
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CopyComplete
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+D:\Sayan\ABC\VAPRON\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojAssemblyReference.cache
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CoreCompileInputs.cache
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csproj.CopyComplete
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+D:\Project\DevonEdutech\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll.config
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.dll
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\WHITELABEL.Data.pdb
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.dll
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.dll
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\Microsoft.Web.Infrastructure.dll
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.dll
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.dll
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.dll
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.dll
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.dll
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.dll
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.xml
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\EntityFramework.SqlServer.xml
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Helpers.xml
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Mvc.xml
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.Razor.xml
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.xml
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Deployment.xml
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\bin\Release\System.Web.WebPages.Razor.xml
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.dll
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.pdb
+F:\PRO\DEVCON\WHITELABEL\WHITELABEL.Data\obj\Release\WHITELABEL.Data.csprojResolveAssemblyReference.cache

@@ -1,0 +1,72 @@
+﻿@using WHITELABEL.Web.Helper;
+@*@model IEnumerable<WHITELABEL.Data.Models.TBL_MASTER_MEMBER>*@
+@model IGrid<WHITELABEL.Data.Models.TBL_MASTER_MEMBER>
+@{
+    ViewBag.Title = "IndexGrid";
+  
+}
+
+@(new HtmlGrid<WHITELABEL.Data.Models.TBL_MASTER_MEMBER>(Html, Model))
+
+
+@*@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.UName).Titled("UserName");
+        columns.Add(model => model.MEMBER_NAME).Titled("Member Name");
+        columns.Add(model => model.COMPANY).Titled("Company");
+        columns.Add(model => model.MEMBER_MOBILE).Titled("Mobile");
+        columns.Add(model => model.BALANCE).Titled("BALANCE");
+        columns.Add(model => model.BLOCKED_BALANCE).Titled("BLK BALANCE");
+        columns.Add(model => Html.Hidden("")).Titled("").Encoded(false)
+            .RenderedAs(model => "<a href='javascript:void(0)' class='btn btn-denger btn-xs' onclick='SendMailToMember(" + model.MEM_ID + ");return 0;'>Send Password</a>");
+        columns.Add(model => model.MEM_ID).Titled("").Filterable(false).Sortable(false).RenderedAs(m => Html.ActionLink("Edit", "CreateMember", "APILabel", new { memid = Encrypt.EncryptMe(m.MEM_ID.ToString())},new { @class = "btn btn-primary btn-xs" }));        
+        columns.Add(model => model.MEM_ID).Titled("").Filterable(false).Sortable(false).RenderedAs(m => Html.ActionLink("Hosting", "HostingDetails", "Hosting", new { memid = Encrypt.EncryptMe(m.MEM_ID.ToString()) }, new {  @class = "btn btn-primary btn-xs" }));
+        columns.Add(model => model.MEM_ID).Titled("").Filterable(false).Sortable(false).RenderedAs(m => Html.ActionLink("Service", "ServiceDetails", "Service", new { memid = Encrypt.EncryptMe(m.MEM_ID.ToString()) }, new { @class = "btn btn-primary btn-xs" }));
+        columns.Add(model => (model.ACTIVE_MEMBER==true?"Active":"Deactive")).Titled("Status");
+        columns.Add(model => Html.Hidden("")).Titled("Change Status").Encoded(false)
+    .RenderedAs(model => "<a href='javascript:void(0)' class='btn btn-denger btn-xs' onclick='MemberStatus(\"" + model.MEM_ID + "\",\"" + model.ACTIVE_MEMBER + "\");return 0;'>" + (model.ACTIVE_MEMBER==true ?"Deactive":"Active")+"</a>");
+    })
+    .RowCss(model => model.ACTIVE_MEMBER == false ? "RowColorchange" : "")
+    .Empty("No data found")
+    .Id("my-ajax-grid")
+    .Pageable(pager =>
+    {
+        pager.PagesToDisplay = 10;
+        pager.RowsPerPage = 10;
+    })
+    .Filterable()
+    .Sortable()
+)*@
+
+<style>
+    .RowColorchange {       
+       background-color:sandybrown; 
+    }
+</style>
+
+@*<script>
+    $('.mvc-grid').mvcgrid({
+        rowClicked: function (row, data, e) {
+            alert($(row).data('id'));
+        }
+    });
+
+</script>
+<script>
+    $(document).ready(function () {     
+        $("#content tbody tr").each(function (i, row) {
+            var $actualRow = $(row);
+            //if ($actualRow.find('input[type=checkbox]').prop('checked') == true) {
+            //    $actualRow.css('background-color', '#EAF2D3');
+            //}
+            //else
+            //{
+            //    $actualRow.css('background-color', '#FF9E9E');
+            //}
+        });
+    });
+</script>*@ 
+
+

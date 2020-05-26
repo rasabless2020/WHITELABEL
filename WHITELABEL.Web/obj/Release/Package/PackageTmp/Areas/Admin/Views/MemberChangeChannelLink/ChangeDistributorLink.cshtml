@@ -1,0 +1,19 @@
+﻿@using NonFactors.Mvc.Grid;
+@model WHITELABEL.Data.Models.TBL_MASTER_MEMBER
+@{
+    ViewBag.Title = "ChangeDistributorLink";
+    //Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = null;
+}
+
+<div class="form-horizontal">
+    <div class="clearfix">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.AjaxGrid(Url.Action("ChangeDistributorGridIndex", "MemberChangeChannelLink", new { area = "Admin" }))
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

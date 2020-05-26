@@ -1,0 +1,10 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@*@model IEnumerable<WHITELABEL.Data.Models.TBL_WHITE_LEVEL_HOSTING_DETAILS>*@
+@model IGrid<WHITELABEL.Data.Models.TBL_WHITE_LEVEL_HOSTING_DETAILS>
+@{
+    ViewBag.Title = "IndexGrid";
+    //Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminLayout.cshtml";
+}
+
+@(new HtmlGrid<WHITELABEL.Data.Models.TBL_WHITE_LEVEL_HOSTING_DETAILS>(Html, Model))

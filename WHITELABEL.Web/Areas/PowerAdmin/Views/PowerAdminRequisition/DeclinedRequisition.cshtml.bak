@@ -1,0 +1,35 @@
+﻿@using NonFactors.Mvc.Grid;
+@model WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS  
+@{
+    ViewBag.Title = "Declined Requisition";
+    //Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminLayout.cshtml";
+    Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminNewLayout.cshtml";
+}
+
+@Html.AntiForgeryToken()
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="panel-heading">
+                        @*<div class="panel-title" align="right"><a href="@Url.Action("RequisitionDetails", "PowerAdminRequisition",new {area="PowerAdmin" })" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span>Add New Requisition</a></div>*@
+                    </div><!--.panel-heading-->
+                    <div class="panel-body">
+                        <div class="row example-row">
+                            @Html.AjaxGrid(Url.Action("DeclinedIndexgrid", "PowerAdminRequisition", new { area = "PowerAdmin" }))
+
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+                    @*<div class="panel-footer text-right">
+                    <a href="@(Url.Action("GridExportIndex", "PowerAdminRequisition",new {area="PowerAdmin" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>
+                </div>*@
+
+                </div><!--.panel-->
+
+            </div><!--.col-md-12-->
+        </div><!--.row-->
+
+</div>
+@Scripts.Render("~/bundles/PowerAdminRequisition")
+

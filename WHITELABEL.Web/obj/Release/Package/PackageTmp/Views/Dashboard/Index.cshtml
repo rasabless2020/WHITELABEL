@@ -1,0 +1,294 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<div class="full-content margin-top-40 margin-bottom-40 bg-white">
+    <div class="row">
+        <div class="col-md-3 material-animate padding-right-40">
+            <ul class="list-group ">
+                <li class="list-group-item">
+                    <div class="form-group">
+                        <label>Price range:</label>
+                        <input type="text" name="" class="ionrange-money1">
+                    </div>
+                    <!--.row-->
+                </li>
+                <li class="list-group-item">
+                    Time slots for the flight
+                    <div class="checkboxer">
+                        <input type="checkbox" value="" id="check1">
+                        <label for="check1"> Early Morning <small>12am - 8am</small></label>
+                    </div>
+                    <!--.checkbox-->
+
+                    <div class="checkboxer">
+                        <input type="checkbox" value="" id="check2">
+                        <label for="check2"> Morning <small>8am - 12pm</small></label>
+                    </div>
+                    <!--.checkbox-->
+
+                    <div class="checkboxer">
+                        <input type="checkbox" value="" id="check3">
+                        <label for="check3">Mid-Day <small>12pm - 4pm</small></label>
+                    </div>
+                    <!--.checkbox-->
+
+                    <div class="checkboxer">
+                        <input type="checkbox" value="" id="check4">
+                        <label for="check4">Evening <small>4pm - 8pm</small></label>
+                    </div>
+                    <!--.checkbox-->
+
+                    <div class="checkboxer">
+                        <input type="checkbox" value="" id="check5">
+                        <label for="check5">Night <small>8pm - 12am</small></label>
+                    </div>
+                    <!--.checkbox-->
+
+                </li>
+                <li class="list-group-item">
+                    Stops for that flight
+                    <div class="clearfix"></div>
+                    <div class="btn-group btn-group-xs" data-toggle="buttons">
+                        <label class="btn btn-blue-grey active">
+                            <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                            1
+                        </label>
+                        <label class="btn btn-blue-grey">
+                            <input type="radio" name="options" id="option2" autocomplete="off">
+                            2
+                        </label>
+                        <label class="btn btn-blue-grey">
+                            <input type="radio" name="options" id="option3" autocomplete="off">
+                            3
+                        </label>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    Refundable:
+                    <div class="btn-group btn-group-xs" data-toggle="buttons">
+                        <label class="btn btn-blue-grey active">
+                            <input type="radio" name="optionsa" id="option1" autocomplete="off" checked>
+                            yes
+                        </label>
+                        <label class="btn btn-blue-grey">
+                            <input type="radio" name="optionsa" id="option2" autocomplete="off">
+                            No
+                        </label>
+                    </div>
+                </li>
+                <li class="list-group-item">
+                    Checkbox:
+                    <div class="checkboxer">
+                        <input type="checkbox" value="" id="check6">
+                        <label for="check6"> For all Airlines</label>
+                    </div>
+                    <!--.checkbox-->
+
+                </li>
+                <li class="list-group-item">
+                    <div class="form-group">
+                        <label>Promo Code </label>
+                        <input class="form-control" type="text" placeholder="promo">
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!--.col-->
+
+        <div class="col-md-9 material-animate">
+
+
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="list-group-item bg-blue text-color-white">
+                    <div class="col-lg-3">Name of the Airlines</div>
+                    <div class="col-lg-9">
+                        <div class="col-lg-4">Departure </div>
+                        <div class="col-lg-4">Arrival Time</div>
+                        <div class="col-lg-2">Refundable</div>
+                        <div class="col-lg-2">Price</div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+
+
+                                <div>
+                                    <div class="col-lg-3"> <img class="img-rounded" src="images/indiGo_Logo.jpg" width="24" height="24"> Indigo</div>
+                                    <div class="col-lg-9">
+                                        <div class="col-lg-4">
+                                            14:20
+                                            <!--<br>
+                                            <span class="label label-info">CCU → JAI</span>-->
+                                        </div>
+                                        <div class="col-lg-4">16:40</div>
+
+                                        <div class="col-lg-2 text-center">
+                                            <i class="fa fa-check text-amber"></i>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            6,600/-
+                                            <!--<button class="btn btn-cyan btn-xs btn-block"> Book</button>-->
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+
+                        <table class="table">
+                            <tr>
+                                <td>Airline’s name</td>
+                                <td>Indigo</td>
+                            </tr>
+                            <tr>
+                                <td>Time and place of departure</td>
+                                <td> 14:20 </td>
+                            </tr>
+                            <tr>
+                                <td>Time and place of arrival</td>
+                                <td> 14:20 </td>
+                            </tr>
+                            <tr>
+                                <td>Cancellation policy</td>
+                                <td>Read more...</td>
+                            </tr>
+                            <tr>
+                                <td>BOOK NOW button</td>
+                                <td><button class="btn btn-cyan btn-xs"> Book</button></td>
+                            </tr>
+
+                        </table>
+
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <div>
+                                    <div class="col-lg-3"> <img class="img-rounded" src="images/indiGo_Logo.jpg" width="24" height="24"> Indigo</div>
+                                    <div class="col-lg-9">
+                                        <div class="col-lg-4">
+                                            14:20
+                                            <!--<br>
+                                            <span class="label label-info">CCU → JAI</span>-->
+                                        </div>
+                                        <div class="col-lg-4">16:40</div>
+
+                                        <div class="col-lg-2 text-center">
+                                            <i class="fa fa-check text-amber"></i>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            6,600/-
+                                            <!--<button class="btn btn-cyan btn-xs btn-block"> Book</button>-->
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>Airline’s name</td>
+                                    <td>Indigo</td>
+                                </tr>
+                                <tr>
+                                    <td>Time and place of departure</td>
+                                    <td> 14:20 </td>
+                                </tr>
+                                <tr>
+                                    <td>Time and place of arrival</td>
+                                    <td> 14:20 </td>
+                                </tr>
+                                <tr>
+                                    <td>Cancellation policy</td>
+                                    <td>Read more...</td>
+                                </tr>
+                                <tr>
+                                    <td>BOOK NOW button</td>
+                                    <td><button class="btn btn-cyan btn-xs"> Book</button></td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                <div>
+                                    <div class="col-lg-3"> <img class="img-rounded" src="images/indiGo_Logo.jpg" width="24" height="24"> Indigo</div>
+                                    <div class="col-lg-9">
+                                        <div class="col-lg-4">
+                                            14:20
+                                            <!--<br>
+                                            <span class="label label-info">CCU → JAI</span>-->
+                                        </div>
+                                        <div class="col-lg-4">16:40</div>
+
+                                        <div class="col-lg-2 text-center">
+                                            <i class="fa fa-check text-amber"></i>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            6,600/-
+                                            <!--<button class="btn btn-cyan btn-xs btn-block"> Book</button>-->
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>Airline’s name</td>
+                                    <td>Indigo</td>
+                                </tr>
+                                <tr>
+                                    <td>Time and place of departure</td>
+                                    <td> 14:20 </td>
+                                </tr>
+                                <tr>
+                                    <td>Time and place of arrival</td>
+                                    <td> 14:20 </td>
+                                </tr>
+                                <tr>
+                                    <td>Cancellation policy</td>
+                                    <td>Read more...</td>
+                                </tr>
+                                <tr>
+                                    <td>BOOK NOW button</td>
+                                    <td><button class="btn btn-cyan btn-xs"> Book</button></td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+        <!--.col-->
+
+    </div>
+    <!--.row-->
+</div>

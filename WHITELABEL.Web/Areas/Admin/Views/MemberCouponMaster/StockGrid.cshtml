@@ -1,0 +1,38 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_COUPON_STOCK>
+@{
+    /**/
+
+    ViewBag.Title = "StockGrid";
+    //Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    Layout = null;
+}
+
+
+@(Html
+      .Grid(Model)
+      .Build(columns =>
+      {
+          columns.Add(model => model.sln).Titled("Sln").Filterable(true).Sortable(true);
+          columns.Add(model => model.HolderName).Titled("Holder Name").Filterable(true).Sortable(true);
+          columns.Add(model => model.puchaseDate).Titled("Puchase Date").Filterable(true).Sortable(true).Formatted("{0:d}");
+          columns.Add(model => model.stockEntryDate).Titled("Stock Entry Date").Filterable(true).Sortable(true).Formatted("{0:d}");
+          columns.Add(model => model.CouponName).Titled("Coupon Type").Filterable(true).Sortable(true);
+          columns.Add(model => model.couponQty).Titled("Available Quantity").Filterable(true).Sortable(true);
+          //columns.Add(model => model.CouponAmount).Titled("Coupon Amt").Filterable(true).Sortable(true);
+          //columns.Add(model => model.sln).Encoded(false).Filterable(false).Sortable(false).Titled("Action")
+          //    .RenderedAs(model => "<div>&nbsp;<a href='" + @Url.Action("AddCouponStock", "Merchant_Coupan_Master", new { area = "Admin", memid = Encrypt.EncryptMe(model.sln.ToString()) }) + "' Title='Edit' style='margin-right:10px;'><i class='fa fa-edit'></i></a></div>");
+      })
+       .Empty("No data found")
+       .Id("my-ajax-grid")
+       .Pageable(pager =>
+       {
+           pager.PagesToDisplay = 5;
+           pager.RowsPerPage = 5;
+       })
+       .Filterable()
+       .Sortable()
+)
+
+

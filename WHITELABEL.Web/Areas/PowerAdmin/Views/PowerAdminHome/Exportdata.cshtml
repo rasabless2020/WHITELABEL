@@ -1,0 +1,15 @@
+﻿@*@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_ACCOUNTS>*@
+@using NonFactors.Mvc.Grid;
+@model IGrid<WHITELABEL.Data.Models.TBL_ACCOUNTS>
+@{
+    ViewBag.Title = "Exportdata";
+    //Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminLayout.cshtml";
+   Layout = "~/Areas/PowerAdmin/Views/Shared/_LayoutPowerAdmin.cshtml";
+}
+
+<a href="@(Url.Action("ExportIndex", "PowerAdminHome", new { area = "PowerAdmin" })+ViewContext.HttpContext.Request.QueryString)">Export</a>
+
+
+@(new HtmlGrid<WHITELABEL.Data.Models.TBL_ACCOUNTS>(Html, Model))

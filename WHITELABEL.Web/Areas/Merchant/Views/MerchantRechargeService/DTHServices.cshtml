@@ -1,0 +1,238 @@
+﻿@model WHITELABEL.Web.Areas.Merchant.Models.MobileRechargeModel
+@{
+    ViewBag.Title = "DTHServices";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+@Scripts.Render("~/bundles/MerchantDTHRecharge")
+<link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet" />
+<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+@using (Ajax.BeginForm("POSTDTHRecharge", "MerchantRechargeService", new AjaxOptions { Confirm = "Do you want to recharge", OnSuccess = "OnSuccessDTHService", OnFailure = "OnFailureDTHService", LoadingElementId = "progressDTHService" }, new { area = "Merchant", @id = "DTHRecharge" }))
+{
+    @Html.AntiForgeryToken()
+    @*<div class="col-md-12 row headcolor">
+            <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-satellite-dish  fa-3x"></i> </div>
+
+            <div class="col-md-8" style="text-align:right; padding-top:10px;">
+                <h3>
+                    DTH Bill Payment
+                </h3>
+            </div>
+        </div>*@
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5>DTH Bill Payment</h5>
+                <form>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="col-md-12" style="margin-top:20px;">
+                                <div class=" floating-label">
+
+                                    <div class="inputer">
+                                        <div class="md-form">
+
+                                            @*<input type="text" class="form-control" id="exampleInput1">*@
+                                            @Html.EditorFor(m => m.ContactNo, new { htmlAttributes = new { @style = " width:100%; padding:5px;", placeholder = "Card No.", @class = "form-control" } })
+                                            <label for="exampleInput1">@*Registered Mobile No. / Viewing Card No.*@</label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-top:20px;">
+                                <div class=" floating-label">
+
+                                    <div class="inputer">
+                                        <div class="md-form">
+
+                                            @Html.EditorFor(m => m.RechargeAmt, new { htmlAttributes = new { @style = " width:100%; padding:5px;", placeholder = "Amount", @class = "form-control" } })
+                                            @*<input type="text" class="form-control" id="amount">*@
+                                            <label for="amount">@*Amount*@</label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.RechargeAmt, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                        <div style="display:none" id="idGeolocmob">
+                                            @Html.EditorFor(m => m.geolocation, new { htmlAttributes = new { @class = "form-control", id = "GeolocationDTHRecharge", @readonly = "readonly" } })
+                                            @Html.EditorFor(m => m.IpAddress, new { htmlAttributes = new { @class = "form-control", id = "DTHRechargeIpaddress", @readonly = "readonly" } })
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="col-md-12" style="margin-top:20px;">
+                                <div class=" floating-label">
+
+
+                                    <div class="input-group">
+
+                                        <div class="inputer" style="width:91%">
+                                            <div class="md-form">
+                                                @*<input type="text" id="hfOperator" name="OperatorId" class="form-control" placeholder="Operator Name">*@
+                                                @Html.EditorFor(m => m.OperatorName, new { htmlAttributes = new { @style = " width:100%;", placeholder = "Operator Name", id = "txtDTHOperator", @class = "form-control" } })
+                                                <input type="hidden" id="hfDTHOperator" name="DTHOperatorId" />
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.OperatorName, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                        <span class="input-group-btn">
+                                            <button href="javascript:void(0)" data-toggle='modal' data-target='.transdDTH' id='transactionvalueDTHid' type="button" class="btn btn-default">...</button>
+                                        </span>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="col-md-12" style="margin-top:20px;">
+                                <div class=" floating-label">
+                                    <div class="input-group" style=" height:37px;">
+                                        <div class="inputer" style="width:100%;">
+                                            <div class="md-form">
+                                                @Html.EditorFor(m => m.CircleName, new { htmlAttributes = new { @id = "txtDTHCircleName", style = " width:100%; padding:5px; border-bottom:#f0f0f0 1px solid;", placeholder = "Circle Name", @class = "form-control" } })
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CircleName, "", new { @class = "text-danger" })</small></span>
+                                                <input type="hidden" id="hfDTHCircleCode" name="DTHCircleCodeId" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="col-md-12" style="text-align:center; margin-top:20px;">
+                                <input type="submit" value="Pay" class="btn btn-primary btn-lg" id="btnsubmitDTH" />
+                            </div>
+
+
+
+
+                        </div>
+                        <div class="col-md-3"></div>
+
+
+
+
+
+
+
+
+                    </div>
+                    <div class="clearfix"></div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+
+}
+<div id="dialog" style="display: none">
+</div>
+@*<div id="progressDTHService" class="loading hidden">Loading&#8230;</div>*@
+<div class="preloader hidden" id="progressDTHService">
+    <div id="loading"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#progressDTHService').removeClass("hidden");
+        $('#progressDTHService').hide();
+    })
+    function OnSuccessDTHService(response) {
+        $('#progressDTHService').removeClass("hidden");
+        $('#progressDTHService').hide();
+        $('#loading').removeClass("hidden");
+        $('#loading').hide();
+        var message = response;
+        $("#DTHRecharge").trigger("reset");
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+            }
+        })
+        //alert(message);
+    }
+    function OnFailureDTHService(response) {
+        alert("Error occured.");
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        callGeocodeDTH();
+    });
+    function callGeocodeDTH() {
+        $.getJSON('http://www.geoplugin.net/json.gp?jsoncallback=?', function (data) {
+            var information = JSON.stringify(data, null, 2);
+            //alert(information[0]);
+            //alert(JSON.stringify(data, null, 2));
+            console.log(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 2));
+            $('#GeolocationDTHRecharge').val(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 0));
+            $('#DTHRechargeIpaddress').val(JSON.stringify(data.geoplugin_request, null, 0));
+            console.log(JSON.stringify(data, null, 2));
+        });
+    }
+    function setDTHOperatorServiseOperator($key, $name) {
+        $('#txtDTHOperator').val($name).focus();
+        $('#hfDTHOperator').val($key);
+        //$('#RechargeAmt').focus();
+        $('#transactionvalueDTHid').modal('hide');
+        $('.transdDTH').modal('hide');
+    }
+</script>
+
+<div id="transactionvalueDTHid" class="modal scale fade transdDTH" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Service Provider Name List</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table style="width:100%">
+                    <tr>
+                        <th>Operator Name </th>
+                        <th></th>
+                    </tr>
+                    @foreach (var d in ViewBag.DTHOperator)
+                    {
+                        <tr>
+                            <td>
+                                @d.SERVICE_NAME (@d.TYPE)
+                                <input type="hidden" value="@d.SERVICE_KEY" />
+                            </td>
+
+                            @*<td><a href="javascript:void(0)" class="btn btn-default" onclick="setWaterServiseOperator('@d.SERVICE_KEY','@d.SERVICE_NAME')">Select..</a></td>*@
+                            <td><a href="javascript:void(0)" class="btn btn-default" onclick="setDTHOperatorServiseOperator('@d.SERVICE_KEY','@d.SERVICE_NAME')"><img src="data:image;base64,@d.IMAGE" width="60" height="60" /></a></td>
+
+                        </tr>
+                    }
+                </table>
+                @*<div class="col-md-6">
+                        <div class="inputer floating-label">
+                            <div class="input-wrapper">
+                                Member Name <input type="text" id="username" value="" class="form-control" />
+                                <input type="text" id="username1" value="" class="form-control" />
+                                <input type="hidden" id="sln" />
+                            </div>
+                        </div>
+                    </div>*@
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div><!--.modal-content-->
+    </div><!--.modal-dialog-->
+</div>

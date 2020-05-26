@@ -1,0 +1,89 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>
+@{
+    ViewBag.Title = "Whitelevel Requisition";
+    //Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminLayout.cshtml";
+    Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminNewLayout.cshtml";
+}
+
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="panel-heading">
+                        <div class="card-title row">
+                            <div class="col-md-12 text-left">
+                                <a href="#" id="btnExportWhiteLevelrecoard" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>
+                                @*<a href="@(Url.Action("ExportIndex","SuperRequisition",new {area="Super" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row example-row" style="margin-bottom:10px;">
+
+
+                            <div class="col-md-4">
+                                <div class="inputer">
+                                    <div class="input-wrapper">
+                                        @Html.DropDownList("MemberService", new SelectList((ViewBag.MemberService) as SelectList, "Value", "Text"), "Select Whitelevel", new { id = "WhiteLevelList", @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="inputer">
+                                    <div class="input-wrapper">
+                                        @Html.DropDownList("MemberTransactionStatus", new List<SelectListItem>
+                                                                            { new SelectListItem{Text="Approve", Value="Approve"},
+                                                                                new SelectListItem{Text="Pending", Value="Pending"},
+                                                                                new SelectListItem{Text="Decline", Value="Decline"} },
+                                                                               "Select Status", new { id = "TransactionStatus", @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                            <div class="col-md-12">@Html.AjaxGrid(Url.Action("Indexgrid", "PowerAdminRequisitionReport", new { area = "PowerAdmin" }))</div>
+                        
+                    </div>
+
+
+                </div>
+                </div>
+            </div>
+        </div>
+</div>
+<script>
+    $(document).on('change', '#TransactionStatus', function () {
+        debugger;
+        var transstatus = $('#TransactionStatus').val();
+        var status = $('#WhiteLevelList').val();
+           $('.mvc-grid').mvcgrid({
+               //query: 'search=' + this.value ,
+               //query: 'search=' + status + '&Status' + transstatus,
+               query: 'search=' + status + '&Status=' + this.value,
+               reload: true
+           });
+       });
+</script>
+
+<script>
+       //$(document).on('change', '.mvc-grid-search', function () {
+    $("#WhiteLevelList").change(function () {
+        debugger;
+        var status = $('#TransactionStatus').val();
+        //var dropdownMerchantval = $('#MerchantId').val();
+           $('.mvc-grid').mvcgrid({
+               //query: 'search=' + this.value,
+               query: 'search=' + this.value + '&Status=' + status,
+               reload: true
+           });
+       });
+</script>
+<script type="text/javascript">
+    $("#btnExportWhiteLevelrecoard").click(function () {
+        var url = '@(Url.Action("ExportWhiteLevelIndex", "PowerAdminRequisitionReport", new {area="PowerAdmin" }) + ViewContext.HttpContext.Request.QueryString)?Disid=' + $("#WhiteLevelList").val() + '&statusval=' + $("#TransactionStatus").val();
+        window.location.href = url;
+    })
+</script>

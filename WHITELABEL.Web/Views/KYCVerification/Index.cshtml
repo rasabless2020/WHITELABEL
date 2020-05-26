@@ -1,0 +1,20 @@
+﻿@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "KYC Verification";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row example-row">
+                        @Html.AjaxGrid(Url.Action("IndexGrid", "KYCVerification"))
+                    </div><!--.row-->
+                </div><!--.panel-body-->
+            </div><!--.panel-->
+        </div><!--.col-md-12-->
+    </div><!--.row-->
+</div>
+@Scripts.Render("~/bundles/KYCVerification");
+  

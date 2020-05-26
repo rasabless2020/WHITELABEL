@@ -1,0 +1,26 @@
+﻿@using NonFactors.Mvc.Grid;
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@*@Scripts.Render("~/bundles/MemberRequisition")*@
+<script src="~/Areas/Admin/AdminHelperJS/MemberRequisition/Index.js"></script>
+@using (Html.BeginForm(new { id = "Transactionlist" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal padding-top-20">
+        <div>
+            <div>
+                <div>
+                    <div>
+                        <div class="panel-footer text-right">
+                            <button id="btnExport" class="btn btn-info btn-xs">EXPORT</button>
+                        </div>
+                        <div>
+                            @Html.AjaxGrid(Url.Action("IndexGrid", "MemberCommDisburseSetting", new { area = "Admin" }))
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,46 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_INSTANTPAY_RECHARGE_RESPONSE>
+@{
+    ViewBag.Title = "PartialRechargeInfoList";
+    Layout = null;
+    //Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+}
+
+@*@(new HtmlGrid<WHITELABEL.Data.Models.TBL_INSTANTPAY_RECHARGE_RESPONSE>(Html, Model))*@
+
+
+@(Html
+                            .Grid(Model)
+                            .Build(columns =>
+                            {
+                                //columns.Add(model => model.ACC_NO).Titled("Sln");
+                                columns.Add(model => model.Ipay_Id).Titled("Ipay Id");
+                                columns.Add(model => model.AgentId).Titled("Agent Id");
+                                columns.Add(model => model.Opr_Id).Titled("Opr Id");
+                                columns.Add(model => model.AccountNo).Titled("Acnt No.");
+                                columns.Add(model => model.Sp_Key).Titled("Ser Prov Key"); ;
+                                columns.Add(model => model.Trans_Amt).Titled("Trans Amt");
+                                columns.Add(model => model.Charged_Amt).Titled("Charge Amt");
+
+                                columns.Add(model => model.Opening_Balance).Titled("Cls amt.");
+                                columns.Add(model => model.DateVal).Titled("Recharge Date").MultiFilterable(true);
+                                columns.Add(model => model.RechargeType).Titled("Recharge Typ");
+                                columns.Add(model => model.ID).Titled("Status").Encoded(false).Filterable(false).Sortable(false)
+                                        .RenderedAs(model => "<label class='label " + (model.Status == "SUCCESS" ? "label-success" : model.Status == "FAILED" ? "label-danger" : "label-info") + "'> " + model.Status + " </label>"); ;
+                                columns.Add(model => model.res_msg).Titled("Recharge Status");
+                                columns.Add(model => model.RechargeType).Titled("Recharge Typ");
+
+                            })
+                            //.RowCss(model => model.STATUS == "Decline" ? "danger" : model.STATUS == "Pending" ? "info" : "")
+                            .Empty("No data found")
+                            .Id("my-ajax-grid")
+                            //.Pageable(pager =>
+                            //{
+                            //    pager.PagesToDisplay = 10;
+                            //    pager.RowsPerPage = 10;
+                            //})
+                            .Filterable()
+                            .Sortable()
+)
+

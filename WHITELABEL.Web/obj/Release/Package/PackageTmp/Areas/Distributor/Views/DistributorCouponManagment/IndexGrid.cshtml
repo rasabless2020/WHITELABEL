@@ -1,0 +1,31 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_COUPON_TRANSFER_LOGS>
+@{
+    Layout = null;
+}
+
+@(Html
+                      .Grid(Model)
+                      .Build(columns =>
+                      {
+                          columns.Add(model => model.SLN).Titled("Id").Filterable(true).Sortable(true);
+                          columns.Add(model => model.Member_Name).Titled("Member Name").Filterable(true).Sortable(true);
+                          columns.Add(model => model.COUPON_Name).Titled("Coupon Type").Filterable(true).Sortable(true);
+                          columns.Add(model => model.REFERENCE_NO).Titled("Ref").Filterable(true).Sortable(true);
+                          columns.Add(model => model.QTY).Titled("Qty").Filterable(true).Sortable(true);
+                          columns.Add(model => model.REQUEST_DATE).Titled("Request Date").Filterable(true).Sortable(true).Formatted("{0:d}");
+                          //columns.Add(model => model.STATUS).Titled("Status").Filterable(true).Sortable(true);
+                          columns.Add(model => model.SLN).Encoded(false).Filterable(false).Sortable(false).Titled("Status")
+                          .RenderedAs(model => "<a href='javascript:void(0)' title='" + (model.STATUS == "Pending" ? "Pending" : model.STATUS == "Success" ? "Success" : "Decline") + "'>" + (model.STATUS == "Pending" ? "<span class='badge badge-warning'>Pending</span>" : model.STATUS == "Success" ? "<span class='badge badge-success'>Success</span>" : "<span class='badge badge-danger'>Decline</span>") + "</a>");
+                      })
+                       .Empty("No data found")
+                       .Id("my-ajax-grid")
+                       .Pageable(pager =>
+                       {
+                           pager.PagesToDisplay = 5;
+                           pager.RowsPerPage = 5;
+                       })
+                       .Filterable()
+                       .Sortable()
+)

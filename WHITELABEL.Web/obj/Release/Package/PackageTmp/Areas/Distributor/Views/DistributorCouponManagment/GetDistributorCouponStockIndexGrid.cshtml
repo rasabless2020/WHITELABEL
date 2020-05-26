@@ -1,0 +1,35 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_COUPON_STOCK>
+@{
+    ViewBag.Title = "GetDistributorCouponStockIndexGrid";
+    //Layout = "~/Areas/Distributor/Views/Shared/_LayoutDistributor.cshtml";
+    Layout = null;
+}
+
+
+@(Html
+                          .Grid(Model)
+                          .Build(columns =>
+                              {
+                                  columns.Add(model => model.sln).Titled("Sln").Filterable(true).Sortable(true);
+
+                                  columns.Add(model => model.CouponName).Titled("Coupon Name").Filterable(true).Sortable(true);
+                                  columns.Add(model => model.puchaseDate).Titled("Purchase Date").Filterable(true).Sortable(true).Formatted("{0:d}");
+                                  columns.Add(model => model.stockEntryDate).Titled("Entry Value").Filterable(true).Sortable(true).Formatted("{0:d}");
+                                  columns.Add(model => model.couponQty).Titled("Quantity").Filterable(true).Sortable(true);
+                                  columns.Add(model => model.Vendor_Name).Titled("Vendor Name").Filterable(true).Sortable(true);
+
+                              })
+                           .Empty("No data found")
+                           .Id("my-ajax-grid")
+                           .Pageable(pager =>
+                               {
+                                   pager.PagesToDisplay = 5;
+                                   pager.RowsPerPage = 5;
+                               })
+                           .Filterable()
+                           .Sortable()
+)
+
+

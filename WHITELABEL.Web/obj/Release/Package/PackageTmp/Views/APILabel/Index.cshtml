@@ -1,0 +1,58 @@
+﻿@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "White Level Member List";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<div class="full-content margin-top-40 margin-bottom-40 bg-white">*@
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-heading text-right">
+                    @if (Session["msg"] != null)
+                    {
+                        <div id="informationMessage" class="text-center alert alert-success">
+                            <span style="width:100%;text-align:center;">@Session["msg"].ToString() </span>
+                            @if (Session["msg"].ToString() == "Data Save Successfully" || Session["msg"].ToString() == "Data Update Successfully")
+                            {
+                                Session.Remove("msg");
+                            }
+                        </div>
+                    }
+                    <div class="panel-title ">
+
+                        <a href="@Url.Action("CreateMember", "APILabel")" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span>Add New Member</a>
+                        <div class="clearfix"></div>
+                    </div>
+                </div><!--.panel-heading-->
+                <div class="panel-body">
+                    <div class="row example-row">
+
+                        @Html.AjaxGrid(Url.Action("IndexGrid", "APILabel"))
+
+                    </div><!--.row-->
+                </div><!--.panel-body-->
+                <div class="panel-footer text-right">
+                    <a href="@(Url.Action("ExportIndex") + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span> Export</a>
+                </div>
+            </div><!--.panel-->
+        </div><!--.col-md-12-->
+    </div><!--.row-->
+</div>
+
+@Scripts.Render("~/bundles/ApiLevel")
+
+@if (Session["msg"] != null)
+{
+   
+}
+<script>
+     $(document).ready(function () {
+         window.setTimeout(function () {
+             $("#informationMessage").fadeOut('slow');
+         }, 2000);
+     });
+
+</script>
+
+  

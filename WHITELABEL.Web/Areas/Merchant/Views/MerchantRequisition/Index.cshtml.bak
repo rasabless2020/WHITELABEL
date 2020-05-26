@@ -1,0 +1,51 @@
+﻿@using NonFactors.Mvc.Grid;
+@model WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+@Scripts.Render("~/bundles/MerchantRequisitionjs")
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        @*<div class="col-md-12">
+            <div class="col-md-12 row headcolor">
+                <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-wallet  fa-3x"></i> </div>
+
+                <div class="col-md-8" style="text-align:right; padding-top:10px;">
+                    <h3>
+                        Requisition List
+                    </h3>
+                </div>
+            </div>
+        </div>*@
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-heading" style="padding-bottom:10px;">
+                        <div class=" row" align="right">
+                            <div class="col-md-6 text-left">
+                                <a href="@(Url.Action("GridExportIndex","MerchantRequisition",new { area="Merchant"}) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <a href="@Url.Action("RequisitionDetails", "MerchantRequisition",new { area="Merchant"})" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New Requisition</a>
+                            </div>
+                        </div>
+                    </div><!--.panel-heading-->
+                    <div class="card-body">
+                        <div class="row example-row">
+
+                            @Html.AjaxGrid(Url.Action("IndexGrid", "MerchantRequisition", new { area = "Merchant" }))
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+                    @*<div class="panel-footer text-right">
+                        <a href="@(Url.Action("GridExportIndex","MerchantRequisition",new { area="Merchant"}) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>
+                    </div>*@
+                </div>
+            </div><!--.panel-->
+        </div><!--.col-md-12-->
+    </div><!--.row-->
+</div>
+
+

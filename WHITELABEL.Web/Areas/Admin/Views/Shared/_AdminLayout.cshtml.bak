@@ -1,0 +1,555 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Vapron</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <link rel="stylesheet" href="~/mystyle.css">
+    <!-- BEGIN CORE CSS -->
+    <link rel="stylesheet" href="~/panel/assets/admin1/css/admin1.css">
+    <link rel="stylesheet" href="~/panel/assets/globals/css/elements.css">
+    <!-- END CORE CSS -->
+    <!-- BEGIN PLUGINS CSS -->
+    <link rel="stylesheet" href="~/panel/assets/globals/css/plugins.css">
+    <link rel="stylesheet" href="~/panel/assets/globals/plugins/pnikolov-bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css">
+    <link rel="stylesheet" href="~/panel/assets/globals/plugins/minicolors/jquery.minicolors.css">
+    <link rel="stylesheet" href="~/panel/assets/globals/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css">
+    <link rel="stylesheet" href="~/panel/assets/globals/plugins/clockface/css/clockface.css">
+    <link rel="stylesheet" href="~/panel/assets/globals/plugins/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="~/panel/assets/globals/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css">
+    <link rel="stylesheet" href="~/panel/assets/globals/plugins/ion.rangeSlider/css/ion.rangeSlider.css">
+    <link rel="stylesheet" href="~/panel/assets/globals/plugins/ion.rangeSlider/css/ion.rangeSlider.skinFlat.css">
+    <link rel="stylesheet" href="~/panel/assets/globals/plugins/nouislider/distribute/jquery.nouislider.min.css">
+    <link rel="stylesheet" href="~/panel/assets/globals/plugins/nouislider/distribute/jquery.nouislider.pips.min.css">    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/todc-bootstrap/3.3.7-3.3.13/css/bootstrap-theme.css" rel="stylesheet" />
+    <link href="~/Content/MvcGrid/mvc-grid.css" rel="stylesheet">
+    <link href="~/Content/typeahead.css" rel="stylesheet" />
+    <!-- END PLUGINS CSS -->
+    <!-- BEGIN SHORTCUT AND TOUCH ICONS -->
+    <link rel="shortcut icon" href="~/panel/assets/globals/img/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="~/panel/assets/globals/img/icons/apple-touch-icon.png">
+    <!-- END SHORTCUT AND TOUCH ICONS -->
+
+    <script src="~/panel/assets/globals/plugins/modernizr/modernizr.min.js"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    @*<script src="/Scripts/jquery.validate.js"></script>
+        <script src="/Scripts/jquery.validate.unobtrusive.js"></script>*@
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+</head>
+<body>
+    <div class="nav-bar-container">
+
+        <!-- BEGIN ICONS -->
+        <div class="nav-menu">
+            <div class="hamburger"> <span class="patty"></span> <span class="patty"></span> <span class="patty"></span> <span class="patty"></span> <span class="patty"></span> <span class="patty"></span> </div>
+            <!--.hamburger-->
+        </div>
+        <!--.nav-menu-->
+        @*<div class="nav-search">
+            <span class="search"></span>
+        </div>*@<!--.nav-search-->
+
+        @*<div class="nav-user">
+            <div class="user">
+                <img src="@Url.Content("~/panel/assets/globals/img/faces/tolga-ergin.jpg")" alt="">
+                <span class="badge">3</span>
+            </div>
+            <div class="cross">
+                <span class="line"></span>
+                <span class="line"></span>
+            </div>
+        </div>*@
+        <!-- END OF ICONS -->
+
+        <div class="nav-bar-border">
+            <div class="logo">Vapron whitelabel</div><!--.logo-->
+            </div><!--.nav-bar-border-->
+        <!-- BEGIN OVERLAY HELPERS -->
+        <div class="overlay">
+            <div class="starting-point">
+                <span></span>
+            </div><!--.starting-point-->
+            @*<div class="logo">Whitelable</div>*@
+            <div class="logo">Vapron whitelabel</div><!--.logo-->
+        </div><!--.overlay-->
+
+        <div class="overlay-secondary"></div><!--.overlay-secondary-->
+        <!-- END OF OVERLAY HELPERS -->
+
+
+    </div>
+    <!--.nav-bar-container-->
+
+    <div class="content">
+        <div class="page-header full-content">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>@ViewBag.Title</h1>
+                </div>
+                <!--.col-->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb pull-right">
+                     
+                        <li><a href="#"><i class="ion-home"></i></a></li>
+                        <li><a href="@Url.Action("Logout","AdminLogin",new {area ="Admin"})" class="active">Logout </a></li>  @* <li><a href="Login/Logout" class="active">Logout </a></li>*@
+
+                    </ol>
+
+                    <div class="pull-right"><h5 style="color:#fff; margin-right:20px; padding-top:5px;"> @*Available Balance: @ViewBag.openingAmt*@</h5></div>
+
+
+                </div>
+                <!--.col-->
+            </div>
+            <!--.row-->
+        </div>
+        <!--.page-header-->
+        <!-- content -->
+        <div style="min-height:450px">
+            <div class="display-animation">
+
+                @RenderBody()
+
+                <!--.full-content-->
+            </div>
+        </div>
+        <!--.display-animation-->
+        <!-- content -->
+
+        <div class="footer-links margin-top-40">
+            <div class="row no-gutters">
+                <div class="col-xs-6 bg-indigo"> <a href="@Url.Action("Index","WhiteLevelAdmin", new {area="Admin" })"> <span class="state">Back To Dashboard</span> @*<span>Timeline</span>*@ <span class="icon"><i class="ion-android-arrow-back"></i></span> </a> </div>
+                <!--.col-->
+                <div class="col-xs-6 bg-cyan" style="height:64px;"></div>
+                <!--.col-->
+            </div>
+            <!--.row-->
+        </div>
+        <!--.footer-links-->
+
+    </div>
+    <!--.content-->
+
+    <div class="layer-container">
+
+        <!-- BEGIN MENU LAYER -->
+        <div class="menu-layer">
+            <ul>
+                <li><a href="@Url.Action("Index","MemberAPILabel", new {area="Admin" })">Super distributor details </a></li>
+                @*<li><a href="@Url.Action("Index","MemberHosting", new {area="Admin" })">Super distributor hosting details</a></li>*@
+                <li><a href="@Url.Action("ServiceDetails","MemberService",new {area="Admin" })">Super distributor permission details </a></li>
+                <li><a href="@Url.Action("Index","MemberCommissionSlab",new {area="Admin" })">White level commission slab </a></li>
+                @*<li><a href="@Url.Action("GenerateCommissionSlab","MemberCommissionSlab",new {area="Admin" })">New commission slab </a></li>*@
+                @*<li><a href="@Url.Action("Index","MemberCommissiontag",new {area="Admin" })">Super commission tagging </a></li>*@
+                @*<li>
+                    <a href="javascript:;">White level Users</a>
+                    <ul class="child-menu">
+                        <li><a href="#">Super stockist </a></li>
+                        <li><a href="#">Distributor </a></li>
+                        <li><a href="#">Retailer  </a></li>
+                    </ul>
+                </li>*@
+                <li><a href="@Url.Action("Index","MemberKYCVerification", new {area="Admin" })">KYC Verification</a></li>
+                <li><a href="@Url.Action("Index","MemberBankDetails", new {area="Admin" })">Bank Details</a></li>
+                
+                <li>
+                    <a href="javascript:;">Wallets</a>
+                    <ul class="child-menu">
+                        <li><a href="@Url.Action("Index","MemberRequisition", new {area="Admin" })">Super distributor balance request</a></li>
+                        <li><a href="@Url.Action("DisplayAccount", "MemberDebitCreditRequest", new {area="Admin" })">Manual balance transfer</a></li>
+                        <li><a href="@Url.Action("DeclinedRequisition", "MemberRequisition", new {area="Admin" })">Decline Requisition</a></li>
+                        <li><a href="@Url.Action("RequisitionDispay", "RequestRequisition", new {area="Admin" })">Request Requisition List</a></li>                        
+                        <li><a href="@Url.Action("Index", "RequestRequisition", new {area="Admin" })">Request Requisition</a></li>
+                        <li>@*<a href="@Url.Action("RequisitionReport","MemberRequisition", new {area="Admin" })">Balance transfer report</a>*@</li>
+                        <li><a href="@Url.Action("Index","MemberRequisitionReport", new {area="Admin" })">Admin Requisition Report</a></li>
+                        <li><a href="@Url.Action("SuperRequisitionReport","MemberRequisitionReport", new {area="Admin" })">Super Requisition Report</a></li>
+                        <li><a href="@Url.Action("DistributorRequisitionReport","MemberRequisitionReport", new {area="Admin" })">Distributor Requisition Report</a></li>
+                        <li><a href="@Url.Action("MerchantRequisitionReport","MemberRequisitionReport", new {area="Admin" })">Merchant Requisition Report</a></li>
+                       
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">Accounts</a>
+                    <ul class="child-menu">
+                        <li>@*<a href="@Url.Action("CompanyAccountStatement", "MemberAccountDetails",new {area="Admin" })">Super distributor accounts statement </a>*@</li>
+                        <li><a href="@Url.Action("Index", "MemberTransactionReport",new {area="Admin" })">Admin Commission Statement </a></li>
+                        <li><a href="@Url.Action("SuperCommissionReport", "MemberTransactionReport",new {area="Admin" })">Super Commission Statement </a></li>
+                        <li><a href="@Url.Action("DistributorCommissionReport", "MemberTransactionReport",new {area="Admin" })">Distributor Commission Statement </a></li>
+                        <li><a href="@Url.Action("MerchantCommission", "MemberTransactionReport",new {area="Admin" })">Merchant Commission Statement </a></li>
+                    </ul>
+                </li> 
+                <li>
+                    <a href="javascript:;">Manage Profile</a>
+                    <ul class="child-menu">
+                        <li><a href="@Url.Action("Index", "MemberProfileUpdate",new {area="Admin" })">Update Profile </a></li>
+                        <li><a href="@Url.Action("Index", "MemberChangePassword",new {area="Admin" })">Change Password </a></li>
+                        @*<li><a href="@Url.Action("ChangeHostingInformation", "MemberProfileUpdate",new {area="Admin" })">Change Hosting Information</a></li>*@
+                    </ul>
+                </li>  
+            </ul>
+        </div>
+        <!--.menu-layer-->
+        <!-- END OF MENU LAYER -->
+
+
+        <div class="user-layer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+                <li class="active"><a href="#settings" data-toggle="tab">Settings</a></li>
+                <li><a href="#notifications" data-toggle="tab">Notifications <span class="badge">3</span></a></li>
+            </ul>
+
+            <div class="row no-gutters tab-content">
+
+                <div class="tab-pane fade" id="notifications">
+
+                    <div class="col-md-6 col-md-offset-3">
+
+                        <ul class="list-material has-hidden">
+                            <li class="has-action-left has-action-right has-long-story">
+                                <a href="#" class="hidden"><i class="ion-android-delete"></i></a>
+                                <a href="#" class="visible">
+                                    <div class="list-action-left">
+                                        <i class="ion-bag icon text-indigo"></i>
+                                    </div>
+                                    <div class="list-content">
+                                        <span class="caption">Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits.</span>
+                                    </div>
+                                    <div class="list-action-right">
+                                        <span class="top">2 hr</span>
+                                        <i class="ion-record text-green bottom"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="has-action-left has-action-right has-long-story">
+                                <a href="#" class="hidden"><i class="ion-android-delete"></i></a>
+                                <a href="#" class="visible">
+                                    <div class="list-action-left">
+                                        <i class="ion-image text-green icon"></i>
+                                    </div>
+                                    <div class="list-content">
+                                        <span class="caption">Dramatically visualize customer directed convergence without revolutionary ROI. Efficiently unleash cross-media information without cross-media value.</span>
+                                    </div>
+                                    <div class="list-action-right">
+                                        <span class="top">16:55</span>
+                                        <i class="ion-record text-green bottom"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="has-action-left has-action-right has-long-story">
+                                <a href="#" class="hidden"><i class="ion-android-delete"></i></a>
+                                <a href="#" class="visible">
+                                    <div class="list-action-left">
+                                        <img src="panel/assets/globals/img/faces/13.jpg" class="face-radius" alt="">
+                                    </div>
+                                    <div class="list-content">
+                                        <span class="caption">Quickly maximize timely deliverables for real-time schemas. Dramatically maintain clicks-and-mortar solutions without functional solutions.</span>
+                                    </div>
+                                    <div class="list-action-right">
+                                        <span class="top">Yesterday</span>
+                                        <i class="ion-record text-green bottom"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="has-action-left has-action-right has-long-story">
+                                <a href="#" class="hidden"><i class="ion-android-delete"></i></a>
+                                <a href="#" class="visible">
+                                    <div class="list-action-left">
+                                        <img src="panel/assets/globals/img/faces/14.jpg" class="face-radius" alt="">
+                                    </div>
+                                    <div class="list-content">
+                                        <span class="caption">Completely synergize resource sucking relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas.</span>
+                                    </div>
+                                    <div class="list-action-right">
+                                        <span class="top">2 days ago</span>
+                                        <i class="ion-android-done bottom"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="has-action-left has-action-right has-long-story">
+                                <a href="#" class="hidden"><i class="ion-android-delete"></i></a>
+                                <a href="#" class="visible">
+                                    <div class="list-action-left">
+                                        <i class="ion-location text-light-blue icon"></i>
+                                    </div>
+                                    <div class="list-content">
+                                        <span class="caption">Dynamically innovate resource-leveling customer service for state of the art customer service. Objectively innovate empowered manufactured products whereas parallel platforms.</span>
+                                    </div>
+                                    <div class="list-action-right">
+                                        <span class="top">1 week ago</span>
+                                        <i class="ion-android-done bottom"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="has-action-left has-action-right has-long-story">
+                                <a href="#" class="hidden"><i class="ion-android-delete"></i></a>
+                                <a href="#" class="visible">
+                                    <div class="list-action-left">
+                                        <i class="ion-bookmark text-deep-orange icon"></i>
+                                    </div>
+                                    <div class="list-content">
+                                        <span class="caption">Holisticly predominate extensible testing procedures for reliable supply chains. Dramatically engage top-line web services vis-a-vis cutting-edge deliverables.</span>
+                                    </div>
+                                    <div class="list-action-right">
+                                        <span class="top">10 Jan</span>
+                                        <i class="ion-android-done bottom"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="has-action-left has-action-right has-long-story">
+                                <a href="#" class="hidden"><i class="ion-android-delete"></i></a>
+                                <a href="#" class="visible">
+                                    <div class="list-action-left">
+                                        <i class="ion-locked icon"></i>
+                                    </div>
+                                    <div class="list-content">
+                                        <span class="caption">Phosfluorescently engage worldwide methodologies with web-enabled technology.</span>
+                                    </div>
+                                    <div class="list-action-right">
+                                        <span class="top">9 Jan</span>
+                                        <i class="ion-android-done bottom"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="has-action-left has-action-right has-long-story">
+                                <a href="#" class="hidden"><i class="ion-android-delete"></i></a>
+                                <a href="#" class="visible">
+                                    <div class="list-action-left">
+                                        <img src="panel/assets/globals/img/faces/17.jpg" class="face-radius" alt="">
+                                    </div>
+                                    <div class="list-content">
+                                        <span class="caption">Synergistically evolve 2.0 technologies rather than just in time initiatives. Quickly deploy strategic networks with compelling e-business. Credibly pontificate highly efficient manufactured products and enabled data.</span>
+                                    </div>
+                                    <div class="list-action-right">
+                                        <span class="top">7 Jan</span>
+                                        <i class="ion-android-done bottom"></i>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="has-action-left has-action-right has-long-story">
+                                <a href="#" class="hidden"><i class="ion-android-delete"></i></a>
+                                <a href="#" class="visible">
+                                    <div class="list-action-left">
+                                        <i class="ion-navigate text-indigo icon"></i>
+                                    </div>
+                                    <div class="list-content">
+                                        <span class="caption">Objectively pursue diverse catalysts for change for interoperable meta-services. Dramatically mesh low-risk high-yield alignments before transparent e-tailers.</span>
+                                    </div>
+                                    <div class="list-action-right">
+                                        <span class="top">7 Jan</span>
+                                        <i class="ion-android-done bottom"></i>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div><!--.col-->
+                </div><!--.tab-pane #notifications-->
+
+                <div class="tab-pane fade" id="settings">
+                    <div class="col-md-6 col-md-offset-3">
+
+                        <div class="settings-panel">
+                            <p class="text-grey">Here's where you can check your settings of Whitelable Admin Panel. If you need an extra information from us, do not hesitate to contact.</p>
+
+                            <div class="legend">Privacy Controls</div>
+                            <ul>
+                                <li>
+                                    Show my profile on search results
+                                    <div class="switcher switcher-indigo pull-right">
+                                        <input id="settings1" type="checkbox" hidden="hidden" checked="checked">
+                                        <label for="settings1"></label>
+                                    </div><!--.switcher-->
+                                </li>
+                                <li>
+                                    Only God can judge me
+                                    <div class="switcher switcher-indigo pull-right">
+                                        <input id="settings2" type="checkbox" hidden="hidden" checked="checked">
+                                        <label for="settings2"></label>
+                                    </div><!--.switcher-->
+                                </li>
+                                <li>
+                                    Review tags people add to your own posts
+                                    <div class="switcher switcher-indigo pull-right">
+                                        <input id="settings3" type="checkbox" hidden="hidden">
+                                        <label for="settings3"></label>
+                                    </div><!--.switcher-->
+                                </li>
+                            </ul>
+
+                            <div class="legend">Notifications</div>
+                            <ul>
+                                <li>
+                                    Activity that involves you
+                                    <div class="switcher switcher-indigo pull-right">
+                                        <input id="settings4" type="checkbox" hidden="hidden" checked="checked">
+                                        <label for="settings4"></label>
+                                    </div><!--.switcher-->
+                                </li>
+                                <li>
+                                    Birthdays
+                                    <div class="switcher switcher-indigo pull-right">
+                                        <input id="settings5" type="checkbox" hidden="hidden">
+                                        <label for="settings5"></label>
+                                    </div><!--.switcher-->
+                                </li>
+                                <li>
+                                    Calendar events
+                                    <div class="switcher switcher-indigo pull-right">
+                                        <input id="settings6" type="checkbox" hidden="hidden">
+                                        <label for="settings6"></label>
+                                    </div><!--.switcher-->
+                                </li>
+                            </ul>
+
+                            <div class="legend">Newsletter</div>
+                            <ul>
+                                <li>
+                                    Friend requests
+                                    <div class="checkboxer checkboxer-indigo pull-right">
+                                        <input type="checkbox" id="checkboxSettings1" value="option1" checked="checked">
+                                        <label for="checkboxSettings1"></label>
+                                    </div>
+                                </li>
+                                <li>
+                                    People you may know
+                                    <div class="checkboxer checkboxer-indigo pull-right">
+                                        <input type="checkbox" id="checkboxSettings2" value="option1">
+                                        <label for="checkboxSettings2"></label>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div><!--.settings-panel-->
+
+                    </div><!--.col-->
+                </div><!--.tab-pane #settings-->
+
+            </div><!--.row-->
+        </div><!--.user-layer-->
+        <!-- END OF USER LAYER -->
+
+    </div>
+    <!--.layer-container-->
+    <!-- BEGIN GLOBAL AND THEME VENDORS -->
+    <script src="~/panel/assets/globals/js/global-vendors.js"></script>
+    <!-- END GLOBAL AND THEME VENDORS -->
+    <!-- BEGIN PLUGINS AREA -->
+    <script src="~/panel/assets/globals/plugins/pnikolov-bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js"></script>
+    <script src="~/panel/assets/globals/plugins/minicolors/jquery.minicolors.min.js"></script>
+    <script src="~/panel/assets/globals/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="~/panel/assets/globals/plugins/clockface/js/clockface.js"></script>
+    <script src="~/panel/assets/globals/plugins/ion.rangeSlider/js/ion.rangeSlider.min.js"></script>
+    <script src="~/panel/assets/globals/plugins/nouislider/distribute/jquery.nouislider.all.min.js"></script>
+
+    <!-- END PLUGINS AREA -->
+    <!-- PLUGINS INITIALIZATION AND SETTINGS -->
+    <script src="~/panel/assets/globals/scripts/forms-pickers.js"></script>
+    <script src="~/panel/assets/globals/scripts/forms-ion-range-slider.js"></script>
+    <script src="~/panel/assets/globals/scripts/forms-no-ui-slider.js"></script>
+    <!-- END PLUGINS INITIALIZATION AND SETTINGS -->
+    <!-- PLEASURE -->
+    <script src="~/panel/assets/globals/js/pleasure.js"></script>
+    <!-- ADMIN 1 -->
+    <script src="~/panel/assets/admin1/js/layout.js"></script>
+
+    <script src="~/Scripts/MvcGrid/mvc-grid.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+    @Scripts.Render("~/bundles/typeahead")
+    <script src="~/Scripts/typeahead.mvc.model.js"></script>
+    <!-- BEGIN INITIALIZATION-->
+    <script>
+        $(document).ready(function () {
+            Pleasure.init();
+            Layout.init();
+            FormsPickers.init();
+            FormsIonRangeSlider.init();
+            FormsNoUISlider.init();
+            //TablesDataTables.init();
+        });
+    </script>
+    <script>
+        $("select").on('change', function () {
+            var str = 0;
+            var tot = 0;
+            $(".passenger option:selected").each(function () {
+                tot = $(this).text() * 1;
+                str = str + tot;
+            });
+            $("#count").text(str);
+        }).change();
+
+
+        $(function () {
+            $('[rel=popover]').popover({
+                html: true,
+                content: function () {
+                    return $('#popover_content_wrapper').html();
+                }
+            });
+        });
+
+    </script>
+    <script>
+        $('.mvc-grid').mvcgrid();
+        $('.mvc-grid table').addClass('table');
+    </script>
+
+    <!-- END INITIALIZATION-->
+    <div id="WL_progress" class="loading hidden">Loading&#8230;</div>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#WL_progress').removeClass("hidden");
+            $('#WL_progress').hide();
+        })
+        function OnSuccess(response) {
+            var message = response;
+            bootbox.alert({
+                message: message,
+                size: 'small',
+                callback: function () {
+                    console.log(message);
+                }
+            })
+            //alert(message);
+        }
+        function OnFailure(response) {
+            alert("Error occured.");
+        }
+
+        $(document).ready(function () {
+            $(".allownumericwithdecimal").keydown(function (event) {
+                alert('');
+            });
+            //$(".allownumericwithdecimal").on("keypress blur", function (event) {
+            //    alert('');
+            //    //this.value = this.value.replace(/[^0-9\.]/g,'');
+            //    $(this).val($(this).val().replace(/[^0-9\.]/g, ''));
+            //    if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+            //        event.preventDefault();
+            //    }
+            //});
+        });
+
+    </script>
+
+    
+</body>
+</html>

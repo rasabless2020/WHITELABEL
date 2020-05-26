@@ -1,0 +1,29 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>
+@{
+    ViewBag.Title = "Merchant_RequisitionList";
+    Layout = null;
+    //Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+@(Html
+                .Grid(Model)
+                .Build(columns =>
+                {
+                    columns.Add(model => "Distributor").Titled("Distributor Name");
+                    columns.Add(model => model.REQUEST_DATE).Titled("Request Date").Formatted("{0:d}");
+        //columns.Add(model => model.BRANCH).Titled("Branch");
+        columns.Add(model => model.AMOUNT).Titled("Amount");
+                    columns.Add(model => model.BANK_ACCOUNT).Titled("Bank Account");
+
+                })
+                .Empty("No data found")
+                .Id("my-ajax-grid")
+                .Pageable(pager =>
+                {
+                    pager.PagesToDisplay = 2;
+                    pager.RowsPerPage = 2;
+                })
+                .Filterable()
+                .Sortable()
+)

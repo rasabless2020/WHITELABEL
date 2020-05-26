@@ -1,0 +1,35 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_WHITE_LEVEL_COMMISSION_SLAB>
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_newadminLayoutPage.cshtml";
+}
+@Scripts.Render("~/bundles/MemberCommissionSlabDeactiveStatus")
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal padding-top-20">
+        <div class="row">
+            <div class="col-md-12">
+                <div class=" card">
+                    <div class="card-body">
+                        <div class="panel-heading">
+                            @*<div class="panel-title" align="right"><a href="@Url.Action("AddCommissionSlab", "MemberCommissionSlab", new { area = "Admin" })" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span>Add New Commission</a></div>*@
+                            <div class="card-title" align="right"><a href="@Url.Action("GenerateCommissionSlab", "MemberCommissionSlab", new { area = "Admin" })" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span>Add New Commission</a></div>
+                        </div><!--.panel-heading-->
+                        <div class="panel-body">
+                            <div class="row example-row">
+                                @Html.AjaxGrid(Url.Action("IndexGrid", "MemberCommissionSlab", new { area = "Admin" }))
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+}
+

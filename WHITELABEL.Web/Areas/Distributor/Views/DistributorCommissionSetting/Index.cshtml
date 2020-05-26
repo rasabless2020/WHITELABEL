@@ -1,0 +1,45 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_WHITE_LEVEL_COMMISSION_SLAB>
+@{
+    ViewBag.Title = "Distributor Commission Setting";    
+    Layout = "~/Areas/Distributor/Views/Shared/_LayoutDistributor.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal padding-top-20">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12 row headcolor">
+                    <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-funnel-dollar fa-3x"></i></div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4" style="text-align:right; padding-top:10px;">
+                        <h3>
+                            Commission List
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class=" card">
+                    <div class="card-body">
+                        <div class="panel-heading">
+                            
+                            <div class="card-title" align="right"><a href="@Url.Action("GenerateCommissionSlab", "DistributorCommissionSetting", new { area = "Distributor" })" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span>Add New Merchant Commission</a></div>
+                        </div><!--.panel-heading-->
+                        <div class="panel-body">
+                            <div class="row example-row">
+                                @Html.AjaxGrid(Url.Action("IndexGrid", "DistributorCommissionSetting", new { area = "Distributor" }))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+

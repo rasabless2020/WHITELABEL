@@ -1,0 +1,88 @@
+﻿@*@model  WHITELABEL.Web.Areas.Merchant.Models.MoneyRemittanceModel*@
+@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "MONEY REMITTANCE";
+    Layout = null;
+    //Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+}
+
+@using (Html.BeginForm(new { id = "MoneyRemitterList" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal padding-top-20">
+        @*<div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="row example-row">*@
+        <div>
+            <div>
+                <div>
+                    <div>
+                        <div>
+                            @Html.AjaxGrid(Url.Action("DisplayBeneficiaryList", "MerchantDMRDashboard", new { area = "Merchant" }))
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="display-animation">
+        <div class="row no-gutters">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <h4> Money Remittance</h4>
+                            <div class="panel-action">
+                                <a href="javascript:;" data-toggle="panel"></a>
+                                <a href="javascript:;" data-toggle="remove"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <fieldset>
+                            <legend>Please Enter Remittance Details</legend>
+                            <div class="row"> </div>
+                            <input name="mobile" value="9903116214" type="hidden">
+                            <div class="form-group has-iconed">
+                                <label><strong>Beneficiary Name</strong></label>
+                                <div class="iconed-input">@Html.DisplayFor(m => m.BeneficiaryName, new { htmlAttributes = new { @class = "form-control"} })</div>
+                            </div>
+                            <div class="form-group has-iconed">
+                                <label><strong>Beneficiary Account No</strong></label>
+                                <div class="iconed-input">@Html.DisplayFor(m => m.BeneficiaryAccountNo, new { htmlAttributes = new { @class = "form-control" } })</div>
+                            </div>
+                            <div class="form-group has-iconed">
+                                <label>Amount</label>
+                                <div class="iconed-input">
+                                    @Html.EditorFor(m=>m.Amount, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Amount", type="number" } })
+                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })</small></span>
+                                </div>
+                            </div>
+                            <div class="form-group has-iconed">
+                                <label>Security PIN</label>
+                                <div class="iconed-input">
+                                    @Html.EditorFor(m=>m.SecurityPin,new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Security PIN", type = "password" } })
+                                </div>
+                            </div>
+                            <div class="form-group has-iconed">
+                                <label>Type of Remittance</label>
+                                <select class="form-control select" name="RemitOption" required>
+                                    <option value="58">IMPS</option>
+                                    <option value="127">NEFT</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-ok"></i> Submit Form</button>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+}
+
+

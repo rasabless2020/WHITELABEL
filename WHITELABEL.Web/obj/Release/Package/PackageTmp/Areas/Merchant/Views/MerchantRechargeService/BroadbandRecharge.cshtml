@@ -1,0 +1,225 @@
+﻿@model WHITELABEL.Web.Areas.Merchant.Models.BroadbandViewModel
+@{
+    ViewBag.Title = "BroadbandRecharge";
+    Layout = null;
+    //Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+}
+
+@using (Ajax.BeginForm("PostBroadbandRecharge", "MerchantRechargeService", new AjaxOptions { Confirm = "Do you want to pay the bill", OnSuccess = "OnSuccessBroadBand", OnFailure = "OnFailureBroadband", LoadingElementId = "progressBroadband" }, new { area = "Merchant" ,@id= "BroadbandRecharge" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="card-body">
+        <h5>Broadband Payment</h5>
+        <form>
+            <div class="col-md-12" style="text-align:center; color:red; margin-bottom:30px;">
+                <div id="broadbandErrormsg"></div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class=" floating-label">
+                        @*<div class="input-wrapper"> </div>*@
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                @Html.EditorFor(m => m.AccountNo, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Account Number/User Id.", @class = "form-control", id = "BroadbandBillAccountNo" } })
+                                <label for="exampleInput1">@*Registered Phone No.*@</label>
+                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })</small></span>
+                            </div>
+                        </div>
+                        <div style="display:none" id="idGeolocbrod">
+                            @Html.EditorFor(m => m.geolocation, new { htmlAttributes = new { @class = "form-control", id = "GeolocationBroadband", @readonly = "readonly" } })
+                            @Html.EditorFor(m => m.IpAddress, new { htmlAttributes = new { @class = "form-control", id = "BroadbandIpaddress", @readonly = "readonly" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class=" floating-label">
+                        @*<div class="input-wrapper"> </div>*@
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                @Html.EditorFor(m => m.PhoneNo, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Registered Phone No.", @class = "form-control",id= "BroadbandMobileno" } })
+                                <label for="exampleInput1">@*Registered Phone No.*@</label>
+                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.PhoneNo, "", new { @class = "text-danger" })</small></span>
+                            </div>
+
+                        </div>
+                        <div style="display:none" id="idGeolocbrod">
+                            @Html.EditorFor(m => m.geolocation, new { htmlAttributes = new { @class = "form-control", id = "GeolocationBroadband", @readonly = "readonly" } })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class=" floating-label">
+                        @*<div class="input-wrapper"> </div>*@
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                @Html.EditorFor(m => m.RechargeAmount, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Amount", @class = "form-control",id= "txtBroadbandAmount" } })
+                                <label for="amount">@*Amount*@</label>
+                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.RechargeAmount, "", new { @class = "text-danger" })</small></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class=" floating-label">
+
+                        <div class="input-group" style=" height:37px;">
+                            <div class="inputer" style="width:85%;">
+                                <div class="input-wrapper">
+                                    @*<input type="text" id="hfOperator" name="OperatorId" class="form-control" placeholder="Operator Name">*@
+                                    <input type="hidden" id="hfbroadbandperator" name="broadbandperatorID" />
+                                    @Html.EditorFor(m => m.ServiceName, new { htmlAttributes = new { @style = "width:100%; padding:5px; border:none", placeholder = "Operator Name", id = "txtBroadbandOperator", @class = "form-control", } })
+                                </div>
+                            </div>
+
+                            <span class="input-group-btn">
+                                <button href="javascript:void(0)" data-toggle='modal' data-target='.transdBroadBand' id='transactionvalueBroadBandid' type="button" class="btn btn-default">...</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12  row" style=" margin-top:15px; border:1px solid #ccc; padding:20px 0; margin-bottom:20px; " id="divBroadBandBillDisplay">
+                    <div class="col-md-4 row">
+                        <div class="col-md-4"> Due Date :-</div>
+                        <div class="col-md-8"><div id="txtbroadbandDueDate"></div></div>
+                    </div>
+
+                    <div class="col-md-4 row">
+                        <div class="col-md-4"> Customer Name :- </div>
+                        <div class="col-md-8">
+                            <div id="txtBroadbandCustomerName"></div>
+                            <input type="hidden" id="Broadband_referenceID" name="BroadbandReferenceId" />
+                        </div>
+                    </div>
+                    <div class="col-md-4 row">
+                        <div class="col-md-4"> Bill No :- </div>
+                        <div class="col-md-8">
+                            <div id="txtBroadBandBillbillnumber"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 row" style="display:none">
+                        <div style="display:none" id="idGeolocbrod"> </div>
+
+                        @Html.EditorFor(m => m.BroadbandrefNo, new { htmlAttributes = new { @class = "form-control", id = "txtBroadBandcityRefNo" } })
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="col-md-12" style="text-align:center;margin-top:30px;">
+                    <a href="#" onclick="GetBroadbandBillDetails();" style="color:white;" class="btn btn-info btn-lg" id="btnBroadbandDisplay">Get Bill</a>
+                    <input type="submit" value="Pay" class="btn btn-primary btn-lg" id="btnsubmitbroadband" />
+                </div>
+                @*<div class="col-md-1" style="text-align:right;">
+
+                <input type="submit" value="Pay" class="btn btn-primary btn-lg" id="btnsubmitDTH" />
+            </div>*@
+            </div>
+
+        </form>
+    </div>
+}
+
+@*<div id="progressBroadband" class="loading hidden">Loading&#8230;</div>*@
+<div class="preloader hidden" id="progressBroadband">
+    <div id="loading"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btnBroadbandDisplay').show();
+        $('#btnsubmitbroadband').hide();
+        $('#divBroadBandBillDisplay').hide();
+        $('#progressBroadband').removeClass("hidden");
+        $('#progressBroadband').hide();
+    })
+    function OnSuccessBroadBand(response) {
+        $('#progressBroadband').removeClass("hidden");
+        $('#progressBroadband').hide();
+        $('#loading').removeClass("hidden");
+        $('#loading').hide();
+        var message = response;
+        $("#BroadbandRecharge").trigger("reset");
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+            }
+        })
+        $('#divBroadBandBillDisplay').hide();
+        $('#btnsubmitbroadband').hide();
+        $('#btnBroadbandDisplay').show();
+        $("#BroadbandRecharge").trigger("reset");
+        callGeocodeMobile();
+        //alert(message);
+    }
+    function OnFailureBroadband(response) {
+        alert("Error occured.");
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+
+        callGeocodeBroadband();
+
+    });
+    function callGeocodeBroadband() {
+        $.getJSON('http://www.geoplugin.net/json.gp?jsoncallback=?', function (data) {
+            
+            var information = JSON.stringify(data, null, 2);
+            //alert(information[0]);
+            //alert(JSON.stringify(data, null, 2));
+            console.log(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 2));
+            $('#GeolocationBroadband').val(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 0));
+            $('#BroadbandIpaddress').val(JSON.stringify(data.geoplugin_request, null, 0));
+            console.log(JSON.stringify(data, null, 2));
+        });
+    }
+
+    
+</script>
+
+<script>
+    //var GetBroadbandBillDetails = function () {
+    //    $('#progressBroadband').show();
+    //    $('#divBroadBandBillDisplay').show();
+    //    debugger;
+    //    var _accountNo = $('#BroadbandBillAccountNo').val();
+    //    var _mobileNo = $('#BroadbandMobileno').val();
+    //    var _geoLocation = $('#GeolocationBroadband').val();
+    //    var Service_Key = $('#hfbroadbandperator').val();
+    //    var BroadBandAmt = $('#txtBroadbandAmount').val();
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/Merchant/MerchantRechargeService/GetBROADBANDBillInformation",
+    //        data: { AccountNo: _accountNo, MobileNo: _mobileNo, GeoLocation: _geoLocation, ServiceKey: Service_Key, landlineAmt: BroadBandAmt },
+    //        success: function (data) {
+    //            debugger;
+    //            var BroadBandbill = JSON.parse(data);
+    //            var status = BroadBandbill.statuscode;
+    //            var statusvalue = BroadBandbill.status;
+    //            if (status === "TXN") {
+    //                //document.getElementById("RechargeAmt").innerHTML = JSON.stringify(BroadBandbill.data.dueamount);
+    //                var amount = BroadBandbill.data.dueamount;
+    //                var Gas_Reff = BroadBandbill.data.reference_id;
+    //                $('#txtBroadbandAmount').val(amount);
+    //                $('#Broadband_referenceID').val(Gas_Reff);
+    //                $('#txtbroadbandDueDate').html(BroadBandbill.data.duedate);
+    //                $('#txtBroadbandCustomerName').html(BroadBandbill.data.customername);
+    //                $('#txtBroadBandcityRefNo').html(BroadBandbill.data.reference_id);
+    //                $('#btnsubmitbroadband').show();
+    //                $('#btnBroadbandDisplay').hide();
+    //                $('#broadbandErrormsg').html('');
+    //                $('#progressBroadband').hide();
+    //            }
+    //            else {
+    //                $('#broadbandErrormsg').html(statusvalue);
+    //            }
+    //            $('#progressBroadband').hide();
+
+    //        }
+
+    //    })
+    //}
+</script>

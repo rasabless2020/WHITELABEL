@@ -1,0 +1,76 @@
+﻿@model WHITELABEL.Web.Areas.Merchant.Models.DatacardRechargeModel
+@{
+    ViewBag.Title = "Datacard Recharge";
+    //Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+    Layout = null;
+}
+@using (Html.BeginForm("PostLindlineRecharge", "MerchantRechargeService", FormMethod.Post, new { area = "Merchant" }))
+{
+
+    <div class="panel-body">
+
+        <h5>Datacard Bill Payment</h5>
+
+        <form>
+            <div class="clearfix"></div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class=" floating-label">
+
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                @Html.EditorFor(m => m.DatacardID, new { htmlAttributes = new { @style = " width:100%; padding:5px;", placeholder = "Datacard Number", @class = "form-control" } })
+                                <label for="exampleInput1">@*Datacard Number.*@</label>
+                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.DatacardID, "", new { @class = "text-danger" })</small></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class=" floating-label">
+
+
+                        <div class="input-group" style=" height:37px;">
+
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    @*<input type="text" id="hfOperator" name="OperatorId" class="form-control" placeholder="Operator Name">*@
+                                    @Html.EditorFor(m => m.OperatorName, new { htmlAttributes = new { @style = " width:100%; padding:5px; border:none;", placeholder = "Operator Name", id = "txtDataCard", @class = "form-control" } })
+                                </div>
+                            </div>
+
+                            <span class="input-group-btn">
+                                <button href="javascript:void(0)" data-toggle='modal' data-target='.transdDataCard' id='transactionvalueDataCardid' type="button" class="btn btn-default">...</button>
+                            </span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class=" floating-label">
+                        @*<div class="input-wrapper"></div>*@
+                        @*<input type="text" class="form-control" id="amount">*@
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                @Html.EditorFor(m => m.RechargeAmt, new { htmlAttributes = new { @style = " width:100%; padding:5px;", placeholder = "Amount", @class = "form-control" } })
+                                <label for="amount">@*Amount*@</label>
+                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.RechargeAmt, "", new { @class = "text-danger" })</small></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <button type="submit" class="btn btn-primary btn-lg">Pay</button>
+                </div>
+                </div>
+
+
+                <div class="clearfix"></div>
+
+                @*<button type="submit" class="btn btn-primary btn-lg">Pay</button>*@
+
+        </form>
+    </div>
+
+}

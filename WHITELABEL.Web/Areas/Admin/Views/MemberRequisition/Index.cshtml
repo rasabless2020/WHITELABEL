@@ -1,0 +1,216 @@
+﻿@using NonFactors.Mvc.Grid;
+@model WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Html.AntiForgeryToken()
+    <div class="form-horizontal padding-top-20">
+        <div class="row">
+            @*<div class="col-md-12">
+                <div class="col-md-12 row headcolor">
+                    <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-wallet  fa-3x"></i> </div>
+
+                    <div class="col-md-8" style="text-align:right; padding-top:10px;">
+                        <h3>
+                            Requisition List
+                        </h3>
+                    </div>
+                </div>
+            </div>*@
+            <div class="col-md-12">
+                <div class=" card">
+                    <div class="card-body">
+                        <div class="panel-heading" style="padding-bottom:10px;">
+                            <div class="card-title row" align="right">
+                                <div class="col-md-6 text-left">
+                                    <button id="btnExportDistributorrecoard" class="btn btn-info btn-xs"><span class="ion-forward"></span> EXPORT</button>
+                                    @*<a href="@(Url.Action("GridExportIndex", "MemberRequisition", new { area = "Admin" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <a href="@Url.Action("RequisitionDetails", "MemberRequisition", new { area = "Admin" })" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New Requisition</a>
+                                </div>
+                            </div>
+                        </div><!--.panel-heading-->
+                        <div class="panel-body">
+                            <div class="col-md-12 row" style="margin-bottom:10px;">
+                                <div class="col-md-5">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3">Date From</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="md-form">
+                                                    @Html.EditorFor(model => model.FROM_DATE, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control date", id = "txtFromDate", @onkeydown = "return false;", @placeholder = "yyyy-MM-dd" } })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group row">
+                                        <label class="control-label col-md-3">Date From</label>
+                                        <div class="col-md-9">
+                                            <div class="inputer">
+                                                <div class="md-form">
+                                                    @Html.EditorFor(model => model.TO_DATE, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control date", id = "txtToDate", @onkeydown = "return false;", @placeholder = "yyyy-MM-dd" } })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="inputer">
+                                        <div class="input-wrapper">
+                                            <a href="#" class="btn btn-primary" id="btnSearchDAteWise">Search Date Wise</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row example-row">
+                                @Html.AjaxGrid(Url.Action("IndexGrid", "MemberRequisition", new { area = "Admin" }))
+                            </div><!--.row-->
+                        </div><!--.panel-body-->
+                    </div><!--.panel-->
+                </div>
+            </div><!--.col-md-12-->
+        </div><!--.row-->
+
+    </div>
+    @Scripts.Render("~/bundles/MemberRequisition")
+
+    <div id="transactionvalueAdminid" class="modal scale fade transd" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:100px;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Transaction Information</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12 row" style="margin-bottom:2px;">
+                        <div class="col-md-4" style="padding-top:10px;">Member Name : </div>
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="md-form">
+                                    <input type="text" id="username" value="" class="form-control" />
+                                    <input type="hidden" id="sln" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 row" style="margin-bottom:2px;">
+                        <div class="col-md-4" style="padding-top:10px;">Transaction Date : </div>
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="md-form">
+                                    <input type="text" id="TransactionDate" value="" class="form-control bootstrap-daterangepicker-basic" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 row" style="margin-bottom:2px;">
+                        <div class="col-md-4" style="padding-top:10px;">Bank Details : </div>
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="md-form">
+                                    <input type="text" id="BankDetails" value="" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 row" style="margin-bottom:2px;">
+                        <div class="col-md-4" style="padding-top:10px;">Payment Trn Details : </div>
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="md-form">
+                                    <input type="text" id="txnBankPaymentDetails" value="" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 row" style="margin-bottom:2px;">
+                        <div class="col-md-4" style="padding-top:10px;">Amount : </div>
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="md-form">
+                                    <input type="text" id="Amount" value="" class="form-control" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 row" style="margin-bottom:2px;">
+                        <div class="col-md-4" style="padding-top:10px;">Credit Limit Settlement : </div>
+                        <div class="col-md-8">
+                            <div class="inputer">
+                                <div class="md-form">
+                                    <input type="radio" name="creditsettlement" value="Partials" id="chkpartialsSettlement" checked="checked"> Partial Credit Limit Settlement <br />
+                                    <input type="radio" name="creditsettlement" value="Full" id="chkFullSettlement"> Full Credit Limit Settlement<br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="TransactionDecline($('#sln').val(),$('#txnBankPaymentDetails').val());">Decline</button>
+                    <button type="button" class="btn btn-success" onclick="updateStatus($('#sln').val(),$('#txnBankPaymentDetails').val());">Approve</button>
+                </div>
+            </div><!--.modal-content-->
+        </div><!--.modal-dialog-->
+    </div>
+
+
+    
+    <script type="text/javascript">
+        $(function () {
+            $('#txtFromDate').datepicker({
+                format: "yyyy-MM-dd",
+                language: "es",
+                autoclose: true,
+                todayHighlight: true,
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+        $(function () {
+            $('#txtToDate').datepicker({
+                format: "yyyy-MM-dd",
+                language: "es",
+                autoclose: true,
+                todayHighlight: true,
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+
+        $("#btnSearchDAteWise").on("click", function () {           
+            
+            var Date_From = $('#txtFromDate').val();
+            var Date_TO = $('#txtToDate').val();
+            $('.mvc-grid').mvcgrid({
+                query: 'DateFrom=' + Date_From + '&Date_To=' + Date_TO,
+                //query: 'DateFrom=' + Date_From + '&Date_To=' + Date_TO,
+                reload: true,
+                reloadStarted: function () {
+                    $(".divFooterTotalComm").remove();
+                },
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+    $("#btnExportDistributorrecoard").click(function () {
+        var Date_From = $('#txtFromDate').val();
+        var Date_TO = $('#txtToDate').val();
+        @*var url = '@(Url.Action("ExportIndexDistributorReport", "MemberTransactionReport",new {area="Admin" }) + ViewContext.HttpContext.Request.QueryString)?Super=' + $("#SuperDisList").val()+'&Disid=' + $("#DistributorListID").val() + '&statusval=' + $("#TransactionStatus").val();*@
+        var url = '@(Url.Action("GridExportIndex", "MemberRequisition", new {area="Admin" }) + ViewContext.HttpContext.Request.QueryString)?DateFrom=' + Date_From + '&Date_To=' + Date_TO;
+        window.location.href = url;
+    })
+    </script>
+
+

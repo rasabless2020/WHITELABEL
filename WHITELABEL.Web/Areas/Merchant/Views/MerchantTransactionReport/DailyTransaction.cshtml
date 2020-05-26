@@ -1,0 +1,67 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_ACCOUNTS>
+@{
+    ViewBag.Title = "Daily Transaction Report";
+    Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+}
+
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12 row headcolor">
+                <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-edit   fa-3x"></i> </div>
+
+                <div class="col-md-8" style="text-align:right; padding-top:10px;">
+                    <h3>
+                        Merchant Commission Report
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row example-row">
+                        <div class="col-md-3">Select Service</div>
+                        <div class="col-md-9">
+                            @Html.DropDownList("MemberTransactionStatus", new List<SelectListItem>
+                                                                { new SelectListItem{Text="Mobile Recharge", Value="Mobile Recharge"},
+                                                                    new SelectListItem{Text="DMR", Value="DMR"},
+                                                                    new SelectListItem{Text="Requisition", Value="Requisition"} },
+                                                                   "Select Status", new { id = "TransactionStatus", @class = "form-control" })
+                        </div>
+
+                        <div class="col-md-12">@Html.AjaxGrid(Url.Action("DailyTransactiongrid", "MerchantTransactionReport", new { area = "Merchant" }))</div>
+
+                    </div>
+                </div>
+                <div class="panel-footer text-right">
+                    <button id="btnExport" class="btn btn-info btn-xs">EXPORT</button>
+                    @*<a href="@(Url.Action("ExportIndex","DistributorTransactionReport",new {area="Distributor" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $("[id$=btnExport]").click(function (e) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=my-ajax-grid]').html()));
+        e.preventDefault();
+    });
+</script>
+<script>
+    $(document).on('change', '#TransactionStatus', function () {
+        var dropdownval = $('#MemberList').val();
+        $('.mvc-grid').mvcgrid({
+            query: 'search=' + this.value,           
+            reload: true,
+            reloadStarted: function () {
+                $(".divFooterTotalComm").remove();
+            },
+            
+        });
+    });
+</script>

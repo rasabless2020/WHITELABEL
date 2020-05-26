@@ -1,0 +1,275 @@
+﻿@model WHITELABEL.Web.Areas.Merchant.Models.MerchantOutletModelview
+@{
+    ViewBag.Title = "Outlet";
+    Layout = null;
+    //Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+}
+
+<div id="OutletOTPID">
+    @using (Ajax.BeginForm("OutletOTPSend", "MerchantOutletRegistration", new AjaxOptions { OnSuccess = "OnSuccessMsgOTP", OnFailure = "OnFailureMsgOTP", LoadingElementId = "progressMsgOTP" }, new { area = "Merchant", id = "AddDMRBeneficiaryInfo" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="display-animation">
+            <div>
+                <div class="col-md-12">
+                    <div>
+                        <div>
+                                <div class="row"> </div>
+                                <div class="form-group row clearfix">
+                                    <div class="col-md-2" style="padding-top:10px">
+                                        <label>Mobile No : </label>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">
+                                                @Html.EditorFor(m => m.Mobile, new { htmlAttributes = new { @class = "form-control" } })
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Mobile, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    
+                                    </div>
+                                    <div class="form-group" style="text-align:center; padding-top:40px;">
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-ok"></i> Send OTP</button>
+                                    </div>
+
+                                </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    }
+</div>
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('#progressMsgOTP').removeClass("hidden");
+            $('#progressMsgOTP').hide();
+        })
+    function OnSuccessMsgOTP(response) {
+        debugger;
+        console.log(response);
+        var response11 = JSON.parse(response);
+        //alert(JSON.stringify(response11.statuscode));
+        var message = response11.statuscode;
+        
+        var msg = "";
+        if (message === "TXN") {
+            var mobileno = response11.data.mobile;
+            $('#RegMobileNo').val(mobileno);
+            msg = "OTP Sent..";
+            $("#OutletOTPID").hide();
+            $("#OutletREGISTRATIONID").show();
+        }
+        else
+        {
+            msg = response11.status;
+
+        }
+        bootbox.alert({
+            message: msg,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+            }
+        });
+            //alert(message);
+        }
+    function OnFailureMsgOTP(response) {
+        debugger;
+            alert("Error occured.");
+        }
+</script>
+
+<div id="OutletREGISTRATIONID">
+    @using (Ajax.BeginForm("OutletRegistration", "MerchantOutletRegistration", new AjaxOptions { OnSuccess = "OnSuccessMsgRegistration", OnFailure = "OnFailureMsgRegistration", LoadingElementId = "progressMsgRegistration" }, new { area = "Merchant", id = "AddDMRBeneficiaryInfo" }))
+    {
+        @Html.AntiForgeryToken()
+    <div class="display-animation">
+        <div>
+            <div class="col-md-12">
+                <div>
+                    <div>
+                        <fieldset>
+                            @*<legend>Please Enter Customer Mobile No</legend>*@
+                            @*@Html.HiddenFor(m=>m.Reg_Mobile)*@
+
+                            <div class="form-group row has-iconed col-md-12 pt-2">
+                                <div class="col-md-2" style="padding-top:10px">
+                                    <label>Mobile No.</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="inputer">
+                                        <div class="input-wrapper">
+                                            @Html.EditorFor(m => m.Reg_Mobile, new { htmlAttributes = new { @class = "form-control", id = "RegMobileNo" } })                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            
+
+                            <div class="form-group row has-iconed col-md-12 pt-2">
+                                <div class="col-md-2" style="padding-top:10px">
+                                    <label>Enter OTP</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="inputer">
+                                        <div class="input-wrapper">
+                                            @Html.EditorFor(m => m.OTP, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.OTP, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row"> </div>
+                            <div class="form-group row has-iconed  col-md-12 pt-2">
+                                <div class="col-md-2" style="padding-top:10px">
+                                    <label>Name</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="inputer">
+                                        <div class="input-wrapper">
+                                            @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row"> </div>
+                            <div class="form-group row has-iconed  col-md-12 pt-2">
+                                <div class="col-md-2" style="padding-top:10px">
+                                    <label>Address</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="inputer">
+                                        <div class="input-wrapper">
+                                            @Html.EditorFor(m => m.Address, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row"> </div>
+                            <div class="form-group row has-iconed  col-md-12 pt-2">
+                                <div class="col-md-2" style="padding-top:10px">
+                                    <label>Pincode</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="inputer">
+                                        <div class="input-wrapper">
+                                            @Html.EditorFor(m => m.Pincode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Pincode, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row"> </div>
+                            <div class="form-group row has-iconed  col-md-12 pt-2">
+                                <div class="col-md-2" style="padding-top:10px">
+                                    <label>Email Id</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="inputer">
+                                        <div class="input-wrapper">
+                                            @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row"> </div>
+                            <div class="form-group row has-iconed  col-md-12 pt-2">
+                                <div class="col-md-2" style="padding-top:10px">
+                                    <label>Company Name</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="inputer">
+                                        <div class="input-wrapper">
+                                            @Html.EditorFor(m => m.Company, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Company, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row"> </div>
+                            <div class="form-group row has-iconed  col-md-12 pt-2">
+                                <div class="col-md-2" style="padding-top:10px">
+                                    <label>Pan No:</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="inputer">
+                                        <div class="input-wrapper">
+                                            @Html.EditorFor(m => m.PanNo, new { htmlAttributes = new { @class = "form-control" } })
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.PanNo, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" style="text-align:center; padding-top:40px;">
+                                <button type="submit" class="btn btn-primary"><i class="fa fa-ok"></i> Register</button> <button type="submit" class="btn btn-primary" onclick="BackToOTPPAGE()">Back</button>
+                            </div>
+                        </fieldset>
+                    </div><!--.panel-body-->
+                </div><!--.panel-->
+            </div>
+        </div>
+        <!--.full-content-->
+    </div>
+    }
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#progressMsgRegistration').removeClass("hidden");
+        $('#progressMsgRegistration').hide();
+    })
+    function OnSuccessMsgRegistration(response) {
+
+        var message = response;
+        if (message == "TXN") {
+            bootbox.alert({
+                message: "Outlet Added Successfully",
+                size: 'small',
+                callback: function () {
+                    console.log(message);
+                    var url = '@Url.Action("Index", "MerchantRechargeService", new { area="Merchant" })';
+                    window.location.href = url;
+                }
+            })
+        }
+        else {
+            bootbox.alert({
+                message: message,
+                size: 'small',
+                callback: function () {
+                    console.log(message);
+                }
+            })
+        }
+
+
+        //alert(message);
+    }
+    function OnFailureMsgRegistration(response) {
+        alert("Error occured.");
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#OutletREGISTRATIONID").hide();
+        //$("#btnSearch").click(function () {
+        //    $("#test").show();
+        //});
+    });
+    function BackToOTPPAGE() {
+        $("#OutletOTPID").show();
+        $("#OutletREGISTRATIONID").hide();
+    }
+
+    
+
+</script>
+

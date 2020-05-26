@@ -1,0 +1,42 @@
+﻿@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "White Level Bank Details";
+    //Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_newadminLayoutPage.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        <div class="col-md-12">
+            <div class=" card">
+                <div class="card-body">
+                    <div class="panel-heading" style="padding-bottom:10px;">
+                        <div class="card-title row" align="right">
+                            <div class="col-md-6 text-left">
+                                <a href="@(Url.Action("ExportIndex", "MemberBankDetails", new { area = "Admin" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <a href="@Url.Action("BankDetails", "MemberBankDetails", new { area = "Admin" })" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New Bank</a>
+                            </div>
+                        </div>
+                    </div><!--.panel-heading-->
+                    <div class="panel-body">
+                        <div class="row example-row">
+
+                            @Html.AjaxGrid(Url.Action("IndexGrid", "MemberBankDetails", new { area = "Admin" }))
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+                    @*<div class="panel-footer text-right">
+                    <a href="@(Url.Action("ExportIndex", "MemberBankDetails", new { area = "Admin" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>
+                </div>*@
+                </div><!--.panel-->
+                </div>
+            </div><!--.col-md-12-->
+        </div><!--.row-->
+</div>
+@Scripts.Render("~/bundles/MemberBankDetails");
+
+
+}

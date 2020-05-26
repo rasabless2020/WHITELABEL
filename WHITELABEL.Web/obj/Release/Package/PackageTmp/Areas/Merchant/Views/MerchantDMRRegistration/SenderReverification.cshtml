@@ -1,0 +1,256 @@
+﻿@model WHITELABEL.Data.Models.TBL_DMR_APPLICANT_INFO
+@{
+    ViewBag.Title = "SenderReverification";
+    Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+}
+
+@*<div class="nav-bar-container">
+    <div class="nav-menu">
+        <div class="hamburger"> <span class="patty"></span> <span class="patty"></span> <span class="patty"></span> <span class="patty"></span> <span class="patty"></span> <span class="patty"></span> </div>
+      </div>
+    <div class="nav-user">
+        <div class="cross"> <span class="line"></span> <span class="line"></span> </div>
+    </div>
+    <div class="nav-bar-border"></div>
+    <div class="overlay">
+        <div class="starting-point"> <span></span> </div>
+        <div class="logo">White label</div>
+    </div>
+</div>*@
+
+@*<div class="content">
+    <div class="page-header full-content">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1>White Lable</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb">
+                    <li><a href="#"><i class="ion-home"></i></a></li>
+                    <li><a href="#" class="active">Pay bill</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>*@
+
+    <div class="display-animation margin-top-40">
+        <div class="row no-gutters">
+
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <h4>Money Remittance Customer Registration</h4>
+                            <div class="panel-action">
+                                <a href="javascript:;" data-toggle="panel"></a>
+                                <a href="javascript:;" data-toggle="remove"></a>
+                            </div><!--.panel-action-->
+                        </div><!--.panel-title-->
+                    </div><!--.panel-heading-->
+                    <div class="panel-body">
+
+
+                        <form class="bottom-margin" id="validateForm" method="post" action="DMR_Reverification.asp" novalidate>
+                            <fieldset>
+                                <legend>Please Enter Customer Mobile No</legend>
+                                <div class="row"> </div>
+                                <div class="form-group has-iconed">
+                                    <label>Please Provide OTP</label>
+                                    <div class="iconed-input">
+                                        <input name="OTP" class="form-control" required placeholder="Enter OTP" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group has-iconed">
+                                    <label>Please Provide OTP Verification Code</label>
+                                    <div class="iconed-input">
+                                        <input name="OTPVER" class="form-control" required placeholder="Enter OTP Verification Code" type="text">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-ok"></i> Submit Form</button>
+                                    <button type="button" class="btn btn-primary"><i class="fa fa-ok" onclick="ResendOTP('')"></i> Resend OTP</button>
+                                </div>
+                            </fieldset>
+                        </form>
+
+
+
+                    </div><!--.panel-body-->
+                </div><!--.panel-->
+            </div>
+
+
+        </div>
+        <!--.full-content-->
+    </div>
+    <!--.display-animation-->
+    <!-- content -->
+
+    @*<div class="footer-links margin-top-40">
+        <div class="row no-gutters">
+            <div class="col-xs-12 bg-cyan"> <a href="#"> <span class="state">Components</span> <span>Offline Detector</span> <span class="icon"><i class="ion-android-arrow-forward"></i></span> </a> </div>           
+        </div>
+    </div>*@
+
+@*</div>*@
+@*<div class="layer-container">
+    <div class="menu-layer">
+        <ul>
+            <li> <a href="panel/app/admin1/index.html">Dashboard</a> </li>
+            <li>
+                <a href="javascript:;">Cards</a>
+                <ul class="child-menu">
+                    <li><a href="panel/app/admin1/cards-image.html">Image Cards</a></li>
+                    <li><a href="panel/app/admin1/cards-audio.html">Audio Cards</a></li>
+                    <li><a href="panel/app/admin1/cards-video.html">Video Cards</a></li>
+                    <li><a href="panel/app/admin1/cards-clickable.html">Clickable Cards</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">UI Elements</a>
+                <ul class="child-menu">
+                    <li><a href="panel/app/admin1/ui-elements-general.html">General</a></li>
+                    <li><a href="panel/app/admin1/ui-elements-buttons.html">Buttons</a></li>
+                    <li><a href="panel/app/admin1/ui-elements-lists.html">Lists</a></li>
+                    <li><a href="panel/app/admin1/ui-elements-dialogs.html">Dialogs</a></li>
+                    <li><a href="panel/app/admin1/ui-elements-notifications.html">Notifications</a></li>
+                    <li><a href="panel/app/admin1/ui-elements-social-buttons.html">Social Buttons</a></li>
+                    <li><a href="panel/app/admin1/ui-elements-font-icons.html">Font Icons</a></li>
+                    <li><a href="panel/app/admin1/ui-elements-tabs.html">Tabs &amp; Accordions</a></li>
+                    <li><a href="panel/app/admin1/ui-elements-typography.html">Typography</a></li>
+                    <li><a href="panel/app/admin1/ui-elements-loaders.html">Loaders</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">Panels</a>
+                <ul class="child-menu">
+                    <li><a href="panel/app/admin1/panels.html">Panel Types</a></li>
+                    <li><a href="panel/app/admin1/panels-draggable.html">Draggable Panels</a></li>
+                    <li><a href="panel/app/admin1/panels-styling.html">Styled Panels</a></li>
+                    <li><a href="panel/app/admin1/panels-ajax.html">Ajax Panels</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">Forms</a>
+                <ul class="child-menu">
+                    <li><a href="panel/app/admin1/forms-general.html">General</a></li>
+                    <li><a href="panel/app/admin1/forms-layouts.html">Layouts</a></li>
+                    <li><a href="panel/app/admin1/forms-tools.html">Tools</a></li>
+                    <li><a href="panel/app/admin1/forms-pickers.html">Pickers</a></li>
+                    <li><a href="panel/app/admin1/forms-icheck.html">iCheck</a></li>
+                    <li><a href="panel/app/admin1/forms-range-sliders.html">Range Slider</a></li>
+                    <li><a href="panel/app/admin1/forms-selects.html">Selectboxes</a></li>
+                    <li><a href="panel/app/admin1/forms-switchers.html">Switchers</a></li>
+                    <li><a href="panel/app/admin1/forms-validation.html">Form Validation</a></li>
+                    <li><a href="panel/app/admin1/forms-wizard.html">Wizard</a></li>
+                    <li><a href="panel/app/admin1/forms-wysiwyg-editors.html">Text Editors</a></li>
+                    <li>
+                        <a href="javascript:;">Image Croppers</a>
+                        <ul class="child-menu">
+                            <li><a href="panel/app/admin1/forms-jcrop.html">J Crop</a></li>
+                            <li><a href="panel/app/admin1/forms-image-cropper.html">Image Cropper</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">Uploaders</a>
+                        <ul class="child-menu">
+                            <li><a href="panel/app/admin1/forms-dropzone.html">Dropzone</a></li>
+                            <li><a href="panel/app/admin1/forms-multiple-file-upload.html">Multiple File Upload</a></li>
+                            <li><a href="panel/app/admin1/forms-custom-file-input.html">Custom File Input</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">Tables</a>
+                <ul class="child-menu">
+                    <li><a href="panel/app/admin1/table-elements.html">Elements</a></li>
+                    <li><a href="panel/app/admin1/table-responsive.html">Responsive Tables</a></li>
+                    <li><a href="panel/app/admin1/table-bootstrap-table.html">BS Table</a></li>
+                    <li><a href="panel/app/admin1/table-datatables.html">DataTables</a></li>
+                    <li><a href="panel/app/admin1/table-datatables-data-sources.html">DataTable Data Sources</a></li>
+                    <li><a href="panel/app/admin1/table-datatables-editor.html">DataTable Editor</a></li>
+                    <li><a href="panel/app/admin1/table-datatables-extensions.html">DataTable Extensions</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">Pages</a>
+                <ul class="child-menu">
+                    <li>
+                        <a href="javascript:;">User Pages <span class="badge badge-primary">4</span></a>
+                        <ul class="child-menu">
+                            <li><a href="panel/app/admin1/user-profile.html">Profile</a></li>
+                            <li><a href="panel/app/admin1/user-lock-screen.html" target="_blank">Lock Screen</a></li>
+                            <li><a href="panel/app/admin1/user-login.html" target="_blank">Login</a></li>
+                            <li><a href="panel/app/admin1/user-calendar.html">Calendar</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="panel/app/admin1/pages-blog.html">Blog</a></li>
+                    <li><a href="panel/app/admin1/pages-about-us.html">About Us</a></li>
+                    <li><a href="panel/app/admin1/pages-coming-soon.html" target="_blank">Coming Soon</a></li>
+                    <li><a href="panel/app/admin1/pages-contact-us.html">Contact Us</a></li>
+                    <li><a href="panel/app/admin1/pages-404.html" target="_blank">404 Error Page</a></li>
+                    <li><a href="panel/app/admin1/pages-invoice.html">Invoice</a></li>
+                    <li><a href="panel/app/admin1/pages-pricing.html">Pricing Tables</a></li>
+                    <li><a href="panel/app/admin1/pages-search-results.html">Search Results</a></li>
+                    <li><a href="panel/app/admin1/pages-timeline.html">Timeline</a></li>
+                    <li data-open-after="true"><a href="panel/app/admin1/blank.html">Blank</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">Components</a>
+                <ul class="child-menu">
+                    <li><a href="panel/app/admin1/components-offline-detector.html">Offline Detector</a></li>
+                    <li><a href="panel/app/admin1/components-session-timeout.html">Session Timeout</a></li>
+                    <li><a href="panel/app/admin1/components-sound-library.html">Sound Library</a></li>
+                    <li><a href="panel/app/admin1/components-tree-view.html">Tree View</a></li>
+                    <li><a href="panel/app/admin1/components-html5-notifications.html">HTML5 Notifications</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">Layouts</a>
+                <ul class="child-menu">
+                    <li><a href="panel/app/admin1/layout-flexible-space.html">Flexible Space</a></li>
+                    <li><a href="panel/app/admin1/layout-fixed-footer-links.html">Fixed Footer Links</a></li>
+                    <li><a href="panel/app/admin1/layout-fixed-footer.html">Fixed Footer</a></li>
+                    <li><a href="panel/app/admin1/layout-settings.html">Layout Settings</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">Grids</a>
+                <ul class="child-menu">
+                    <li><a href="panel/app/admin1/grids-bootstrap.html">Bootstrap Grids</a></li>
+                    <li><a href="panel/app/admin1/grids-bootstrap-extra.html">Extra Grids</a></li>
+                    <li><a href="panel/app/admin1/grids-masonry.html">Masonry Grids</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">Charts</a>
+                <ul class="child-menu">
+                    <li><a href="panel/app/admin1/charts-c3.html">C3 Charts</a></li>
+                    <li><a href="panel/app/admin1/charts-chartjs.html">Chart JS</a></li>
+                    <li><a href="panel/app/admin1/charts-flot.html">Flot Charts</a></li>
+                    <li><a href="panel/app/admin1/charts-knob.html">Knob Charts</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">Maps</a>
+                <ul class="child-menu">
+                    <li><a href="panel/app/admin1/maps-google.html">Google Maps</a></li>
+                    <li><a href="panel/app/admin1/maps-leaflet.html">Leaflet Maps</a></li>
+                    <li><a href="panel/app/admin1/maps-vector.html">Vector Maps</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="javascript:;">E-mail Templates</a>
+                <ul class="child-menu">
+                    <li><a href="panel/app/admin1/email-basic.html" target="_blank">Basic Template</a></li>
+                    <li><a href="panel/app/admin1/email-invoice.html" target="_blank">Invoice Template</a></li>
+                    <li><a href="panel/app/admin1/email-list.html" target="_blank">List Template</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>*@
+
+

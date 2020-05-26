@@ -1,0 +1,312 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_ACCOUNTS>
+@{
+    ViewBag.Title = "Merchant Commission Report";
+    //Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminLayout.cshtml";
+    Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminNewLayout.cshtml";
+}
+
+
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="panel-heading">
+                        <div class="card-title">
+                            <div class="text-left">
+
+                                <button id="btnExport" class="btn btn-info btn-xs"><span class="ion-forward"></span> EXPORT</button>
+
+                                @*<a href="@(Url.Action("ExportIndex","SuperRequisition",new {area="Super" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="panel-body">
+                        <div class="row example-row" style="margin-bottom:10px;">
+                            <div class="col-md-2">
+                                <div class="inputer">
+                                    <div class="input-wrapper">
+                                        @Html.DropDownList("MemberService", new SelectList((ViewBag.MemberService) as SelectList, "Value", "Text"), "Select Whitelevel", new { id = "WhitelevelList", @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="inputer">
+                                    <div class="input-wrapper">
+                                        @Html.DropDownList("Super", new SelectList(string.Empty, "Value", "Text"), "--Select Super Distributor--", new { @class = "form-control", id = "SuperList" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="inputer">
+                                    <div class="input-wrapper">
+                                        @Html.DropDownList("Distributor", new SelectList(string.Empty, "Value", "Text"), "--Select Distributor--", new { @class = "form-control", id = "DistributorListID" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="inputer">
+                                    <div class="input-wrapper">
+                                        @Html.DropDownList("MemberService", new SelectList(string.Empty, "Value", "Text"), "--Select Merchant--", new { @class = "form-control", id = "MemberList" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="inputer">
+                                    <div class="input-wrapper">
+                                        @Html.DropDownList("MemberTransactionStatus", new List<SelectListItem>
+                                                                             { new SelectListItem{Text="Mobile Recharge", Value="Mobile Recharge"},
+                                                                                 new SelectListItem{Text="DMR", Value="DMR"},
+                                                                                 new SelectListItem{Text="Requisition", Value="Requisition"} },
+                                                                                "Select Status", new { id = "TransactionStatus", @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="col-md-12">@Html.AjaxGrid(Url.Action("PowerAdminMerchantCommissionGrid", "PowerAdminTransactionReport", new { area = "PowerAdmin" }))</div>
+                       
+                    </div>
+                    <div class="panel-footer text-right">
+                        @*<button id="btnExport" class="btn btn-info btn-xs">0EXPORT</button>*@
+                        @*<a href="#" id="btnExportMercnatrecoard" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                        @*<a href="@(Url.Action("ExportIndex","SuperRequisition",new {area="Super" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                    </div>
+
+                </div>
+                </div>
+            </div>
+        </div>
+</div>
+
+
+<script>
+    $(document).on('change', '#TransactionStatus', function () {
+        var Whitelevelval = $('#WhitelevelList').val();
+        var SuperIDval = $('#SuperList').val();
+        var disval = $('#DistributorListID').val();
+        var dropdownval = $('#MemberList').val();
+        //var status = $('#TransactionStatus').val();
+        //var status = $('#MemberList').val();
+           $('.mvc-grid').mvcgrid({
+               query: 'Whitelevel=' + Whitelevelval + '&Supervalue=' + SuperIDval + '&Distributor=' + disval + '&Merchant=' + dropdownval + '&Status=' + this.value,
+               //query: 'search=' + status +'&Status='+this.value,
+               reload: true,
+            reloadStarted: function () {
+                $(".divFooterTotalComm").remove();
+            },
+           });
+       });
+</script>
+
+<script>
+       //$(document).on('change', '.mvc-grid-search', function () {
+    $("#MemberList").change(function () {
+        var Whitelevelval = $('#WhitelevelList').val();
+        var SuperIDval = $('#SuperList').val();
+        var disval = $('#DistributorListID').val();
+        //var dropdownval = $('#MemberList').val();
+        var status = $('#TransactionStatus').val();
+        //var dropdownMerchantval = $('#MerchantId').val();
+           $('.mvc-grid').mvcgrid({
+               query: 'Whitelevel=' + Whitelevelval + '&Supervalue=' + SuperIDval + '&Distributor=' + disval + '&Merchant=' + this.value + '&Status=' + status,
+               //query: 'search=' + this.value + '&Status=' + status,
+               reload: true,
+               reloadStarted: function () {
+                   $(".divFooterTotalComm").remove();
+               },
+           });
+       });
+</script>
+<script>
+    $(document).ready(function () {
+        $('.mvc-grid').mvcgrid({
+            reload: true,
+                reloadStarted: function () {
+                    $(".divFooterTotalComm").remove();
+                },
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#WhitelevelList").change(function () {
+            $("#SuperList").empty();
+            $("#SuperList").val("--Select--");
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("GetSuperDistributor")',
+                    dataType: 'json',
+                    data: { Disid: $("#WhitelevelList").val() },
+                    success: function (states) {
+                        $("#SuperList").append('<option selected value="">--Select Super--</option>');
+                        $.each(states, function (i, state) {
+                            $("#SuperList").append('<option value="' + state.IDValue + '">' +
+                                state.TextValue + '</option>');
+                        });      
+                        var Whitelevelval = $('#WhitelevelList').val();
+                        var SuperIDval = $('#SuperList').val();
+                        var disval = $('#DistributorListID').val();
+                        var dropdownval = $('#MemberList').val();
+                        var status = $('#TransactionStatus').val();
+                        $('.mvc-grid').mvcgrid({
+                            query: 'Whitelevel=' + Whitelevelval + '&Supervalue=' + SuperIDval + '&Distributor=' + disval + '&Merchant=' + dropdownval+'&Status=' + status,
+                            //query: 'search=' + dropdownval + '&Status=' + status,
+                            reload: true,
+                            reloadStarted: function () {
+                                $(".divFooterTotalComm").remove();
+                            },
+                        });
+                    },
+                    error: function (ex) {
+                        $("#SuperList").append('<option selected value="">--Select Super--</option>');
+                        $("#DistributorListID").append('<option selected value="">--Select Distributor--</option>');
+                        $("#MemberList").append('<option selected value="">--Select Merchant--</option>');
+                        var Whitelevelval = $('#WhitelevelList').val();
+                        var SuperIDval = $('#SuperList').val();
+                        var disval = $('#DistributorListID').val();
+                        var dropdownval = $('#MemberList').val();
+                        var status = $('#TransactionStatus').val();
+                        $('.mvc-grid').mvcgrid({
+                            query: 'Whitelevel=' + Whitelevelval + '&Supervalue=' + SuperIDval + '&Distributor=' + disval + '&Merchant=' + dropdownval + '&Status=' + status,
+                            //query: 'search=' + dropdownval + '&Status=' + status,
+                            reload: true,
+                            reloadStarted: function () {
+                                $(".divFooterTotalComm").remove();
+                            },
+                        });
+                        //alert('Failed to retrieve data.' + ex);
+                    }
+            });
+            var Whitelevelval = $('#WhitelevelList').val();
+            var SuperIDval = '';
+            var disval = '';
+            var dropdownval = '';
+            var status = '';
+            $('.mvc-grid').mvcgrid({
+                query: 'Whitelevel=' + Whitelevelval + '&Supervalue=' + SuperIDval + '&Distributor=' + disval + '&Merchant=' + dropdownval + '&Status=' + status,
+                //query: 'search=' + dropdownval + '&Status=' + status,
+                reload: true,
+                reloadStarted: function () {
+                    $(".divFooterTotalComm").remove();
+                },
+            });
+                return false;
+        })
+
+        $("#SuperList").change(function () {
+            $("#DistributorListID").empty();
+            $("#DistributorListID").val("--Select--");
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetDistributor")',
+                    dataType: 'json',
+                    data: { Disid: $("#SuperList").val() },
+                    success: function (states) {
+                        $("#DistributorListID").append('<option selected value="">--Select Distributor--</option>');
+                        $.each(states, function (i, state) {
+                            $("#DistributorListID").append('<option value="' + state.IDValue + '">' +
+                                state.TextValue + '</option>');
+                        });
+                        var Whitelevelval = $('#WhitelevelList').val();
+                        var SuperIDval = $('#SuperList').val();
+                        var disval = $('#DistributorListID').val();
+                        var dropdownval = $('#MemberList').val();
+                        var status = $('#TransactionStatus').val();
+                        $('.mvc-grid').mvcgrid({
+                            query: 'Whitelevel=' + Whitelevelval + '&Supervalue=' + SuperIDval + '&Distributor=' + disval + '&Merchant=' + dropdownval + '&Status=' + status,
+                            //query: 'search=' + dropdownval + '&Status=' + status,
+                            reload: true,
+                            reloadStarted: function () {
+                                $(".divFooterTotalComm").remove();
+                            },
+                        });
+                    },
+                    error: function (ex) {
+                        $("#DistributorListID").append('<option selected value="">--Select Distributor--</option>');
+                        //alert('Failed to retrieve data.' + ex);
+                    }
+            });
+                var Whitelevelval = $('#WhitelevelList').val();
+                var SuperIDval = $('#SuperList').val();
+                var disval ='';
+                var dropdownval = '';
+                var status ='';
+                $('.mvc-grid').mvcgrid({
+                    query: 'Whitelevel=' + Whitelevelval + '&Supervalue=' + SuperIDval + '&Distributor=' + disval + '&Merchant=' + dropdownval + '&Status=' + status,
+                    //query: 'search=' + dropdownval + '&Status=' + status,
+                    reload: true,
+                    reloadStarted: function () {
+                        $(".divFooterTotalComm").remove();
+                    },
+                });
+                return false;
+            })
+    $("#DistributorListID").change(function () {
+            $("#MemberList").empty();
+            $("#MemberList").val("--Select--");
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetMerchant")',
+                    dataType: 'json',
+                    data: { Disid: $("#DistributorListID").val() },
+                    success: function (states) {
+                        $("#MemberList").append('<option selected value="">--Select Merchant--</option>');
+                        $.each(states, function (i, state) {
+                            $("#MemberList").append('<option value="' + state.IDValue + '">' +
+                                state.TextValue + '</option>');
+                        });
+                        var Whitelevelval = $('#WhitelevelList').val();
+                        var SuperIDval = $('#SuperList').val();
+                        var disval = $('#DistributorListID').val();
+                        var dropdownval = $('#MemberList').val();
+                        var status = $('#TransactionStatus').val();
+                        $('.mvc-grid').mvcgrid({
+                            query: 'Whitelevel=' + Whitelevelval + '&Supervalue=' + SuperIDval + '&Distributor=' + disval + '&Merchant=' + dropdownval + '&Status=' + status,
+                            //query: 'search=' + dropdownval + '&Status=' + status,
+                            reload: true,
+                            reloadStarted: function () {
+                                $(".divFooterTotalComm").remove();
+                            },
+                        });
+                    },
+                    error: function (ex) {
+                        $("#MemberList").append('<option selected value="">--Select Merchant--</option>');
+                        //alert('Failed to retrieve data.' + ex);
+                    }
+            });
+                var Whitelevelval = $('#WhitelevelList').val();
+                var SuperIDval = $('#SuperList').val();
+                var disval = $('#DistributorListID').val();
+                var dropdownval ='';
+                var status ='';
+                $('.mvc-grid').mvcgrid({
+                    query: 'Whitelevel=' + Whitelevelval + '&Supervalue=' + SuperIDval + '&Distributor=' + disval + '&Merchant=' + dropdownval + '&Status=' + status,
+                    //query: 'search=' + dropdownval + '&Status=' + status,
+                    reload: true,
+                    reloadStarted: function () {
+                        $(".divFooterTotalComm").remove();
+                    },
+                });
+                return false;
+            })
+
+        });
+</script>
+<script type="text/javascript">
+    $("#btnExportMercnatrecoard").click(function () {
+        var url = '@(Url.Action("ExportIndexPAMerchantAdminReport", "PowerAdminTransactionReport", new {area="PowerAdmin" }) + ViewContext.HttpContext.Request.QueryString)?Whitelevel=' + $('#WhitelevelList').val() + '&Supervalue=' + $('#SuperList').val() + '&Distributor=' + $("#DistributorListID").val() + '&Disid=' + $("#MemberList").val()+'&statusval=' + $("#TransactionStatus").val();        
+        window.location.href = url;
+    })
+</script>
+
+<script type="text/javascript">
+
+    $("[id$=btnExport]").click(function (e) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=my-ajax-grid]').html()));
+        e.preventDefault();
+    });
+</script>

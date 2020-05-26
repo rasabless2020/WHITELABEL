@@ -1,0 +1,366 @@
+﻿@model WHITELABEL.Web.Areas.Admin.Models.CommissoinManagmentmodel
+@{
+                /**/
+
+                ViewBag.Title = "Generate Commission Slab";
+                //Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+                Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/angular.min.js"></script>
+<script src="~/Scripts/typeahead.jquery.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+@Scripts.Render("~/bundles/NeWMemberCommissionSlabAutocompleteJs")
+
+@*@Scripts.Render("~/bundles/NeWMemberCommissionSlabSettingSettinigJs")*@
+<script src="~/Areas/Admin/AdminHelperJS/MemberCommSlabSetting/NewCommissionSlabSetting.js"></script>
+@*<div ng-app="NewMembberCommissionSlabSettingApp" ng-controller="NewMembberCommissionSlabSettingController" ng-init="OnLoadDataBind()" class="form-horizontal padding-top-20">*@
+<div ng-app="NewMembberCommissionSlabSettingApp" id="NewMembberCommissionSlabSettingController" ng-controller="NewMembberCommissionSlabSettingController" ng-init="OnLoadDataBind()" class="form-horizontal padding-top-20">
+
+    <form name="userForm" novalidate>
+        @Html.AntiForgeryToken()
+        @*@Html.HiddenFor(model => model.SLN)*@
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12 row headcolor">
+                    <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-funnel-dollar fa-3x"></i></div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4" style="text-align:right; padding-top:10px;">
+                        <h3>
+                            Create Commission
+                        </h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-heading">
+                    </div><!--.card-heading-->
+                    <div class="card-body">
+                        <div class="row">
+                            @*<div class="col-md-12">
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-6">
+                                        <label class="control-label col-md-3">Select Member Role</label>
+                                        <div class="col-md-9">
+                                            <select data-ng-model="MemberRoleInfor"  name="memberrole" class="form-control" id="Memberrole">
+                                                <option ng-repeat="list in MemberRoleDetails" value="{{list.ROLE_ID}}">{{list.ROLE_NAME}}</option>
+                                                <option value="">Select Member </option>
+                                            </select>
+                                        </div>
+                                        <div ng-show="userForm.$submitted || userForm.MemberRoleInfor.$touched">
+                                            <div class="form-control" style="color:red;" ng-show="userForm.MemberRoleInfor.$error.required">Enter Member Role</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3"></div>
+                                </div>*@
+                            <div class="col-md-12">
+                                <div class="clearfix"></div>
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6">
+                                    <div class="col-md-12">
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Slab Name</label>
+                                                <div class="col-md-9">
+                                                    <div class="inputer">
+                                                        <div class="md-form">
+
+                                                            @*<input type="hidden" ng-model="SLN" ng-value="SLN" />*@
+                                                            <input type="hidden" ng-model="ID" ng-value="ID" />
+                                                            <input type="text" ng-model="SLAB_NAME" name="SlabName" class="form-control" required="" maxlength="150" ng-change='CheckSlabName()' />
+
+                                                        </div>
+                                                        <div ng-show="userForm.$submitted || userForm.SlabName.$touched">
+                                                            <div class="form-control" style="color:red;" ng-show="userForm.SlabName.$error.required">Enter Slab Name</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Slab Details</label>
+                                                <div class="col-md-9">
+                                                    <div class="inputer">
+                                                        <div class="md-form">
+                                                            <input type="text" id="SLAB_DETAILS" name="SLAB_DETAILS" ng-model="SLAB_DETAILS" class="form-control" required="" maxlength="350" />
+                                                        </div>
+                                                        <div ng-show="userForm.$submitted || userForm.SLAB_DETAILS.$touched">
+                                                            <div class="form-control" style="color:red;" ng-show="userForm.SLAB_DETAILS.$error.required">Enter Details..</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Slab Type</label>
+                                                <div class="col-md-9">
+                                                    <div class="inputer">
+                                                        <div class="md-form">
+                                                            @*<input type="text" id="txtNewServiceType" ng-change="FetchOperator()" name="Service" ng-model="ServiceType" class="form-control" required="" />*@
+                                                            <input type="text" id="txtNewServiceType" ng-change="ClearData()" name="Service" ng-model="ServiceType" class="form-control" required="" />
+                                                            <input type="hidden" id="hftNewServiceType" ng-value="SLAB_TYPE" ng-model="SLAB_TYPE" name="ServiceTypeId" />
+                                                        </div>
+                                                        <div ng-show="userForm.$submitted || userForm.Service.$touched">
+                                                            <div class="form-control" style="color:red;" ng-show="userForm.Service.$error.required">Enter Service Type..</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">Slab Status</label>
+                                                <div class="col-md-9">
+                                                    <div class="inputer">
+                                                        <div class="md-form">
+                                                            <select name="singleSelect" id="singleSelect" ng-model="SLAB_STATUS" class="form-control">
+                                                                <option value="Active">Active</option>
+                                                                <option value="Inactive"> Inactive</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group row">
+                                                <label class="control-label col-md-3">TDS Applied</label>
+                                                <div class="col-md-9">
+                                                    <div class="inputer">
+                                                        <div class="md-form">
+                                                            <select name="singleSelectTDSName" id="singleTDSSelect" ng-model="SLAB_TDS" class="form-control">
+                                                                <option value="Yes">Yes</option>
+                                                                <option value="No">No</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-3"></div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="col-md-12"><h3></h3></div>
+                                        @*<input type="hidden" ng-model="m.CommissionPer" class="form-control" id="hdnCommval">*@
+                                        <span style="display:none;"> {{CommissionPer}}</span>
+                                        <table ng-show="ServiceType=='DMR'" class="table table-hover" id="SalaryTable">
+
+                                            <thead style=" background-color:#4b5961; color:#fff; ">
+                                                <tr style="background-color:#fff;">
+                                                    <td colspan="6" style="text-align:center"><h3 style="color:#AB1B5C;">Domestic [Transaction rate - 1%]</h3></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        Service Name
+                                                    </th>
+                                                    <th ng-show="OperatorDetails[0].TYPE=='REMITTANCE'">Slab From</th>
+                                                    @*<th ng-show="ServiceInformationDMR[0].TYPE=='REMITTANCE'">
+                                                        Slab From
+                                                    </th>*@
+                                                    <th ng-show="OperatorDetails[0].TYPE=='REMITTANCE'">Slab To</th>
+                                                    @*<th ng-show="ServiceInformationDMR[0].TYPE=='REMITTANCE'">
+                                                        Slab To
+                                                    </th>*@
+                                                    <th>
+                                                        TYPE
+                                                    </th>
+                                                    <th style="display:none;">
+                                                        Super Comm Type
+                                                    </th>
+                                                    <th style="display:none;">
+                                                        Super Comm Per
+                                                    </th>
+                                                    <th>Distributor Comm Type</th>
+                                                    <th>
+                                                        Distributor Comm Per
+                                                    </th>
+                                                    <th  style="display:none;">Merchant Comm Type</th>
+                                                    <th  style="display:none;">
+                                                        Merchant Comm Per
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-repeat="m in OperatorDetails">
+                                            @*<tbody ng-repeat="m in ServiceInformationDMR">*@
+                                                <tr>
+                                                    <td>
+                                                        <input type="hidden" ng-model="m.ID" class="form-control">
+                                                        <input type="hidden" ng-model="m.CommissionPercentage" class="form-control">
+                                                        <input type="text" ng-model="m.SERVICE_NAME" class="form-control" readonly>
+                                                    </td>
+                                                    <td><input type="number" ng-show="m.TYPE=='REMITTANCE'" ng-model="m.DMRFrom" class="form-control" readonly></td>
+                                                    <td><input type="number" ng-show="m.TYPE=='REMITTANCE'" ng-model="m.DMRTo" ng-change="updateDMRFromAmount($index)" class="form-control"></td>
+                                                    <td><input type="text" ng-model="m.TYPE" class="form-control" readonly></td>
+                                                    <td style="display:none;">
+                                                        <select name="singleSelectNameCommission" id="singleSelectCommission" ng-model="m.COMM_TYPE" class="form-control">
+                                                            <option value="FIXED">FIXED</option>
+                                                            <option value="PERCENTAGE"> PERCENTAGE</option>
+                                                        </select>
+                                                    </td>
+                                                    <td style="display:none;">
+                                                        @*<input type="text" ng-model="m.SuperDisPercentage" maxlength="4" class="form-control" ng-keyup="CheckDMRcommissionAmount($index,1)">*@
+                                                        <input type="text" ng-model="m.SuperDisPercentage" maxlength="4" class="form-control">
+                                                    </td>
+                                                    <td>
+                                                        <select name="singleDistributorCommission" id="singleDistributorCommission" ng-model="m.DistributorComm_Type" class="form-control">
+                                                            <option value="FIXED">FIXED</option>
+                                                            <option value="PERCENTAGE"> PERCENTAGE</option>
+                                                        </select>
+                                                    </td>
+                                                    <td>
+                                                        @*<input type="text" ng-model="m.DistriCommissionPer" maxlength="4" class="form-control" ng-keyup="CheckDMRcommissionAmount($index,2)">*@
+                                                        <input type="text" ng-model="m.DistriCommissionPer" maxlength="4" class="form-control">
+                                                    </td>
+                                                    <td  style="display:none;">
+                                                        <select name="singleMerchantCommission" id="singleMerchantCommission" ng-model="m.MerchantComm_Type" class="form-control">
+                                                            <option value="FIXED">FIXED</option>
+                                                            <option value="PERCENTAGE"> PERCENTAGE</option>
+                                                        </select>
+                                                    </td>
+                                                    <td  style="display:none;">
+                                                        @*<input type="text" ng-model="m.RetailerCommissionPer" maxlength="4" class="form-control" ng-keyup="CheckDMRcommissionAmount($index,3)">*@
+                                                        <input type="text" ng-model="m.RetailerCommissionPer" maxlength="4" class="form-control">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        @*<table ng-show="ServiceType=='DMR'" class="table responsive table-responsive table-striped table-bordered table-hover" id="SalaryTable2">
+                                            <thead style=" background-color:#4b5961; color:#fff;">
+                                                <tr style="background-color:#fff;">
+                                                    <td colspan="6" style="text-align:center"><h3 style="color:#AB1B5C;">International (Nepal)</h3></td>
+                                                </tr>
+                                                <tr>
+                                                    <th>
+                                                        Service Name
+                                                    </th>
+                                                    <th ng-show="ServiceInformationDMR[0].TYPE=='REMITTANCE'">
+                                                        Slab From
+                                                    </th>
+                                                    <th ng-show="ServiceInformationDMR[0].TYPE=='REMITTANCE'">
+                                                        Slab To
+                                                    </th>
+                                                    <th>
+                                                        TYPE
+                                                    </th>
+                                                    <th>
+                                                        Commission Type
+                                                    </th>
+                                                    <th>
+                                                        Commission Percentage
+                                                    </th>
+                                                </tr>
+                                            </thead>*@
+                                            @*<tbody ng-repeat="m in ServiceInformationDMR">*@
+                                            @*<tbody ng-repeat="m in ServiceInformationInternational">
+
+                                                    <tr>
+                                                        <td>
+                                                            <input type="hidden" ng-model="m.ID" class="form-control">
+                                                            <input type="text" ng-model="m.SERVICE_NAME" class="form-control" readonly>
+                                                        </td>
+                                                        <td><input type="number" ng-show="m.TYPE=='REMITTANCE'" ng-model="m.DMRFrom" class="form-control" readonly></td>
+                                                        <td><input type="number" ng-show="m.TYPE=='REMITTANCE'" ng-model="m.DMRTo" ng-change="updateDMRInternationalAmount($index)" class="form-control"></td>
+                                                        <td><input type="text" ng-model="m.TYPE" class="form-control" readonly></td>
+                                                        <td>
+                                                            <select name="singleSelectNameCommission" id="singleSelectCommission" ng-model="m.COMM_TYPE" class="form-control">
+                                                                <option value="FIXED">FIXED</option>
+                                                                <option value="PERCENTAGE"> PERCENTAGE</option>
+                                                            </select>
+                                                        </td>
+                                                        <td><input type="text" ng-model="m.CommissionPercentage" maxlength="4" class="form-control" ng-change="DMRInternationalEditValue(m.OldCommissionPercentage,$index)"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>*@
+
+                                        <table ng-show="ServiceType!='DMR'" class="table table-hover" id="SalaryTable1">
+                                            <thead style=" background-color:#4b5961; color:#fff;">
+                                                <tr>
+                                                    <th>
+                                                        Service Name
+                                                    </th>
+                                                    <th>
+                                                        TYPE
+                                                    </th>
+                                                    <th>
+                                                        Service Code
+                                                    </th>
+                                                    <th>
+                                                        Commission Type
+                                                    </th>
+                                                    <th>
+                                                        Commission Value
+                                                    </th>
+                                                    <th style="display:none;">
+                                                        Super Dis Percentage
+                                                    </th>
+                                                    <th>
+                                                        Distributor Percentage
+                                                    </th>
+                                                    <th style="display:none;">
+                                                        Merchant Percentage
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody ng-repeat="m in ServiceInformation">
+                                                <tr>
+                                                    <td style="display:none;">
+                                                        {{m.ID}}
+                                                    </td>
+                                                    <td>
+                                                        <input type="hidden" ng-model="m.ID" class="form-control">
+                                                        <input type="text" ng-model="m.SERVICE_NAME" class="form-control" readonly>
+                                                    </td>
+                                                    <td><input type="text" ng-model="m.TYPE" class="form-control" readonly></td>
+                                                    <td><input type="text" ng-model="m.SERVICE_KEY" class="form-control" readonly></td>
+                                                    <td><input type="text" ng-model="m.CommissionType" class="form-control" readonly>  </td>
+                                                    <td>{{m.CommissionPercentage}}</td>
+                                                    <td ng-hide="true"><input type="text" ng-model="m.CommissionPercentage" maxlength="5" class="form-control" ng-change="EditValue(m.OldCommissionPercentage,$index)"></td>
+                                                    <td style="display:none;"><input type="text" ng-model="m.SuperDisPercentage" maxlength="5" class="form-control" ng-decimal="10" ng-keyup="CheckcommissionValidation($index,1)"></td>
+                                                    <td><input type="text" ng-model="m.DistriCommissionPer" maxlength="5" class="form-control" ng-decimal="10" ng-keyup="CheckcommissionValidation($index,2)"></td>
+                                                    <td  style="display:none;"><input type="text" ng-model="m.RetailerCommissionPer" maxlength="5" class="form-control" ng-decimal="10" ng-keyup="CheckcommissionValidation($index,3)"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="col-lg-12 text-center">
+                                @if (ViewBag.checkStatus == "0")
+                                {
+                                    <input type="submit" value="Create Commission" class="btn btn-primary" ng-click="SaveData()" ng-disabled="buttondisplay" id="btnsave" />
+                                }
+                                else
+                                {
+                                    <input type="submit" value="Update Commission" class="btn btn-primary" ng-click="SaveData()" id="btnsave" />
+                                }
+                                <a href="@Url.Action("Index", "MemberCommissionSlab", new { area = "Admin" })" class="btn btn-primary">Back</a>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="margin-top-20"></div>
+                            @if (ViewBag.msg != null && ViewBag.msg != "")
+                            {
+                                <div id="informationMessage" class="text-center alert alert-success">
+                                    <span style="width:100%;text-align:center;">@ViewBag.msg </span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div id="serviceOperator"></div>
+            </div>
+        </div>
+    </form>
+</div>
+

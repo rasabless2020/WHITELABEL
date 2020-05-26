@@ -1,0 +1,53 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_MASTER_MEMBER>
+@*@model IGrid<WHITELABEL.Data.Models.TBL_MASTER_MEMBER>*@
+@{
+    ViewBag.Title = "IndexGrid";
+    //Layout = "~/Areas/Super/Views/Shared/_LayoutSuper.cshtml";
+}
+
+@*@(new HtmlGrid<WHITELABEL.Data.Models.TBL_MASTER_MEMBER>(Html, Model))*@
+
+@(Html
+                                    .Grid(Model)
+                                    .Build(columns =>
+                                    {
+                                    columns.Add(model => model.EMAIL_ID).Titled("Email").Filterable(true).Sortable(true);
+                                    columns.Add(model => model.MEMBER_NAME).Titled("Name").Filterable(true).Sortable(true);
+                                    columns.Add(model => model.COMPANY).Titled("Company").Filterable(true).Sortable(true);
+                                    columns.Add(model => model.MEMBER_MOBILE).Titled("Mobile").Filterable(true).Sortable(true);
+                                    columns.Add(model => model.BLOCKED_BALANCE).Titled("Balance").Filterable(true).Sortable(true);
+                                    columns.Add(model => model.MEM_ID).Encoded(false).Filterable(false).Sortable(false).Titled("Password")
+                                        .RenderedAs(model => "<div style='text-align:center'><a href='javascript:void(0)' onclick='SendMailToMember(" + model.MEM_ID + ");return 0;' title='Password'><i class='fa fa-key'></i></a> <a href='javascript:void(0);' onclick='GetPassword(" + model.MEM_ID + ");'><i class='fa fa-eye'></i></a></div>");
+                                    columns.Add(model => model.SECURITY_PIN_MD5).Titled("M Pin").Filterable(true).Sortable(true);
+                                    columns.Add(model => model.MEM_ID).Encoded(false).Filterable(false).Sortable(false).Titled("Action")
+                                        //.RenderedAs(model => "<div>&nbsp;<a href='" + @Url.Action("CreateMember", "MemberAPILabel", new { area = "Admin", memid = Encrypt.EncryptMe(model.MEM_ID.ToString()) }) + "' Title='Edit' style='margin-right:10px;'><i class='fa fa-edit'></i></a><a href='" + @Url.Action("ServiceDetails", "MemberService", new { area = "Admin", memid = Encrypt.EncryptMe(model.MEM_ID.ToString()) }) + "' title='Services'><i class='fa fa-cogs'></i></a></div>");
+                                        .RenderedAs(model => "<div style='text-align:center'><a href='" + @Url.Action("CreateMember", "SuperMember", new { area = "Super", memid = Encrypt.EncryptMe(model.MEM_ID.ToString()) }) + "' Title='Edit' style='margin-right:10px;'><i class='fa fa-edit'></i></a><a href='" + @Url.Action("ServiceDetails", "SuperService", new { area = "Super", memid = Encrypt.EncryptMe(model.MEM_ID.ToString()) }) + "' title='Services'><i class='fa fa-cogs'></i></a></div>");
+                                    columns.Add(model => (model.ACTIVE_MEMBER == true ? "Active" : "Deactive")).Titled("Status").Css("<style>.table - hover tbody tr: hover {background - color:red;}</style> ").Filterable(true).Sortable(true);
+
+                                    columns.Add(model => model.MEM_ID).Encoded(false).Filterable(false).Sortable(false).Titled("Action")
+                                  //.RenderedAs(model => "<a href='javascript:void(0)' onclick='MemberStatus(\"" + model.MEM_ID + "\",\"" + model.ACTIVE_MEMBER + "\");return 0;' title='" + (model.ACTIVE_MEMBER == true ? "Active" : "Deactive") + "'>" + (model.ACTIVE_MEMBER == true ? "<span style='color:green;'><i class='fa fa-toggle-on fa-2x'></i></span>" : "<span style='color:red;'><i class='fa fa-toggle-off fa-2x'></i></span>") + "</a>");
+                                  .RenderedAs(model => "<div style='text-align:center'><a href='javascript:void(0)' onclick='MemberStatus(\"" + model.MEM_ID + "\",\"" + model.ACTIVE_MEMBER + "\");return 0;' title='" + (model.ACTIVE_MEMBER == true ? "Active" : "Deactive") + "'>" + (model.ACTIVE_MEMBER == true ? "<span style='color:green;'><i class='fa fa-toggle-on fa-2x'></i></span>" : "<span style='color:red;'><i class='fa fa-toggle-off fa-2x'></i></span>") + "</a></div>");
+                                  
+
+
+
+                                    })
+                                    .Empty("No data found")
+                                    .Id("my-ajax-grid")
+                                    .Pageable(pager =>
+                                    {
+        pager.PagesToDisplay = 5;
+        pager.RowsPerPage = 5;
+    })
+                                    .Filterable()
+                                    .Sortable()
+)
+
+<style>
+    .RowColorchange {
+        background-color: sandybrown;
+    }
+</style>
+

@@ -1,0 +1,36 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>
+@{
+    ViewBag.Title = "DeclinedIndexGrid";
+    Layout = null;
+    //Layout = "~/Areas/Super/Views/Shared/_SuperLayout.cshtml";
+}
+
+@(Html
+                            .Grid(Model)
+                            .Build(columns =>
+                            {
+                                columns.Add(model => model.Serial_No).Titled("Sr Id");
+                                //columns.Add(model => model.ToUser).Titled("To User");
+                                columns.Add(model => model.FromUser).Titled("From Member");
+                                columns.Add(model => model.REFERENCE_NO).Titled("Reference No");
+                                columns.Add(model => model.REQUEST_DATE).Titled("Req Date").Formatted("{0:d}");
+                                columns.Add(model => model.AMOUNT).Titled("Amouont");
+                                columns.Add(model => model.BANK_ACCOUNT).Titled("Bank Account");
+                                columns.Add(model => model.TRANSACTION_DETAILS).Titled("Transaction Details");
+                                columns.Add(model => model.SLN).Titled("Action").Encoded(false).Filterable(false).Sortable(false)
+                                .RenderedAs(model => "<button class='btn btn-primary btn-xs' data-id=" + model.SLN + " onclick='ActivateRequisition(" + model.SLN + ");' title='Activate'>Activate</button>");
+                            })
+                            .RowCss(model => model.STATUS == "Decline" ? "danger" : model.STATUS == "Pending" ? "info" : "")
+                            .Empty("No data found")
+                            .Id("my-ajax-grid")
+                            .Pageable(pager =>
+                            {
+                                pager.PagesToDisplay = 10;
+                                pager.RowsPerPage = 10;
+                            })
+                            .Filterable()
+                            .Sortable()
+)
+

@@ -1,0 +1,42 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_CREDIT_LIMIT_BALANCE_DISTRIBUTION>
+@{
+    //ViewBag.Title = "DistributorCreditindexgrid";
+    //Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = null;
+}
+
+
+@(Html
+                                                .Grid(Model)
+                                                .Build(columns =>
+                                                {
+                                                    columns.Add(model => model.SLN).Titled("Sln").Filterable(true).Sortable(true);
+                                                    columns.Add(model => model.FromUser).Titled("Member Name ").Filterable(true).Sortable(true);
+                                                    columns.Add(model => model.CREDIT_AMOUNT).Titled("Credit Amount").Filterable(true).Sortable(true);
+                                                    columns.Add(model => model.CREDIT_DATE).Titled("Credit Date").Filterable(true).Sortable(true).Formatted("{0:yyyy-MM-dd}");
+                                                    columns.Add(model => model.CREDIT_NOTE_DESCRIPTION).Titled("Credit Note").Filterable(true).Sortable(true);
+
+                                                })
+                                                .Css("css-classes")
+    .AppendCss("table table-striped")
+                                                .Empty("No data found")
+                                                .Id("my-ajax-grid")
+                                                .Pageable(pager =>
+                                                {
+                                                    pager.PagesToDisplay = 35;
+                                                    pager.RowsPerPage = 35;
+                                                })
+                                                .Filterable()
+                                                .Sortable()
+)
+<table class="divFooterTotalComm" style="width:100%">
+    <tr>
+        <td style="width:25%;">Total Credit Amount:- <b>@Model.Sum(z => z.CREDIT_AMOUNT)</b></td>
+        <td></td>
+    </tr>
+</table>
+
+
+

@@ -1,0 +1,28 @@
+﻿@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_newadminLayoutPage.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        <div class="col-md-12">
+            <div class=" card">
+                <div class="card-body">
+                    <div class="panel-body">
+                        <div class="row example-row">
+                            @Html.AjaxGrid(Url.Action("IndexGrid", "MemberKYCVerification"), new { area = "Admin" })
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+                </div><!--.panel-->
+                </div>
+            </div><!--.col-md-12-->
+        </div><!--.row-->
+</div>
+@Scripts.Render("~/bundles/MemberKYCVerification");
+}
+
+

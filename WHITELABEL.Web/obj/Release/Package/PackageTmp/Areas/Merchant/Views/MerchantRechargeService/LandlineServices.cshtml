@@ -1,0 +1,267 @@
+﻿@model WHITELABEL.Web.Areas.Merchant.Models.LandlineRecharge
+@{
+    ViewBag.Title = "LandlineServices";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+@Scripts.Render("~/bundles/MerchantLandlineRecharge")
+<link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet" />
+<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+@*@using (Html.BeginForm("PostLindlineRecharge", "MerchantRechargeService", FormMethod.Post, new { area = "Merchant" }))*@
+@using (Ajax.BeginForm("PostLindlineRecharge", "MerchantRechargeService", new AjaxOptions { Confirm = "Do you want to recharge", OnSuccess = "OnLandlineSuccess", OnFailure = "OnLandlineFailure", LoadingElementId = "LandLineprogress" }, new { area = "Merchant", @id = "LandLineRecharge" }))
+{
+    @Html.AntiForgeryToken()
+
+    @*<div class="col-md-12 row headcolor">
+            <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-phone-volume  fa-3x"></i> </div>
+
+            <div class="col-md-8" style="text-align:right; padding-top:10px;">
+                <h3>
+                    Landline Bill Payment
+                </h3>
+            </div>
+        </div>*@
+
+    <div class="col-md-12">
+        <div class="card">
+
+            <div class="card-body">
+                <h5>Landline Bill Payment</h5>
+
+                <form>
+                    <div class="col-md-12" style="text-align:center; color:red; margin-bottom:30px;">
+                        <div id="LandlineErrormsg"></div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="row">
+
+
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+
+
+                            <div class="col-md-12">
+                                <div class=" floating-label">
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @Html.EditorFor(m => m.ContactNo, new { htmlAttributes = new { @style = " width:100%; padding:5px;", placeholder = "Registered Landline No. / Viewing Card No.", @class = "form-control", id = "txtLandLineNumber" } })
+                                            <label for="exampleInput1"></label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })</small></span>
+
+                                        </div>
+                                        <div style="display:none">
+                                            @Html.EditorFor(m => m.geolocation, new { htmlAttributes = new { @class = "form-control", id = "GeolocationLandline" } })
+                                            @Html.EditorFor(m => m.IpAddress, new { htmlAttributes = new { @class = "form-control", id = "LandlineIpaddress", @readonly = "readonly" } })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <div class=" floating-label">
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @Html.EditorFor(m => m.CustomerNo, new { htmlAttributes = new { @style = " width:100%; padding:5px;", placeholder = "Customer Mobile No", @class = "form-control", id = "txtLandlineMObileNo" } })
+                                            <label for="amount"></label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CustomerNo, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-12">
+                                <div class=" floating-label">
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @Html.EditorFor(m => m.RechargeAmt, new { htmlAttributes = new { @style = " width:100%; padding:5px;", placeholder = "Amount", @class = "form-control", id = "txtLandlineAmt" } })
+                                            <label for="amount"></label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.RechargeAmt, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-12">
+                                <div class=" floating-label">
+
+                                    <div class="input-group" style=" height:37px;">
+                                        <div class="inputer" style="width:91%;">
+                                            <div class="md-form">
+                                                @Html.EditorFor(m => m.OperatorName, new { htmlAttributes = new { @style = "width:97%; padding:5px; ", placeholder = "Operator Name", id = "txtLandlineOperator", @class = "form-control", } })
+                                                <input type="hidden" id="hfLandlineOperator" name="LandlineOperatorId" />
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                        <span class="input-group-btn">
+                                            <button href="javascript:void(0)" data-toggle='modal' data-target='.transdLandLine' id='transactionvalueLandLineid' type="button" class="btn btn-default">...</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-12" style="margin-top:20px; text-align:center;">
+
+                                <a href="#" onclick="GetLandLINEBillDetails();" style="color:white;" class="btn btn-info btn-lg" id="btnLandlineDisplay">Get Bill</a>
+                                <input type="submit" value="Pay" class="btn btn-primary btn-lg" id="btnLandLinesubmit" />
+
+
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-3"></div>
+
+
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-12 row" style=" margin-top:15px; border:1px solid #ccc; padding:20px 0; margin-bottom:20px; margin-left:12px;" id="divLandLineBillDisplay">
+                        <div class="col-md-4 row">
+                            <div class="col-md-4"> Due Date :-</div>
+                            <div class="col-md-8"><div id="txtLandlineDueDate"></div></div>
+                        </div>
+
+                        <div class="col-md-4 row">
+                            <div class="col-md-4"> Customer Name :- </div>
+                            <div class="col-md-8">
+                                <div id="txtLandlineCustomerName"></div>
+                                <input type="hidden" id="LandlineCreferenceID" name="REfferenceLandLineId" />
+                            </div>
+                        </div>
+                        <div class="col-md-4 row">
+                            <div class="col-md-4"> Bill No :- </div>
+                            <div class="col-md-8">
+                                <div id="txtLandlineBillbillnumber"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="col-md-12 row" style="display:none">
+                        <div style="display:none" id="idGeolocbrod"> </div>
+
+                        @Html.EditorFor(m => m.LandLineRefId, new { htmlAttributes = new { @class = "form-control", id = "txtLandlinecityRefNo" } })
+                    </div>
+
+                    <div class="col-md-12" style="text-align:center;margin-top:30px;">
+                        <div>
+
+
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+}
+
+<div id="dialog" style="display: none">
+</div>
+@*<div id="LandLineprogress" class="loading hidden">Loading&#8230;</div>*@
+<div class="preloader hidden" id="LandLineprogress">
+    <div id="loading"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#divLandLineBillDisplay').hide();
+        $('#btnLandLinesubmit').hide();
+        $('#LandLineprogress').removeClass("hidden");
+        $('#LandLineprogress').hide();
+    })
+    function OnLandlineSuccess(response) {
+        $('#LandLineprogress').removeClass("hidden");
+        $('#LandLineprogress').hide();
+        $('#loading').removeClass("hidden");
+        $('#loading').hide();
+        var message = response;
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+            }
+        })
+        $("#LandLineRecharge").trigger("reset");
+        $("#divLandLineBillDisplay").hide();
+        $('#btnLandlineDisplay').show();
+        $('#btnLandLinesubmit').hide();
+        callGeocodeRecharge();
+        //window.location.reload();
+        //alert(message);
+    }
+    function OnLandlineFailure(response) {
+        alert("Error occured.");
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+
+        callGeocodeRecharge();
+
+    });
+    function callGeocodeRecharge() {
+        $.getJSON('http://www.geoplugin.net/json.gp?jsoncallback=?', function (data) {
+
+            var information = JSON.stringify(data, null, 2);
+
+            //alert(JSON.stringify(data, null, 2));
+            console.log(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 2));
+            $('#GeolocationLandline').val(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 0));
+            $('#LandlineIpaddress').val(JSON.stringify(data.geoplugin_request, null, 0));
+            console.log(JSON.stringify(data, null, 2));
+        });
+    }
+    function setLandLineOperatorServiseOperator($key, $name) {
+        $('#txtLandlineOperator').val($name).focus();
+        $('#hfLandlineOperator').val($key);
+        //$('#RechargeAmt').focus();
+        $('#transactionvalueLandLineid').modal('hide');
+        $('.transdLandLine').modal('hide');
+    }
+   
+</script>
+<div id="transactionvalueLandLineid" class="modal scale fade transdLandLine" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Service Provider Name List</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table style="width:100%">
+                    <tr>
+                        <th>Operator Name </th>
+                        <th></th>
+                    </tr>
+                    @foreach (var d in ViewBag.LANDLINEOperator)
+                    {
+                        <tr>
+                            <td>
+                                @d.SERVICE_NAME (@d.TYPE)
+                                <input type="hidden" value="@d.SERVICE_KEY" />
+                            </td>
+                            <td><a href="javascript:void(0)" class="btn btn-default" onclick="setLandLineOperatorServiseOperator('@d.SERVICE_KEY','@d.SERVICE_NAME')"><img src="data:image;base64,@d.IMAGE" width="60" height="60" /></a></td>
+                            @*<td><a href="javascript:void(0)" class="btn btn-default" onclick="setWaterServiseOperator('@d.SERVICE_KEY','@d.SERVICE_NAME')">Select..</a></td>*@
+                        </tr>
+                    }
+                </table>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div><!--.modal-content-->
+    </div><!--.modal-dialog-->
+</div>

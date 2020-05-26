@@ -1,0 +1,31 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_VENDOR_MASTER>
+@{
+    ViewBag.Title = "IndexGrid";
+    Layout = null;
+}
+
+@(Html
+                .Grid(Model)
+                .Build(columns =>
+                {
+                    columns.Add(model => model.ID).Titled("Sln No").Filterable(true).Sortable(true);
+                    columns.Add(model => model.VENDOR_NAME).Titled("Vendor Name").Filterable(true).Sortable(true);
+                    columns.Add(model => model.VENDOR_TYPE).Titled("Vendor Type").Filterable(true).Sortable(true);
+                    columns.Add(model => model.STATUS).Encoded(false).Filterable(false).Sortable(false).Titled("Status")
+                              .RenderedAs(model => "<a href='javascript:void(0)' title='" + (model.STATUS == 1 ? "Actice" : "Deactice") + "'>" + (model.STATUS == 1 ? "<span class='badge badge-success'>Active</span>" : "<span class='badge badge-danger'>Deactive</span>") + "</a>");
+                    columns.Add(model => model.ID).Encoded(false).Filterable(false).Sortable(false).Titled("Action")
+                                            .RenderedAs(model => "<div><a href='" + @Url.Action("AddVendorMaster", "MemberVenderMaster", new { area = "Admin", memid = Encrypt.EncryptMe(model.ID.ToString()) }) + "' Title='Edit' style='margin-right:10px;'><i class='fa fa-edit'></i></a></div>");
+
+                })
+                .Empty("No data found")
+                .Id("my-ajax-grid")
+                .Pageable(pager =>
+                {
+                    pager.PagesToDisplay = 5;
+                    pager.RowsPerPage = 5;
+                })
+                .Filterable()
+                .Sortable()
+)

@@ -1,0 +1,45 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>
+@{
+    Layout = null;
+}
+
+
+@(Html
+                            .Grid(Model)
+                            .Build(columns =>
+                            {
+                                columns.Add(model => model.Serial_No).Titled("Slm Id");
+                                //columns.Add(model => model.ToUser).Titled("To User");
+                                columns.Add(model => model.FromUser).Titled("From Member");
+                                columns.Add(model => model.REQUEST_DATE).Titled("Req Date").Formatted("{0:yyyy-MM-dd}").MultiFilterable(true);
+                                columns.Add(model => model.REQUEST_TIME).Titled("Req Time").Formatted("{0:T}");
+                                columns.Add(model => model.AMOUNT).Titled("Amount");
+                                columns.Add(model => model.PAYMENT_METHOD).Titled("Pay Mode");
+                                columns.Add(model => model.BANK_ACCOUNT).Titled("Bank");
+                                columns.Add(model => model.TRANSACTION_DETAILS).Titled("Pay Method");
+                                columns.Add(model => model.STATUS).Titled("Status");
+                                columns.Add(model => model.APPROVAL_DATE).Titled("Apprv/Declined Date").Formatted("{0:yyyy-MM-dd}");
+                                columns.Add(model => model.APPROVED_BY).Titled("Apprv By");
+                            })
+                            .Css("css-classes")
+                                    .AppendCss("table table-striped")
+                            .RowCss(model => model.STATUS == "Decline" ? "danger" : model.STATUS == "Pending" ? "info" : "")
+                            .Empty("No data found")
+                            .Id("my-ajax-grid")
+                            .MultiFilterable()
+                             .Pageable(pager =>
+                            {
+                                pager.PagesToDisplay = 20;
+                                pager.RowsPerPage = 20;
+                            })
+                            .Filterable()
+                            .Sortable()
+)
+<table class="divFooterTotalComm" style="width:100%">
+    <tr>
+        <td style="width:25%;">Total Amount:- <b>@Model.Sum(z => z.AMOUNT)</b></td>
+        <td></td>
+    </tr>
+</table>

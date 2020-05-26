@@ -1,0 +1,200 @@
+﻿@model WHITELABEL.Web.Areas.Merchant.Models.TransXT_ADDCustomerModal
+@{
+    ViewBag.Title = "Customer Create";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+    //Layout = "~/Areas/Merchant/Views/Shared/_newmarchantLayoutPage.cshtml";
+}
+@Scripts.Render("~/bundles/MerchantDMRAPIAngularjsFiles")
+@Scripts.Render("~/bundles/MerchantDMRAPIJsFiles")
+@using (Ajax.BeginForm("PostCreateCustomer", "MerchantDMRSection", new AjaxOptions { OnSuccess = "OnSuccessAddCustomer", OnFailure = "OnFailureAddCustomer", LoadingElementId = "progressAddCustomer" }, new { area = "Merchant", @id = "CreateCustomer" }))
+{<div class="form-horizontal padding-top-20">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row ">
+
+                            <div class="col-md-12" style="padding: 0 60px;">
+
+                                <div style="box-shadow: 5px 10px #3e50b4; border: 1px solid #3e50b4; padding:20px;" class="clearfix">
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-4" style="padding-top:10px;">Mobile No</label>
+                                            <div class="col-md-8">
+                                                <div class="inputer">
+                                                    <div class="input-wrapper">
+                                                        @Html.EditorFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Mobile Number", id = "MobileNumber", @readonly = "readonly" } })
+
+                                                        @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                    </div>
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a href="javascript:void(0)" id="SendOTP" onclick="GenerateOTP($('#MobileNumber').val())" style="padding:20px 0 0 30px; ">Get OTP</a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="col-md-12" style="padding: 0 20px;">
+
+
+
+
+                                <div style="box-shadow: 5px 10px #3e50b4; border: 1px solid #3e50b4; padding:20px 0; margin:40px;" class="clearfix">
+                                    <div class=" col-md-12">
+
+                                        <div class="col-md-6">
+
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4" style="padding-top:10px;"> Name</label>
+                                                <div class="col-md-8">
+                                                    <div class="inputer">
+                                                        <div class="input-wrapper">
+                                                            @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Customer Name" } })
+
+                                                            @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                        </div>
+                                                        <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })</small></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4" style="padding-top:10px;">Address</label>
+                                                <div class="col-md-8">
+                                                    <div class="inputer">
+                                                        <div class="input-wrapper">
+                                                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Address" } })
+                                                            @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                        </div>
+
+                                                        <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })</small></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4" style="padding-top:10px;">DOB</label>
+                                                <div class="col-md-8">
+                                                    <div class="inputer">
+                                                        @{
+                                                            DateTime date = DateTime.Now;
+                                                            DateTime min = date.AddYears(-40);
+                                                            DateTime max = date.AddYears(1);
+                                                        }
+                                                        <div class="input-wrapper">
+                                                            @Html.EditorFor(model => model.DOB, "{0:yyyy-MM-dd}", new { htmlAttributes = new { @class = "form-control", @min = min.ToString("yyyy-MM-dd"), @max = max.ToString("yyyy-MM-dd"), @onkeydown = "return false;" } })
+                                                            @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                        </div>
+                                                        <span class="help-block"><small>@Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })</small></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-4" style="padding-top:10px;">OTP</label>
+                                                <div class="col-md-8">
+                                                    <div class="inputer">
+                                                        <div class="input-wrapper">
+                                                            @Html.EditorFor(model => model.OTP, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "OTP" } })
+                                                            @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                        </div>
+                                                        <span class="help-block"><small>@Html.ValidationMessageFor(model => model.OTP, "", new { @class = "text-danger" })</small></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="text-center col-md-12">
+                                        <input type="submit" value="Add Customer" class="btn btn-cyan" id="btnsubmit" />
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/MerchantDMRAPIAngularjsFiles")
+    @Scripts.Render("~/bundles/MerchantDMRAPIJsFiles")
+}
+<div id="progressAddCustomer" class="loading hidden">Loading&#8230;</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#progressAddCustomer').removeClass("hidden");
+        $('#progressAddCustomer').hide();
+    })
+    function OnSuccessAddCustomer(response) {
+        var message = response;
+        var CustId = $('#MobileNumber').val();
+        $("#CreateCustomer").trigger("reset");
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+                var url = "/Merchant/MerchantDMRSection/CustomerDetails?CustId=" + CustId;
+                window.location.href = url;
+            }
+        })
+        callGeocodeMobile();
+        //alert(message);
+    }
+    function OnFailureAddCustomer(response) {
+        alert("Error occured.");
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnsubmit").prop("disabled", true);
+    });
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+    $(document).ready(function () {
+        $('#password').attr('type', 'password');
+    });
+    $('#SendOTP').click(function () {
+        var $this = $(this);
+        $this.text('Resend OTP');
+        $("#btnsubmit").prop("disabled", false);
+    });
+</script>
+
+

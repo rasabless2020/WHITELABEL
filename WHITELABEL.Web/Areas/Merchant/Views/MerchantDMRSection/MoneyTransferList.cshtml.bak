@@ -1,0 +1,448 @@
+﻿@model WHITELABEL.Data.Models.TBL_TRANSXT_DMR_TRANSACTION_LIST
+@using WHITELABEL.Web.Helper;
+@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "DMR Transaction List";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+
+@*@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()*@
+<script src="~/Areas/Merchant/MerchantHelperJS/TransXTAPI/Index.js"></script>
+<script src="~/Scripts/dirPagination.js"></script>
+<div class="display-animation" ng-app="TransXTDMRAPIAPP" ng-controller="TransXTApiCallController" ng-init="getTransactionList()">
+    <div class="row">
+        @*<div class="col-md-12">
+            <div class="col-md-12 row headcolor">
+                <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-search  fa-3x"></i> </div>
+
+                <div class="col-md-8" style="text-align:right; padding-top:10px;">
+                    <h3>
+                        DMR Transaction List
+                    </h3>
+                </div>
+            </div>
+        </div>*@
+        <div class="col-md-12 padding-top-20">
+            <div class="card">
+                <div class="card-body text-right">
+                    <div class="panel-title row pt-3">
+                        <div class="col-md-6 text-left row" style="margin-bottom:10px;">
+                            <div class="col-md-3" style="padding-top:10px;">Transection ID</div>
+                            <div class="col-md-9 row">
+                                <div class="col-md-10">
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            <input class="form-control" type="text" placeholder="Search.." ng-model="TransactionID.txnId" name="search">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <a href="#" class="btn btn-danger"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-right row" style="margin-bottom:10px;">
+                            <div class="col-md-3">Beneficiary ID </div>
+                            <div class="col-md-9 row">
+
+                                <div class="col-md-10">
+                                    <div class="inputer">
+                                        <div class="input-wrapper">
+                                            <input class="form-control" type="text" placeholder="Search.." name="search" ng-model="Beneficiary.RecipientID">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <a href="#" class="btn btn-danger"><i class="fa fa-search"></i></a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 text-right row" style="margin-bottom:10px;">
+                            <div class="col-md-3" style="text-align:left;">Reference ID </div>
+                            <div class="col-md-9 row">
+                                <div class="col-md-10">
+                                    <div class="inputer">
+                                        <div class="input-wrapper">
+                                            <input class="form-control" type="text" placeholder="Search.." name="search" ng-model="Beneficiary.CustomerID">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1">
+                                    <a href="#" class="btn btn-danger"><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row example-row">
+                        <div class="mvc-grid">
+                            <table border="1" id="testTable">
+                                <thead class="mvc-grid-headers ">
+                                    <tr>
+                                        <td ng-click="sortData('TXN_ID')">
+                                            TransID <i class="fa fa-sort-down" style="float:right"></i><div ng-class="getSortClass('TXN_ID')"></div>
+                                        </td>
+                                        <td ng-click="sortData('CLIENT_REF_ID')">Reference ID <i class="fa fa-sort-down" style="float:right"></i><div ng-class="getSortClass('CLIENT_REF_ID')"></div></td>
+                                        <td ng-click="sortData('RECIPIENT_ID')">Recipient Id <i class="fa fa-sort-down" style="float:right"></i><div ng-class="getSortClass('RECIPIENT_ID')"></div></td>
+                                        <td ng-click="sortData('NAME')">Name <i class="fa fa-sort-down" style="float:right"></i><div ng-class="getSortClass('NAME')"></div></td>
+                                        <td ng-click="sortData('TRANSFER_AMT')">Trans. Amt. <i class="fa fa-sort-down" style="float:right"></i><div ng-class="getSortClass('TRANSFER_AMT')"></div></td>
+                                        <td ng-click="sortData('ACCOUNT_NO')">Accnt. No. <i class="fa fa-sort-down" style="float:right"></i><div ng-class="getSortClass('ACCOUNT_NO')"></div></td>
+                                        <td ng-click="sortData('IFSC_CODE')">IFSC Code <i class="fa fa-sort-down" style="float:right"></i><div ng-class="getSortClass('IFSC_CODE')"></div></td>
+                                        <td ng-click="sortData('TRANSACTION_STATUS')">Trans Status <i class="fa fa-sort-down" style="float:right"></i><div ng-class="getSortClass('TRANSACTION_STATUS')"></div></td>
+                                        <td ng-click="sortData('SENDER_NAME')">Sender Name <i class="fa fa-sort-down" style="float:right"></i><div ng-class="getSortClass('SENDER_NAME')"></div></td>
+                                        <td ng-click="sortData('SENDER_MOBILE_NO')">Sender Mobile <i class="fa fa-sort-down" style="float:right"></i><div ng-class="getSortClass('SENDER_MOBILE_NO')"></div></td>
+                                        <td>Trans Date </td>
+                                        <td>Receipt</td>
+                                    </tr>
+                                </thead>
+                                @*<tbody ng-repeat="m in AllTransactionList | filter:{txnId: TransactionID.txnId, RecipientID: Beneficiary.RecipientID}|  orderBy:sortColumn:reverseSort| offset: currentPage*itemsPerPage | limitTo: itemsPerPage">*@
+                                @*<tbody ng-repeat="m in AllTransactionList | filter:{txnId: TransactionID.txnId, RecipientID: Beneficiary.RecipientID}|  orderBy:sortColumn:reverseSort ">*@
+                                @*// For paging code*@
+                                @*<tbody dir-paginate="m in AllTransactionList | filter:{txnId: TransactionID.txnId, RecipientID: Beneficiary.RecipientID, CustomerID: Beneficiary.CustomerID}|  orderBy:sortColumn:reverseSort|itemsPerPage:5 ">*@
+                                <tbody dir-paginate="m in AllTransactionList | filter:{TXN_ID: TransactionID.txnId, RECIPIENT_ID: Beneficiary.RecipientID, CLIENT_REF_ID: Beneficiary.CustomerID}|  orderBy:sortColumn:reverseSort|itemsPerPage:5 ">
+                                    <tr>
+                                        <td>
+                                            <span>{{m.TXN_ID}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{m.CLIENT_REF_ID}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{m.RECIPIENT_ID}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{m.NAME}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{m.TRANSFER_AMT}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{m.ACCOUNT_NO}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{m.IFSC_CODE}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{m.TRANSACTION_STATUS}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{m.SENDER_NAME}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{m.SENDER_MOBILE_NO}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{m.TIMESTAMP | date:"dd/MM/yyyy" }}</span>
+                                        </td>
+                                        <td>
+                                            @*<a href="javascript:void(0);" ng-click="PrintInvoice(m.TXN_ID,m.CLIENT_REF_ID)">{{m.TXN_ID}}</a>*@
+                                            <a class='btn btn-primary btn-xs' style="color:white;" data-toggle='modal' data-target='.printTransd' id='PrinttransactionvalueAdminid' data-id="{{m.TXN_ID}}" ng-click="PrintInvoice(m.TXN_ID,m.CLIENT_REF_ID)">print Copy</a>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                @*<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" items-per-page="entryLimit"></pagination>*@
+                            </table>
+
+                            @*@Html.AjaxGrid(Url.Action("GetAllTransactionLIst", "MerchantDMRSection", new { area = "Merchant", id = "my-TransactionList" }))*@
+                            <div style="text-align:center">
+                                <dir-pagination-controls max-size="5"
+                                                         direction-links="true"
+                                                         boundary-links="true">
+                                </dir-pagination-controls>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-footer" style="text-align:right">
+                    <button id="btnExport" class="btn btn-info btn-xs" onclick="tableToExcel('testTable', 'Transaction List')" value="Export to Excel"><span class="ion-forward"></span> EXPORT</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div id="PrintDiv">
+        <div id="PrinttransactionvalueAdminid" class="modal scale fade printTransd" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog modal-lg" style="margin-bottom:100px;">
+               
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <div class="row" style="width:95%;">
+
+                            <div style=" margin-bottom:20px; text-align:center; width:22%; float:left;"><img src="{{GetTransactionValue.CompanyLogo}}" width="100" /></div>
+
+                            <div style="text-decoration:underline; text-align:center; width:50%; float:left;"><h4>DMT Receipt</h4></div>
+
+                            <div style=" margin-bottom:20px; text-align:center; width:22%; float:left;"><img src="~/images/vapron_logo.png" width="100" /></div>
+                            <div style="clear:both;"></div>
+                        </div>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style="max-height:700px;">
+                        <div class="col-md-12" style="border-bottom:1px solid #ccc; margin-bottom:30px; text-align:center;">
+                            <div style=" text-align:left; width:50%; float:left;">
+                                {{GetTransactionValue.CompanyName}}<br>
+                                <span>{{GetTransactionValue.CompanyAddress}}</span><br>
+                                <span>{{GetTransactionValue.MobileNo}}</span>
+                            </div>
+                            <div style="text-align:right; font-weight:bold; width:50%; float:right;">{{GetTransactionValue.TransactionDate}}</div>
+                            <div style="clear:both;"></div>
+
+                        </div>
+                        <div class="col-md-12" @*style="border-bottom:1px solid #ccc; padding:30px 0; margin-bottom:30px;"*@>
+                            <div>
+                                <div style="width:50%; float:left;">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-5" style="width:40%; float:left;">Customer's mobile  </label>
+                                        <div class="col-md-7" style="width:60%; float:right;">
+                                            <div class="">
+                                                <div class="">
+                                                    : {{GetTransactionValue.MobileNo}}
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div style="clear:both;"></div>
+
+                                    </div>
+                                </div>
+                                <div style="width:50%; float:right;">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-5" style="width:40%; float:left;">Beneficiary Name</label>
+                                        <div class="col-md-7" style="width:60%; float:right;">
+                                            <div class="">
+                                                <div class="input-wrapper">
+                                                    :  {{GetTransactionValue.BeneficiaryName}}
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div style="clear:both;"></div>
+                                    </div>
+                                </div>
+                                <div style="clear:both;"></div>
+                            </div>
+
+
+                            <div>
+                                <div style="width:50%; float:left;">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-5" style="width:40%; float:left;">Beneficiary A/C No.</label>
+                                        <div class="col-md-7" style="width:60%; float:right;">
+                                            <div class="">
+                                                <div class="input-wrapper">
+                                                    :  {{GetTransactionValue.BeneficiaryAccountNo}}
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div style="clear:both;"></div>
+                                    </div>
+                                </div>
+
+                                <div style="width:50%; float:right;">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-5" style="width:40%; float:left;">Beneficiary IFSC Code</label>
+                                        <div class="col-md-7" style="width:60%; float:right;">
+                                            <div class="">
+                                                <div class="input-wrapper">
+                                                    :  {{GetTransactionValue.BeneficiaryIFSCCode}}
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div style="clear:both;"></div>
+                                    </div>
+                                </div>
+
+                                <div style="clear:both;"></div>
+                            </div>
+
+                            <div>
+                                <div style="width:50%; float: left;">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-5" style="width:40%; float:left;">Beneficiary Mobile</label>
+                                        <div class="col-md-7" style="width:60%; float:right;">
+                                            <div class="">
+                                                <div class="input-wrapper">
+                                                    :{{GetTransactionValue.BeneficiaryMobile}}
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div style="clear:both;"></div>
+                                    </div>
+                                </div>
+                                <div style="width:50%; float:right;">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-5" style="width:40%; float:left;">Amount </label>
+                                        <div class="col-md-7" style="width:60%; float:right;">
+                                            <div class="">
+                                                <div class="input-wrapper">
+                                                    : {{GetTransactionValue.TransferAmount}}
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div style="clear:both;"></div>
+                                    </div>
+                                </div>
+                                <div style="clear:both;"></div>
+                            </div>
+                            <div>
+                                <div style="width:50%; float:left;">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-5" style="width:40%; float:left;">Bank Reference</label>
+                                        <div class="col-md-7" style="width:60%; float:right;">
+                                            <div class="">
+                                                <div class="input-wrapper">
+                                                    : {{GetTransactionValue.TransactionId}}
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div style="clear:both;"></div>
+                                    </div>
+                                </div>
+                                @*<div style="width:50%; float:right; display:none;">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-5" style="width:40%; float:left;">Bank Fee</label>
+                                        <div class="col-md-7" style="width:60%; float:right;">
+                                            <div class="">
+                                                <div class="input-wrapper">
+                                                    : 1 %
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="clear:both;"></div>
+                                    </div>
+                                </div>*@
+
+
+                                <div style="width:50%; float:right;">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-5" style="width:40%; float:left;">Sender Name</label>
+                                        <div class="col-md-7" style="width:60%; float:right;">
+                                            <div class="">
+                                                <div class="input-wrapper">
+                                                    : {{GetTransactionValue.SenderName}}
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div style="clear:both;"></div>
+                                    </div>
+                                </div>
+
+
+                                <div style="clear:both;"></div>
+                            </div>
+                            <div>
+                                <div style="width:50%; float:left;">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-5" style="width:40%; float:left;">Status</label>
+                                        <div class="col-md-7" style="width:60%; float:right;">
+                                            <div class="">
+                                                <div class="input-wrapper">
+                                                    : {{GetTransactionValue.TransactionStatus}}
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div style="clear:both;"></div>
+                                    </div>
+                                </div>
+
+
+                                <div style="width:50%; float:right;">
+                                    <div class="form-group">
+                                        <label class="control-label col-md-5" style="width:40%; float:left;">Sender Mobile </label>
+                                        <div class="col-md-7" style="width:60%; float:right;">
+                                            <div class="">
+                                                <div class="input-wrapper">
+                                                    : {{GetTransactionValue.SenderMobile}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="clear:both;"></div>
+                                    </div>
+                                </div>
+
+
+                                <div class="clearfix"></div>
+                           
+                        </div>
+                            <div class="col-md-12" style="border-top:1px solid #ccc; margin-bottom:10px; padding-top:10px;">
+                                <div style="width:25%; float:left;"><b> {{GetTransactionValue.PowerBy}}</b></div>
+                                <div style="width:25%; float:left;"><b>CIN : {{GetTransactionValue.GSTNo}}</b></div>
+                                <div style="width:25%; float:left;"> <b>Email : {{GetTransactionValue.EmailID}}</b></div>
+                                <div style="width:25%; float:left; text-align:right;"> <b>Website : {{GetTransactionValue.Website}}</b></div>
+
+                                <div class="clearfix"></div>
+
+                            </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    </div>
+                <br />
+                    <div class="modal-footer text-center">
+                        <a href="#" class="btn btn-primary" onclick="PrintDiv();">Print Receipts</a>
+                    </div>
+                </div><!--.modal-content-->
+            </div><!--.modal-dialog-->
+        </div>
+    </div>
+</div>
+@*@Scripts.Render("~/bundles/MemberApilevel")*@
+@*@Scripts.Render("~/bundles/MerchantDMRAPIAngularjsFiles")*@
+@Scripts.Render("~/bundles/MerchantDMRAPIJsFiles")
+
+
+<script>
+    $(document).ready(function () {
+
+        window.setTimeout(function () {
+            $("#informationMessage").fadeOut('slow');
+        }, 2000);
+    });
+
+</script>
+
+<script type="text/javascript">
+    var tableToExcel = (function () {
+        var uri = 'data:application/vnd.ms-excel;base64,'
+            , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>'
+            , base64 = function (s) { return window.btoa(unescape(encodeURIComponent(s))) }
+            , format = function (s, c) { return s.replace(/{(\w+)}/g, function (m, p) { return c[p]; }) }
+        return function (table, name) {
+            if (!table.nodeType) table = document.getElementById(table)
+            var ctx = { worksheet: name || 'Worksheet', table: table.innerHTML }
+            window.location.href = uri + base64(format(template, ctx))
+        }
+    })
+
+    function PrintDiv() {
+        var divContents = document.getElementById("PrintDiv").innerHTML;
+        var printWindow = window.open('', '', 'height=400,width=600');
+        printWindow.document.write('<html><head><title>DMT Receipt</title>');
+        printWindow.document.write('</head><body>');
+        printWindow.document.write(divContents);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    }
+</script>
+
+@*}*@
+
+
+

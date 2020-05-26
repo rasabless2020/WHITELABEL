@@ -1,0 +1,35 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_MASTER_MEMBER>
+@{
+    ViewBag.Title = "IndexGrid";
+    //Layout = "~/Areas/Super/Views/Shared/_LayoutSuper.cshtml";
+}
+
+
+@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.UName).Titled("UserName");
+        columns.Add(model => model.AADHAAR_NO).Titled("Aadhaar Card").Encoded(false)
+            .RenderedAs(model => model.AADHAAR_NO + "<br /> <a href='javascript:void(0)' onclick='showimages(\"" + model.AADHAAR_FILE_NAME + "\")'>View Image</a>  " + Html.ActionLink("Download", "downloadfiles", "SuperKYCVerification", new { area = "Super", type = "Aadhaar", memid = Encrypt.EncryptMe(model.MEM_ID.ToString()) }, new { }));
+        columns.Add(model => Html.Hidden("")).Titled("Pan Card").Encoded(false)
+            .RenderedAs(model => model.PAN_NO + "<br /> <a href='javascript:void(0)' onclick='showimages(\"" + model.PAN_FILE_NAME + "\")'>View Image</a>  " + Html.ActionLink("Download", "downloadfiles", "SuperKYCVerification", new { area = "Super", type = "Pan", memid = Encrypt.EncryptMe(model.MEM_ID.ToString()) }, new { }));
+        columns.Add(model => Html.Hidden("")).Titled("").Encoded(false)
+           .RenderedAs(model => "<div class='btn-group btn-group-xs'><a href='javascript:void(0)' class='btn btn-primary' onclick='KYCDocApprove(" + model.MEM_ID + ")'>Approve</a>&nbsp;&nbsp;  <a href='javascript:void(0)' class='btn btn-denger' onclick='KYCDocReject(" + model.MEM_ID + ")'>Reject</a></div>");
+        //columns.Add(model => Html.Hidden("")).Titled("").Encoded(false)
+        //    .RenderedAs(model => "<div class='btn-group btn-group-xs'><a href='javascript:void(0)' class='btn btn-denger' onclick='KYCDocReject(" + model.MEM_ID + ")'>Reject</a></div>");
+    })
+
+    .Empty("No data found")
+    .Id("my-ajax-grid")
+    .Pageable(pager =>
+    {
+        pager.PagesToDisplay = 2;
+        pager.RowsPerPage = 2;
+    })
+    .Filterable()
+    .Sortable()
+
+)

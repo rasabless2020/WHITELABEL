@@ -1,0 +1,254 @@
+﻿@model WHITELABEL.Web.Areas.Merchant.Models.TransXT_ADDCustomerModal
+@{
+    ViewBag.Title = "Customer Create";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+    //Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+@Scripts.Render("~/bundles/MerchantDMRAPIAngularjsFiles")
+@Scripts.Render("~/bundles/MerchantDMRAPIJsFiles")
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+@using (Ajax.BeginForm("PostCreateCustomer", "MerchantDMRSection", new AjaxOptions { OnSuccess = "OnSuccessAddCustomer", OnFailure = "OnFailureAddCustomer", LoadingElementId = "progressAddCustomer" }, new { area = "Merchant", @id = "CreateCustomer" }))
+{<div class="form-horizontal padding-top-20">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+     <div class="row">
+         @*<div class="col-md-12">
+             <div class="col-md-12 row headcolor">
+                 <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-align-left fa-3x"></i></div>
+                 <div class="col-md-4"></div>
+                 <div class="col-md-4" style="text-align:right; padding-top:10px;">
+                     <h3>
+                         Create Customer
+                     </h3>
+                 </div>
+             </div>
+         </div>*@
+         <div class="col-md-12">
+             <div class="card">
+                 <div class="card-body">
+                     <div class="row ">
+                         <div class="col-md-12" style="padding: 0 60px;">
+                             <div style=" padding:20px; border-bottom:2px solid #ccc" class="clearfix row">
+                                 <div class="col-md-6">
+                                     <div class="form-group row">
+                                         <label class="control-label col-md-4" style="padding-top:10px;">Mobile No</label>
+                                         <div class="col-md-8">
+                                             <div class="inputer">
+                                                 <div class="input-wrapper">
+                                                     @Html.EditorFor(model => model.MobileNumber, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Mobile Number", id = "txtDMTCUSTMobileNumber", @readonly = "readonly" } })                                                     
+                                                 </div>
+                                                 <span class="help-block"><small>@Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })</small></span>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
+                                 <div class="col-md-6 pt-2">
+                                     @*<a href="javascript:void(0)" id="SendOTP" onclick="GenerateOTP($('#MobileNumber').val())" style="padding:20px 0 0 30px; "><b>Get OTP</b></a>*@
+                                 </div>
+                             </div>
+                         </div>
+                         <div class="col-md-12" style="padding: 0 20px;">
+                             <div style=" margin:40px;" class="clearfix">
+                                 @*box-shadow: 5px 10px #3e50b4; border: 1px solid #3e50b4; padding:20px 0;*@
+                                 <div class=" col-md-12 row">
+                                     <div class="col-md-6">
+                                         <div class="form-group row">
+                                             <label class="control-label col-md-4" style="padding-top:10px;">First Name</label>
+                                             <div class="col-md-8">
+                                                 <div class="inputer">
+                                                     <div class="input-wrapper">
+                                                         @Html.EditorFor(model => model.CustomerName, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "First Name" } })
+                                                         @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                     </div>
+                                                     <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CustomerName, "", new { @class = "text-danger" })</small></span>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="col-md-6">
+                                         <div class="form-group row">
+                                             <label class="control-label col-md-4" style="padding-top:10px;">Sur Name</label>
+                                             <div class="col-md-8">
+                                                 <div class="inputer">
+                                                     <div class="input-wrapper">
+                                                         @Html.EditorFor(model => model.SurName, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Sur Name" } })
+                                                         @*<input class="form-control text-box single-line" placeholder="Mobile Number" style=" width:100%; padding:5px;" type="text" value="">*@
+                                                     </div>
+                                                     <span class="help-block"><small>@Html.ValidationMessageFor(model => model.SurName, "", new { @class = "text-danger" })</small></span>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     <div class="col-md-6">
+                                         <div class="form-group row">
+                                             <label class="control-label col-md-4" style="padding-top:10px;">Pincode</label>
+                                             <div class="col-md-8">
+                                                 <div class="inputer">
+                                                                                     @*@{
+                                                            DateTime date = DateTime.Now;
+                                                            DateTime min = date.AddYears(-40);
+                                                            DateTime max = date.AddYears(1);
+                                                        }*@
+                                                     <div class="input-wrapper">
+                                                         @Html.EditorFor(model => model.PinCode, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Pin code" } })
+                                                         @*@Html.EditorFor(model => model.DOB, "{0:dd-MM-yyyy}", new { htmlAttributes = new { @class = "form-control", @min = min.ToString("yyyy-MM-dd"), @max = max.ToString("yyyy-MM-dd"), @onkeydown = "return false;" } })*@
+                                                     </div>
+                                                     <span class="help-block"><small>@Html.ValidationMessageFor(model => model.PinCode, "", new { @class = "text-danger" })</small></span>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+                                     @*<div class="col-md-6">
+                                         <div class="form-group row">
+                                             <label class="control-label col-md-4" style="padding-top:10px;">OTP</label>
+                                             <div class="col-md-8">
+                                                 <div class="inputer">
+                                                     <div class="input-wrapper">
+                                                         @Html.EditorFor(model => model.OTP, new { htmlAttributes = new { @class = "form-control text-box single-line", @style = " width:100%; padding:5px;", @placeholder = "Enter OTP" } })                                                       
+                                                     </div>
+                                                     <span class="help-block"><small>@Html.ValidationMessageFor(model => model.OTP, "", new { @class = "text-danger" })</small></span>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>*@
+                                 </div>
+                                 <div class="text-center col-md-12" style="margin-top:20px;">
+                                     <input type="submit" value="Add Customer" class="btn btn-primary" id="btnsubmit" />
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div><!--.panel-->
+         </div><!--.col-md-12-->
+     </div>
+    </div>
+    @Scripts.Render("~/bundles/MerchantDMRAPIAngularjsFiles")
+    @Scripts.Render("~/bundles/MerchantDMRAPIJsFiles")
+}
+<div id="progressAddCustomer" class="loading hidden">Loading&#8230;</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.transdDMRCustRegForm').modal('hide');
+        $('#progressAddCustomer').removeClass("hidden");
+        $('#progressAddCustomer').hide();
+    })
+    function OnSuccessAddCustomer(response) {
+        $('#progressAddCustomer').show();
+        var message = response;
+        debugger;
+        var Remitterid = message.RemitterIDVALUE;
+        var APIMSG = message.msgDetail;
+        //if (RemitterId != "0") {
+        var CustId = $('#txtDMTCUSTMobileNumber').val();
+        $('#txtDMTCustomerMobile').val(CustId);
+        $('#hdnRemitterId').val(Remitterid);
+        $('#progressAddCustomer').hide();
+        $('.transdDMRCustRegForm').modal('show');
+        //}
+        //else {
+        //    bootbox.alert({
+        //        message: APIMSG,
+        //        size: 'small',
+        //        callback: function () {
+        //            console.log(message);
+        //        }
+        //    })
+        //}
+        
+        //bootbox.alert({
+        //    message: message,
+        //    size: 'small',
+        //    callback: function () {
+        //        console.log(message);
+        //        if (message == "Customer Created") {
+        //            var url = "/Merchant/MerchantDMRSection/CustomerDetails?CustId=" + CustId;
+        //            window.location.href = url;
+        //        }
+        //        else {
+        //            $('#progressAddCustomer').removeClass("hidden");
+        //            $('#progressAddCustomer').hide();
+        //        }
+        //    }
+        //})
+        //callGeocodeMobile();
+        //alert(message);
+    }
+    function OnFailureAddCustomer(response) {
+        alert("Error occured.");
+    }
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$("#btnsubmit").prop("disabled", true);
+    });
+    function myFunction() {
+        var x = document.getElementById("password");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+    $(document).ready(function () {
+        $('#password').attr('type', 'password');
+    });
+    $('#SendOTP').click(function () {
+        var $this = $(this);
+        $this.text('Resend OTP');
+        $("#btnsubmit").prop("disabled", false);
+    });
+</script>
+<script src="~/Areas/Merchant/MerchantHelperJS/TransXTAPI/InstantPayAPIJs.js"></script>
+<div id="transactionvalueDMRCustomerRegistrationid" class="modal scale fade transdDMRCustRegForm" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog" style="max-width: 700px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Validate Mobile No</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">                
+                <div class="col-md-12" style="padding: 0 20px;">
+                    <div style="box-shadow: 5px 10px #3e50b4; border: 1px solid #3e50b4; padding:20px 0; margin:40px;" class="clearfix">
+                        <div class=" col-md-12 row">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-4" style="padding-top:10px;">Mobile No</label>
+                                    <div class="col-md-8">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">                                               
+                                                <input type="text" class="form-control text-box single-line" id="txtDMTCustomerMobile" placeholder="Customer Mobile No" readonly="readonly" />
+                                                <input type="hidden" id="hdnRemitterId" />
+                                            </div>                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <label class="control-label col-md-4" style="padding-top:10px;"> OTP</label>
+                                    <div class="col-md-8">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">
+                                                <input type="text"  class="form-control text-box single-line" id="txtDMTCUSTOTP_Value" placeholder="Enter OTP" />
+                                            </div>
+                                            <span class="help-block"><small>@*@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })*@</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center col-md-12">
+                            <input type="submit" value="Verify Yourself" class="btn btn-primary" id="btnOutletsubmit" onclick="VerifyDMTCustomerMobileNo($('#txtDMTCustomerMobile').val(),$('#hdnRemitterId').val(),$('#txtDMTCUSTOTP_Value').val());" />
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div><!--.modal-content-->
+    </div><!--.modal-dialog-->
+</div>

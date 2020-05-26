@@ -1,0 +1,174 @@
+﻿//function VerifyDMTCustomerMobileNo(MObileNo, RemitterId_Val, OTP) {
+function VerifyDMTCustomerMobileNo(MObileNo, RemitterId_Val, OTP_Val) {
+    debugger;
+    if (MObileNo != "" && OTP_Val != "") {
+        bootbox.confirm({
+            //title: "Message",
+            message: "Do you want to Validate customer",
+            buttons: {
+                confirm: {
+                    label: 'Confirm',
+                    className: 'btn-success btn-sm'
+                },
+                cancel: {
+                    label: 'Cancel',
+                    className: 'btn-danger btn-sm'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    debugger;
+
+                    var RemitterId = RemitterId_Val;
+                    var Mobile = MObileNo;
+                    var OTP_Value = OTP_Val;
+                    var token = $(':input[name="__RequestVerificationToken"]').val();
+                    $.ajax({
+                        url: "/MerchantDMRSection/ValidateCustomerMobileNo?area=Merchant",
+                        data: {
+                            __RequestVerificationToken: token,
+                            MobileNo: Mobile,
+                            RemitterId: RemitterId,
+                            OTP_Val: OTP_Value
+                        },
+                        cache: false,
+                        type: "POST",
+                        dataType: "json",
+                        beforeSend: function () {
+                        },
+                        success: function (data) {
+                            var message = data;
+                            if (message == "Customer Mobile No is verified") {
+                                bootbox.alert({
+                                    size: "small",
+                                    message: "Customer Created Successfully",
+                                    backdrop: true,
+                                    callback: function () {
+                                        var url = "/Merchant/MerchantDMRSection/CustomerDetails";
+                                        window.location.href = url;
+                                    }
+                                });
+                            }
+                            else {
+                                bootbox.alert({
+                                    size: "small",
+                                    message: message,
+                                    backdrop: true
+                                });
+                            }                            
+                            //$('.transdDMRCustRegForm').modal('hide');
+                            //window.location.reload();
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(status);
+                        }
+                    });
+                }
+            }
+        });
+    }
+    else {
+        bootbox.alert({
+            size: "small",
+            message: "Please Provide Mobile no and OTP for Customer Registration.",
+            backdrop: true
+        });
+    }
+
+}
+function VerifyBeneficaryAccountNo(RemitterId,BeneficairyId, OTP) {
+    if ( OTP != "") {
+        bootbox.confirm({
+            //title: "Message",
+            message: "Do you want to Validate customer",
+            buttons: {
+                confirm: {
+                    label: 'Confirm',
+                    className: 'btn-success btn-sm'
+                },
+                cancel: {
+                    label: 'Cancel',
+                    className: 'btn-danger btn-sm'
+                }
+            },
+            callback: function (result) {
+                if (result) {
+                    debugger;
+
+                    var RemitterId = RemitterId;
+                    var BeneficairyId = BeneficairyId;
+                    var OTP = OTP;
+                    var token = $(':input[name="__RequestVerificationToken"]').val();
+                    $.ajax({
+                        url: "/MerchantDMRSection/ValidateBeneficiary?area=Merchant",
+                        data: {
+                            __RequestVerificationToken: token,
+                            RemitterId: RemitterId,
+                            BeneficairyId: BeneficairyId,
+                            OTP: OTP
+                        },
+                        cache: false,
+                        type: "POST",
+                        dataType: "json",
+                        beforeSend: function () {
+                        },
+                        success: function (data) {
+                            var message = data;
+                            bootbox.alert({
+                                size: "small",
+                                message: message,
+                                backdrop: true
+                            });
+                            $('.transdDMRBeneficiaryRegForm').modal('hide');
+                            window.location.reload();
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(status);
+                        }
+                    });
+                }
+            }
+        });
+    }
+    else {
+        bootbox.alert({
+            size: "small",
+            message: "Please Provide OTP for Beneficiary Registration.",
+            backdrop: true
+        });
+    }
+
+}
+
+
+
+function GenerateOTP(RemitterId,BeneficiaryId) {
+    $(".overlaydiv").fadeIn("slow");
+    var RemitterId = RemitterId;
+    var BeneficiaryId = BeneficiaryId;
+    $.ajax({
+        url: "/MerchantDMRSection/ResendDMROTP?area=Merchant",
+        data: {
+            RemitterId: RemitterId,
+            BeneficiaryId: BeneficiaryId
+        },
+        cache: false,
+        type: "POST",
+        dataType: "json",
+        beforeSend: function () {
+        },
+        success: function (data) {
+            if (data == 'OTP Send to your Mobile no.') {
+                bootbox.alert({
+                    size: "small",
+                    message: data,
+                    backdrop: true
+                });
+            }
+            $(".overlaydiv").fadeOut("slow");
+        },
+        error: function (xhr, status, error) {
+            console.log(status);
+        }
+    });
+}

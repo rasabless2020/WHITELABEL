@@ -1,0 +1,270 @@
+﻿@model WHITELABEL.Web.Areas.Distributor.Models.DistributorCreditLimitSetting
+@{
+    ViewBag.Title = "Distributor Credit Limit Managment";
+    Layout = "~/Areas/Distributor/Views/Shared/_LayoutDistributor.cshtml";
+}
+<link href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-2.2.4.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+<script src="~/Areas/Distributor/DistributorHelperJS/RetailerAPILevel/IndexDistributorCredit.js"></script>
+@using (Ajax.BeginForm("PostCREDITLimitBALANCESetting", "DistributorCreditManagment", new AjaxOptions { Confirm = "Do you want to give credit limit to merchant", OnSuccess = "OnSuccessCreditLimitDistributor", OnFailure = "OnFailureCreditLimitDistributor", LoadingElementId = "progressCreditLimitDistributor" }, new { area = "Distributor", @id = "ADDCreditLimitDISTRIBUTOR" }))
+{
+    <div class="form-horizontal">
+        @Html.AntiForgeryToken()        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="clearfix">
+            @*<div class="col-md-12">
+                <div class="col-md-12 row headcolor">
+                    <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-list fa-3x"></i></div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4" style="text-align:right; padding-top:10px;">
+                        <h3>
+                            Credit Balance
+                        </h3>
+                    </div>
+                </div>
+            </div>*@
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="panel-heading text-right">
+                        </div>
+                        <div class="panel-body">
+
+                            <div class="row ">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6 row">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="text-align:left;">Merchant Name</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @*@Html.DropDownListFor(model => model.FROM_MEM_ID, new SelectList((ViewBag.MemberDetails) as SelectList, "Value", "Text"),  new { id = "txtRoleDetails", @class = "form-control" })*@
+                                                        @Html.EditorFor(m => m.From_Member_Name, new { htmlAttributes = new { @id = "txtMemberaName", style = " width:100%; padding:5px;", placeholder = "Merchant User Name", @class = "form-control" } })
+                                                        @Html.HiddenFor(model => model.FROM_MEM_ID, new { id = "hfOperator" })
+                                                    </div>
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.From_Member_Name, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="text-align:left;">Reserved Credit Limit(PCL) </label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.EditorFor(model => model.reservedCreditLimit, new { htmlAttributes = new { @class = "form-control", @placeholder = "",@readonly="readonly" ,@id="txtDistReservedCreditLimit"} })
+                                                    </div>
+                                                    <span>@Html.ValidationMessageFor(model => model.reservedCreditLimit, "", new { @class = "text-danger" })</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="text-align:left;">Credit Balance Amount</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.EditorFor(model => model.CREDIT_LIMIT_AMOUNT, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
+                                                    </div>
+                                                    <span>@Html.ValidationMessageFor(model => model.CREDIT_LIMIT_AMOUNT, "", new { @class = "text-danger" })</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="text-align:left;">Credit Balance Note</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.TextAreaFor(model => model.CREDIT_LIMIT_DIstription, 5, 54, new { htmlAttributes = new { @class = "form-control", @style = "border-radius:5px", @placeholder = "Description" } })
+                                                    </div>
+                                                    <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CREDIT_LIMIT_DIstription, "", new { @class = "text-danger" })</small></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="text-align:left;">Services Tagging</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        <div class="">
+                                                            @Html.CheckBoxFor(x => x.MOBILE_RECHARGE, new { @class = "", @id = "chkMobile" }) Mobile | @Html.CheckBoxFor(x => x.UTILITY_SERVICES, new { @class = "", @id = "chkUtility" }) Utility | @Html.CheckBoxFor(x => x.DMR, new { @class = "", @id = "chkDMT" }) DMT | @Html.CheckBoxFor(x => x.AIR_TICKET, new { @class = "", @id = "chkFlight" }) Air Booking | @Html.CheckBoxFor(x => x.RAIL_UTILITY, new { @class = "", @id = "chkRail" }) Rail<br />
+                                                            @Html.CheckBoxFor(x => x.BUS_TICKET, new { @class = "", @id = "chkBusBooking" }) Bus Booking | @Html.CheckBoxFor(x => x.HOTEL_BOOKING, new { @class = "", @id = "chkHotelBooking" }) Hotel Booking |  @Html.CheckBoxFor(x => x.AllServices, new { @class = "", @id = "chkAllService", onclick = "SelectAll()" }) <b>Check All Services</b>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <div class="inputer" style="text-align:center">
+                                                    <input type="submit" value="Proceed" class="btn btn-primary" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div><!--.row-->
+                        </div>
+                    </div><!--.panel-body-->
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div>
+    </div>
+}
+<div class="preloader hidden" id="progressCreditLimitDistributor" style="display:none;">
+    <div id="loading"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$('#chkMobile').prop('checked', false);
+        //$('#chkUtility').prop('checked', false);
+        //$('#chkDMT').prop('checked', false);
+        //$('#chkFlight').prop('checked', false);
+        //$('#chkRail').prop('checked', false);
+        //$('#chkBusBooking').prop('checked', false);
+        //$('#chkHotelBooking').prop('checked', false);
+        $('#progressCreditLimitDistributor').removeClass("hidden");
+        $('#progressCreditLimitDistributor').hide();
+    })
+
+    //function SelectAll() {
+    //    var CheckAllServices = document.getElementById("chkAllService");
+       
+    //    if (CheckAllServices.checked) {
+    //        $('#chkMobile').prop('checked', true);
+    //        $('#chkUtility').prop('checked', true);
+    //        $('#chkDMT').prop('checked', true);
+    //        $('#chkFlight').prop('checked', true);
+    //        $('#chkRail').prop('checked', true);
+    //        $('#chkBusBooking').prop('checked', true);
+    //        $('#chkHotelBooking').prop('checked', true);
+    //    }        
+    //    else {
+    //        $('#chkMobile').prop('checked', false);
+    //        $('#chkUtility').prop('checked', false);
+    //        $('#chkDMT').prop('checked', false);
+    //        $('#chkFlight').prop('checked', false);
+    //        $('#chkRail').prop('checked', false);
+    //        $('#chkBusBooking').prop('checked', false);
+    //        $('#chkHotelBooking').prop('checked', false);
+    //    }
+    //    //dvPassport.style.display = PrepaidchkYes.checked ? "block" : "none";
+    //}
+
+    function OnSuccessCreditLimitDistributor(response) {
+        var message = response;
+        $("#ADDCreditLimitDISTRIBUTOR").trigger("reset");
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+                var url = "/Distributor/DistributorCreditManagment/CreditLimitList";
+                window.location.href = url;
+            }
+        });
+    }
+    function OnFailureCreditLimitDistributor(response) {
+        alert("Error occured.");
+    }
+</script>
+
+
+<script>
+    //$(document).ready(function () {
+    //    $("#txtMemberaName").autocomplete({
+    //        source: function (request, response) {
+    //            var MEm_Type = $('#txtRoleDetails').val();
+    //            $.ajax({
+    //                url: '/Distributor/DistributorCreditManagment/GetMerchantMemberName/',
+    //                data: "{ 'prefix': '" + request.term + "'}",
+    //                dataType: "json",
+    //                type: "POST",
+    //                contentType: "application/json; charset=utf-8",
+    //                success: function (data) {
+    //                    response($.map(data, function (item) {
+    //                        return item;
+    //                    }))
+    //                },
+    //                error: function (response) {
+    //                    alert(response.responseText);
+    //                },
+    //                failure: function (response) {
+    //                    alert(response.responseText);
+    //                }
+    //            });
+    //        },
+    //        focus: function (event, ui) {
+    //            $('#txtMemberaName').val(ui.item.label);
+    //            return true;
+    //        },
+    //        select: function (e, i) {
+    //            $("#hfOperator").val(i.item.val);
+    //            return true;
+    //        },
+    //        minLength: 1
+    //    });
+
+    //    $("#ddlCreditNoteType").change(function () {
+    //        var getvalue = $('#ddlCreditNoteType').val();
+    //        if (getvalue == 'DR') {
+    //            $('#ddlGSTValue').show();
+    //        }
+    //        else {
+    //            $('#ddlGSTValue').hide();
+    //        }
+    //    });
+    //});
+
+    //$("#txtMemberaName").change(function () {        
+    //    var MEM_ID = $('#hfOperator').val();
+    //    $.ajax({
+    //        url: "/DistributorCreditManagment/GetReservedCreditLimit?area=Distributor",
+    //        data: {                
+    //            Mem_ID: MEM_ID
+    //        },           
+    //        type: "post",
+    //        datatype: "json",
+    //        beforesend: function () {
+    //        },
+    //        success: function (data) {
+    //            debugger;
+    //            if (data == "0") {
+    //                $('#txtDistReservedCreditLimit').text("0");
+    //            }
+    //            else {
+    //                //var AvailableBal = data.CLOSING;                   
+    //                var ReservedCreditLimitAmt = data.RESERVED_CREDIT_LIMIT;
+    //                if (ReservedCreditLimitAmt == null) {
+    //                    var AMtval = "0.00";
+    //                    $('#txtDistReservedCreditLimit').val(AMtval);
+    //                }
+    //                else {
+    //                    $('#txtDistReservedCreditLimit').val(ReservedCreditLimitAmt);
+    //                }
+                    
+    //            }
+    //        },
+    //        error: function (xhr, status, error) {
+    //            console.log(status);
+    //        }
+    //    });
+    //});
+
+</script>

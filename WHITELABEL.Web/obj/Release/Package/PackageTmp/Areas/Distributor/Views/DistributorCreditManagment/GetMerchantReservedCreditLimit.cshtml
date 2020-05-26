@@ -1,0 +1,158 @@
+﻿@model WHITELABEL.Web.Areas.Distributor.Models.DISTReservedCreditLimitModel
+@{
+    ViewBag.Title = "Set Reserved Credit Limit";
+    Layout = "~/Areas/Distributor/Views/Shared/_LayoutDistributor.cshtml";
+}
+
+
+@using (Ajax.BeginForm("PostReservedMerchantCREDITBALANCE", "DistributorCreditManagment", new AjaxOptions { Confirm = "Do you want to set reserved credit balance", OnSuccess = "OnSuccessResCreditMerchant", OnFailure = "OnFailureResCreditMerchant", LoadingElementId = "progressResCreditMerchant" }, new { area = "Distributor", @id = "ADDResCreditMerchant" }))
+{
+    <div class="form-horizontal">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="clearfix">
+            @*<div class="col-md-12">
+                <div class="col-md-12 row headcolor">
+                    <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-list fa-3x"></i></div>
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4" style="text-align:right; padding-top:10px;">
+                        <h3>
+                            Reserved Credit limit (PCL) for Merchant
+                        </h3>
+                    </div>
+                </div>
+            </div>*@
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="panel-heading text-right">
+                        </div>
+                        <div class="panel-body">
+                            <div class="row ">
+                                <div class="col-md-3"></div>
+                                <div class="col-md-6 row">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="text-align:left;">Select Merchant</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @*@Html.DropDownListFor(model => model.FROM_MEM_ID, new SelectList((ViewBag.RoleDetails) as SelectList, "Value", "Text"), "Select Merchant", new { id = "txtRoleDetails", @class = "form-control" })*@
+                                                        @Html.EditorFor(m => m.From_Member_Name, new { htmlAttributes = new { @id = "txtMemberaName", style = " width:100%; padding:5px;", placeholder = "Merchant User Name", @class = "form-control" } })
+                                                        @Html.HiddenFor(model => model.FROM_MEM_ID, new { id = "hfOperator" })
+                                                    </div>
+                                                    <span class="help-block">@Html.ValidationMessageFor(model => model.FROM_MEM_ID, "", new { @class = "text-danger" })</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3" style="text-align:left;">Reserved Credit Amount</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="md-form">
+                                                        @Html.EditorFor(model => model.ReservedCreditLimit, new { htmlAttributes = new { @class = "form-control", @placeholder = "" } })
+                                                    </div>
+                                                    <span>@Html.ValidationMessageFor(model => model.ReservedCreditLimit, "", new { @class = "text-danger" })</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <label class="control-label col-md-3"></label>
+                                            <div class="col-md-9">
+                                                <div class="inputer" style="text-align:center">
+                                                    <input type="submit" value="Proceed" class="btn btn-primary" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3"></div>
+                            </div><!--.row-->
+
+                        </div>
+                    </div><!--.panel-body-->
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div>
+    </div>
+}
+<div class="preloader hidden" id="progressResCreditMerchant" style="display:none;">
+    <div id="loading"></div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#progressResCreditMerchant').removeClass("hidden");
+        $('#progressResCreditMerchant').hide();
+    })
+    function OnSuccessResCreditMerchant(response) {
+        var message = response;
+        $("#ADDResCreditMerchant").trigger("reset");
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+                var url = "/Distributor/DistributorCreditManagment/CreditLimitList";
+                window.location.href = url;
+            }
+        });
+    }
+    function OnFailureResCreditMerchant(response) {
+        alert("Error occured.");
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#txtMemberaName").autocomplete({
+            source: function (request, response) {
+                var MEm_Type = $('#txtRoleDetails').val();
+                $.ajax({
+                    url: '/Distributor/DistributorCreditManagment/GetMerchantMemberName/',
+                    data: "{ 'prefix': '" + request.term + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return item;
+                        }))
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    }
+                });
+            },
+            focus: function (event, ui) {
+                $('#txtMemberaName').val(ui.item.label);
+                return true;
+            },
+            select: function (e, i) {
+                $("#hfOperator").val(i.item.val);
+                return true;
+            },
+            minLength: 1
+        });
+
+        $("#ddlCreditNoteType").change(function () {
+            var getvalue = $('#ddlCreditNoteType').val();
+            if (getvalue == 'DR') {
+                $('#ddlGSTValue').show();
+            }
+            else {
+                $('#ddlGSTValue').hide();
+            }
+        });
+    });
+</script>

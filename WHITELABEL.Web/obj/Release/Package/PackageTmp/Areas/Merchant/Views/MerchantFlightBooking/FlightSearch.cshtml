@@ -1,0 +1,552 @@
+﻿
+@{
+    ViewBag.Title = "Flight Search";
+    Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+}
+
+<!-- content -->
+
+
+<div style="padding:200px; text-align:center;">
+    <h1>coming soon.....</h1>
+</div>
+
+@*<div class="display-animation">
+    <div class="full-content  margin-bottom-40 bg-white">
+        <div class="row">
+            <div class="col-md-3 material-animate padding-right-40">
+                <ul class="list-group ">
+                    <li class="list-group-item">
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Depart on</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="ion-android-calendar"></i></span>
+                                    <div class="inputer">
+                                        <div class="input-wrapper">
+                                            <input type="text" style="width:80%" name="birthday" class="form-control bootstrap-daterangepicker-basic" value="03/18/2013" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--.row-->
+                    </li>
+                    <li class="list-group-item">
+                        <div class="control-group">
+                            <div class="controls">
+                                <label>Return on</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="ion-android-calendar"></i></span>
+                                    <div class="inputer">
+                                        <div class="input-wrapper">
+                                            <input type="text" style="width:80%" name="birthday" class="form-control bootstrap-daterangepicker-basic" value="03/18/2013" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--.row-->
+                    </li>
+                    <li class="list-group-item">
+                        <div class="form-group">
+                            <label>Price range:</label>
+                            <input type="text" name="" class="ionrange-money1">
+                        </div>
+                        <!--.row-->
+                    </li>
+                    <li class="list-group-item">
+                        Time slots for the flight
+                        <div class="checkboxer">
+                            <input type="checkbox" value="" id="check1">
+                            <label for="check1"> Early Morning <small>12am - 8am</small></label>
+                        </div>
+                        <!--.checkbox-->
+
+                        <div class="checkboxer">
+                            <input type="checkbox" value="" id="check2">
+                            <label for="check2"> Morning <small>8am - 12pm</small></label>
+                        </div>
+                        <!--.checkbox-->
+
+                        <div class="checkboxer">
+                            <input type="checkbox" value="" id="check3">
+                            <label for="check3">Mid-Day <small>12pm - 4pm</small></label>
+                        </div>
+                        <!--.checkbox-->
+
+                        <div class="checkboxer">
+                            <input type="checkbox" value="" id="check4">
+                            <label for="check4">Evening <small>4pm - 8pm</small></label>
+                        </div>
+                        <!--.checkbox-->
+
+                        <div class="checkboxer">
+                            <input type="checkbox" value="" id="check5">
+                            <label for="check5">Night <small>8pm - 12am</small></label>
+                        </div>
+                        <!--.checkbox-->
+
+                    </li>
+                    <li class="list-group-item">
+                        Stops
+                        <div class="clearfix"></div>
+                        <div class="btn-group btn-group-xs" data-toggle="buttons">
+                            <label class="btn btn-blue active">
+                                <input type="radio" name="options" id="option0" autocomplete="off" checked>
+                                0
+                            </label>
+                            <label class="btn btn-blue-grey">
+                                <input type="radio" name="options" id="option1" autocomplete="off" checked>
+                                1
+                            </label>
+                            <label class="btn btn-blue-grey">
+                                <input type="radio" name="options" id="option2" autocomplete="off">
+                                2
+                            </label>
+                            <label class="btn btn-blue-grey">
+                                <input type="radio" name="options" id="option3" autocomplete="off">
+                                3
+                            </label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        Refundable:
+                        <div class="btn-group btn-group-xs" data-toggle="buttons">
+                            <label class="btn btn-blue active">
+                                <input type="radio" name="optionsa" id="option1" autocomplete="off" checked>
+                                yes
+                            </label>
+                            <label class="btn btn-blue-grey">
+                                <input type="radio" name="optionsa" id="option2" autocomplete="off">
+                                No
+                            </label>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        Checkbox:
+                        <div class="checkboxer">
+                            <input type="checkbox" value="" id="check6">
+                            <label for="check6"> For all Airlines</label>
+                        </div>
+                        <!--.checkbox-->
+                        <div class="checkboxer">
+                            <input type="checkbox" value="" id="check6">
+                            <label for="check6"> Air India</label>
+                        </div>
+                        <!--.checkbox-->
+                        <div class="checkboxer">
+                            <input type="checkbox" value="" id="check6">
+                            <label for="check6"> GoAir</label>
+                        </div>
+                        <!--.checkbox-->
+                        <div class="checkboxer">
+                            <input type="checkbox" value="" id="check6">
+                            <label for="check6"> SpiceJet</label>
+                        </div>
+                        <!--.checkbox-->
+                    </li>
+
+                    <li class="list-group-item">
+                        <div class="form-group">
+                            <label>Trip duration:</label>
+                            <input type="text" name="" class="ionrange-money1">
+                        </div>
+                        <!--.row-->
+                    </li>
+                    <li class="list-group-item">
+                        <div class="form-group">
+                            <label>Layover duration:</label>
+                            <input type="text" name="" class="ionrange-money1">
+                        </div>
+                        <!--.row-->
+                    </li>
+                </ul>
+            </div>
+            <!--.col-->
+
+            <div class="col-md-9 material-animate">
+
+
+                <div class="panel-group" id="search_list">
+
+                    <div class="row  no-gutters">
+                        <div class="col-md-6">
+                            <ul class="list-group">
+                                <li class="list-group-item bg-grey text-color-white text-center">
+                                    <div class="col-lg-2">Airlines</div>
+                                    <div class="col-lg-10">
+                                        <div class="col-lg-4">Departure </div>
+                                        <div class="col-lg-4">Arrival Time</div>
+                                        <div class="col-lg-2">Refundable</div>
+                                        <div class="col-lg-2">Price</div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                </li>
+                                <li class="list-group-item text-center">
+                                    <div class="col-lg-2">
+                                        <p>
+                                            <img class="img-rounded" src="~/images/indiGo_Logo.jpg" width="24" height="24"><br>
+                                            <span>Indigo</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="col-lg-4">
+                                            <p>
+                                                14:20<br>
+                                                <span class="label label-info">CCU → JAI</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                16:40<br>
+                                                <span class="label label-info">Duration: 2h:30m</span>
+                                            </p>
+                                        </div>
+
+                                        <div class="col-lg-2 text-center">
+                                            <i class="fa fa-check text-amber"></i>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            6,600/-
+                                            <button class="btn btn-blue btn-xs btn-block"> Book</button>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                </li>
+                                <li class="list-group-item text-center">
+                                    <div class="col-lg-2">
+                                        <p>
+                                            <img class="img-rounded" src="~/images/indiGo_Logo.jpg" width="24" height="24"><br>
+                                            
+                                            <span>Indigo</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="col-lg-4">
+                                            <p>
+                                                14:20<br>
+                                                <span class="label label-info">CCU → JAI</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                16:40<br>
+                                                <span class="label label-info">Duration: 2h:30m</span>
+                                            </p>
+                                        </div>
+
+                                        <div class="col-lg-2 text-center">
+                                            <i class="fa fa-check text-amber"></i>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            6,600/-
+                                            <button class="btn btn-blue btn-xs btn-block"> Book</button>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                </li>
+                                <li class="list-group-item text-center">
+                                    <div class="col-lg-2">
+                                        <p>
+                                            <img class="img-rounded" src="~/images/indiGo_Logo.jpg" width="24" height="24"><br>
+                                            <span>Indigo</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="col-lg-4">
+                                            <p>
+                                                14:20<br>
+                                                <span class="label label-info">CCU → JAI</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                16:40<br>
+                                                <span class="label label-info">Duration: 2h:30m</span>
+                                            </p>
+                                        </div>
+
+                                        <div class="col-lg-2 text-center">
+                                            <i class="fa fa-check text-amber"></i>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            6,600/-
+                                            <button class="btn btn-blue btn-xs btn-block"> Book</button>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                </li>
+                                <li class="list-group-item text-center">
+                                    <div class="col-lg-2">
+                                        <p>
+                                            <img class="img-rounded" src="~/images/indiGo_Logo.jpg" width="24" height="24"><br>
+                                            <span>Indigo</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="col-lg-4">
+                                            <p>
+                                                14:20<br>
+                                                <span class="label label-info">CCU → JAI</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                16:40<br>
+                                                <span class="label label-info">Duration: 2h:30m</span>
+                                            </p>
+                                        </div>
+
+                                        <div class="col-lg-2 text-center">
+                                            <i class="fa fa-check text-amber"></i>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            6,600/-
+                                            <button class="btn btn-blue btn-xs btn-block"> Book</button>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                </li>
+                                <li class="list-group-item text-center">
+                                    <div class="col-lg-2">
+                                        <p>
+                                            <img class="img-rounded" src="~/images/indiGo_Logo.jpg" width="24" height="24"><br>
+                                            <span>Indigo</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="col-lg-4">
+                                            <p>
+                                                14:20<br>
+                                                <span class="label label-info">CCU → JAI</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                16:40<br>
+                                                <span class="label label-info">Duration: 2h:30m</span>
+                                            </p>
+                                        </div>
+
+                                        <div class="col-lg-2 text-center">
+                                            <i class="fa fa-check text-amber"></i>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            6,600/-
+                                            <button class="btn btn-blue btn-xs btn-block"> Book</button>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-group">
+                                <li class="list-group-item bg-grey text-color-white text-center">
+                                    <div class="col-lg-2">Airlines</div>
+                                    <div class="col-lg-10">
+                                        <div class="col-lg-4">Departure </div>
+                                        <div class="col-lg-4">Arrival Time</div>
+                                        <div class="col-lg-2">Refundable</div>
+                                        <div class="col-lg-2">Price</div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                </li>
+                                <li class="list-group-item text-center">
+                                    <div class="col-lg-2">
+                                        <p>
+                                            <img class="img-rounded" src="~/images/indiGo_Logo.jpg" width="24" height="24"><br>
+                                            <span>Indigo</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="col-lg-4">
+                                            <p>
+                                                14:20<br>
+                                                <span class="label label-info">CCU → JAI</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                16:40<br>
+                                                <span class="label label-info">Duration: 2h:30m</span>
+                                            </p>
+                                        </div>
+
+                                        <div class="col-lg-2 text-center">
+                                            <i class="fa fa-check text-amber"></i>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            6,600/-
+                                            <button class="btn btn-blue btn-xs btn-block"> Book</button>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                </li>
+                                <li class="list-group-item text-center">
+                                    <div class="col-lg-2">
+                                        <p>
+                                            <img class="img-rounded" src="~/images/indiGo_Logo.jpg" width="24" height="24"><br>
+                                            <span>Indigo</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="col-lg-4">
+                                            <p>
+                                                14:20<br>
+                                                <span class="label label-info">CCU → JAI</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                16:40<br>
+                                                <span class="label label-info">Duration: 2h:30m</span>
+                                            </p>
+                                        </div>
+
+                                        <div class="col-lg-2 text-center">
+                                            <i class="fa fa-check text-amber"></i>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            6,600/-
+                                            <button class="btn btn-blue btn-xs btn-block"> Book</button>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                </li>
+                                <li class="list-group-item text-center">
+                                    <div class="col-lg-2">
+                                        <p>
+                                            <img class="img-rounded" src="~/images/indiGo_Logo.jpg" width="24" height="24"><br>
+                                            <span>Indigo</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="col-lg-4">
+                                            <p>
+                                                14:20<br>
+                                                <span class="label label-info">CCU → JAI</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                16:40<br>
+                                                <span class="label label-info">Duration: 2h:30m</span>
+                                            </p>
+                                        </div>
+
+                                        <div class="col-lg-2 text-center">
+                                            <i class="fa fa-check text-amber"></i>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            6,600/-
+                                            <button class="btn btn-blue btn-xs btn-block"> Book</button>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                </li>
+                                <li class="list-group-item text-center">
+                                    <div class="col-lg-2">
+                                        <p>
+                                            <img class="img-rounded" src="~/images/indiGo_Logo.jpg" width="24" height="24"><br>
+                                            <span>Indigo</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="col-lg-4">
+                                            <p>
+                                                14:20<br>
+                                                <span class="label label-info">CCU → JAI</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                16:40<br>
+                                                <span class="label label-info">Duration: 2h:30m</span>
+                                            </p>
+                                        </div>
+
+                                        <div class="col-lg-2 text-center">
+                                            <i class="fa fa-check text-amber"></i>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            6,600/-
+                                            <button class="btn btn-blue btn-xs btn-block"> Book</button>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                </li>
+                                <li class="list-group-item text-center">
+                                    <div class="col-lg-2">
+                                        <p>
+                                            <img class="img-rounded" src="~/images/indiGo_Logo.jpg" width="24" height="24"><br>
+                                            <span>Indigo</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-10">
+                                        <div class="col-lg-4">
+                                            <p>
+                                                14:20<br>
+                                                <span class="label label-info">CCU → JAI</span>
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <p>
+                                                16:40<br>
+                                                <span class="label label-info">Duration: 2h:30m</span>
+                                            </p>
+                                        </div>
+
+                                        <div class="col-lg-2 text-center">
+                                            <i class="fa fa-check text-amber"></i>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            6,600/-
+                                            <button class="btn btn-blue btn-xs btn-block"> Book</button>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+                </div>
+
+
+
+
+            </div>
+            <!--.col-->
+
+        </div>
+        <!--.row-->
+    </div>
+    <!--.full-content-->
+</div>*@
+<!--.display-animation-->
+<!-- content -->
+

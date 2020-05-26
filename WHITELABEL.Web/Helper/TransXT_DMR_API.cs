@@ -1,0 +1,425 @@
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using com.mobileware.transxt;
+using WHITELABEL.Web.Helper;
+namespace WHITELABEL.Web.Helper
+{
+    public static class TransXT_DMR_API
+    {
+        //public static string root = "https://uatportal.transxtnow.com:8443/";
+        public static string root = "https://api.transxtnow.com/";
+
+        public static string agentCode = "1";
+        public static string ErrorCode =string.Empty;
+
+        public static dynamic RecipientEnquiry(string customerId,string udf1,string udf2,string recipientType,string clientRefId,string currency,string channel)
+        {
+            try
+            {
+                var param = new Dictionary<string, dynamic> {
+                        {"customerId", customerId},
+                        {"udf1", udf1},
+                        {"udf2", udf2},
+                        {"recipientType", recipientType},
+                        {"clientRefId", clientRefId},
+                        {"currency", currency},
+                        {"channel", channel},
+                        {"agentCode",agentCode }
+                    };
+                string valueparameter = JsonConvert.SerializeObject(param);
+                string dmrFetchCustomerUrl = root + "api/1.1/dmr/recipientenquiry";
+                var response = TransXTCommunicator.execute(valueparameter, dmrFetchCustomerUrl);
+                var ResponseResult = JObject.Parse(response);
+                var errorCode = ResponseResult["errorCode"].ToString();
+                string errorCodeMgs = errorCode.ToString();
+                if (errorCodeMgs == "00" || errorCodeMgs == "E1640")
+                {
+                    return ResponseResult;
+                }
+                else
+                {
+                    return TransXT_ErrorCode.GetError(errorCodeMgs);
+                }
+                //return ResponseResult;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public static dynamic GenerateOTP(string CustomerID, string OtpType, string transId)
+        {
+            try
+            {
+                string Vavv = "{\"customerId\":\"6290665805\",\"otpType\":\"1\",\"txnId\":\"\",\"agentCode\":\"1\" }";
+                var param = new Dictionary<string, dynamic> {
+                        {"customerId", CustomerID},
+                        {"otpType",OtpType },
+                        {"txnId",transId },
+                        {"agentCode",agentCode }
+                    };
+                string valueparameter = JsonConvert.SerializeObject(param);
+                string dmrFetchCustomerUrl = root + "api/1.1/dmr/otp";
+                var response = TransXTCommunicator.execute(valueparameter, dmrFetchCustomerUrl);
+                var ResponseResult = JObject.Parse(response);
+                var errorCode = ResponseResult["errorCode"].ToString();
+                string errorCodeMgs = errorCode.ToString();
+                if (errorCodeMgs == "00" || errorCodeMgs == "E1640")
+                {
+                    return ResponseResult;
+                }
+                else
+                {
+                    return TransXT_ErrorCode.GetError(errorCodeMgs);
+                }
+                //return ResponseResult;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+           
+        }
+
+        public static dynamic CreateCustomer(string customerId,string name,string address,string dateOfBirth,string otp)
+        {
+            try
+            {
+                var param = new Dictionary<string, dynamic> {
+                        {"customerId", customerId},
+                        {"name",name },
+                        {"address",address },
+                        {"dateOfBirth",dateOfBirth },
+                        {"otp",otp },
+                        {"agentCode",agentCode }
+                    };
+                string valueparameter = JsonConvert.SerializeObject(param);
+                string dmrFetchCustomerUrl = root+"api/1.1/dmr/createcustomer";
+                var response = TransXTCommunicator.execute(valueparameter, dmrFetchCustomerUrl);
+                var ResponseResult = JObject.Parse(response);
+                var errorCode = ResponseResult["errorCode"].ToString();
+                string errorCodeMgs = errorCode.ToString();
+                if (errorCodeMgs == "00" || errorCodeMgs == "E1640")
+                {
+                    return ResponseResult;
+                }
+                else
+                {
+                    return TransXT_ErrorCode.GetError(errorCodeMgs);
+                }
+                //return ResponseResult;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static dynamic FetchCustomer(string customerId)
+        {
+            try
+            {
+                var param = new Dictionary<string, dynamic> {
+                        {"customerId", customerId},                        
+                        {"agentCode",agentCode }
+                    };
+                string valueparameter = JsonConvert.SerializeObject(param);
+                string dmrFetchCustomerUrl = root+"api/1.1/dmr/fetchcustomer";
+                var response = TransXTCommunicator.execute(valueparameter, dmrFetchCustomerUrl);
+                var ResponseResult = JObject.Parse(response);
+                var errorCode = ResponseResult["errorCode"].ToString();
+                string errorCodeMgs = errorCode.ToString();
+                if (errorCodeMgs == "00" || errorCodeMgs == "E1640")
+                {
+                    return ResponseResult;
+                }
+                else {
+                    ErrorCode =  TransXT_ErrorCode.GetError(errorCodeMgs);
+                    var Error_code = ErrorCode;
+                    return Error_code;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public static dynamic AddRecipient(string customerId, string udf1, string udf2, string mobileNo, string recipientName, string recipientType)
+        {
+            try
+            {
+                var param = new Dictionary<string, dynamic> {
+                        {"customerId", customerId},
+                        {"udf1", udf1},
+                        {"udf2", udf2},
+                        {"mobileNo", mobileNo},
+                        {"recipientName", recipientName},
+                        {"recipientType", recipientType},                        
+                        {"agentCode",agentCode }
+                    };
+                string valueparameter = JsonConvert.SerializeObject(param);
+                string dmrFetchCustomerUrl = root + "api/1.1/dmr/addrecipient";
+                var response = TransXTCommunicator.execute(valueparameter, dmrFetchCustomerUrl);
+                var ResponseResult = JObject.Parse(response);
+                var errorCode = ResponseResult["errorCode"].ToString();
+                string errorCodeMgs = errorCode.ToString();
+                if (errorCodeMgs == "00" || errorCodeMgs == "E1640")
+                {
+                    return ResponseResult;
+                }
+                else
+                {
+                    return TransXT_ErrorCode.GetError(errorCodeMgs);
+                }
+                //return ResponseResult;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static dynamic FetchRecipient(string recipientId)
+        {
+            try
+            {
+                var param = new Dictionary<string, dynamic> {
+                        {"recipientId", recipientId},
+                        {"agentCode",agentCode }
+                    };
+                string valueparameter = JsonConvert.SerializeObject(param);
+                string dmrFetchCustomerUrl = root + "api/1.1/dmr/fetchrecipient";
+                var response = TransXTCommunicator.execute(valueparameter, dmrFetchCustomerUrl);
+                var ResponseResult = JObject.Parse(response);
+                var errorCode = ResponseResult["errorCode"].ToString();
+                string errorCodeMgs = errorCode.ToString();
+                if (errorCodeMgs == "00" || errorCodeMgs == "E1640")
+                {
+                    return ResponseResult;
+                }
+                else
+                {
+                    return TransXT_ErrorCode.GetError(errorCodeMgs);
+                }
+                //return ResponseResult;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static dynamic FetchAllRecipient(string customerId)
+        {
+            try
+            {
+                var param = new Dictionary<string, dynamic> {
+                        {"customerId", customerId},
+                        {"agentCode",agentCode }
+                    };
+                string valueparameter = JsonConvert.SerializeObject(param);
+                string dmrFetchCustomerUrl = root + "api/1.1/dmr/fetchallrecipient";
+                var response = TransXTCommunicator.execute(valueparameter, dmrFetchCustomerUrl);
+                var ResponseResult = JObject.Parse(response);
+                var errorCode = ResponseResult["errorCode"].ToString();
+                string errorCodeMgs = errorCode.ToString();
+                if (errorCodeMgs == "00" || errorCodeMgs == "E1640")
+                {
+                    return ResponseResult;
+                }
+                else
+                {
+                    return TransXT_ErrorCode.GetError(errorCodeMgs);
+                }
+                //return ResponseResult;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static dynamic DeleteRecipient(string recipientId,string customerId)
+        {
+            try
+            {
+                var param = new Dictionary<string, dynamic> {
+                        {"recipientId", recipientId},
+                        {"customerId", customerId},
+                        {"agentCode",agentCode }
+                    };
+                string valueparameter = JsonConvert.SerializeObject(param);
+                string dmrFetchCustomerUrl = root + "api/1.1/dmr/deleterecipient";
+                var response = TransXTCommunicator.execute(valueparameter, dmrFetchCustomerUrl);
+                var ResponseResult = JObject.Parse(response);
+                var errorCode = ResponseResult["errorCode"].ToString();
+                string errorCodeMgs = errorCode.ToString();
+                if (errorCodeMgs == "00" || errorCodeMgs == "E1640")
+                {
+                    return ResponseResult;
+                }
+                else
+                {
+                    return TransXT_ErrorCode.GetError(errorCodeMgs);
+                }
+                //return ResponseResult;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static dynamic BankDetails(string bankCode)
+        {
+            try
+            {
+                var param = new Dictionary<string, dynamic> {
+                        {"bankCode", bankCode},                        
+                        {"agentCode",agentCode }
+                    };
+                string valueparameter = JsonConvert.SerializeObject(param);
+                string dmrFetchCustomerUrl = root + "api/1.1/dmr/getbankdetail";
+                var response = TransXTCommunicator.execute(valueparameter, dmrFetchCustomerUrl);
+                var ResponseResult = JObject.Parse(response);
+                var errorCode = ResponseResult["errorCode"].ToString();
+                string errorCodeMgs = errorCode.ToString();
+                if (errorCodeMgs == "00" || errorCodeMgs == "E1640")
+                {
+                    return ResponseResult;
+                }
+                else
+                {
+                    return TransXT_ErrorCode.GetError(errorCodeMgs);
+                }
+                //return ResponseResult;
+
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static dynamic AllBankDetails()
+        {
+            try
+            {
+                var param = new Dictionary<string, dynamic> {                        
+                        {"agentCode",agentCode }
+                    };
+                string valueparameter = JsonConvert.SerializeObject(param);
+                string dmrFetchCustomerUrl = root + "api/1.1/dmr/fetchallbanks";
+                var response = TransXTCommunicator.execute(valueparameter, dmrFetchCustomerUrl);
+                var ResponseResult = JObject.Parse(response);
+                var errorCode = ResponseResult["errorCode"].ToString();
+                string errorCodeMgs = errorCode.ToString();
+                if (errorCodeMgs == "00" || errorCodeMgs == "E1640")
+                {
+                    return ResponseResult;
+                }
+                else
+                {
+                    return TransXT_ErrorCode.GetError(errorCodeMgs);
+                }
+                //return ResponseResult;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        public static dynamic TransactiondoRemit(string recSeqId, string customerId, string amount, string clientRefId, string currency, string channel,string tp1,string tp2,string tp3,string tp4,string tp5,string tp6)
+        {
+            try
+            {
+                var param = new Dictionary<string, dynamic> {
+                        {"recSeqId", recSeqId},
+                        {"customerId", customerId},
+                        {"amount", amount},
+                        {"clientRefId", clientRefId},
+                        {"currency", currency},
+                        {"channel", channel},
+                        {"agentCode",agentCode },
+                        {"tp1",tp1 },
+                        {"tp2",tp2 },
+                        {"tp3",tp3 },
+                        {"tp4",tp4 },
+                        {"tp5",tp5 },
+                        {"tp6",tp6 }
+                    };
+                string valueparameter = JsonConvert.SerializeObject(param);
+                string dmrFetchCustomerUrl = root + "api/1.1/dmr/doremit";
+                var response = TransXTCommunicator.execute(valueparameter, dmrFetchCustomerUrl);
+                var ResponseResult = JObject.Parse(response);
+                var errorCode = ResponseResult["errorCode"].ToString();
+                string errorCodeMgs = string.Empty;
+                if (errorCode == "9000")
+                {
+                    errorCodeMgs = errorCode.ToString();
+                    
+                }
+                
+                
+                if (errorCodeMgs == "00" || errorCodeMgs == "E1640")
+                {
+                    return ResponseResult;
+                }
+                else
+                {
+                     return ResponseResult;
+                    //return TransXT_ErrorCode.GetError(errorCodeMgs);
+                }
+                //return ResponseResult;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public static dynamic SearchTransaction(string txnid,string clientRefId)
+        {
+            try
+            {
+                var param = new Dictionary<string, dynamic> {
+                        {"txnid",txnid },
+                    {"clientRefId",clientRefId }
+                    };
+                string valueparameter = JsonConvert.SerializeObject(param);
+                string dmrFetchCustomerUrl = root + "api/1.0/checktxndetails";
+                var response = TransXTCommunicator.execute(valueparameter, dmrFetchCustomerUrl);
+                var ResponseResult = JObject.Parse(response);
+                var errorCode = ResponseResult["errorCode"].ToString();
+                string errorCodeMgs = errorCode.ToString();
+                if (errorCodeMgs == "00" || errorCodeMgs == "E1640")
+                {
+                    return ResponseResult;
+                }
+                else
+                {
+                    return TransXT_ErrorCode.GetError(errorCodeMgs);
+                }
+                //return ResponseResult;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public static string CaptchaSecretKey
+        {
+            get { return "6LdCy5sUAAAAAN9WMUecTSggrcO3Ku9iGWYK_fdS"; }
+        }
+
+    }
+}

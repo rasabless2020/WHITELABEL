@@ -1,0 +1,28 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_NOTIFICATION_SETTING>
+@{
+    ViewBag.Title = "GetNotificationList";
+    Layout = null;
+}
+
+@(Html
+                            .Grid(Model)
+                            .Build(columns =>
+                            {
+                                columns.Add(model => model.ID).Titled("Nofify Id").Filterable(true).Sortable(true);
+                                columns.Add(model => model.NOTIFICATION_SUBJECT).Titled("Notify Sub").Filterable(true).Sortable(true);
+                                columns.Add(model => model.NOTIFICATION_DESCRIPTION).Titled("Notify Desc").Filterable(true).Sortable(true);
+                                columns.Add(model => model.NOTIFICATION_DATE).Titled("Date").Filterable(true).Sortable(false);
+                            })
+                            .Empty("No data found")
+                            .Id("my-ajax-grid")
+                            .Pageable(pager =>
+                            {
+                                pager.PagesToDisplay = 20;
+                                pager.RowsPerPage = 20;
+                            })
+                            .Filterable()
+                            .Sortable()
+)
+

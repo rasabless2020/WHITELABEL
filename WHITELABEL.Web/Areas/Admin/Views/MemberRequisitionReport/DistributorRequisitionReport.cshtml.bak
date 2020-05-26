@@ -1,0 +1,192 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>
+@{
+    ViewBag.Title = "Distributor Requisition Report";
+    //Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+    <div class="form-horizontal padding-top-20">
+        <div class="row">
+            @*<div class="col-md-12">
+                <div class="col-md-12 row headcolor">
+                    <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-wallet  fa-3x"></i> </div>
+
+                    <div class="col-md-8" style="text-align:right; padding-top:10px;">
+                        <h3>
+                            Distributor Requisition List
+                        </h3>
+                    </div>
+                </div>
+            </div>*@
+            <div class="col-md-12">
+                <div class=" card">
+                    <div class="card-body">
+                        <div class="panel-heading" style="padding-bottom:10px;">
+                            <div class="card-title row" align="right">
+                                <div class="col-md-6 text-left">
+                                    <button id="btnExport" class="btn btn-info btn-xs"><span class="ion-forward"></span> EXPORT</button>
+                                    @*<a href="@(Url.Action("GridExportIndex", "MemberRequisition", new { area = "Admin" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="row example-row">
+
+                                <div class="col-md-12 row mb-2">
+                                    @*<div class="col-md-4">
+                                    <div class="inputer">
+                                        <div class="input-wrapper">
+                                            @Html.DropDownList("MemberService", new SelectList((ViewBag.MemberService) as SelectList, "Value", "Text"), "Select Super", new { id = "SuperList", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>*@
+                                    <div class="col-md-6">
+                                        <div class="inputer">
+                                            <div class="md-form">
+                                                @*@Html.DropDownList("Distributor", new SelectList(string.Empty, "Value", "Text"), "--Select Distributor--", new { @class = "form-control", id = "DistributorListID" })*@
+                                                @Html.DropDownList("Distributor", new SelectList((ViewBag.MemberService) as SelectList, "Value", "Text"), "Select Distributor", new { id = "DistributorListID", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="inputer">
+                                            <div class="md-form">
+                                                @Html.DropDownList("MemberTransactionStatus", new List<SelectListItem>
+                                                                                { new SelectListItem{Text="Approve", Value="Approve"},
+                                                                                    new SelectListItem{Text="Pending", Value="Pending"},
+                                                                                    new SelectListItem{Text="Decline", Value="Decline"} },
+                                                                                   "Select Status", new { id = "TransactionStatus", @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-md-12">@Html.AjaxGrid(Url.Action("DistributorReqGrid", "MemberRequisitionReport", new { area = "Admin" }))</div>
+                            </div>
+
+                        </div>
+                        @*<div class="panel-footer text-right">
+                    <button id="btnExport" class="btn btn-info btn-xs">EXPORT</button>
+                    @*<a href="#" id="btnExportDistributorrecoard" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                        @*<a href="@(Url.Action("ExportIndex","SuperRequisition",new {area="Super" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*
+                    </div>*@
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</div>
+
+    <script>
+        $(document).on('change', '#TransactionStatus', function () {
+            debugger;
+        //var SuperList = $('#SuperList').val();
+            var status = $('#DistributorListID').val();
+            var dropdownval = $('#DistributorListID').val();
+           $('.mvc-grid').mvcgrid({
+               query: 'Super=0&search=' + dropdownval + '&Status=' + this.value,
+               //query: 'Super=0&search=' + dropdownval + '&Status=' + this.value,
+               //query: 'search=' + status +'&Status='+this.value,
+               reload: true
+           });
+       });
+    </script>
+
+    <script>
+       //$(document).on('change', '.mvc-grid-search', function () {
+        $("#DistributorListID").change(function () {
+            var SuperList = $('#SuperList').val();
+
+        var status = $('#TransactionStatus').val();
+        //var dropdownMerchantval = $('#MerchantId').val();
+           $('.mvc-grid').mvcgrid({
+               //query: 'Super=' + SuperList + '&search=' + this.value + '&Status=' + status,
+               query: 'Super=0&search=' + this.value + '&Status=' + status,
+               //query: 'search=' + this.value + '&Status=' + status,
+               reload: true
+           });
+       });
+    </script>
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#SuperList").change(function () {
+            $("#DistributorListID").empty();
+            $("#DistributorListID").val("--Select--");
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetDistributor")',
+                    dataType: 'json',
+                    data: { Disid: $("#SuperList").val() },
+                    success: function (states) {
+                        $("#DistributorListID").append('<option selected value="">--Select Distributor--</option>');
+                        $.each(states, function (i, state) {
+                            $("#DistributorListID").append('<option value="' + state.IDValue + '">' +
+                                state.TextValue + '</option>');
+                        });
+                        var SuperList = $('#SuperList').val();
+                        var dropdownval = $('#DistributorListID').val();
+                        var status = $('#TransactionStatus').val();
+                        $('.mvc-grid').mvcgrid({
+                            //query: 'Super=' + SuperList + '&search=' + dropdownval + '&Status=' + status,
+                            query: 'Super=0&search=' + dropdownval + '&Status=' + status,
+                            //query: 'search=' + dropdownval + '&Status=' + status,
+                            reload: true,
+                            reloadStarted: function () {
+                                $(".divFooterTotalComm").remove();
+                            },
+                        });
+                    },
+                    error: function (ex) {
+                        $("#DistributorListID").append('<option selected value="">--Select Distributor--</option>');
+                        //alert('Failed to retrieve data.' + ex);
+                        var SuperList = $('#SuperList').val();
+                        var dropdownval = $('#DistributorListID').val();
+                        var status = $('#TransactionStatus').val();
+                        $('.mvc-grid').mvcgrid({
+                            //query: 'Super=' + SuperList + '&search=' + dropdownval + '&Status=' + status,
+                            query: 'Super=0&search=' + dropdownval + '&Status=' + status,
+                            //query: 'search=' + dropdownval + '&Status=' + status,
+                            reload: true,
+                            reloadStarted: function () {
+                                $(".divFooterTotalComm").remove();
+                            },
+                        });
+                    }
+            });
+                var SuperList = $('#SuperList').val();
+                var dropdownval = '';
+                var status ='';
+                $('.mvc-grid').mvcgrid({
+                    //query: 'Super=' + SuperList + '&search=' + dropdownval + '&Status=' + status,
+                    query: 'Super=0&search=' + dropdownval + '&Status=' + status,
+                    //query: 'search=' + dropdownval + '&Status=' + status,
+                    reload: true,
+                    reloadStarted: function () {
+                        $(".divFooterTotalComm").remove();
+                    },
+                });
+                return false;
+            })
+        });
+</script>
+<script type="text/javascript">
+    $("#btnExportDistributorrecoard").click(function () {
+        @*var url = '@(Url.Action("ExportDistributorIndex", "MemberRequisitionReport", new {area="Admin" }) + ViewContext.HttpContext.Request.QueryString)?Super=' + $("#SuperList").val() + '&Disid=' + $("#DistributorListID").val() + '&statusval=' + $("#TransactionStatus").val();*@
+        var url = '@(Url.Action("ExportDistributorIndex", "MemberRequisitionReport", new {area="Admin" }) + ViewContext.HttpContext.Request.QueryString)?Super=0&Disid=' + $("#DistributorListID").val() + '&statusval=' + $("#TransactionStatus").val();
+        window.location.href = url;
+    })
+</script>
+<script type="text/javascript">
+    $("[id$=btnExport]").click(function (e) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=my-ajax-grid]').html()));
+        e.preventDefault();
+    });
+</script>

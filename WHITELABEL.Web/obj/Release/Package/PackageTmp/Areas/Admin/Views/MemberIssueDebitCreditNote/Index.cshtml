@@ -1,0 +1,68 @@
+﻿@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "Issue Debit credit note";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-12 row headcolor">
+                <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-list fa-3x"></i></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4" style="text-align:right; padding-top:10px;">
+                    <h3>
+                        Issue Debit credit note
+                    </h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 padding-top-20">
+            <div class=" card">
+                <div class="card-body">
+                    <div class="panel-heading text-right">
+                        @*@if (Session["msg"] != null)
+                        {
+                            <div id="informationMessage" class="text-center alert alert-success">
+                                <span style="width:100%;text-align:center;">@Session["msg"].ToString() </span>
+                                @if (Session["msg"].ToString() == "Data Saved Successfully" || Session["msg"].ToString() == "Data Updated Successfully")
+                                {
+                                    Session.Remove("msg");
+                                }
+                            </div>
+                        }*@
+                        <div class="card-title row">
+                            <div class="col-md-6 text-left">
+                                @*<a href="@(Url.Action("ExportIndex","MemberIssueDebitCreditNote", new {area="Admin" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span> Export</a>*@
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <a href="@Url.Action("ApplyIssueDebitCreditNote", "MemberIssueDebitCreditNote",new {area="Admin" },null)" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> Apply Issue Debit Credit Note</a>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </div><!--.panel-heading-->
+                    <div class="panel-body">
+                        <div class="row example-row" style="width:100%">
+
+                            @Html.AjaxGrid(Url.Action("IndexGrid", "MemberIssueDebitCreditNote", new { area = "Admin" }))
+
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+                    
+                </div><!--.panel-->
+            </div>
+        </div><!--.col-md-12-->
+    </div><!--.row-->
+    @Scripts.Render("~/bundles/MemberApilevel")
+    <script>
+        $(document).ready(function () {
+
+            window.setTimeout(function () {
+                $("#informationMessage").fadeOut('slow');
+            }, 2000);
+        });
+    </script>
+}

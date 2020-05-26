@@ -1,0 +1,34 @@
+﻿namespace WHITELABEL.Data.Models
+{
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    [Table("TRANSXT_DMR_TRANSACTION_LIST")]
+
+    public class TBL_TRANSXT_DMR_TRANSACTION_LIST
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public long ID { get; set; }
+        public string CustomerID { get; set; }
+        public string RecipientID { get; set; }
+        public decimal serviceTax { get; set; }
+        public string clientRefId { get; set; }
+        public decimal fee { get; set; }
+        public string initiatorId { get; set; }
+        public string accountNumber { get; set; }
+        public string txnStatus { get; set; }
+        public string name { get; set; }
+        public string ifscCode { get; set; }
+        public string impsRespCode { get; set; }
+        public string impsRespMessage { get; set; }
+        public string txnId { get; set; }
+        public string timestamp { get; set; }
+        public string SenderName { get; set; }
+        public string SenderMobile { get; set; }
+        public DateTime Transaction_Date { get; set; }
+        public string TransactionStatus { get; set; }
+        public long MEM_ID { get; set; }
+        public decimal TransferAmount { get; set; }
+    }
+}

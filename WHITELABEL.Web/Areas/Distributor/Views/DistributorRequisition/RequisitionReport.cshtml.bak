@@ -1,0 +1,95 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>
+@{
+    ViewBag.Title = "Requisition Report";
+    //Layout = "~/Areas/Distributor/Views/Shared/_DistributorLayout.cshtml";
+    Layout = "~/Areas/Distributor/Views/Shared/_LayoutDistributor.cshtml";
+}
+
+
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        @*<div class="col-md-12">
+                <div class="col-md-12 row headcolor">
+                    <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-wallet  fa-3x"></i> </div>
+
+                    <div class="col-md-8" style="text-align:right; padding-top:10px;">
+                        <h3>
+                           Merchant Requisition Report
+                        </h3>
+                    </div>
+                </div>
+            </div>*@
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-heading">
+                        <div class="card-title text-left">
+                            <button id="btnExport" class="btn btn-info btn-xs"><span class="ion-forward"></span>EXPORT</button>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row example-row">
+                            <div class="col-md-6 md-form">@Html.DropDownList("MemberService", new SelectList((ViewBag.MemberService) as SelectList, "Value", "Text"), "Select Member", new { id = "MemberList", @class = "form-control" })</div>
+                            <div class="col-md-6 md-form">
+                                @Html.DropDownList("MemberTransactionStatus", new List<SelectListItem>
+                                                                    { new SelectListItem{Text="Approve", Value="Approve"},
+                                                                        new SelectListItem{Text="Pending", Value="Pending"},
+                                                                        new SelectListItem{Text="Decline", Value="Decline"} },
+                                                                       "Select Status", new { id = "TransactionStatus", @class = "form-control" })
+                            </div>
+
+                            <div class="col-md-12 mt-2">@Html.AjaxGrid(Url.Action("RequisitionGrid", "DistributorRequisition", new { area = "Distributor" }))</div>
+
+
+
+                        </div>
+                    </div>
+                    <div class="panel-footer text-right">
+
+                        @*<a href="#" id="btnExportMerchantrecoard" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                        @*<a href="@(Url.Action("ExportIndex","DistributorRequisition",new {area="Distributor" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).on('change', '#TransactionStatus', function () {
+        var dropdownval = $('#MemberList').val();
+        $('.mvc-grid').mvcgrid({
+            query: 'search=' + dropdownval + '&Status=' + this.value,
+            //query: 'search=' + this.value+'&Satus'+this.value,
+            reload: true
+        });
+    });
+</script>
+
+<script>
+    //$(document).on('change', '.mvc-grid-search', function () {
+    $("#MemberList").change(function () {
+        var status = $('#TransactionStatus').val();
+        $('.mvc-grid').mvcgrid({
+            //query: 'search=' + this.value,
+            query: 'search=' + this.value + '&Status=' + status,
+            reload: true
+        });
+    });
+</script>
+<script>
+    $("#btnExportMerchantrecoard").click(function () {
+          var url = '@(Url.Action("ExportMerchantDistributorRequisitionIndex", "DistributorRequisition", new {area= "Distributor" }) + ViewContext.HttpContext.Request.QueryString)?Disid=' + $("#MemberList").val() + '&statusval=' + $("#TransactionStatus").val();
+        window.location.href = url;
+    })
+</script>
+<script type="text/javascript">
+    $("[id$=btnExport]").click(function (e) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=my-ajax-grid]').html()));
+        e.preventDefault();
+    });
+</script>

@@ -1,0 +1,38 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_CREDIT_LIMIT_BALANCE_DISTRIBUTION>
+@{
+    ViewBag.Title = "CREEEDITLimitGrid";
+    //Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = null;
+}
+
+
+@(Html
+                                            .Grid(Model)
+                                            .Build(columns =>
+                                            {
+                                                columns.Add(model => model.SLN).Titled("Sln").Filterable(true).Sortable(true);
+                                                columns.Add(model => model.FromUser).Titled("Member Name ").Filterable(true).Sortable(true);                                                                                                
+                                                columns.Add(model => model.CREDIT_AMOUNT).Titled("Credit Balance Amount").Filterable(true).Sortable(true);
+                                                columns.Add(model => model.CREDIT_OPENING).Titled("Credit Opening").Filterable(true).Sortable(true);
+                                                columns.Add(model => model.CREDITCLOSING).Titled("Credit Closing").Filterable(true).Sortable(true);
+                                                columns.Add(model => model.CREDIT_DATE).Formatted("{0:yyyy-MM-dd}").Titled("Credit Balance Date").Filterable(true).Sortable(true);
+                                                columns.Add(model => model.CREDIT_NOTE_DESCRIPTION).Titled("Credit Balance Note").Filterable(true).Sortable(true);                                    
+
+                                })
+                                .Css("css-classes")
+                                .AppendCss("table table-striped")
+                                            .Empty("No data found")
+                                            .Id("my-ajax-grid")
+                                            .Pageable(pager =>
+                                            {
+                                                pager.PagesToDisplay = 25;
+                                                pager.RowsPerPage = 25;
+                                            })
+                                            .Filterable()
+                                            .Sortable()
+)
+
+
+

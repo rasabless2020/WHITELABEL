@@ -1,0 +1,97 @@
+﻿@model WHITELABEL.Data.Models.TBL_DMT_BANK_MARGIN
+@{
+    ViewBag.Title = "DMT Bank Margin";
+    Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("BankDetails", "PowerAdminBankDetails", FormMethod.Post, new { area = "PowerAdmin" }))
+{
+
+    <div class="form-horizontal padding-top-20">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ID)
+        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                    </div><!--.panel-heading-->
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Bank Name</label>
+                                    <div class="col-md-9">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">
+                                                @Html.HiddenFor(model => model.SL_NO)
+                                                @Html.EditorFor(model => model.BANK, new { htmlAttributes = new { @class = "form-control", @placeholder = "Bank Name" } })
+                                            </div>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.BANK, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label col-md-3">Ifsc Code</label>
+                                    <div class="col-md-9">
+                                        <div class="inputer">
+                                            <div class="input-wrapper">
+                                                @Html.EditorFor(model => model.IFSC, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ifsc Code" } })
+                                            </div>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.IFSC, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div><!--.row-->
+                       
+
+
+
+
+
+
+
+
+
+                    </div><!--.panel-body-->
+
+                    <div class="panel-footer">
+                        <div class="col-lg-6">
+
+                        </div>
+
+                        <div class="col-lg-6 text-right">
+                            @if (ViewBag.checkbank == "0")
+                            {
+                                <input type="submit" value="Create" class="btn btn-cyan" />
+
+                            }
+                            else
+                            {
+                                <input type="submit" value="Update" class="btn btn-cyan" />
+
+                            }
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div>
+
+    </div>
+
+    <style>
+        .form-horizontal .control-label {
+            text-align: left
+        }
+    </style>
+}

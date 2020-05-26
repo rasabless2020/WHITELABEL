@@ -1,0 +1,36 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IGrid<WHITELABEL.Data.Models.TBL_WHITE_LEVEL_COMMISSION_SLAB>
+@{
+    ViewBag.Title = "IndexGrid";
+    //Layout = "~/Areas/PowerAdmin/Views/Shared/_PowerAdminLayout.cshtml";
+ 
+}
+
+
+@(new HtmlGrid<WHITELABEL.Data.Models.TBL_WHITE_LEVEL_COMMISSION_SLAB>(Html, Model))
+
+
+@*@(Html
+                                .Grid(Model)
+                                .Build(columns =>
+                                {
+                                    columns.Add(model => model.SLAB_NAME).Titled("Slab Name");
+
+                                    columns.Add(model => model.SLAB_DETAILS).Titled("Slab Details");//columns.Add(model => model.ACTIVE_SERVICE).Titled("Active Service");
+                                    columns.Add(model => model.SLAB_TYPE).Titled("Slab Type");//columns.Add(model => model.ACTIVE_SERVICE).Titled("Active Service");
+                                    columns.Add(model => model.SLAB_STATUS).Titled("Status");//columns.Add(model => model.ACTIVE_SERVICE).Titled("Active Service");
+                                    columns.Add(model => model.SLN).Titled("").Encoded(false).Filterable(false).Sortable(false)
+                                        .RenderedAs(model => "<a href='" + @Url.Action("AddSlab", "PowerAdminCommissionSlab", new { area = "PowerAdmin", ServiceId = Encrypt.EncryptMe(model.SLN.ToString()) }) + "' class='btn btn-primary btn-xs'>Edit</a> &nbsp; <div class='btn-group btn-group-xs'> &nbsp;&nbsp;&nbsp;</div>");
+                                })
+                                .Empty("No data found")
+                                .Id("my-ajax-grid")
+                                .Pageable(pager =>
+                                {
+                                    pager.PagesToDisplay = 6;
+                                    pager.RowsPerPage = 6;
+                                })
+                                .Filterable()
+                                .Sortable()
+)*@
+

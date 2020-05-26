@@ -1,0 +1,351 @@
+﻿@model  WHITELABEL.Web.Areas.Merchant.Models.ElectricityViewModel
+@{
+    ViewBag.Title = "Electricity Services";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+@*@Scripts.Render("~/bundles/MerchantElectricityRecharge")*@
+<script src="~/Areas/Merchant/MerchantHelperJS/ElectricityBillPayment/Index.js"></script>
+<link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+<script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+@using (Ajax.BeginForm("PostElectricityBill", "MerchantRechargeService", new AjaxOptions { Confirm = "Do you want to pay bill", OnSuccess = "OnElectricitySuccess", OnFailure = "OnElectricityFailure", LoadingElementId = "Electricityprogress" }, new { area = "Merchant", @id = "ElectricityBillPayment" }))
+{
+    @Html.AntiForgeryToken()
+
+    @*<div class="col-md-12">
+            <div class="col-md-12 row headcolor">
+                <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-bolt  fa-3x"></i> </div>
+
+                <div class="col-md-8" style="text-align:right; padding-top:10px;">
+                    <h3>
+                        Electricity Bill Payment
+                    </h3>
+                </div>
+            </div>
+        </div>*@
+
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <h5>Electricity Bill Payment</h5>
+                <form>
+
+                    <div class="col-md-12" style="text-align:center; color:red; margin-bottom:30px;">
+                        <div id="Errormsg"></div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="row">
+
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    <div class="input-group" style="height:37px;">
+                                        <div class="inputer" style="width:91%;">
+                                            <div class="md-form">
+                                                @Html.EditorFor(m => m.Service_Name, new { htmlAttributes = new { @style = "width:97%; padding:5px;", placeholder = "Electricity Board", id = "txtElectricityOperator", @class = "form-control", onblur = "checkOperator()" } })
+                                                <input type="hidden" id="hfElectricityperator" name="ElectricityoperId" />
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Service_Name, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+
+                                        <span class="input-group-btn">
+                                            <button href="javascript:void(0)" data-toggle='modal' data-target='.transdElectricity' id='transactionvalueElectricityid' type="button" class="btn btn-default">...</button>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    @*<div class="input-wrapper"> </div>*@
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @Html.EditorFor(m => m.CustomerId, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Consumer No", @class = "form-control", id = "CustomerId" } })
+                                            <label for="exampleInput1">@*Account No*@</label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    @*<div class="input-wrapper"></div>*@
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @Html.EditorFor(m => m.CUSTOMER_FIRST_NAME, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Customer First Name", @class = "form-control", id = "CustomerFirstName" } })
+                                            <label for="amount">@*Mobile*@</label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CUSTOMER_FIRST_NAME, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    @*<div class="input-wrapper"></div>*@
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @Html.EditorFor(m => m.CUSTOMER_LAST_NAME, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Customer Last Name", @class = "form-control", id = "CustomerLastName" } })
+                                            <label for="amount">@*Mobile*@</label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CUSTOMER_LAST_NAME, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    @*<div class="input-wrapper"></div>*@
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @Html.EditorFor(m => m.CUSTOMER_EMAIL_ID, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Customer Email Id", @class = "form-control", id = "CUSTOMER_EMAIL_ID" } })
+                                            <label for="amount">@*Mobile*@</label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CUSTOMER_EMAIL_ID, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    @*<div class="input-wrapper"></div>*@
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @Html.EditorFor(m => m.MobileNo, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Customer Mobile No", @class = "form-control", id = "MobileNo" } })
+                                            <label for="amount">@*Mobile*@</label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    @*<div class="input-wrapper"></div>*@
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @Html.EditorFor(m => m.PIN, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Enter Pin No", @class = "form-control", id = "txtPin" } })
+                                            <label for="amount">@*Mobile*@</label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.PIN, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    @*<div class="input-wrapper"></div>*@
+                                    <div class="inputer">
+                                        <div class="md-form">
+                                            @Html.EditorFor(m => m.RechargeAmt, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Bill Amount", @class = "form-control", id = "BillAMount", @readonly = "readonly" } })
+                                            <label for="exampleInput1">@*Recharge amt*@</label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.RechargeAmt, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    @*<div class="input-wrapper"></div>*@
+                                    <div id="ModelElectricityCity">
+                                        <div class="inputer">
+                                            <div class="md-form">
+
+                                                @Html.EditorFor(m => m.City, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "City", @class = "form-control", id = "txtCityName" } })
+                                                <label for="exampleInput1">@*Recharge amt*@</label>
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    @*<div class="input-wrapper"></div>*@
+                                    <div id="ModelElectricityUnit">
+                                        <div class="inputer">
+                                            <div class="md-form">
+
+                                                @Html.EditorFor(m => m.BillUnit, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Bill Unit", @class = "form-control", id = "BillUnitData" } })
+                                                <label for="exampleInput1">@*Recharge amt*@</label>
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.BillUnit, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-12" style="text-align:center; margin-top:20px;">
+                                <a href="#" onclick="GetElectricityBillDetails();" class="btn btn-info btn-lg" style="color:white;" id="btnEleDisplay">Get Bill</a>
+                                <input type="submit" value="Pay" class="btn btn-primary btn-lg" id="btnsubmitElectricity" />
+                            </div>
+                        </div>
+                        <div class="col-md-3"></div>
+
+
+
+
+
+                        
+                    </div>
+                    <div class="col-md-12 row" style=" margin-top:15px; border:1px solid #ccc; padding:20px 0; margin-bottom:20px;margin-left:12px; " id="divElecBillDisplay">
+                        <div class="col-md-4 row">
+                            <div class="col-md-4"> Due Date :-</div>
+                            <div class="col-md-8"><div id="DueDate"></div></div>
+                        </div>
+
+                        <div class="col-md-4 row">
+                            <div class="col-md-4"> Customer Name :- </div>
+                            <div class="col-md-8">
+                                <div id="CustomerName"></div>
+                                <input type="hidden" id="ELECreferenceID" name="REfferenceElecId" />
+                            </div>
+                        </div>
+                        <div class="col-md-4 row">
+                            <div class="col-md-4"> Bill No :- </div>
+                            <div class="col-md-8">
+                                <div id="txtElecbillnumber"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 row" style="display:none">
+                            <div style="display:none" id="idGeolocbrod"> @Html.EditorFor(m => m.geolocation, new { htmlAttributes = new { @class = "form-control", id = "GeolocationElectricity" } })</div>
+                            @Html.EditorFor(m => m.IpAddress, new { htmlAttributes = new { @class = "form-control", id = "ElectricityIpaddress" } })
+                            @Html.EditorFor(m => m.ElectricityRefNo, new { htmlAttributes = new { @class = "form-control", id = "txtElectricityRefNo" } })
+                        </div>
+                    </div>
+
+
+
+                    <div class="clearfix"></div>
+                    <div class="col-md-12" style="text-align:center; margin-top:30px;">
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+}
+
+
+<div id="dialog" style="display: none">
+</div>
+@*<div id="Electricityprogress" class="loading hidden">Loading&#8230;</div>*@
+<div class="preloader hidden" id="Electricityprogress">
+    <div id="loading"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#divElecBillDisplay').hide();
+        $('#btnsubmitElectricity').hide();
+        $('#Electricityprogress').removeClass("hidden");
+        $('#Electricityprogress').hide();
+        $('#ModelElectricityUnit').hide();
+    })
+    function OnElectricitySuccess(response) {
+        $('#Electricityprogress').removeClass("hidden");
+        $('#Electricityprogress').hide();
+        $('#loading').removeClass("hidden");
+        $('#loading').hide();
+        var message = response;
+        $("#ElectricityBillPayment").trigger("reset");
+        //window.location.reload();
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+                $('#divElecBillDisplay').hide();
+                $('#btnEleDisplay').show();
+                $('#btnsubmitElectricity').hide();
+            }
+        })
+        callGeocodeElectricity();
+        //alert(message);
+    }
+    function OnElectricityFailure(response) {
+        alert("Error occured.");
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+
+        callGeocodeElectricity();
+
+    });
+    function callGeocodeElectricity() {
+        $.getJSON('http://www.geoplugin.net/json.gp?jsoncallback=?', function (data) {
+            var information = JSON.stringify(data, null, 2);
+            //alert(information[0]);
+            //alert(JSON.stringify(data, null, 2));
+            console.log(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 2));
+            $('#GeolocationElectricity').val(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 0));
+            $('#ElectricityIpaddress').val(JSON.stringify(data.geoplugin_request, null, 0));
+            console.log(JSON.stringify(data, null, 2));
+        });
+    }
+    function checkOperator() {
+        var Servicekey = $('#hfElectricityperator').val();
+
+        if (Servicekey == "MDE") {
+            $('#ModelElectricityUnit').show();
+        }
+        else {
+            $('#ModelElectricityUnit').hide();
+        }
+    }
+    function setElectricityServiseOperator($key, $name) {
+        $('#txtElectricityOperator').val($name).focus();
+        $('#hfElectricityperator').val($key);
+        //$('#RechargeAmt').focus();
+        $('#transactElectricitymodal').modal('hide');
+    }
+</script>
+
+<div id="transactElectricitymodal" class="modal scale fade transdElectricity" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Service Provider Name List</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table style="width:100%;">
+                    <tr>
+                        <th>Operator Name </th>
+                        <th></th>
+                    </tr>
+                    @foreach (var d in ViewBag.ElectricityOperator)
+                    {
+                        <tr>
+                            <td>
+                                @d.SERVICE_NAME (@d.TYPE)
+                                <input type="hidden" value="@d.SERVICE_KEY" />
+                            </td>
+
+                            <td><a href="javascript:void(0)" class="btn btn-default" onclick="setElectricityServiseOperator('@d.SERVICE_KEY','@d.SERVICE_NAME')"><img src="@d.IMAGE" width="40" height="40" /></a></td>
+                        </tr>
+                    }
+                </table>
+                @*<div class="col-md-6">
+                        <div class="inputer floating-label">
+                            <div class="input-wrapper">
+                                Member Name <input type="text" id="username" value="" class="form-control" />
+                                <input type="text" id="username1" value="" class="form-control" />
+                                <input type="hidden" id="sln" />
+                            </div>
+                        </div>
+                    </div>*@
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div><!--.modal-content-->
+    </div><!--.modal-dialog-->
+</div>

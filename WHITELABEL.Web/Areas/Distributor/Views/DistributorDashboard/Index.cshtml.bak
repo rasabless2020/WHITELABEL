@@ -1,0 +1,77 @@
+﻿@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "Distributor Dashboard";
+    Layout = "~/Areas/Distributor/Views/Shared/_DistributorNewLayout.cshtml";
+
+}
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        <div class="col-md-12" style="margin:20px;">
+            @*<div class="pull-right"><span style="margin-right:20px;">Available Balance:-  @ViewBag.AvailableBalance</span><span style="margin-right:20px;">Opening Amount:-  @ViewBag.openingAmt</span> <span>Closing Amount:-  @ViewBag.closingAmt</span></div>*@
+            <div class="pull-right"><span style="margin-right:20px; font-weight: bold;">@*Available Balance:-  @ViewBag.closingAmt*@</span>@*<span style="margin-right:20px;">Opening Amount:-  @ViewBag.openingAmt</span> <span>Closing Amount:-  @ViewBag.closingAmt</span>*@</div>
+        </div>
+        <div class="col-md-6 mb-2">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="card-heading text-center">
+                        <div class="card-title ">
+                            <h3> Retailer Details</h3>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div><!--.panel-heading-->
+                    <div class="card-body">
+                        <div class="row example-row">
+                            @Html.AjaxGrid(Url.Action("MemberGrid", "DistributorDashboard", new { area = "Distributor" }))
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+
+                </div>
+
+                </div><!--.panel-->
+            </div><!--.col-md-6-->
+        <div class="col-md-6 mb-2">
+            <div class="card">
+                <div class="card-body">
+
+                    <div class="card-heading text-center">
+                        <div class="card-title ">
+                            <h3> Retailer Requisition</h3>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div><!--.panel-heading-->
+                    <div class="card-body">
+                        <div class="row example-row">
+                            @Html.AjaxGrid(Url.Action("RequisitionGridlist", "DistributorDashboard", new { area = "Distributor" }))
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+
+                </div>
+            </div><!--.panel-->
+        </div><!--.col-md-6-->
+
+        <div class="col-md-6 mb-2">
+            <div class="card">
+
+                <div class="card-body">
+
+                    <div class="card-heading text-center">
+                        <div class="card-title ">
+                            <h3> Distributor Bank Details</h3>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div><!--.panel-heading-->
+                    <div class="card-body">
+                        <div class="row example-row">
+                            @Html.AjaxGrid(Url.Action("BankPartilGridBind", "DistributorDashboard", new { area = "Distributor" }))
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+                    </div>
+                    </div>
+                </div><!--.panel-->
+            </div><!--.col-md-6-->
+    </div><!--.row-->
+    <!--.row-->
+</div>
+
+

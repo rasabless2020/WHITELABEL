@@ -1,0 +1,46 @@
+﻿@using NonFactors.Mvc.Grid;
+@{
+    ViewBag.Title = "Transaction List";
+    //Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+
+@using (Html.BeginForm(new { id = "Transactionlist" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal padding-top-20">        
+        <div>
+            <div>
+                <div>
+                    <div class="card">
+                        <div class="card-header text-right">
+                            <button id="btnExport" class="btn btn-info btn-xs">EXPORT</button>
+                            @*<a href="@(Url.Action("ExportIndex","DistributorTransactionReport",new {area="Distributor" }) + ViewContext.HttpContext.Request.QueryString)" class="btn btn-info btn-xs"><span class="ion-forward"></span>Export</a>*@
+                        </div>
+                        <div class="card-body">
+                            @Html.AjaxGrid(Url.Action("PartialRechargeInfoList", "MerchantRechargeService", new { area = "Merchant" }))
+                        </div>
+                    </div>
+                    
+                    @*<div class="panel-footer text-right">
+                        <button id="btnExport" class="btn btn-info btn-xs">EXPORT</button>
+                        </div>*@
+                    </div>
+            </div>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    $("[id$=btnExport]").click(function (e) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=my-ajax-grid]').html()));
+        e.preventDefault();
+    });
+</script>
+<script type="text/javascript">
+    $("[id$=btnExport]").click(function (e) {
+        window.open('data:application/vnd.ms-excel,' + encodeURIComponent($('div[id$=my-ajax-grid]').html()));
+        e.preventDefault();
+    });
+</script>
+

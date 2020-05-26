@@ -1,0 +1,43 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_TRANSXT_DMR_TRANSACTION_LIST>
+@{
+    ViewBag.Title = "GetAllTransactionLIst";
+    //Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+    Layout = null;
+}
+
+@(Html
+                    .Grid(Model)
+                    .Build(columns =>
+                    {
+                        columns.Add(model => model.txnId).Titled("Trans Id");
+                        columns.Add(model => model.CustomerID).Titled("Customer Id");
+                        columns.Add(model => model.RecipientID).Titled("Recipient Id");
+                        columns.Add(model => model.name).Titled("Recipient Name");                        
+                        columns.Add(model => model.TransferAmount).Titled("Trans Amount");
+                        columns.Add(model => model.accountNumber).Titled("Account No");
+                        columns.Add(model => model.ifscCode).Titled("Ifsc Code");                        
+                        columns.Add(model => model.SenderName).Titled("Sender Name");
+                        columns.Add(model => model.SenderMobile).Titled("Sender Mob");
+                        columns.Add(model => model.Transaction_Date).Titled("Trans date");
+                        //columns.Add(model => model.CREATE_DATE).Titled("Created Date").Formatted("{0:d}");
+                        //columns.Add(model => model.MEM_ID).Encoded(false).Filterable(false).Sortable(false).Titled("Action")
+                        //.RenderedAs(model => "<a href='javascript:void(0)' onclick='RecipientEnquery(\"" + model.RECIPIENT_ID + "\",\"" + model.CUSTOMER_ID + "\");return 0;' title='" + (model.ISVERIFIED == 0 ? "UnVerified" : "Verified") + "'>" + (model.ISVERIFIED == 0 ? "Not Verified" : "Verified") + "</a>");
+                        //columns.Add(model => model.MEM_ID).Titled("").Encoded(false).Filterable(false).Sortable(false).Titled("Action")
+                        //             .RenderedAs(model => "<div style='text-align:center'><a href='javascript:void(0);' onclick='DeleteRecipientInformation(\"" + model.RECIPIENT_ID + "\",\"" + model.CUSTOMER_ID + "\");return 0;'>Delete</a> </div>");
+                        //columns.Add(model => model.MEM_ID).Encoded(false).Filterable(false).Sortable(false).Titled("Action")
+                        //             .RenderedAs(model => "<div>&nbsp;<a href='" + @Url.Action("MoneyTransfer", "MerchantDMRSection", new { area = "Merchant", CustId = Encrypt.EncryptMe(model.RECIPIENT_ID) }) + "' Title='Transfer' style='margin-right:10px;'>Transfer </a></div>");
+                        //columns.Add(model => (model.STATUS == 0 ? "Active" : "Deactive")).Titled("Status").Css("<style>.table - hover tbody tr: hover {background - color:red;}</style> ").Filterable(true).Sortable(true);
+                    })
+                    .Empty("No data found")
+                    .Id("my-ajax-grid")
+                    .Pageable(pager =>
+                    {
+                        pager.PagesToDisplay = 10;
+                        pager.RowsPerPage = 10;
+                    })
+                    .Filterable()
+                    .Sortable()
+)
+

@@ -1,0 +1,201 @@
+﻿@model WHITELABEL.Web.Areas.Merchant.Models.RailUtilityApplication
+@{
+    /**/
+
+    ViewBag.Title = "Apply For Rail Utility";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+
+@using (Ajax.BeginForm("POSTApplyRailUtilityDetails", "MerchantRailApplication", new AjaxOptions { Confirm = "Do you want to apply rail Utility", OnSuccess = "OnSuccessRailMerchant", OnFailure = "OnFailureRailMerchant", LoadingElementId = "progressRailMerchant" }, new { area = "Merchant", @id = "GetMerchantDetails" }))
+
+{
+    @*@using (Html.BeginForm("POSTApplyRailUtilityDetails", "MerchantRailApplication", FormMethod.Post, new { area = "Merchant", enctype = "multipart/form-data" }))*@
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        @*<div class="col-md-12">
+            <div class="col-md-12 row headcolor">
+                <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-align-left fa-3x"></i></div>
+                <div class="col-md-4"></div>
+                <div class="col-md-4" style="text-align:right; padding-top:10px;">
+                    <h3>
+                        Application for Rail Utility
+                    </h3>
+                </div>
+            </div>
+        </div>*@
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div>
+                        <h4>Merchant Information</h4>
+                        @*<p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, commodi quam! Provident quis voluptate asperiores ullam, quidem odio pariatur. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem, nulla eos?
+                            Cum non ex voluptate corporis id asperiores doloribus dignissimos blanditiis iusto qui repellendus deleniti aliquam, vel quae eligendi explicabo.
+                        </p>*@
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-4 col-6">
+                                <div class="mb-4">
+                                    <p class="text-primary mb-1"><i class="i-Calendar text-16 mr-1"></i> GST No</p>
+                                    @*<span>1 Jan, 1994</span>*@
+                                    <span>
+                                        @Html.EditorFor(model => model.GST_No, new { htmlAttributes = new { @class = "form-control", @placeholder = "Gst No" } })
+                                    </span>
+
+                                </div>
+                                <div class="mb-4">
+                                    <p class="text-primary mb-1"><i class="i-Edit-Map text-16 mr-1"></i>Name </p>
+                                    <span>
+                                        @Html.EditorFor(model => model.Member_Name, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name", @readonly = "readonly" } })
+                                    </span>
+                                </div>
+                                <div class="mb-4">
+                                    
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-6">
+                                <div class="mb-4">
+                                    <p class="text-primary mb-1"><i class="i-MaleFemale text-16 mr-1"></i> Aadhaar Card</p>
+                                    @*<span>1 Jan, 1994</span>*@
+                                    <span>
+                                        @Html.EditorFor(model => model.AadhaarCard, new { htmlAttributes = new { @class = "form-control", @placeholder = "Aadhaar Card" } })
+                                    </span>
+                                </div>
+                                <div class="mb-4">
+                                    <p class="text-primary mb-1"><i class="i-MaleFemale text-16 mr-1"></i> Email</p>
+                                    <span>
+                                        @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email Id", @readonly = "readonly" } })
+                                    </span>
+                                </div>
+                                <div class="mb-4">
+                                    <p class="text-primary mb-1"><i class="i-Globe text-16 mr-1"></i> Description</p>
+                                    <span>@Html.TextAreaFor(model => model.Description, 5, 48, new { htmlAttributes = new { @class = "form-control", @style = "border-radius:5px", @placeholder = "Description" } })</span>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-6">
+                                <div class="mb-4">
+                                    <p class="text-primary mb-1"><i class="i-Face-Style-4 text-16 mr-1"></i> Pan Card</p>
+                                    <span>@Html.EditorFor(model => model.PanNo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Pan Card" } })</span>
+                                </div>
+                                <div class="mb-4">
+                                    <p class="text-primary mb-1"><i class="i-Professor text-16 mr-1"></i> Mobile No</p>
+                                    <span>
+                                        @Html.EditorFor(model => model.Mobile, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mobile", @readonly = "readonly" } })
+                                    </span>
+                                </div>
+                                <div class="mb-4">
+                                    @*<p class="text-primary mb-1"><i class="i-Home1 text-16 mr-1"></i> School</p>
+                                        <span>School of Digital Marketing</span>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-12" style="text-align:center">
+
+                            <div class="text-center">
+                                <input type="submit" value="Apply for RDS" class="btn btn-primary" id="btnsubmit" />
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            @*<div class="card">
+                    <div class="card-body" style="padding:40px ;">
+                        <div class="row ">
+                            <div class="col-md-12">
+
+                                <div class="col-md-12" style="box-shadow: 5px 10px #3e50b4; border: 1px solid #3e50b4; padding:20px;">
+                                    <div class="col-md-12" style="height:75px;">
+                                        <div class="form-group">
+                                            <label class="control-label col-md-3" style="padding-top:10px;">Customer ID</label>
+                                            <div class="col-md-9">
+                                                <div class="inputer">
+                                                    <div class="input-wrapper">
+                                                        <p>We are a team of journalists, editors and reviewers who are experts in content creation. We produce riveting blog posts to potentialize your brand’s engagement and increase sales. We do this because we believe that sharing good stories can make your business grow.</p>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12" style="margin-top:30px; box-shadow: 5px 10px #3e50b4; border: 1px solid #3e50b4; padding:20px;">
+                                    <div class="col-md-12">
+
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <label class="control-label col-md-3" style="padding-top:10px;">Amount</label>
+                                                <div class="col-md-9">
+                                                    <div class="inputer">
+                                                        <div class="input-wrapper">
+                                                            @Html.CheckBoxFor(model => model.checkValue, new { htmlAttributes = new { @class = "form-control", id = "chkCheckedVal" } })
+                                                        </div>
+                                                        <span class="help-block"><small>@Html.ValidationMessageFor(model => model.checkValue, "", new { @class = "text-danger" })</small></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group" style="text-align:right;">
+                                                @if (ViewBag.CheckPage)
+                                                {
+                                                    <input type="submit" value="Transfer Amount" class="btn btn-cyan" disabled />
+                                                }
+                                                else
+                                                {
+                                                    <input type="submit" value="Transfer Amount" class="btn btn-cyan" id="btnsubmit1" />
+                                                }
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="text-center">
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>*@
+        </div><!--.col-md-12-->
+    </div>
+    
+}
+
+<div class="preloader hidden" id="progressRailMerchant" style="display:none;">
+    <div id="loading"></div>
+</div>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#progressRailMerchant').removeClass("hidden");
+        $('#progressRailMerchant').hide();
+    })
+    function OnSuccessRailMerchant(response) {
+        var message = response;
+
+        $("#GetMerchantDetails").trigger("reset");
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+            }
+        })
+        //callGeocodeMobile();
+        //alert(message);
+    }
+    function OnFailureRailMerchant(response) {
+        alert("Error occured.");
+    }
+</script>

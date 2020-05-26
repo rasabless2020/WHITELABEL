@@ -1,0 +1,204 @@
+﻿@model WHITELABEL.Data.Models.TBL_FINGERPRINT_DEVICE_MASTER
+@using NonFactors.Mvc.Grid;
+@{
+    /**/
+
+    ViewBag.Title = "Finger Print Device Setup";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+<script src="~/Areas/Merchant/MerchantHelperJS/FingerPrinterJs/Index.js"></script>
+
+@Html.AntiForgeryToken()
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-heading">
+                    <div class="panel-title" style="margin-bottom:10px; margin-top:10px;">
+                        <div class="text-right col-md-12">
+                            <div class="panel-title" align="right"><a href="#" data-toggle="modal" data-target=".transd" id="transactionvalueid" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New Finger Print Device</a></div>
+                        </div>
+                    </div>
+                </div><!--.panel-heading-->
+                <div class="card-body">
+                    <div class="row example-row">
+                        @Html.AjaxGrid(Url.Action("IndexGrid", "MerchantFingerprintdevice", new { area = "Merchant" }))
+                    </div><!--.row-->
+                </div><!--.panel-body-->
+
+            </div><!--.panel-->
+        </div><!--.col-md-12-->
+    </div><!--.row-->
+</div>
+
+@using (Ajax.BeginForm("AddFingerPrintDevice", "MerchantFingerprintdevice", new AjaxOptions { Confirm = "Do you want to recharge", OnSuccess = "OnSuccessFingerPrint", OnFailure = "OnFailureFingerPrint", LoadingElementId = "progressFingerPrint" }, new { area = "Merchant", @id = "FingerPrintForm" }))
+{
+<div id="transactionvalueid" class="modal scale fade transd" tabindex="-1" role="dialog" aria-hidden="true">
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ID, new { htmlAttributes = new { id = "ID" } })
+    @Html.HiddenFor(model => model.MEM_ID, new { htmlAttributes = new { id = "MEM_ID" } })
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Finger Print Device</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12 row" style="margin-bottom:10px;">
+                    <div class="col-md-4" style="padding-top:10px;">Device Name : </div>
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                @*<input type="text" id="txtDeviceName" value="" class="form-control" />*@
+                                @Html.EditorFor(m => m.DEVICE_NAME, new { htmlAttributes = new { @style = " width:100%; padding:5px;", placeholder = "Device Name", @class = "form-control", @id = "txtDeviceName" } })
+                            </div>
+                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.DEVICE_NAME, "", new { @class = "text-danger" })</small></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 row" style="margin-bottom:10px;">
+                    <div class="col-md-4" style="padding-top:10px;">Device Model No : </div>
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                @*<input type="text" id="txtDeviceModelNo" value="" class="form-control" />*@
+                                @Html.EditorFor(m => m.DEVICE_MODELNO, new { htmlAttributes = new { @style = " width:100%; padding:5px;", placeholder = "Device Model No", @class = "form-control", @id = "txtDeviceModelNo" } })
+                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.DEVICE_MODELNO, "", new { @class = "text-danger" })</small></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 row" style="margin-bottom:10px;">
+                    <div class="col-md-4" style="padding-top:10px;">Device Code : </div>
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                @*<input type="text" id="txtDeviceCode" value="" class="form-control" />*@
+                                @Html.EditorFor(m => m.DEVICE_CODE, new { htmlAttributes = new { @style = " width:100%; padding:5px;", placeholder = "Device Code", @class = "form-control", @id = "txtDeviceCode" } })
+                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.DEVICE_CODE, "", new { @class = "text-danger" })</small></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="col-md-12 row" style="margin-bottom:10px;">
+                    <div class="col-md-4" style="padding-top:10px;">Status : </div>
+                    <div class="col-md-8">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                @Html.DropDownListFor(m => m.STATUS, new List<SelectListItem>
+                                                               { new SelectListItem{Text="Active", Value="0"},
+                                                                   new SelectListItem{Text="Deactive", Value="1"}},
+                                                                   new { id = "ddl_Status", @class = "form-control" })
+                                <span><small> @Html.ValidationMessageFor(model => model.STATUS, "", new { @class = "text-danger" })</small></span>
+                                @*<select id="ddl_Status" class="form-control">
+                                        <option value="1">Active</option>
+                                        <option value="0">Deactive</option>
+                                    </select>
+                                    <input type="hidden" id="hdnDeviceName" />*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" id="valuesubmit" class="btn btn-success">Save</button>*@
+                <input type="submit" value="Add" class="btn btn-info btn-lg" id="valuesubmit" />
+                @*<button type="button" id="valuesubmit" class="btn btn-success" onclick="SaveFingerPrintInformation($('#txtDeviceName').val(),$('#txtDeviceModelNo').val(),$('#txtDeviceCode').val(),$('#ddl_Status').val());">Save</button>*@
+            </div>
+        </div>
+    </div>
+
+</div>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$('#valuesubmit').attr('disabled', true);
+        $('#valuesubmit').attr('disabled', false);
+    });
+    function isNumberKey(evt) {
+        debugger;
+        var DeviceName = $('#txtDeviceName').val();
+        var DeviceModel = $('#txtDeviceModelNo').val();
+
+        document.getElementById("valuesubmit").disabled = false;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode != 46 && charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        else {
+            return true;
+            $('#valuesubmit').attr('disabled', false);
+        }
+    }
+</script>
+
+<div id="progressFingerPrint" class="loading hidden">Loading&#8230;</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#progressFingerPrint').removeClass("hidden");
+        $('#progressFingerPrint').hide();
+    })
+    function OnSuccessFingerPrint(response) {
+        
+        $('.mvc-grid').mvcgrid('reload');
+        var message = response;
+        //$("#FingerPrintForm").trigger("reset");
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+                $('#transactionvalueid').modal('hide');
+                $('.transd').modal('hide');                
+            }
+        })
+        $('.mvc-grid').mvcgrid('reload');
+        //callGeocodeMobile();
+        //alert(message);
+    }
+    function OnFailureFingerPrint(response) {
+        alert("Error occured.");
+    }
+
+
+
+    function GetFingerPrinterInfoDetails(transid) {
+        var idval = transid;
+        debugger;
+        $.ajax({
+            url: "/MerchantFingerprintdevice/GetFingerPrintInfo?area=Merchant",
+            data: {
+                TransId: transid
+            },
+            cache: false,
+            type: "POST",
+            dataType: "json",
+            beforeSend: function () {
+            },
+            success: function (data) {
+                debugger;
+                var traninfo = data;
+                $('#txtDeviceName').val(data.DEVICE_NAME);
+                $('#txtDeviceModelNo').val(data.DEVICE_MODELNO);
+                $('#txtDeviceCode').val(data.DEVICE_CODE);
+                $('#ddl_Status').val(data.STATUS);
+                var Device_ID = data.ID;
+                $('#ID').val(Device_ID);
+                $('#MEM_ID').val(data.MEM_ID);
+            },
+            error: function (xhr, status, error) {
+                console.log(status);
+            }
+        });
+    }
+
+
+</script>

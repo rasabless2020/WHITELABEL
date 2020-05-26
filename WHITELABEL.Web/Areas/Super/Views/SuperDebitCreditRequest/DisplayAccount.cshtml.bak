@@ -1,0 +1,40 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_ACCOUNTS>
+@{
+    ViewBag.Title = "Display Account";
+    //Layout = "~/Areas/Super/Views/Shared/_SuperLayout.cshtml";
+    Layout = "~/Areas/Super/Views/Shared/_SuperNewLayout.cshtml";
+}
+
+<div class="form-horizontal padding-top-20">
+    <div class="row">
+
+
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-heading text-right">
+                        <div class="card-title ">
+                            <a href="@Url.Action("Index", "SuperDebitCreditRequest", new { area = "Super" })" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span> New Requisition</a>
+                            @*<a href="@Url.Action("CreateMember", "APILabel")" class="btn btn-info btn-xs text-color-white"><span class="ion-plus"></span>Add New Member</a>*@
+                            <div class="clearfix"></div>
+                        </div>
+                    </div><!--.panel-heading-->
+                    <div class="row example-row">
+                        <div class="col-md-3">Transaction Status</div>
+                        <div class="col-md-9">
+                        </div>
+
+                        <div class="col-md-12 mt-2">@Html.AjaxGrid(Url.Action("indexgrid", "SuperDebitCreditRequest", new { area = "Super" }))</div>
+                    </div>
+                </div>
+                @*<div class="panel-footer text-right">
+                        <button id="btnExport" class="btn btn-info btn-xs">EXPORT</button>
+                    </div>*@
+
+            </div>
+        </div>
+    </div>
+</div>
+

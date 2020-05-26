@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewBag.Title = "White Level";
+    //Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>White Level</title>
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- BEGIN CORE CSS -->
+    <link rel="stylesheet" href="~/panel/assets/admin1/css/admin1.css">
+    <link rel="stylesheet" href="~/panel/assets/globals/css/elements.css">
+    <!-- END CORE CSS -->
+    <!-- BEGIN PLUGINS CSS -->
+    <link rel="stylesheet" href="~/panel/assets/globals/plugins/bootstrap-social/bootstrap-social.css">
+    <!-- END PLUGINS CSS -->
+    <!-- FIX PLUGINS -->
+    <link rel="stylesheet" href="~/panel/assets/globals/css/plugins.css">
+    <!-- END FIX PLUGINS -->
+    <!-- BEGIN SHORTCUT AND TOUCH ICONS -->
+    <link rel="shortcut icon" href="~/panel/assets/globals/img/icons/favicon.ico">
+    <link rel="apple-touch-icon" href="~/panel/assets/globals/img/icons/apple-touch-icon.png">
+    <!-- END SHORTCUT AND TOUCH ICONS -->
+
+    <script src="~/panel/assets/globals/plugins/modernizr/modernizr.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="/Scripts/jquery.validate.js"></script>
+    <script src="/Scripts/jquery.validate.unobtrusive.js"></script>
+
+</head>
+<body class="bg-login printable">
+    @*<h3>White level</h3>*@
+    <div class="login-screen">
+        <div class="panel-login" style="text-align:center;">
+            
+        <div><img src="~/images/vapron_logo.png" width="300"/></div>
+
+            <div>
+                <p><h4 style="color:#000; font-weight:300; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Email : support@vaprondigi.com</h4></p>
+                <p><h4 style="color:#000; font-weight:300;  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">+91 11 4984 3639</h4></p>
+            </div>
+            
+        </div><!--.blur-content-->
+
+        <div style="text-align: center; ">
+            <a href="#"><i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-google-plus-square fa-3x" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-linkedin-square fa-3x" aria-hidden="true"></i></a>
+            <a href="#"><i class="fa fa-twitter-square fa-3x" aria-hidden="true"></i></a>
+        </div>
+        <div style="text-align: center;margin-top:10px">    
+            <div class="col-lg-12">
+                <div class="col-lg-4" style="padding:0px;"><a  href="/poweradmin" class="btn btn-default">Power Admin</a> </div>
+                <div class="col-lg-4" style="padding:0px;"><a href="/admin" class="btn btn-default">White Level</a></div>
+                <div class="col-lg-4" style="padding:0px;"><a href="/super" class="btn btn-default">Super </a></div>
+                <div class="col-lg-6" style="text-align: center;margin-top:10px"><a href="/distributor" class="btn btn-default pull-right">Distributor</a></div>
+                <div class="col-lg-6" style="text-align: center;margin-top:10px"><a href="/Merchant" class="btn btn-default pull-left">Merchant</a></div>
+            </div>
+             
+        </div>
+
+    </div><!--.login-screen-->
+    @*<div class="bg-blur dark">*@
+    <div class="bg-blur dark">
+        <div class="overlay"></div><!--.overlay-->
+    </div><!--.bg-blur-->
+
+    <svg version="1.1" xmlns='http://www.w3.org/2000/svg'>
+        <filter id='blur'>
+            <feGaussianBlur stdDeviation='7' />
+        </filter>
+    </svg>
+
+    <!-- BEGIN GLOBAL AND THEME VENDORS -->
+    <script src="~/panel/assets/globals/js/global-vendors.js"></script>
+    <!-- END GLOBAL AND THEME VENDORS -->
+    <!-- BEGIN PLUGINS AREA -->
+    <!-- END PLUGINS AREA -->
+    <!-- PLUGINS INITIALIZATION AND SETTINGS -->
+    <script src="~/panel/assets/globals/scripts/user-pages.js"></script>
+    <!-- END PLUGINS INITIALIZATION AND SETTINGS -->
+    <!-- PLEASURE Initializer -->
+    <script src="~/panel/assets/globals/js/pleasure.js"></script>
+    <!-- ADMIN 1 Layout Functions -->
+    <script src="~/panel/assets/admin1/js/layout.js"></script>
+
+    <!-- BEGIN INITIALIZATION-->
+    <script>
+        $(document).ready(function () {
+            Pleasure.init();
+            Layout.init();
+            UserPages.login();
+        });
+    </script>
+    <!-- END INITIALIZATION-->
+    <!-- BEGIN Google Analytics -->
+    <script>
+        (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', Pleasure.settings.ga.urchin, Pleasure.settings.ga.url);
+        ga('send', 'pageview');
+    </script>
+    <!-- END Google Analytics -->
+
+</body>
+</html>

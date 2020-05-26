@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "BindAllMobileOperator";
+    //Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    Layout = null;
+}
+<div class="modal-body">
+    <table class="table table-bordered table-responsive table-hover">
+        <tr>
+            <th>Operator Name </th>
+            <th></th>
+        </tr>
+        @foreach (var d in ViewBag.operatorList)
+        {
+            <tr>
+                <td>
+                    @d.SERVICE_NAME (@d.TYPE)
+                    <input type="hidden" value="@d.SERVICE_KEY" />
+                </td>
+
+                <td><a href="javascript:void(0)" class="btn btn-default" onclick="setServiseOperator('@d.SERVICE_KEY','@d.SERVICE_NAME')">Select..</a></td>
+            </tr>
+        }
+    </table>
+    </div>
+

@@ -1,0 +1,721 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title"><h4>BASIC FORM ELEMENTS</h4></div>
+            </div><!--.panel-heading-->
+            <div class="panel-body">
+
+                <div class="row example-row">
+                    <div class="col-md-3">Text Inputs</div><!--.col-md-3-->
+                    <div class="col-md-9">
+
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Text placeholder">
+                            </div>
+                        </div>
+
+                        <div class="inputer floating-label">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" id="exampleInput1">
+                                <label for="exampleInput1">Floating label</label>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="ion-android-call"></i></span>
+                            <div class="inputer">
+                                <div class="input-wrapper">
+                                    <input type="text" class="form-control" placeholder="With icon">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input" disabled>
+                            </div>
+                        </div>
+
+                    </div><!--.col-md-9-->
+                </div><!--.row-->
+
+                <div class="row example-row">
+                    <div class="col-md-3">Checkboxes and Radios</div><!--.col-md-3-->
+                    <div class="col-md-9">
+                        <div class="checkboxer">
+                            <input type="checkbox" value="" id="check1">
+                            <label for="check1">Option one is this</label>
+                        </div><!--.checkbox-->
+                        <div class="checkboxer disabled">
+                            <input type="checkbox" value="" id="check2" disabled>
+                            <label for="check2">Option two is disabled</label>
+                        </div><!--.checkbox-->
+
+                        <div class="radioer">
+                            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                            <label for="optionsRadios1">Option one is this</label>
+                        </div><!--.radio-->
+                        <div class="radioer">
+                            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+                            <label for="optionsRadios2">Option two can be something else</label>
+                        </div><!--.radio-->
+                        <div class="radioer disabled">
+                            <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
+                            <label for="optionsRadios3">Option three is disabled</label>
+                        </div><!--.radio-->
+                    </div><!--.col-md-9-->
+                </div><!--.row-->
+
+                <div class="row example-row">
+                    <div class="col-md-3">Switchers</div><!--.col-md-3-->
+                    <div class="col-md-9">
+                        <div class="switcher">
+                            <input id="switcher1" type="checkbox" hidden="hidden">
+                            <label for="switcher1"></label>
+                        </div><!--.switcher-->
+                    </div><!--.col-md-9-->
+                </div><!--.row-->
+
+                <div class="row example-row">
+                    <div class="col-md-3">Inline Checkboxes and Radios</div><!--.col-md-3-->
+                    <div class="col-md-9">
+
+                        <div class="clearfix margin-bottom-10">
+                            <div class="checkboxer form-inline">
+                                <input type="checkbox" id="inlineCheckbox1" value="option1">
+                                <label for="inlineCheckbox1">1</label>
+                            </div>
+                            <div class="checkboxer form-inline">
+                                <input type="checkbox" id="inlineCheckbox2" value="option2">
+                                <label for="inlineCheckbox2">2</label>
+                            </div>
+                            <div class="checkboxer form-inline">
+                                <input type="checkbox" id="inlineCheckbox3" value="option3">
+                                <label for="inlineCheckbox3">3</label>
+                            </div>
+                        </div>
+
+                        <div class="clearfix">
+
+                            <div class="radioer form-inline">
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label for="inlineRadio1">1</label>
+                            </div>
+                            <div class="radioer form-inline">
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <label for="inlineRadio2">2</label>
+                            </div>
+                            <div class="radioer form-inline">
+                                <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                                <label for="inlineRadio3">3</label>
+                            </div>
+
+                        </div>
+                    </div><!--.col-md-9-->
+                </div><!--.row-->
+
+                <div class="row example-row">
+                    <div class="col-md-3">Selectbox</div><!--.col-md-3-->
+                    <div class="col-md-9">
+                        <select class="selecter">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div><!--.col-md-9-->
+                </div><!--.row-->
+
+                <div class="row example-row">
+                    <div class="col-md-3">Multiple Selectbox</div><!--.col-md-3-->
+                    <div class="col-md-9">
+                        <select multiple class="selecter">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div><!--.col-md-9-->
+                </div><!--.row-->
+
+                <div class="row example-row">
+                    <div class="col-md-3">Textarea</div><!--.col-md-3-->
+                    <div class="col-md-9">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <textarea class="form-control" rows="3" placeholder="Normal textarea"></textarea>
+                            </div>
+                        </div>
+                    </div><!--.col-md-9-->
+                </div><!--.row-->
+
+                <div class="row example-row">
+                    <div class="col-md-3">Autosize Textarea</div><!--.col-md-3-->
+                    <div class="col-md-9">
+                        <div class="inputer">
+                            <div class="input-wrapper">
+                                <textarea class="form-control js-auto-size" rows="1" placeholder="Autosize textarea"></textarea>
+                            </div>
+                        </div>
+                    </div><!--.col-md-9-->
+                </div><!--.row-->
+
+                <div class="row example-row">
+                    <div class="col-md-3">File Input</div><!--.col-md-3-->
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <label for="exampleInputFile">File input</label>
+                            <input type="file" id="exampleInputFile">
+                            <p class="help-block">Example block-level help text here.</p>
+                        </div><!--.form-group-->
+                    </div><!--.col-md-9-->
+                </div><!--.row-->
+
+            </div><!--.panel-body-->
+        </div><!--.panel-->
+    </div><!--.col-md-12-->
+</div><!--.row-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title"><h4>INPUT COLORS</h4></div>
+            </div><!--.panel-heading-->
+            <div class="panel-body">
+                <div class="row example-row">
+                    <div class="col-md-4">
+
+                        <div class="inputer inputer-red">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Red">
+                            </div>
+                        </div>
+                        <div class="inputer inputer-pink">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Pink">
+                            </div>
+                        </div>
+                        <div class="inputer inputer-purple">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Purple">
+                            </div>
+                        </div>
+                        <div class="inputer inputer-deep-purple">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Deep Purple">
+                            </div>
+                        </div>
+                        <div class="inputer inputer-indigo">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Indigo">
+                            </div>
+                        </div>
+                        <div class="inputer inputer-blue">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Blue">
+                            </div>
+                        </div>
+                        <div class="inputer inputer-light-blue">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Light Blue">
+                            </div>
+                        </div>
+
+                    </div><!--.col-md-3-->
+                    <div class="col-md-4">
+
+                        <div class="inputer inputer-cyan">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Cyan">
+                            </div>
+                        </div>
+                        <div class="inputer inputer-teal">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Teal">
+                            </div>
+                        </div>
+                        <div class="inputer inputer-green">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Green">
+                            </div>
+                        </div>
+                        <div class="inputer inputer-light-green">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Light Green">
+                            </div>
+                        </div>
+                        <div class="inputer inputer-lime">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Lime">
+                            </div>
+                        </div>
+                        <div class="inputer inputer-yellow">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Yellow">
+                            </div>
+                        </div>
+
+                    </div><!--.col-md-4-->
+
+                    <div class="col-md-4">
+
+                        <div class="inputer inputer-amber">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Amber">
+                            </div>
+                        </div>
+                        <div class="inputer inputer-orange">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Orange">
+                            </div>
+                        </div>
+                        <div class="inputer inputer-deep-orange">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Deep Orange">
+                            </div>
+                        </div>
+                        <div class="inputer inputer-brown">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Brown">
+                            </div>
+                        </div>
+                        <div class="inputer inputer-grey">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Grey">
+                            </div>
+                        </div>
+                        <div class="inputer inputer-blue-grey">
+                            <div class="input-wrapper">
+                                <input type="text" class="form-control" placeholder="Blue Grey">
+                            </div>
+                        </div>
+
+                    </div><!--.col-md-4-->
+                </div><!--.row-->
+
+            </div><!--.panel-body-->
+        </div><!--.panel-->
+    </div><!--.col-md-12-->
+</div><!--.row-->
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title"><h4>CHECKBOX COLORS</h4></div>
+            </div><!--.panel-heading-->
+            <div class="panel-body">
+
+                <div class="row example-row">
+                    <div class="col-md-12">
+
+                        <div class="checkboxer checkboxer-red form-inline">
+                            <input type="checkbox" id="checkboxColor1" value="option1" checked="checked">
+                            <label for="checkboxColor1">Red</label>
+                        </div>
+                        <div class="checkboxer checkboxer-pink form-inline">
+                            <input type="checkbox" id="checkboxColor2" value="option1" checked="checked">
+                            <label for="checkboxColor2">Pink</label>
+                        </div>
+                        <div class="checkboxer checkboxer-purple form-inline">
+                            <input type="checkbox" id="checkboxColor3" value="option1" checked="checked">
+                            <label for="checkboxColor3">Purple</label>
+                        </div>
+
+                        <div class="checkboxer checkboxer-deep-purple form-inline">
+                            <input type="checkbox" id="checkboxColor4" value="option1" checked="checked">
+                            <label for="checkboxColor4">Deep Purple</label>
+                        </div>
+                        <div class="checkboxer checkboxer-indigo form-inline">
+                            <input type="checkbox" id="checkboxColor5" value="option1" checked="checked">
+                            <label for="checkboxColor5">Indigo</label>
+                        </div>
+                        <div class="checkboxer checkboxer-blue form-inline">
+                            <input type="checkbox" id="checkboxColor6" value="option1" checked="checked">
+                            <label for="checkboxColor6">Blue</label>
+                        </div>
+
+                        <div class="checkboxer checkboxer-light-blue form-inline">
+                            <input type="checkbox" id="checkboxColor7" value="option1" checked="checked">
+                            <label for="checkboxColor7">Light Blue</label>
+                        </div>
+                        <div class="checkboxer checkboxer-cyan form-inline">
+                            <input type="checkbox" id="checkboxColor8" value="option1" checked="checked">
+                            <label for="checkboxColor8">Cyan</label>
+                        </div>
+                        <div class="checkboxer checkboxer-teal form-inline">
+                            <input type="checkbox" id="checkboxColor9" value="option1" checked="checked">
+                            <label for="checkboxColor9">Teal</label>
+                        </div>
+
+                        <div class="checkboxer checkboxer-green form-inline">
+                            <input type="checkbox" id="checkboxColor10" value="option1" checked="checked">
+                            <label for="checkboxColor10">Green</label>
+                        </div>
+                        <div class="checkboxer checkboxer-light-green form-inline">
+                            <input type="checkbox" id="checkboxColor11" value="option1" checked="checked">
+                            <label for="checkboxColor11">Light Green</label>
+                        </div>
+                        <div class="checkboxer checkboxer-lime form-inline">
+                            <input type="checkbox" id="checkboxColor12" value="option1" checked="checked">
+                            <label for="checkboxColor12">Lime</label>
+                        </div>
+
+                        <div class="checkboxer checkboxer-yellow form-inline">
+                            <input type="checkbox" id="checkboxColor13" value="option1" checked="checked">
+                            <label for="checkboxColor13">Yellow</label>
+                        </div>
+                        <div class="checkboxer checkboxer-amber form-inline">
+                            <input type="checkbox" id="checkboxColor14" value="option1" checked="checked">
+                            <label for="checkboxColor14">Amber</label>
+                        </div>
+                        <div class="checkboxer checkboxer-orange form-inline">
+                            <input type="checkbox" id="checkboxColor15" value="option1" checked="checked">
+                            <label for="checkboxColor15">Orange</label>
+                        </div>
+
+                        <div class="checkboxer checkboxer-deep-orange form-inline">
+                            <input type="checkbox" id="checkboxColor16" value="option1" checked="checked">
+                            <label for="checkboxColor16">Deep Orange</label>
+                        </div>
+                        <div class="checkboxer checkboxer-brown form-inline">
+                            <input type="checkbox" id="checkboxColor17" value="option1" checked="checked">
+                            <label for="checkboxColor17">Brown</label>
+                        </div>
+                        <div class="checkboxer checkboxer-grey form-inline">
+                            <input type="checkbox" id="checkboxColor18" value="option1" checked="checked">
+                            <label for="checkboxColor18">Grey</label>
+                        </div>
+                        <div class="checkboxer checkboxer-blue-grey form-inline">
+                            <input type="checkbox" id="checkboxColor19" value="option1" checked="checked">
+                            <label for="checkboxColor19">Blue Grey</label>
+                        </div>
+
+
+                    </div><!--.col-->
+
+                </div><!--.row-->
+
+            </div><!--.panel-body-->
+        </div><!--.panel-->
+    </div><!--.col-md-12-->
+</div><!--.row-->
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title"><h4>RADIO COLORS</h4></div>
+            </div><!--.panel-heading-->
+            <div class="panel-body">
+
+                <div class="row example-row">
+                    <div class="col-md-12">
+
+                        <div class="radioer radioer-red form-inline">
+                            <input type="radio" name="radioColorOption" id="radioColor1" value="option1">
+                            <label for="radioColor1">Red</label>
+                        </div>
+                        <div class="radioer radioer-pink form-inline">
+                            <input type="radio" name="radioColorOption" id="radioColor2" value="option2">
+                            <label for="radioColor2">Pink</label>
+                        </div>
+                        <div class="radioer radioer-purple form-inline">
+                            <input type="radio" name="radioColorOption" id="radioColor3" value="option3">
+                            <label for="radioColor3">Purple</label>
+                        </div>
+
+                        <div class="radioer radioer-deep-purple form-inline">
+                            <input type="radio" name="radioColorOption" id="radioColor4" value="option4">
+                            <label for="radioColor4">Deep Purple</label>
+                        </div>
+                        <div class="radioer radioer-indigo form-inline">
+                            <input type="radio" name="radioColorOption" id="radioColor5" value="option5">
+                            <label for="radioColor5">Indigo</label>
+                        </div>
+                        <div class="radioer radioer-blue form-inline">
+                            <input type="radio" name="radioColorOption" id="radioColor6" value="option6">
+                            <label for="radioColor6">Blue</label>
+                        </div>
+
+                        <div class="radioer radioer-light-blue form-inline">
+                            <input type="radio" name="radioColorOption" id="radioColor7" value="option7">
+                            <label for="radioColor7">Light Blue</label>
+                        </div>
+                        <div class="radioer radioer-cyan form-inline">
+                            <input type="radio" name="radioColorOption" id="radioColor8" value="option8">
+                            <label for="radioColor8">Cyan</label>
+                        </div>
+                        <div class="radioer radioer-teal form-inline">
+                            <input type="radio" name="radioColorOption" id="radioColor9" value="option9">
+                            <label for="radioColor9">Teal</label>
+                        </div>
+
+                        <div class="radioer radioer-green form-inline">
+                            <input type="radio" name="radioColorOption" id="radioColor10" value="option10">
+                            <label for="radioColor10">Green</label>
+                        </div>
+                        <div class="radioer radioer-light-green form-inline">
+                            <input type="radio" name="radioColorOption" id="radioColor11" value="option11">
+                            <label for="radioColor11">Light Green</label>
+                        </div>
+                        <div class="radioer radioer-lime form-inline">
+                            <input type="radio" name="radioColorOption" id="radioColor12" value="option12">
+                            <label for="radioColor12">Lime</label>
+                        </div>
+
+                        <div class="radioer radioer-yellow form-inline">
+                            <input type="radio" name="radioColorOption" id="radioColor13" value="option13">
+                            <label for="radioColor13">Yellow</label>
+                        </div>
+                        <div class="radioer radioer-amber form-inline">
+                            <input type="radio" name="radioColorOption" id="radioColor14" value="option14">
+                            <label for="radioColor14">Amber</label>
+                        </div>
+                        <div class="radioer radioer-orange form-inline">
+                            <input type="radio" name="radioColorOption" id="radioColor15" value="option15">
+                            <label for="radioColor15">Orange</label>
+                        </div>
+
+                        <div class="radioer radioer-deep-orange form-inline">
+                            <input type="radio" name="radioColorOption" id="radioColor16" value="option16">
+                            <label for="radioColor16">Deep Orange</label>
+                        </div>
+                        <div class="radioer radioer-brown form-inline">
+                            <input type="radio" name="radioColorOption" id="radioColor17" value="option17">
+                            <label for="radioColor17">Brown</label>
+                        </div>
+                        <div class="radioer radioer-grey form-inline">
+                            <input type="radio" name="radioColorOption" id="radioColor18" value="option18">
+                            <label for="radioColor18">Grey</label>
+                        </div>
+                        <div class="radioer radioer-blue-grey form-inline">
+                            <input type="radio" name="radioColorOption" id="radioColor19" value="option19">
+                            <label for="radioColor19">Blue Grey</label>
+                        </div>
+
+                    </div><!--.col-->
+
+                </div><!--.row-->
+
+            </div><!--.panel-body-->
+        </div><!--.panel-->
+    </div><!--.col-md-12-->
+</div><!--.row-->
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title"><h4>SWITCH COLORS</h4></div>
+            </div><!--.panel-heading-->
+            <div class="panel-body">
+
+                <div class="row example-row">
+                    <div class="col-md-12">
+
+                        <div class="switcher switcher-red form-inline">
+                            <input id="switcherColor1" type="checkbox" hidden="hidden" checked="checked">
+                            <label for="switcherColor1"></label>
+                        </div><!--.switcher-->
+                        <div class="switcher switcher-pink form-inline">
+                            <input id="switcherColor2" type="checkbox" hidden="hidden" checked="checked">
+                            <label for="switcherColor2"></label>
+                        </div><!--.switcher-->
+                        <div class="switcher switcher-purple form-inline">
+                            <input id="switcherColor3" type="checkbox" hidden="hidden" checked="checked">
+                            <label for="switcherColor3"></label>
+                        </div><!--.switcher-->
+
+                        <div class="switcher switcher-deep-purple form-inline">
+                            <input id="switcherColor4" type="checkbox" hidden="hidden" checked="checked">
+                            <label for="switcherColor4"></label>
+                        </div><!--.switcher-->
+                        <div class="switcher switcher-indigo form-inline">
+                            <input id="switcherColor5" type="checkbox" hidden="hidden" checked="checked">
+                            <label for="switcherColor5"></label>
+                        </div><!--.switcher-->
+                        <div class="switcher switcher-blue form-inline">
+                            <input id="switcherColor6" type="checkbox" hidden="hidden" checked="checked">
+                            <label for="switcherColor6"></label>
+                        </div><!--.switcher-->
+
+                        <div class="switcher switcher-light-blue form-inline">
+                            <input id="switcherColor7" type="checkbox" hidden="hidden" checked="checked">
+                            <label for="switcherColor7"></label>
+                        </div><!--.switcher-->
+                        <div class="switcher switcher-cyan form-inline">
+                            <input id="switcherColor8" type="checkbox" hidden="hidden" checked="checked">
+                            <label for="switcherColor8"></label>
+                        </div><!--.switcher-->
+                        <div class="switcher switcher-teal form-inline">
+                            <input id="switcherColor9" type="checkbox" hidden="hidden" checked="checked">
+                            <label for="switcherColor9"></label>
+                        </div><!--.switcher-->
+
+                        <div class="switcher switcher-green form-inline">
+                            <input id="switcherColor10" type="checkbox" hidden="hidden" checked="checked">
+                            <label for="switcherColor10"></label>
+                        </div><!--.switcher-->
+                        <div class="switcher switcher-light-green form-inline">
+                            <input id="switcherColor11" type="checkbox" hidden="hidden" checked="checked">
+                            <label for="switcherColor11"></label>
+                        </div><!--.switcher-->
+                        <div class="switcher switcher-lime form-inline">
+                            <input id="switcherColor12" type="checkbox" hidden="hidden" checked="checked">
+                            <label for="switcherColor12"></label>
+                        </div><!--.switcher-->
+
+                        <div class="switcher switcher-yellow form-inline">
+                            <input id="switcherColor13" type="checkbox" hidden="hidden" checked="checked">
+                            <label for="switcherColor13"></label>
+                        </div><!--.switcher-->
+                        <div class="switcher switcher-amber form-inline">
+                            <input id="switcherColor14" type="checkbox" hidden="hidden" checked="checked">
+                            <label for="switcherColor14"></label>
+                        </div><!--.switcher-->
+                        <div class="switcher switcher-orange form-inline">
+                            <input id="switcherColor15" type="checkbox" hidden="hidden" checked="checked">
+                            <label for="switcherColor15"></label>
+                        </div><!--.switcher-->
+
+                        <div class="switcher switcher-deep-orange form-inline">
+                            <input id="switcherColor16" type="checkbox" hidden="hidden" checked="checked">
+                            <label for="switcherColor16"></label>
+                        </div><!--.switcher-->
+                        <div class="switcher switcher-brown form-inline">
+                            <input id="switcherColor17" type="checkbox" hidden="hidden" checked="checked">
+                            <label for="switcherColor17"></label>
+                        </div><!--.switcher-->
+                        <div class="switcher switcher-grey form-inline">
+                            <input id="switcherColor18" type="checkbox" hidden="hidden" checked="checked">
+                            <label for="switcherColor18"></label>
+                        </div><!--.switcher-->
+                        <div class="switcher switcher-blue-grey form-inline">
+                            <input id="switcherColor19" type="checkbox" hidden="hidden" checked="checked">
+                            <label for="switcherColor19"></label>
+                        </div><!--.switcher-->
+
+                    </div><!--.col-->
+
+                </div><!--.row-->
+
+            </div><!--.panel-body-->
+        </div><!--.panel-->
+    </div><!--.col-md-12-->
+</div><!--.row-->
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel">
+            <div class="panel-heading">
+                <div class="panel-title"><h4>SELECT COLORS</h4></div>
+            </div><!--.panel-heading-->
+            <div class="panel-body">
+
+                <div class="row example-row">
+                    <div class="col-md-4">
+
+                        <select class="selecter" data-style="btn-red">
+                            <option>Red</option>
+                            <option>Other</option>
+                        </select>
+                        <select class="selecter" data-style="btn-pink">
+                            <option>Pink</option>
+                            <option>Other</option>
+                        </select>
+                        <select class="selecter" data-style="btn-purple">
+                            <option>Purple</option>
+                            <option>Other</option>
+                        </select>
+                        <select class="selecter" data-style="btn-deep-purple">
+                            <option>Deep Purple</option>
+                            <option>Other</option>
+                        </select>
+                        <select class="selecter" data-style="btn-indigo">
+                            <option>Indigo</option>
+                            <option>Other</option>
+                        </select>
+                        <select class="selecter" data-style="btn-blue">
+                            <option>Blue</option>
+                            <option>Other</option>
+                        </select>
+                        <select class="selecter" data-style="btn-light-blue">
+                            <option>Light Blue</option>
+                            <option>Other</option>
+                        </select>
+
+                    </div>
+                    <div class="col-md-4">
+
+                        <select class="selecter" data-style="btn-cyan">
+                            <option>Cyan</option>
+                            <option>Other</option>
+                        </select>
+                        <select class="selecter" data-style="btn-teal">
+                            <option>Teal</option>
+                            <option>Other</option>
+                        </select>
+                        <select class="selecter" data-style="btn-green">
+                            <option>Green</option>
+                            <option>Other</option>
+                        </select>
+                        <select class="selecter" data-style="btn-light-green">
+                            <option>Light Green</option>
+                            <option>Other</option>
+                        </select>
+                        <select class="selecter" data-style="btn-lime">
+                            <option>Lime</option>
+                            <option>Other</option>
+                        </select>
+                        <select class="selecter" data-style="btn-yellow">
+                            <option>Yellow</option>
+                            <option>Other</option>
+                        </select>
+
+                    </div>
+
+                    <div class="col-md-4">
+
+                        <select class="selecter" data-style="btn-amber">
+                            <option>Amber</option>
+                            <option>Other</option>
+                        </select>
+                        <select class="selecter" data-style="btn-orange">
+                            <option>Orange</option>
+                            <option>Other</option>
+                        </select>
+                        <select class="selecter" data-style="btn-deep-orange">
+                            <option>Deep Orange</option>
+                            <option>Other</option>
+                        </select>
+                        <select class="selecter" data-style="btn-brown">
+                            <option>Brown</option>
+                            <option>Other</option>
+                        </select>
+                        <select class="selecter" data-style="btn-grey">
+                            <option>Grey</option>
+                            <option>Other</option>
+                        </select>
+                        <select class="selecter" data-style="btn-blue-grey">
+                            <option>Blue Grey</option>
+                            <option>Other</option>
+                        </select>
+
+                    </div><!--.col-->
+
+                </div><!--.row-->
+
+            </div><!--.panel-body-->
+        </div><!--.panel-->
+    </div><!--.col-md-12-->
+</div><!--.row-->

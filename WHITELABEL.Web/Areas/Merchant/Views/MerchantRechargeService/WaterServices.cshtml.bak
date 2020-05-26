@@ -1,0 +1,326 @@
+﻿@model  WHITELABEL.Web.Areas.Merchant.Models.WaterSupplyPaymentModel
+@{
+    ViewBag.Title = "WaterServices";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}
+@Scripts.Render("~/bundles/MerchantWaterSupplyRecharge")
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+@using (Ajax.BeginForm("PostWaterSypplyBillPayment", "MerchantRechargeService", new AjaxOptions { Confirm = "Do you want to pay bill", OnSuccess = "OnSuccessWaterBill", OnFailure = "OnFailureWaterBill", LoadingElementId = "progressWaterBill" }, new { area = "Merchant", @id = "WaterSupplyPayment" }))
+{
+    @Html.AntiForgeryToken()
+
+
+
+    @*<div class="col-md-12">
+            <div class="col-md-12 row headcolor">
+                <div class="col-md-4" style="text-align:left; padding-top:3px;"><i class="fa fa-tint  fa-3x"></i> </div>
+
+                <div class="col-md-8" style="text-align:right; padding-top:10px;">
+                    <h3>
+                        Water Bill Payment
+                    </h3>
+                </div>
+            </div>
+        </div>*@
+
+    <div class="col-md-12">
+        <div class="card">
+
+
+            <div class="card-body">
+                <h5>Water Bill Payment</h5>
+                <form>
+
+                    <div class="col-md-12" style="text-align:center; color:red; margin-bottom:30px;">
+                        <div id="Errormsgvalue"></div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="row">
+
+
+                        <div class="col-md-3"></div>
+                        <div class="col-md-6">
+                            <div class="col-md-12">
+                                <div class=" floating-label">
+                                    @*<div class="input-wrapper"></div>*@
+                                    <div class="inputer">
+                                        <div class="input-wrapper">
+                                            @Html.EditorFor(m => m.CustomerId, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "K No", @class = "form-control", id = "waterBillNo" } })
+                                            <label for="exampleInput1">@*Customer ID*@</label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.CustomerId, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                    <div style="display:none">
+                                        @Html.EditorFor(m => m.geolocation, new { htmlAttributes = new { @class = "form-control", id = "GeolocationWaterBill", @readonly = "readonly" } })
+                                        @Html.EditorFor(m => m.IpAddress, new { htmlAttributes = new { @class = "form-control", id = "WaterBillIpaddress", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class=" floating-label">
+                                    @*<div class="input-wrapper"></div>*@
+                                    <div class="inputer">
+                                        <div class="input-wrapper">
+                                            @Html.EditorFor(m => m.MobileNo, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Mobile No", @class = "form-control", id = "waterBillMobileNo" } })
+                                            <label for="amount">@*Mobile No*@</label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom:20px;">
+                                <div class=" floating-label">
+                                    <div class="input-group" style="height:37px;">
+                                        <div class="inputer" style="width:91%;">
+                                            <div class="input-wrapper">
+                                                @*<input type="text" id="hfOperator" name="OperatorId" class="form-control" placeholder="Operator Name">*@
+                                                @Html.EditorFor(m => m.Service_Name, new { htmlAttributes = new { @style = "width:100%; padding:5px; border:none", placeholder = "Operator Name", id = "txtWaterSupplyOperator", @class = "form-control" } })
+                                                <input type="hidden" id="hfWaterSupplyperator" name="WaterSupplyoperId" />
+                                                <span class="help-block"><small>@Html.ValidationMessageFor(model => model.Service_Name, "", new { @class = "text-danger" })</small></span>
+                                            </div>
+                                        </div>
+                                        <span class="input-group-btn">
+                                            <button href="javascript:void(0)" data-toggle='modal' data-target='.transdWater' id='transactionvalueWaterid' type="button" class="btn btn-default">...</button>
+                                        </span>
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+                            <div class="col-md-12">
+                                <div class=" floating-label">
+                                    @*<div class="input-wrapper"></div>*@
+                                    <div class="inputer">
+                                        <div class="input-wrapper">
+                                            @Html.EditorFor(m => m.RechargeAmt, new { htmlAttributes = new { @style = "width:100%; padding:5px;", placeholder = "Bill Amount", @class = "form-control", id = "WaterBillAMount", @readonly = "readonly" } })
+                                            <label for="exampleInput1">@*Recharge amt*@</label>
+                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.RechargeAmt, "", new { @class = "text-danger" })</small></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" style="text-align:center;">
+                                <a href="#" onclick="GetWaterBillDetails();" style="color:white;" class="btn btn-info btn-lg" id="btnWaterBillDisplay">Get Bill</a>
+                                <input type="submit" value="Pay" class="btn btn-primary btn-lg" id="btnsubmitWaterBill" />
+                            </div>
+                        </div>
+                        <div class="col-md-3"></div>
+
+
+
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-12 row" style=" margin-top:15px; border:1px solid #ccc; padding:20px 0; margin-bottom:20px; display:none; margin-left:12px;" id="divWaterBillDisplay">
+                        <div class="col-md-4 row">
+                            <div class="col-md-4"> Due Date :-</div>
+                            <div class="col-md-8"><div id="txtWaterDueDate"></div></div>
+                        </div>
+
+                        <div class="col-md-4 row">
+                            <div class="col-md-4"> Customer Name :- </div>
+                            <div class="col-md-8">
+                                <div id="txtWaterCustomerName"></div>
+                                <input type="hidden" id="Water_referenceID" name="Water_ref_Name" />
+                            </div>
+                        </div>
+                        <div class="col-md-4 row">
+                            <div class="col-md-4"> Bill No :- </div>
+                            <div class="col-md-8">
+                                <div id="txtWaterBillbillnumber"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 row" style="display:none">
+                            <div style="display:none" id="idGeolocbrod"> </div>
+
+                            @Html.EditorFor(m => m.WaterRefNo, new { htmlAttributes = new { @class = "form-control", id = "txtWatercityRefNo" } })
+                        </div>
+                    </div>
+
+
+                    @*<div class="col-md-2">
+                            <a href="javascript:void(0)" data-toggle='modal' data-target='.transdWater' id='transactionvalueWaterid'>All Operator List</a>
+                        </div>*@
+                    @*@Html.EditorFor(m => m.geolocation, new { htmlAttributes = new { @class = "form-control", id = "GeolocationWater" } })*@
+                    <div class="clearfix"></div>
+                    <div class="col-md-12" style="text-align:center; margin-top:30px;">
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+}
+
+<div id="dialog" style="display: none">
+</div>
+@*<div id="progressWaterBill" class="loading hidden">Loading&#8230;</div>*@
+<div class="preloader hidden" id="progressWaterBill">
+    <div id="loading"></div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#divWaterBillDisplay').hide();
+        $('#btnsubmitWaterBill').hide();
+        $('#btnsubmitWaterBill').hide();
+        $('#progressWaterBill').removeClass("hidden");
+        $('#progressWaterBill').hide();
+    })
+    function OnSuccessWaterBill(response) {
+        $('#progressWaterBill').removeClass("hidden");
+        $('#progressWaterBill').hide();
+
+        $('#loading').removeClass("hidden");
+        $('#loading').hide();
+        var message = response;
+        $("#WaterSupplyPayment").trigger("reset");
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);
+            }
+        })
+        $('#btnsubmitWaterBill').hide();
+        $('#btnsubmitWaterBill').hide();
+        $('#divWaterBillDisplay').hide();
+        $('#btnWaterBillDisplay').show();
+        $("#WaterSupplyPayment").trigger("reset");
+        callGeocodeWaterBill();
+        //alert(message);
+    }
+    function OnFailureWaterBill(response) {
+        alert("Error occured.");
+    }
+</script>
+
+<script>
+    $(document).ready(function () {
+
+        callGeocodeWaterBill();
+
+    });
+    function callGeocodeWaterBill() {
+        $.getJSON('http://www.geoplugin.net/json.gp?jsoncallback=?', function (data) {
+            var information = JSON.stringify(data, null, 2);
+            //alert(information[0]);
+            //alert(JSON.stringify(data, null, 2));
+            console.log(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 2));
+            $('#GeolocationWaterBill').val(JSON.stringify(data.geoplugin_latitude + ',' + data.geoplugin_longitude, null, 0));
+            $('#WaterBillIpaddress').val(JSON.stringify(data.geoplugin_request, null, 0));
+            console.log(JSON.stringify(data, null, 2));
+        });
+    }
+
+</script>
+<script>
+    var GetWaterBillDetails = function () {
+        $('#progressWaterBill').show();
+        $('#divWaterBillDisplay').show();
+        debugger;
+        var _accountNo = $('#waterBillNo').val();
+        var _mobileNo = $('#waterBillMobileNo').val();
+        var _geoLocation = $('#GeolocationWaterBill').val();
+        var Service_Key = $('#hfWaterSupplyperator').val();
+        var WaterBillAmt = $('#WaterBillAMount').val();
+        $.ajax({
+            type: "POST",
+            url: "/Merchant/MerchantRechargeService/GetWaterBillInformation",
+            data: { AccountNo: _accountNo, MobileNo: _mobileNo, GeoLocation: _geoLocation, ServiceKey: Service_Key, WaterBillAmt: WaterBillAmt },
+            success: function (data) {
+                debugger;
+                var GEtWaterbill = JSON.parse(data);
+                var status = GEtWaterbill.statuscode;
+                var statusvalue = GEtWaterbill.status;
+                if (status === "TXN") {
+                    //document.getElementById("RechargeAmt").innerHTML = JSON.stringify(GEtWaterbill.data.dueamount);
+                    var amount = GEtWaterbill.data.dueamount;
+                    var Water_Reff = GEtWaterbill.data.reference_id;
+                    $('#WaterBillAMount').val(amount);
+                    $('#Water_referenceID').val(Water_Reff);
+                    $('#txtWaterDueDate').html(GEtWaterbill.data.duedate);
+                    $('#txtWaterCustomerName').html(GEtWaterbill.data.customername);
+                    $('#txtWaterBillbillnumber').html(GEtWaterbill.data.billnumber);
+                    $('#txtWatercityRefNo').val(Water_Reff);
+                    $('#Errormsgvalue').html('');
+                    $('#btnsubmitWaterBill').show();
+                    $('#progressWaterBill').hide();
+                    $('#btnWaterBillDisplay').hide();
+                }
+                else {
+                    $('#Errormsgvalue').html(statusvalue);
+                }
+                $('#progressWaterBill').hide();
+
+            }
+
+        })
+    }
+
+    function setWaterServiseOperator($key, $name) {
+        $('#txtWaterSupplyOperator').val($name).focus();
+        $('#hfWaterSupplyperator').val($key);
+        //$('#RechargeAmt').focus();
+        $('#transactWatermodal').modal('hide');
+        $('.modal-backdrop').hide();
+    }
+
+</script>
+
+<div id="transactWatermodal" class="modal scale fade transdWater" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Service Provider Name List</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table style="width:100%;">
+                    <tr>
+                        <th>Operator Name </th>
+                        <th></th>
+                    </tr>
+                    @foreach (var d in ViewBag.WaterOperator)
+                    {
+                        <tr>
+                            <td>
+                                @d.SERVICE_NAME (@d.TYPE)
+                                <input type="hidden" value="@d.SERVICE_KEY" />
+                            </td>
+
+                            <td><a href="javascript:void(0)" class="btn btn-default" onclick="setWaterServiseOperator('@d.SERVICE_KEY','@d.SERVICE_NAME')"><img src="@d.IMAGE" width="40" height="40" /></a></td>
+                        </tr>
+                    }
+                </table>
+                @*<div class="col-md-6">
+                        <div class="inputer floating-label">
+                            <div class="input-wrapper">
+                                Member Name <input type="text" id="username" value="" class="form-control" />
+                                <input type="text" id="username1" value="" class="form-control" />
+                                <input type="hidden" id="sln" />
+                            </div>
+                        </div>
+                    </div>*@
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div><!--.modal-content-->
+    </div><!--.modal-dialog-->
+</div>

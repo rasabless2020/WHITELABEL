@@ -1,0 +1,166 @@
+﻿@model WHITELABEL.Data.Models.TBL_SETTINGS_BANK_DETAILS
+@{
+    ViewBag.Title = "BankDetails";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("BankDetails", "BankDetails", FormMethod.Post))
+{
+
+    <div class="form-horizontal padding-top-20">
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.MEM_ID)
+        @Html.HiddenFor(model=>model.SL_NO)
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-heading">
+                    </div><!--.panel-heading-->
+                    <div class="panel-body">
+                        <div class="row ">
+                            @*<div class="col-md-6">
+                                <div class="inputer floating-label">
+                                    <div class="input-wrapper">
+                                        @Html.HiddenFor(model=>model.SL_NO)
+                                        @Html.DropDownListFor(model => model.UserName, new SelectList((ViewBag.MemberService) as SelectList, "Value", "Text"), "Select Member", new { id = "MemberID", @class = "form-control" })                                        
+                                    </div>
+                                    <span>@Html.ValidationMessageFor(model => model.MEM_ID, "", new { @class = "text-danger" })</span>
+                                </div>
+                            </div>*@
+                            <div class="col-md-6">
+                                <div class="">
+                                    <div class="input-wrapper">
+                                        <label for="BANK">BANK NAME</label>
+                                        @Html.EditorFor(model => model.BANK, new { htmlAttributes = new { @class = "form-control", @placeholder = "Bank Name" } })
+                                        @*<label for="BANK">BANK</label>*@
+                                    </div>
+                                    <span>@Html.ValidationMessageFor(model => model.BANK, "", new { @class = "text-danger" })</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="">
+                                    <div class="input-wrapper">
+                                        <label for="IFSC">IFSC</label>
+                                        @Html.EditorFor(model => model.IFSC, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ifsc Code" } })
+                                        @*<label for="IFSC">IFSC CODE</label>*@
+                                    </div>
+                                    <span>@Html.ValidationMessageFor(model => model.IFSC, "", new { @class = "text-danger" })</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="">
+                                    <div class="input-wrapper">
+                                        <label for="MICR_CODE">MICR CODE</label>
+                                        @Html.EditorFor(model => model.MICR_CODE, new { htmlAttributes = new { @class = "form-control", @placeholder = "Mirc Code" } })
+                                        @*<label for="MICR_CODE">MICR CODE</label>*@
+                                    </div>
+                                    <span>@Html.ValidationMessageFor(model => model.MICR_CODE, "", new { @class = "text-danger" })</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="">
+                                    <div class="input-wrapper">
+                                        <label for="ACCOUNT_NO">ACCOUNT NO.</label>
+                                        @Html.EditorFor(model => model.ACCOUNT_NO, new { htmlAttributes = new { @class = "form-control", @placeholder = "Account No." } })
+                                        @*<label for="ACCOUNT_NO">ACCOUNT NO</label>*@
+                                    </div>
+                                    <span>@Html.ValidationMessageFor(model => model.ACCOUNT_NO, "", new { @class = "text-danger" })</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="">
+                                    <div class="input-wrapper">
+                                        <label for="BRANCH">BRANCH </label>
+                                        @Html.EditorFor(model => model.BRANCH, new { htmlAttributes = new { @class = "form-control", @placeholder = "Branch" } })
+                                        @*<label for="BRANCH">BRANCH </label>*@
+                                    </div>
+                                    <span>@Html.ValidationMessageFor(model => model.BRANCH, "", new { @class = "text-danger" })</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="">
+                                    <div class="input-wrapper">
+                                        <label for="CONTACT">CONTACT NO </label>
+                                        @Html.EditorFor(model => model.CONTACT, new { htmlAttributes = new { @class = "form-control", @placeholder = "Contact No" } })
+                                        @*<label for="CONTACT">CONTACT NO </label>*@
+                                    </div>
+                                    <span>@Html.ValidationMessageFor(model => model.CONTACT, "", new { @class = "text-danger" })</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="">
+                                    <div class="input-wrapper">
+                                        <label for="ADDRESS">ADDRESS </label>
+                                        @Html.EditorFor(model => model.ADDRESS, "0", new { htmlAttributes = new { @class = "form-control", @placeholder = "Addrress" } })
+                                        @*<label for="ADDRESS">ADDRESS </label>*@
+                                    </div>
+                                    <span>@Html.ValidationMessageFor(model => model.ADDRESS, "", new { @class = "text-danger" })</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="">
+                                    <div class="input-wrapper">
+                                        <label for="CITY">CITY</label>
+                                        @Html.EditorFor(model => model.CITY, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
+                                        @*<label for="CITY">CITY</label>*@
+                                    </div>
+                                    <span>@Html.ValidationMessageFor(model => model.CITY, "", new { @class = "text-danger" })</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="">
+                                    <div class="input-wrapper">
+                                        <label for="DISTRICT">DISTRICT</label>
+                                        @Html.EditorFor(model => model.DISTRICT, new { htmlAttributes = new { @class = "form-control", @placeholder = "District" } })
+                                        @*<label for="DISTRICT">DISTRICT</label>*@
+                                    </div>
+                                    <span>@Html.ValidationMessageFor(model => model.DISTRICT, "", new { @class = "text-danger" })</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="">
+                                    <div class="input-wrapper">
+                                        <label for="STATE">STATE </label>
+                                        @Html.EditorFor(model => model.STATE, new { htmlAttributes = new { @class = "form-control", @placeholder = "State" } })
+                                        @*<label for="STATE">STATE </label>*@
+                                    </div>
+                                    <span>@Html.ValidationMessageFor(model => model.STATE, "", new { @class = "text-danger" })</span>
+                                </div>
+                            </div>
+
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+
+                    <div class="panel-footer">
+                        <div class="col-lg-6">
+
+                        </div>
+
+                        <div class="col-lg-6 text-right">
+                            @if (ViewBag.checkbank == "0")
+                            {
+                                <input type="submit" value="Create" class="btn btn-cyan" />
+                                
+                            }
+                            else
+                            {
+                                <input type="submit" value="Update" class="btn btn-cyan" />
+                                
+                            }
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div>
+        
+    </div>
+}
+

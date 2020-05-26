@@ -1,0 +1,38 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@model IEnumerable<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>
+@{
+    ViewBag.Title = "IndexGrid";
+    Layout = null;
+    //Layout = "~/Areas/Merchant/Views/Shared/_MerchantLayout.cshtml";
+}
+
+@(Html
+                            .Grid(Model)
+                            .Build(columns =>
+                            {
+                                columns.Add(model => model.Serial_No).Titled("Id");
+                                //columns.Add(model => model.ToUser).Titled("To User");
+                                columns.Add(model => model.FromUser).Titled("From Member");
+                                columns.Add(model => model.REQUEST_DATE).Titled("Req Date").MultiFilterable(true);
+                                columns.Add(model => model.REQUEST_TIME).Titled("Req Time").Formatted("{0:T}").MultiFilterable(true);
+                                columns.Add(model => model.AMOUNT).Titled("Account");
+                                columns.Add(model => model.BANK_ACCOUNT).Titled("Bank");
+                                columns.Add(model => model.TRANSACTION_DETAILS).Titled("Pay Method");
+                                columns.Add(model => model.STATUS).Titled("STATUS");
+                                columns.Add(model => model.APPROVAL_DATE).Titled("Approve/Decline Date");
+                                columns.Add(model => model.APPROVED_BY).Titled("Approve/Decline By");
+                            })
+                            .RowCss(model => model.STATUS == "Decline" ? "danger" : model.STATUS == "Pending" ? "info" : "")
+                            .Empty("No data found")
+                            .Id("my-ajax-grid")
+                            .MultiFilterable()
+                            //.Pageable(pager =>
+                            //{
+                            //    pager.PagesToDisplay = 10;
+                            //    pager.RowsPerPage = 10;
+                            //})
+                            .Filterable()
+                            .Sortable()
+)
+

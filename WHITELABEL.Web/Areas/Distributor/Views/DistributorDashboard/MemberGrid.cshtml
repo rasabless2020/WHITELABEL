@@ -1,0 +1,10 @@
+﻿@using NonFactors.Mvc.Grid;
+@using WHITELABEL.Web.Helper;
+@*@model IEnumerable<WHITELABEL.Data.Models.TBL_MASTER_MEMBER>*@
+@model IGrid<WHITELABEL.Data.Models.TBL_MASTER_MEMBER>
+@{
+    ViewBag.Title = "MemberGrid";
+}
+
+@(new HtmlGrid<WHITELABEL.Data.Models.TBL_MASTER_MEMBER>(Html, Model))
+

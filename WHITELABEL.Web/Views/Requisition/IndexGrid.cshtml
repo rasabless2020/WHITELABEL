@@ -1,0 +1,92 @@
+﻿@using WHITELABEL.Web.Helper;
+@*@model IEnumerable<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>*@
+@model IGrid<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>
+@{
+    ViewBag.Title = "IndexGrid";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@(new HtmlGrid<WHITELABEL.Data.Models.TBL_BALANCE_TRANSFER_LOGS>(Html, Model))
+
+@*@(Html
+    .Grid(Model)
+    .Build(columns =>
+    {
+        columns.Add(model => model.SLN).Titled("Transaction ID");
+        columns.Add(model => model.ToUser).Titled("To User");
+        columns.Add(model => model.FromUser).Titled("From User");
+        columns.Add(model => model.REQUEST_DATE).Titled("REQUEST DATE");
+        columns.Add(model => model.AMOUNT).Titled("AMOUNT");
+        columns.Add(model => model.BANK_ACCOUNT).Titled("BANK ACCOUNT");
+        columns.Add(model => model.TRANSACTION_DETAILS).Titled("PAYMENT METHOD");
+        columns.Add(model => model.SLN).Titled("").Filterable(false).Sortable(false).RenderedAs(m => Html.ActionLink("Edit", "RequisitionDetails", "Requisition", new { transId = Encrypt.EncryptMe(m.SLN.ToString()) }, new { @class = "btn btn-primary btn-xs" }));
+        columns.Add(model => Html.Hidden("")).Titled("").Encoded(false)
+                .RenderedAs(model => "<button class='btn btn-primary btn-xs' data-toggle='modal' data-target='.transd' id='transactionvalueid' data-id="+model.SLN+ " onclick='getvalue("+ model.SLN + ");'>Approve</button>");       
+        columns.Add(model => Html.Hidden("")).Titled("").Encoded(false)
+                .RenderedAs(model => "<a href='javascript:void(0)' class='btn btn-denger btn-xs' onclick='DeactivateTransactionlist(" + model.SLN + ");return 0;'>Deactivate</a>");
+
+    })
+    .Empty("No data found")
+    .Id("my-ajax-grid")
+    .Pageable(pager =>
+    {
+        pager.PagesToDisplay = 10;
+        pager.RowsPerPage = 10;
+    })
+    .Filterable()
+    .Sortable()
+
+)*@
+
+
+<script type="text/javascript">
+    function getvalue(transid) {
+        var idval = transid;
+        $.ajax({
+            url: "@Url.Content("~/Requisition/getTransdata")",
+            data: {
+                TransId: transid
+            },
+            cache: false,
+            type: "POST",
+            dataType: "json",
+            beforeSend: function () {
+            },
+            success: function (data) {
+                if (data.Result === "true") {
+                    debugger;
+                    var traninfo = data;
+                    //var dateval = new Date(traninfo.data.REQUEST_DATE)
+                    $('#username').val(traninfo.data.FromUser);
+                    $('#TransactionDate').val(formatDate(traninfo.data.REQUEST_DATE));
+                    $('#sln').val(traninfo.data.SLN);
+                    $("#BankDetails").val(traninfo.data.BANK_ACCOUNT);
+                    $("#Amount").val(traninfo.data.AMOUNT);
+                    //document.getElementById("username").innerHTML = traninfo.data.AMOUNT;
+                }
+                else {
+                    $(".overlaydiv").fadeOut("slow");
+
+                }
+            },
+            error: function (xhr, status, error) {
+                console.log(status);
+            }
+        });
+    }
+    
+    function formatDate(inputDate) {
+        var value = new Date(parseInt(inputDate.replace(/(^.*\()|([+-].*$)/g, '')));
+        var formattedDate = value.getMonth() + 1 + "/" + value.getDate() + "/" + value.getFullYear();
+        return formattedDate;
+    }
+</script>
+
+@*<script type="text/javascript">
+    $('#addPaymentMethod').on('click', function () {
+        $('#popId').modal('show');
+    });
+    
+</script>*@
+
+

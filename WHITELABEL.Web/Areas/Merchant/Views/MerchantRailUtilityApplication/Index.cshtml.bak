@@ -1,0 +1,111 @@
+﻿@model WHITELABEL.Data.Models.TBL_APPLICATION_FOR_RAIL_UTILITY
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+
+}
+
+@using (Ajax.BeginForm("PostRailApplicationStatus", "MerchantRailUtilityApplication", new AjaxOptions { Confirm = "Do you want to apply for Railway Utility", OnSuccess = "OnSuccessRailApplication", OnFailure = "OnFailureRailApplication", LoadingElementId = "progressRailApplication" }, new { area = "Merchant", @id = "Index" }))
+{
+    <div class="form-horizontal padding-top-20">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-body" style="padding:40px ;">
+                        <div class="row ">
+                            <div class="col-md-12">
+
+                                <div class="col-md-12" style="box-shadow: 5px 10px #3e50b4; border: 1px solid #3e50b4; padding:20px;">
+                                    <div class="col-md-12">
+
+                                        <div class="col-md-12">
+
+                                            <p>We are a team of journalists, editors and reviewers who are experts in content creation. We produce riveting blog posts to potentialize your brand’s engagement and increase sales. We do this because we believe that sharing good stories can make your business grow.</p>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="col-md-8">
+                                                <div class="form-group row">
+                                                    <label class="control-label col-md-6" style="padding-top:10px;">Please Check our term and condition</label>
+                                                    <div class="col-md-2 pt-2" >
+                                                        <div class="inputer">
+                                                            <div class="input-wrapper">
+                                                                @Html.CheckBoxFor(model => model.checkValue, new { htmlAttributes = new { @class = "form-control", id = "chkCheckedVal" } })
+                                                            </div>
+                                                            <span class="help-block"><small>@Html.ValidationMessageFor(model => model.checkValue, "", new { @class = "text-danger" })</small></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <div class="form-group" style="text-align:right;">
+                                                            @if (ViewBag.CheckPage)
+                                                            {
+                                                                <input type="submit" value="Transfer Amount" class="btn btn-cyan" disabled />
+                                                            }
+                                                            else
+                                                            {
+                                                                <input type="submit" value="Transfer Amount" class="btn btn-cyan" id="btnsubmit1" />
+                                                            }
+
+                                                        </div>
+
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                           
+                                        </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                            </div>
+                        </div><!--.row-->
+                    </div><!--.panel-body-->
+                    <div class="panel-footer">
+                        <div class="text-center">
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div><!--.panel-->
+            </div><!--.col-md-12-->
+        </div>
+    </div>
+}
+@*@Scripts.Render("~/bundles/MerchantDMRAPIAngularjsFiles")
+@Scripts.Render("~/bundles/MerchantDMRAPIJsFiles")*@
+<div id="progressRailApplication" class="loading hidden">Loading&#8230;</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //$("#btnsubmit1").prop("disabled", true);
+        $('#progressRailApplication').removeClass("hidden");
+        $('#progressRailApplication').hide();
+    })
+    function OnSuccessRailApplication(response) {
+        debugger;
+        var message = response;        
+        $("#Index").trigger("reset");
+        bootbox.alert({
+            message: message,
+            size: 'small',
+            callback: function () {
+                console.log(message);               
+                if (message == "Your Application Already send to Administratior.") {
+                }
+                else {
+                    //$("#btnsubmit1").prop("disabled", false);
+                    $("#btnsubmit1").prop("disabled", true);
+                }
+            }
+        })
+        //alert(message);
+    }
+    function OnFailureRailApplication(response) {
+        debugger;
+        alert("Error occured.");
+    }
+</script>
+

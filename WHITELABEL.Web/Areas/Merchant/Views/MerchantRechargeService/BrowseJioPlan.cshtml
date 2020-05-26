@@ -1,0 +1,29 @@
+﻿
+@*@{
+    ViewBag.Title = "BrowseJioPlan";
+    Layout = "~/Areas/Merchant/Views/Shared/_RetailerLayout.cshtml";
+}*@
+
+
+<table class="table-responsive table-bordered" style="font-size:9px;">
+
+    @if (ViewBag.joiPlanList != null)
+    {
+
+        foreach (var d in ViewBag.joiPlanList)
+        {
+    <tr>
+
+        <td style="width:20%;font-size:11px;" > @d.id_Val (@d.circle) </td>
+        <td style="width:20%;font-size:11px;"> @d.name </td>
+        <td style="width:5%;font-size:11px;"> @d.price/- </td>
+        <td style="width:55%;font-size:11px;"> @d.description </td>
+
+        <td style="text-align:right"><a href="javascript:void(0)" class="btn btn-default" onclick="setServiseJioService('@d.price','@d.id_Val')" data-dismiss="modal">Select Plan...</a></td>
+    </tr>
+        }
+    }
+
+
+
+</table>
